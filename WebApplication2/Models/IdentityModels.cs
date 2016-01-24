@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WebApplication2.Models;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace WebApplication2.Models
@@ -28,6 +29,10 @@ namespace WebApplication2.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         public static ApplicationDbContext Create()
         {

@@ -161,3 +161,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Securi
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.Init.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.Init1.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.Init2.resources
