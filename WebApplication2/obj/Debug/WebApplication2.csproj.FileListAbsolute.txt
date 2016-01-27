@@ -244,10 +244,8 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.Init.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.Init1.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.Init2.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.InitialCreate.resources
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.newTutorAndStudent.resources
