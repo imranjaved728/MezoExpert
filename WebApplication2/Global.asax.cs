@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebApplication2.App_Start;
 
 namespace WebApplication2
 {
@@ -16,6 +17,7 @@ namespace WebApplication2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

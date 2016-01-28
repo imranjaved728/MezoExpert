@@ -18,7 +18,9 @@ namespace WebApplication2.Models
         public string AboutMe { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public DateTime DateCreated { get; set; }
         public float CurrentEarning { get; set; }
+   
 
     }
 

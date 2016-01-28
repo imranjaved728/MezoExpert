@@ -32,6 +32,8 @@ namespace WebApplication2.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+       public ExternalLoginListViewModel externalLogin;
     }
     public class TutorRegisterModel
     {

@@ -3,7 +3,7 @@ namespace WebApplication2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -37,12 +37,13 @@ namespace WebApplication2.Migrations
                         StudentID = c.Guid(nullable: false),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        DateOfBirth = c.DateTime(nullable: false),
+                        DateOfBirth = c.DateTime(),
                         Degree = c.String(),
                         University = c.String(),
                         AboutMe = c.String(),
                         City = c.String(),
                         Country = c.String(),
+                        DateCreated = c.DateTime(nullable: false),
                         CurrentBalance = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.StudentID);

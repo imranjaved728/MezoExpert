@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -190,6 +194,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -202,17 +207,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601280320113_init.cs" />
-    <Compile Include="Migrations\201601280320113_init.Designer.cs">
-      <DependentUpon>201601280320113_init.cs</DependentUpon>
+    <Compile Include="Migrations\201601282024157_InitialCreate.cs" />
+    <Compile Include="Migrations\201601282024157_InitialCreate.Designer.cs">
+      <DependentUpon>201601282024157_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601280620276_updatedStudent.cs" />
-    <Compile Include="Migrations\201601280620276_updatedStudent.Designer.cs">
-      <DependentUpon>201601280620276_updatedStudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601280626496_updatedStudentnull.cs" />
-    <Compile Include="Migrations\201601280626496_updatedStudentnull.Designer.cs">
-      <DependentUpon>201601280626496_updatedStudentnull.cs</DependentUpon>
+    <Compile Include="Migrations\201601282318365_updatedTutor.cs" />
+    <Compile Include="Migrations\201601282318365_updatedTutor.Designer.cs">
+      <DependentUpon>201601282318365_updatedTutor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -404,14 +405,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601280320113_init.resx">
-      <DependentUpon>201601280320113_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601282024157_InitialCreate.resx">
+      <DependentUpon>201601282024157_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601280620276_updatedStudent.resx">
-      <DependentUpon>201601280620276_updatedStudent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601280626496_updatedStudentnull.resx">
-      <DependentUpon>201601280626496_updatedStudentnull.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601282318365_updatedTutor.resx">
+      <DependentUpon>201601282318365_updatedTutor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
