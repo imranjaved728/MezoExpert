@@ -1,0 +1,57 @@
+﻿@model  WebApplication2.Models.StudentRegisterModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="registerStudentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2>Sign Up</h2>
+                            <hr class="star-primary">
+
+                            @*<form role="form">*@
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Email Address", @class = "form-control", type = "email", id="emailStudent" })
+                                    <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.UserName)
+                            </div> <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control",id = "passwordStudent" })
+                                    @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
+                                    <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                                </div> <!-- /.input-group -->
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div> <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control", id = "confirmPasswordStudent" })
+                                    @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
+                                    <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                                </div> <!-- /.input-group -->
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div> <!-- /.form-group -->
+
+                            <input type="submit" class="btn btn-success" value="Sign Up" />
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                        <p class="error">@TempData["ExpertRegisterError"]</p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

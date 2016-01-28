@@ -212,6 +212,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Student.cs" />
@@ -379,6 +380,9 @@
     <Content Include="Theme\LICENSE" />
     <Content Include="Theme\mail\contact_me.php" />
     <Content Include="Theme\README.md" />
+    <Content Include="Views\Shared\_LoginNewPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterStudentPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterTutorPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

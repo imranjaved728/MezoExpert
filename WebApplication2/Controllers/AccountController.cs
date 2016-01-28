@@ -147,11 +147,11 @@ namespace WebApplication2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(StudentRegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -169,7 +169,8 @@ namespace WebApplication2.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            // return View(model);
+            return RedirectToAction("Index", "Home");
         }
 
         //
