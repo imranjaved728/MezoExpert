@@ -202,13 +202,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601252239586_InitialCreate.cs" />
-    <Compile Include="Migrations\201601252239586_InitialCreate.Designer.cs">
-      <DependentUpon>201601252239586_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601280320113_init.cs" />
+    <Compile Include="Migrations\201601280320113_init.Designer.cs">
+      <DependentUpon>201601280320113_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601252357136_newTutorAndStudent.cs" />
-    <Compile Include="Migrations\201601252357136_newTutorAndStudent.Designer.cs">
-      <DependentUpon>201601252357136_newTutorAndStudent.cs</DependentUpon>
+    <Compile Include="Migrations\201601280620276_updatedStudent.cs" />
+    <Compile Include="Migrations\201601280620276_updatedStudent.Designer.cs">
+      <DependentUpon>201601280620276_updatedStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601280626496_updatedStudentnull.cs" />
+    <Compile Include="Migrations\201601280626496_updatedStudentnull.Designer.cs">
+      <DependentUpon>201601280626496_updatedStudentnull.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -400,11 +404,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601252239586_InitialCreate.resx">
-      <DependentUpon>201601252239586_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601280320113_init.resx">
+      <DependentUpon>201601280320113_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601252357136_newTutorAndStudent.resx">
-      <DependentUpon>201601252357136_newTutorAndStudent.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601280620276_updatedStudent.resx">
+      <DependentUpon>201601280620276_updatedStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601280626496_updatedStudentnull.resx">
+      <DependentUpon>201601280626496_updatedStudentnull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

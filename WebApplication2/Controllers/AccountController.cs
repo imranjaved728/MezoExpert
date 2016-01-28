@@ -17,9 +17,11 @@ namespace WebApplication2.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
 
         public AccountController()
         {
+           _dbContext = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -66,7 +68,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +77,7 @@ namespace WebApplication2.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,7 +158,13 @@ namespace WebApplication2.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    Student stu = new Student();
+                    stu.StudentID = new Guid(user.Id);
+                    stu.DateCreated = DateTime.Today;
+                    _dbContext.Students.Add(stu);
+                    _dbContext.SaveChanges();
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -170,6 +178,44 @@ namespace WebApplication2.Controllers
 
             // If we got this far, something failed, redisplay form
             // return View(model);
+            return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterTutor(TutorRegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    /*Tutor tutor = new Tutor();
+                    tutor.TutorID = new Guid(user.Id);
+                    tutor.FirstName = model.FirstName;
+                    stu.DateCreated = DateTime.Today;
+                    _dbContext.Students.Add(stu);
+                    _dbContext.SaveChanges();*/
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            // return View("Index",model);
             return RedirectToAction("Index", "Home");
         }
 
