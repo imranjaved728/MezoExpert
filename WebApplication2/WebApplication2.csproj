@@ -76,6 +76,14 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.1.2.3\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -203,27 +211,59 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\TutorsController.cs" />
+    <Compile Include="DBEntities\Category.cs" />
+    <Compile Include="DBEntities\Files.cs" />
+    <Compile Include="DBEntities\Question.cs" />
+    <Compile Include="DBEntities\Reply.cs" />
+    <Compile Include="DBEntities\Student.cs" />
+    <Compile Include="DBEntities\Tutor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601282024157_InitialCreate.cs" />
-    <Compile Include="Migrations\201601282024157_InitialCreate.Designer.cs">
-      <DependentUpon>201601282024157_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601300453176_InitialCreate.cs" />
+    <Compile Include="Migrations\201601300453176_InitialCreate.Designer.cs">
+      <DependentUpon>201601300453176_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601282318365_updatedTutor.cs" />
-    <Compile Include="Migrations\201601282318365_updatedTutor.Designer.cs">
-      <DependentUpon>201601282318365_updatedTutor.cs</DependentUpon>
+    <Compile Include="Migrations\201601310346272_chat.cs" />
+    <Compile Include="Migrations\201601310346272_chat.Designer.cs">
+      <DependentUpon>201601310346272_chat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601311855155_questions.cs" />
+    <Compile Include="Migrations\201601311855155_questions.Designer.cs">
+      <DependentUpon>201601311855155_questions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601311911338_questions1.cs" />
+    <Compile Include="Migrations\201601311911338_questions1.Designer.cs">
+      <DependentUpon>201601311911338_questions1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601311920175_questionsUpdated.cs" />
+    <Compile Include="Migrations\201601311920175_questionsUpdated.Designer.cs">
+      <DependentUpon>201601311920175_questionsUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601311924402_questionsUpdated2.cs" />
+    <Compile Include="Migrations\201601311924402_questionsUpdated2.Designer.cs">
+      <DependentUpon>201601311924402_questionsUpdated2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601312000246_questionsUpdated3.cs" />
+    <Compile Include="Migrations\201601312000246_questionsUpdated3.Designer.cs">
+      <DependentUpon>201601312000246_questionsUpdated3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602010624322_updateProfile.cs" />
+    <Compile Include="Migrations\201602010624322_updateProfile.Designer.cs">
+      <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\Tutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Models\ChatHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -232,6 +272,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\MezoImages\bluebacksmall.png" />
+    <Content Include="Images\MezoImages\homeback.jpg" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.css" />
@@ -246,6 +301,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -332,11 +389,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_Navbar.cshtml" />
     <Content Include="Theme\bootstrap-3.3.4-dist\css\bootstrap-theme.css.map" />
@@ -388,10 +440,28 @@
     <Content Include="Views\Shared\_LoginNewPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterStudentPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterTutorPartial.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\Questions\Create.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Questions\Post.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index2.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Students\EditProfile.cshtml" />
+    <Content Include="Views\Tutors\Create.cshtml" />
+    <Content Include="Views\Tutors\Delete.cshtml" />
+    <Content Include="Views\Tutors\Details.cshtml" />
+    <Content Include="Views\Tutors\Edit.cshtml" />
+    <Content Include="Views\Tutors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -405,11 +475,29 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601282024157_InitialCreate.resx">
-      <DependentUpon>201601282024157_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601300453176_InitialCreate.resx">
+      <DependentUpon>201601300453176_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601282318365_updatedTutor.resx">
-      <DependentUpon>201601282318365_updatedTutor.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601310346272_chat.resx">
+      <DependentUpon>201601310346272_chat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601311855155_questions.resx">
+      <DependentUpon>201601311855155_questions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601311911338_questions1.resx">
+      <DependentUpon>201601311911338_questions1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601311920175_questionsUpdated.resx">
+      <DependentUpon>201601311920175_questionsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601311924402_questionsUpdated2.resx">
+      <DependentUpon>201601311924402_questionsUpdated2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601312000246_questionsUpdated3.resx">
+      <DependentUpon>201601312000246_questionsUpdated3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602010624322_updateProfile.resx">
+      <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

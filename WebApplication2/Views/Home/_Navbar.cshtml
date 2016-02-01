@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @{
     if (!Request.IsAuthenticated)
-    {
+    {  
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
@@ -90,8 +90,20 @@
                             }
                         }*@
                         <li>
-                            <a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                            <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Post a Question</a>
                         </li>
+                        <li class="dropdown">
+                            <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Account Settings</a></li>
+                                <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"><span class="glyphicon glyphicon-log-out"></span> Profile</a></li>
+                                <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Help</a></li>
+                                <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                             </ul>
+                        </li>
+                        @*<li>
+                            <a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                        </li>*@
 
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "LogoutForm" }))
                         {
