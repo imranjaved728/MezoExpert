@@ -5,6 +5,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebApplication2.Models;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using WebApplication2.DBEntities;
 
 namespace WebApplication2.Models
 {
@@ -31,6 +34,28 @@ namespace WebApplication2.Models
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<Files> Files { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Usera> Useras { get; set; }
+        public DbSet<Connection> Connections { get; set; }
+
+        public class Usera
+        {
+            [Key]
+            public string UserName { get; set; }
+            public ICollection<Connection> Connections { get; set; }
+        }
+
+        public class Connection
+        {
+            public string ConnectionID { get; set; }
+            public string UserAgent { get; set; }
+            public bool Connected { get; set; }
+        }
         //public DbSet<Enrollment> Enrollments { get; set; }
         //public DbSet<Course> Courses { get; set; }
 

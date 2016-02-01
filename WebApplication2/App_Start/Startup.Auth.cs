@@ -71,6 +71,7 @@ namespace WebApplication2
                 ClientSecret = "fRCjYpSuxKXvxSrkgl5aA4V0",
             };
             app.UseGoogleAuthentication(googleOAuth2AuthenticationOptions);
+            app.MapSignalR();
         }
     }
 }

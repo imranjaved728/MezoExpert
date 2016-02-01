@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication2.DBEntities;
 using WebApplication2.Models;
 
 namespace WebApplication2.App_Start
@@ -20,6 +21,11 @@ namespace WebApplication2.App_Start
                .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.LastName))
                .ForMember(dest => dest.DateOfBirth, opts => opts.MapFrom(src => src.DOB));
 
+
+            AutoMapper.Mapper.CreateMap<QuestionViewModel, Question>();
+
+
+            AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>();
         }
 
     }

@@ -36,8 +36,10 @@
 
     <div id="body">
         @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix" style="padding-bottom:0px">
-            @RenderBody()
+        <section class="content-wrapper main-content clear-fix" style="padding-bottom:0px;">
+           
+                @RenderBody()
+            
         </section>
     </div>
 
@@ -77,6 +79,14 @@
         $('#datetimepicker1 input').click(function (event) {
             $('#datetimepicker1 ').data("DateTimePicker").show();
         });
+    </script>
+    <script>
+    $(function() {
+        $(".dropdown").hover(
+            function(){ $(this).addClass('open') },
+            function(){ $(this).removeClass('open') }
+        );
+    });
     </script>
 
     @*@{Html.EnableClientValidation(true);}
