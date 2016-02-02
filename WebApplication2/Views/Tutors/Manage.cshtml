@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.Models.Student>
+﻿@model IEnumerable<WebApplication2.Models.Tutor>
 
 @{
     ViewBag.Title = "Index";
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.DateCreated)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CurrentBalance)
+            @Html.DisplayNameFor(model => model.CurrentEarning)
         </th>
         <th></th>
     </tr>
@@ -74,12 +74,12 @@
             @Html.DisplayFor(modelItem => item.DateCreated)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CurrentBalance)
+            @Html.DisplayFor(modelItem => item.CurrentEarning)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StudentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StudentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StudentID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.TutorID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TutorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TutorID })
         </td>
     </tr>
 }

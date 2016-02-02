@@ -15,17 +15,21 @@ using System.IO;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize(Roles = "Student,Admin")]
     public class StudentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public async Task<ActionResult> Index2()
+        public async Task<ActionResult> Manage()
         {
             //  ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View(await db.Students.ToListAsync());
         }
+
+        
         public ActionResult Index()
         {
+           
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         }
@@ -257,7 +261,7 @@ namespace WebApplication2.Controllers
             Student student = await db.Students.FindAsync(id);
             db.Students.Remove(student);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Manage");
         }
 
         protected override void Dispose(bool disposing)

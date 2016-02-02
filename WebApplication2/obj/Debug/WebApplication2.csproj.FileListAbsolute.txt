@@ -273,3 +273,4 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.M
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.updatingpicsprofile.resources

@@ -73,15 +73,21 @@ namespace WebApplication2.Migrations
                 UserName = "tutor3@123.com",
                 Email = "tutor3@123.com"
             };
+            ApplicationUser obj7 = new ApplicationUser
+            {
+                UserName = "admin@admin.com",
+                Email = "admin@admin.com"
+            };
 
 
-           
+
             userManager.Create(obj1, "password");
             userManager.Create(obj2, "password");
             userManager.Create(obj3, "password");
             userManager.Create(obj4, "password");
             userManager.Create(obj5, "password");
             userManager.Create(obj6, "password");
+            userManager.Create(obj7, "password");
             //userManager.AddToRole(obj1.Id, "Student");
             //userManager.AddToRole(obj2.Id, "Student");
             //userManager.AddToRole(obj3.Id, "Student");

@@ -11,117 +11,110 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-    [Authorize(Roles = "Tutor,Admin")]
-    public class TutorsController : Controller
+    public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Tutors
+        // GET: Categories
         public async Task<ActionResult> Index()
         {
-            return View(await db.Tutors.ToListAsync());
+            return View(await db.Categories.ToListAsync());
         }
 
-        // GET: Tutors
-        public async Task<ActionResult> Manage()
-        {
-            return View(await db.Tutors.ToListAsync());
-        }
-
-        // GET: Tutors/Details/5
+        // GET: Categories/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(tutor);
+            return View(category);
         }
 
-        // GET: Tutors/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Tutors/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TutorID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentEarning")] Tutor tutor)
+        public async Task<ActionResult> Create([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
             if (ModelState.IsValid)
             {
-                tutor.TutorID = Guid.NewGuid();
-                db.Tutors.Add(tutor);
+                category.CategoryID = Guid.NewGuid();
+                db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(tutor);
+            return View(category);
         }
 
-        // GET: Tutors/Edit/5
+        // GET: Categories/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(tutor);
+            return View(category);
         }
 
-        // POST: Tutors/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "TutorID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentEarning")] Tutor tutor)
+        public async Task<ActionResult> Edit([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tutor).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(tutor);
+            return View(category);
         }
 
-        // GET: Tutors/Delete/5
+        // GET: Categories/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(tutor);
+            return View(category);
         }
 
-        // POST: Tutors/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            db.Tutors.Remove(tutor);
+            Category category = await db.Categories.FindAsync(id);
+            db.Categories.Remove(category);
             await db.SaveChangesAsync();
-            return RedirectToAction("Manage");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

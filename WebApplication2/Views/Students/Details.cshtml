@@ -51,14 +51,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AboutMe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AboutMe)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.City)
         </dt>
 
@@ -90,9 +82,17 @@
             @Html.DisplayFor(model => model.CurrentBalance)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileImage)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Manage")
 </p>

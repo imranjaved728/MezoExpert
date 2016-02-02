@@ -52,14 +52,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AboutMe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AboutMe)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.City)
         </dt>
 
@@ -91,6 +83,14 @@
             @Html.DisplayFor(model => model.CurrentBalance)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileImage)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
@@ -98,7 +98,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Manage")
         </div>
     }
 </div>

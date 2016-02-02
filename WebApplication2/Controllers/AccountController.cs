@@ -70,13 +70,26 @@ namespace WebApplication2.Controllers
                 return View(model);
             }
 
+            var user = await UserManager.FindAsync(model.UserName, model.Password);
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    
+                        if (UserManager.IsInRole(user.Id, "Student"))
+                        {
+                            return RedirectToAction("Index", "Students");
+                        }
+                        //role Admin go to Admin page
+                        else if (UserManager.IsInRole(user.Id, "Admin"))
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else
+                            return RedirectToAction("Index", "Tutors");
+                    
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
