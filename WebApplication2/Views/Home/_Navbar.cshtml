@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.HomeViewModel
 @using Microsoft.AspNet.Identity
 @{
-    if (!Request.IsAuthenticated)
+    if (!User.Identity.IsAuthenticated)
     {  
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -75,23 +75,23 @@
                             <a href="#page-top"></a>
                         </li>
 
-                        @*@{
-                           if (Roles.IsUserInRole("client"))
+                      @{
+                           if (User.IsInRole("Student"))
                            {
                                 <li>
-                                    <a href="#"><span class="glyphicon glyphicon-question-sign"></span> Post Question</a>
+                                    <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Post Question</a>
                                 </li>
                             }
-                              else if (Roles.IsUserInRole("expert"))
+                              else if (User.IsInRole("Tutor"))
                             {
                                 <li>
-                                    <a href="#"><span class="glyphicon glyphicon-question-sign"></span> View Posted Questions</a>
+                                    <a href="#" ><span class="glyphicon glyphicon-question-sign"></span> View Posted Questions</a>
                                 </li>
                             }
-                        }*@
-                        <li>
+                        }
+                        @*<li>
                             <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Post a Question</a>
-                        </li>
+                        </li>*@
                         <li class="dropdown">
                             <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
                             <ul class="dropdown-menu">

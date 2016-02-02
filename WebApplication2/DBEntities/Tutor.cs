@@ -20,7 +20,8 @@ namespace WebApplication2.Models
         public string Country { get; set; }
         public DateTime DateCreated { get; set; }
         public float CurrentEarning { get; set; }
-   
+        public string ProfileImage { get; set; }
+
 
     }
 

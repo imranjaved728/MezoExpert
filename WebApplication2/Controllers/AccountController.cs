@@ -98,8 +98,9 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var roleresult = UserManager.AddToRole(user.Id, "Student");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -107,6 +108,9 @@ namespace WebApplication2.Controllers
                     Student stu = new Student();
                     stu.StudentID = new Guid(user.Id);
                     stu.DateCreated = DateTime.Today;
+                    Random rnd = new Random();
+                    int filename = rnd.Next(1, 4);
+                    stu.ProfileImage = "/Profiles/default/" + filename + ".png";
                     _dbContext.Students.Add(stu);
                     _dbContext.SaveChanges();
 
@@ -137,12 +141,16 @@ namespace WebApplication2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var roleresult = UserManager.AddToRole(user.Id, "Tutor");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     Tutor tutor = Mapper.Map<TutorRegisterModel, Tutor>(model);
                     tutor.TutorID = new Guid(user.Id);
                     tutor.DateCreated = DateTime.Today;
+                    Random rnd = new Random();
+                    int filename = rnd.Next(1, 4);
+                    tutor.ProfileImage = "/Profiles/default/"+filename+".png";
                     _dbContext.Tutors.Add(tutor);
                     _dbContext.SaveChanges(); 
                     

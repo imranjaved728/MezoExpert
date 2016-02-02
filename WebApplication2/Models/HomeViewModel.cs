@@ -83,7 +83,7 @@ namespace WebApplication2.Models
         [Required]
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Enter a valid Email Address please.")]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -96,6 +96,48 @@ namespace WebApplication2.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+       
+    }
+
+    public class StudentUpdateModel
+    {
+        [Display(Name = "First Name")]
+        [DataType(DataType.Text)]
+        public string FirstName { get; set; }
+
+
+        [Display(Name = "Last Name")]
+        [DataType(DataType.Text)]
+        public string LastName { get; set; }
+
+
+        [Display(Name = "Date of Birth")]
+        public string DateOfBirth { get; set; }
+
+
+        [Display(Name = "Username")]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+
+        [Display(Name = "Degree")]
+        [DataType(DataType.Text)]
+        public string Degree { get; set; }
+
+        [Display(Name = "Country")]
+        [DataType(DataType.Text)]
+        public string Country { get; set; }
+
+        [Display(Name = "City")]
+        [DataType(DataType.Text)]
+        public string City { get; set; }
+
+        [Display(Name = "University")]
+        [DataType(DataType.Text)]
+        public string University { get; set; }
+
+        [DataType(DataType.Text)]
+        public string ProfileImage { get; set; }
     }
 
 }

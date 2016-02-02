@@ -22,9 +22,14 @@ namespace WebApplication2.App_Start
                .ForMember(dest => dest.DateOfBirth, opts => opts.MapFrom(src => src.DOB));
 
 
+            AutoMapper.Mapper.CreateMap<Student, StudentRegisterModel>();
+            AutoMapper.Mapper.CreateMap<StudentRegisterModel, Student>();
+
+
+            AutoMapper.Mapper.CreateMap<Student, StudentUpdateModel>();
+            AutoMapper.Mapper.CreateMap<StudentUpdateModel, Student>();
+
             AutoMapper.Mapper.CreateMap<QuestionViewModel, Question>();
-
-
             AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>();
         }
 

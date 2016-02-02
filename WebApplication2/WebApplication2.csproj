@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201602010624322_updateProfile.Designer.cs">
       <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602012229529_updatingpicsprofile.cs" />
+    <Compile Include="Migrations\201602012229529_updatingpicsprofile.Designer.cs">
+      <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
@@ -287,6 +291,12 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Profiles\7d3cb849-e0b8-4f45-9420-a8cad345445c\20160128112523.jpg" />
+    <Content Include="Profiles\7d3cb849-e0b8-4f45-9420-a8cad345445c\20160201114445.jpg" />
+    <Content Include="Profiles\default\1.png" />
+    <Content Include="Profiles\default\2.png" />
+    <Content Include="Profiles\default\3.png" />
+    <Content Include="Profiles\default\4.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.css" />
@@ -498,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602010624322_updateProfile.resx">
       <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602012229529_updatingpicsprofile.resx">
+      <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

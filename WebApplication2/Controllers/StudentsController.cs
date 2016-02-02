@@ -11,6 +11,7 @@ using WebApplication2.Models;
 using AutoMapper;
 using WebApplication2.DBEntities;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace WebApplication2.Controllers
 {
@@ -128,6 +129,29 @@ namespace WebApplication2.Controllers
             return View(student);
         }
 
+        [HttpPost]
+        public ActionResult UploadProfile()
+        {
+            var user= new Guid(User.Identity.GetUserId());
+            if (!System.IO.Directory.Exists(Server.MapPath("~/Profiles/" + user)))
+            {
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/Profiles/" + user));
+            }
+            string path="";
+            var fileName="";
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+
+                 fileName = Path.GetFileName(file.FileName);
+                   
+                    path = Path.Combine(Server.MapPath("~/Profiles/" + user), fileName);
+                file.SaveAs(path);
+            }
+
+            return Json(new { result = "/Profiles/" + user+ "/"+fileName });
+
+            }
         public async Task<ActionResult> EditProfile()
         {
             Guid user = new Guid(User.Identity.GetUserId());
@@ -136,13 +160,49 @@ namespace WebApplication2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = await db.Students.FindAsync(user);
+            StudentUpdateModel stu = Mapper.Map<Student, StudentUpdateModel>(student);
+           
             if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+
+            return View(stu);
             
         }
+
+        // POST: Students/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DateOfBirth,Country,City,University,Degree")] StudentUpdateModel student)
+        {
+            if (ModelState.IsValid)
+            {
+            
+                var userId = new Guid(User.Identity.GetUserId());
+              
+                Student loaddb = await db.Students.FindAsync(userId);
+                
+                loaddb.FirstName = student.FirstName;
+                loaddb.LastName = student.LastName;
+                loaddb.Country = student.Country;
+                loaddb.City = student.City;
+                loaddb.University = student.University;
+                if (!String.IsNullOrWhiteSpace(student.DateOfBirth))
+                     loaddb.DateOfBirth =Convert.ToDateTime(student.DateOfBirth);
+    
+
+                db.Entry(loaddb).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(student);
+        }
+
+
+
         // GET: Students/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
