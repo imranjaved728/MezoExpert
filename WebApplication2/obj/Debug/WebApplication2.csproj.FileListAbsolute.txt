@@ -176,6 +176,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.questionsUpdated2.resources
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.questionsUpdated3.resources
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.updateProfile.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.updatingpicsprofile.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ApplicationInsights.config
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\csc.exe
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -261,6 +262,7 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.InitialCreate.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.chat.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.questions.resources
@@ -270,7 +272,7 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.M
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.questionsUpdated3.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.updateProfile.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.updatingpicsprofile.resources
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.updatingpicsprofile.resources

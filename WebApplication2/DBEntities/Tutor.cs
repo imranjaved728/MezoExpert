@@ -16,6 +16,7 @@ namespace WebApplication2.Models
         public string Degree { get; set; }
         public string University { get; set; }
         public string AboutMe { get; set; }
+        public string Experience { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public DateTime DateCreated { get; set; }

@@ -137,9 +137,9 @@ namespace WebApplication2.Controllers
         public ActionResult UploadProfile()
         {
             var user= new Guid(User.Identity.GetUserId());
-            if (!System.IO.Directory.Exists(Server.MapPath("~/Profiles/" + user)))
+            if (!System.IO.Directory.Exists(Server.MapPath("~/Profiles/Students/" + user)))
             {
-                System.IO.Directory.CreateDirectory(Server.MapPath("~/Profiles/" + user));
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/Profiles/Students/" + user));
             }
             string path="";
             var fileName="";
@@ -149,11 +149,11 @@ namespace WebApplication2.Controllers
 
                  fileName = Path.GetFileName(file.FileName);
                    
-                    path = Path.Combine(Server.MapPath("~/Profiles/" + user), fileName);
+                    path = Path.Combine(Server.MapPath("~/Profiles/Students/" + user), fileName);
                 file.SaveAs(path);
             }
 
-            return Json(new { result = "/Profiles/" + user+ "/"+fileName });
+            return Json(new { result = "/Profiles/Students/" + user+ "/"+fileName });
 
             }
         public async Task<ActionResult> EditProfile()
@@ -180,7 +180,7 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DateOfBirth,Country,City,University,Degree")] StudentUpdateModel student)
+        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DateOfBirth,Country,City,University,Degree,ProfileImage")] StudentUpdateModel student)
         {
             if (ModelState.IsValid)
             {
@@ -194,6 +194,8 @@ namespace WebApplication2.Controllers
                 loaddb.Country = student.Country;
                 loaddb.City = student.City;
                 loaddb.University = student.University;
+                loaddb.Degree = student.Degree;
+                loaddb.ProfileImage = student.ProfileImage;
                 if (!String.IsNullOrWhiteSpace(student.DateOfBirth))
                      loaddb.DateOfBirth =Convert.ToDateTime(student.DateOfBirth);
     

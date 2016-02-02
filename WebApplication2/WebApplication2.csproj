@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201602012229529_updatingpicsprofile.Designer.cs">
       <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602022108209_experience.cs" />
+    <Compile Include="Migrations\201602022108209_experience.Designer.cs">
+      <DependentUpon>201602022108209_experience.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
@@ -343,6 +347,8 @@
     <Content Include="Theme\css\custom.css" />
     <Content Include="Theme\css\freelancer.css" />
     <Content Include="Theme\css\theme.min.css" />
+    <Content Include="Theme\dropdownMultiple\semantic.min.css" />
+    <Content Include="Theme\dropdownMultiple\semantic.min.js" />
     <Content Include="Theme\font-awesome\css\font-awesome.css" />
     <Content Include="Theme\font-awesome\css\font-awesome.min.css" />
     <Content Include="Theme\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -478,9 +484,11 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Tutors\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Theme\dropdownMultiple\themes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -520,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602012229529_updatingpicsprofile.resx">
       <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602022108209_experience.resx">
+      <DependentUpon>201602022108209_experience.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
