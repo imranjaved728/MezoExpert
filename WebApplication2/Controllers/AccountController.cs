@@ -161,6 +161,7 @@ namespace WebApplication2.Controllers
                     Tutor tutor = Mapper.Map<TutorRegisterModel, Tutor>(model);
                     tutor.TutorID = new Guid(user.Id);
                     tutor.DateCreated = DateTime.Today;
+                    tutor.IsCompletedProfile = false;
                     Random rnd = new Random();
                     int filename = rnd.Next(1, 4);
                     tutor.ProfileImage = "/Profiles/default/"+filename+".png";

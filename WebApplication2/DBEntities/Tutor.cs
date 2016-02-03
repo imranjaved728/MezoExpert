@@ -22,11 +22,21 @@ namespace WebApplication2.Models
         public DateTime DateCreated { get; set; }
         public float CurrentEarning { get; set; }
         public string ProfileImage { get; set; }
+      
+        public Boolean IsCompletedProfile { get; set; }
 
+        public virtual ICollection<TutorExperties> tutorExperties { get; set; }
 
     }
 
-   
+   public class TutorExperties
+    {
+        public Guid TutorID { get; set; }
+        public Guid CategoryID { get; set; }
+        public virtual Tutor tutor { get; set; }
+        public virtual Category category { get; set; }
+    }
+
     //public enum Grade
     //{
     //    A, B, C, D, F

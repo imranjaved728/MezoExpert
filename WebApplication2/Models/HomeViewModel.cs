@@ -137,8 +137,7 @@ namespace WebApplication2.Models
         public string ProfileImage { get; set; }
 
         [DataType(DataType.Text)]
-        [Required]
-        public string Expertise { get; set; }
+        public string []Expertise { get; set; }
     }
 
     public class StudentRegisterModel

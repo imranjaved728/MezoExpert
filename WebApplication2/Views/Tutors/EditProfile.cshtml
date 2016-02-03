@@ -129,8 +129,9 @@
                         @Html.LabelFor(model => model.Expertise, "Expertise")
                     </label>
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.Expertise, new SelectList(ViewBag.Expertise, "CategoryID", "CategoryName"), htmlAttributes: new { @class = "ui fluid normal dropdown", multiple = "multiple" })
-                        @Html.ValidationMessageFor(model => model.Expertise, "", new { @class = "text-danger" })
+                        @*@Html.DropDownListFor(model => model.Expertise, new SelectList(ViewBag.Expertise, "CategoryID", "CategoryName"), htmlAttributes: new { @class = "ui fluid normal dropdown", multiple = "multiple" })*@
+                       @Html.DropDownList("Expertise", null,  new { @class = "ui fluid normal dropdown", multiple = "multiple" })
+                         @Html.ValidationMessageFor(model => model.Expertise, "", new { @class = "text-danger" })
                     </div>
 </div>
                 @*<select multiple="" name="skills" class="ui fluid normal dropdown">

@@ -3,16 +3,16 @@ namespace WebApplication2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updateProfile : DbMigration
+    public partial class experience4 : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.Students", "AboutMe");
+            AlterColumn("dbo.Tutors", "IsCompletedProfile", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Students", "AboutMe", c => c.String());
+            AlterColumn("dbo.Tutors", "IsCompletedProfile", c => c.Int(nullable: false));
         }
     }
 }

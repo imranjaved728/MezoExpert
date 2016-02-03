@@ -19,10 +19,25 @@ namespace WebApplication2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private async Task<bool> isProfileCompleted()
+        {
+            var LoggedInUserId = new Guid(User.Identity.GetUserId());
+            Tutor Tutor = await db.Tutors.FindAsync(LoggedInUserId);
+            bool IsCompletedProfile = Tutor.IsCompletedProfile;
+            return IsCompletedProfile;
+        }
+
         // GET: Tutors
         public async Task<ActionResult> Index()
         {
-            return View(await db.Tutors.ToListAsync());
+           
+            bool IsCompletedProfile = await isProfileCompleted();
+
+            if (IsCompletedProfile == true)
+                return View();
+            else
+                return RedirectToAction("EditProfile");
+
         }
 
         #region Admin Functionality
@@ -166,7 +181,8 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Expertise = db.Categories;
+            ViewBag.Expertise = new SelectList(db.Categories, "CategoryID", "CategoryName", t.Expertise);
+            
             return View(t);
 
         }
@@ -197,7 +213,20 @@ namespace WebApplication2.Controllers
                 if (!String.IsNullOrWhiteSpace(tutor.DOB))
                     loaddb.DateOfBirth = Convert.ToDateTime(tutor.DOB);
 
+                //look this thing later.
 
+                IEnumerable<TutorExperties> obj =loaddb.tutorExperties.AsEnumerable();
+                foreach (var category in tutor.Expertise)
+                {
+                    var result = obj.Where(c => c.CategoryID == new Guid(category)).ToList();
+                    if(result.Count==0) //dont exist add it
+                          db.TutorsExpertise.Add(new TutorExperties { TutorID = loaddb.TutorID, CategoryID = new Guid(category) });
+                    
+                    //add logic to remove as well.
+
+                }
+
+                loaddb.IsCompletedProfile = true;
                 db.Entry(loaddb).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

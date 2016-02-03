@@ -11,5 +11,6 @@ namespace WebApplication2.Models
         public Guid CategoryID { get; set; }
         public String CategoryName { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<TutorExperties> tutorExperties { get; set; }
     }
 }

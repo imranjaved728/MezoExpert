@@ -24,7 +24,8 @@ namespace WebApplication2.App_Start
             AutoMapper.Mapper.CreateMap<Tutor, TutorUpdateModel>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.LastName))
-                .ForMember(dest => dest.DOB, opts => opts.MapFrom(src => src.DateOfBirth));
+                .ForMember(dest => dest.DOB, opts => opts.MapFrom(src => src.DateOfBirth))
+                .ForMember(d => d.Expertise, o => o.MapFrom(s => s.tutorExperties.Select(c => c.category.CategoryName).ToArray()));
 
             AutoMapper.Mapper.CreateMap<TutorUpdateModel, Tutor>()
                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))

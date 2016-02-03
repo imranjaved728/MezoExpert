@@ -3,16 +3,16 @@ namespace WebApplication2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class experience : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Tutors", "DateCreated", c => c.DateTime(nullable: false));
+            AddColumn("dbo.Tutors", "IsCompletedProfile", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Tutors", "DateCreated");
+            DropColumn("dbo.Tutors", "IsCompletedProfile");
         }
     }
 }
