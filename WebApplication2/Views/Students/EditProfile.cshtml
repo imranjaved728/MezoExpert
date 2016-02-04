@@ -32,7 +32,8 @@
           {
                  @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @*<form class="form-horizontal" role="form">*@
+            @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { style = "display: none;" } })
+          
                 <div class="form-group">
                     <label class="col-lg-3 control-label">@Html.LabelFor(model => model.FirstName)</label>
                     <div class="col-lg-6">
@@ -163,7 +164,7 @@
                 processData: false,
                 success: function (response) {
                     $("#profImg").attr("src", response.result);
-
+                    $("#ProfileImage").val(response.result);
                 },
                 error: function (error) {
                     alert("errror uploading profile");

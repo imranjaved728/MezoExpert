@@ -19,5 +19,6 @@ namespace WebApplication2.Models
         public float CurrentBalance { get; set; }
         public string ProfileImage { get; set; }
 
+     
     }
 }

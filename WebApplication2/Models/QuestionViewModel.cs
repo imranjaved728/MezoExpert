@@ -12,10 +12,14 @@ namespace WebApplication2.Models
         public Guid QuestionID { get; set; }
         public Guid StudentID { get; set; }
         public Guid? TutorID { get; set; }
+
         [Required]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 10)]
         public string Title { get; set; }
+
         [Required]
         [AllowHtml]
+        [StringLength(1000, ErrorMessage = "The {0} must be at least {2} characters long and maximum 1000 characters long.", MinimumLength = 10)]
         public string Details { get; set; }
 
         public string Status { get; set; }

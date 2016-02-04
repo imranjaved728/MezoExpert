@@ -225,41 +225,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601300453176_InitialCreate.cs" />
-    <Compile Include="Migrations\201601300453176_InitialCreate.Designer.cs">
-      <DependentUpon>201601300453176_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201602032024362_InitialCreate.cs" />
+    <Compile Include="Migrations\201602032024362_InitialCreate.Designer.cs">
+      <DependentUpon>201602032024362_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601310346272_chat.cs" />
-    <Compile Include="Migrations\201601310346272_chat.Designer.cs">
-      <DependentUpon>201601310346272_chat.cs</DependentUpon>
+    <Compile Include="Migrations\201602032114320_experience.cs" />
+    <Compile Include="Migrations\201602032114320_experience.Designer.cs">
+      <DependentUpon>201602032114320_experience.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601311855155_questions.cs" />
-    <Compile Include="Migrations\201601311855155_questions.Designer.cs">
-      <DependentUpon>201601311855155_questions.cs</DependentUpon>
+    <Compile Include="Migrations\201602032132100_experience1.cs" />
+    <Compile Include="Migrations\201602032132100_experience1.Designer.cs">
+      <DependentUpon>201602032132100_experience1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601311911338_questions1.cs" />
-    <Compile Include="Migrations\201601311911338_questions1.Designer.cs">
-      <DependentUpon>201601311911338_questions1.cs</DependentUpon>
+    <Compile Include="Migrations\201602032133541_experience2.cs" />
+    <Compile Include="Migrations\201602032133541_experience2.Designer.cs">
+      <DependentUpon>201602032133541_experience2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601311920175_questionsUpdated.cs" />
-    <Compile Include="Migrations\201601311920175_questionsUpdated.Designer.cs">
-      <DependentUpon>201601311920175_questionsUpdated.cs</DependentUpon>
+    <Compile Include="Migrations\201602032136432_experience3.cs" />
+    <Compile Include="Migrations\201602032136432_experience3.Designer.cs">
+      <DependentUpon>201602032136432_experience3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601311924402_questionsUpdated2.cs" />
-    <Compile Include="Migrations\201601311924402_questionsUpdated2.Designer.cs">
-      <DependentUpon>201601311924402_questionsUpdated2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601312000246_questionsUpdated3.cs" />
-    <Compile Include="Migrations\201601312000246_questionsUpdated3.Designer.cs">
-      <DependentUpon>201601312000246_questionsUpdated3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602010624322_updateProfile.cs" />
-    <Compile Include="Migrations\201602010624322_updateProfile.Designer.cs">
-      <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602012229529_updatingpicsprofile.cs" />
-    <Compile Include="Migrations\201602012229529_updatingpicsprofile.Designer.cs">
-      <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
+    <Compile Include="Migrations\201602032137337_experience4.cs" />
+    <Compile Include="Migrations\201602032137337_experience4.Designer.cs">
+      <DependentUpon>201602032137337_experience4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -343,6 +331,8 @@
     <Content Include="Theme\css\custom.css" />
     <Content Include="Theme\css\freelancer.css" />
     <Content Include="Theme\css\theme.min.css" />
+    <Content Include="Theme\dropdownMultiple\semantic.min.css" />
+    <Content Include="Theme\dropdownMultiple\semantic.min.js" />
     <Content Include="Theme\font-awesome\css\font-awesome.css" />
     <Content Include="Theme\font-awesome\css\font-awesome.min.css" />
     <Content Include="Theme\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -478,9 +468,11 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Tutors\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Theme\dropdownMultiple\themes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -494,32 +486,23 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601300453176_InitialCreate.resx">
-      <DependentUpon>201601300453176_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032024362_InitialCreate.resx">
+      <DependentUpon>201602032024362_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601310346272_chat.resx">
-      <DependentUpon>201601310346272_chat.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032114320_experience.resx">
+      <DependentUpon>201602032114320_experience.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601311855155_questions.resx">
-      <DependentUpon>201601311855155_questions.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032132100_experience1.resx">
+      <DependentUpon>201602032132100_experience1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601311911338_questions1.resx">
-      <DependentUpon>201601311911338_questions1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032133541_experience2.resx">
+      <DependentUpon>201602032133541_experience2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601311920175_questionsUpdated.resx">
-      <DependentUpon>201601311920175_questionsUpdated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032136432_experience3.resx">
+      <DependentUpon>201602032136432_experience3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601311924402_questionsUpdated2.resx">
-      <DependentUpon>201601311924402_questionsUpdated2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601312000246_questionsUpdated3.resx">
-      <DependentUpon>201601312000246_questionsUpdated3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602010624322_updateProfile.resx">
-      <DependentUpon>201602010624322_updateProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602012229529_updatingpicsprofile.resx">
-      <DependentUpon>201602012229529_updatingpicsprofile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602032137337_experience4.resx">
+      <DependentUpon>201602032137337_experience4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

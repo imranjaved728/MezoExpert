@@ -13,11 +13,11 @@ namespace WebApplication2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "WebApplication2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(WebApplication2.Models.ApplicationDbContext context)
         {
-
             var userRole1 = new IdentityRole { Name = "Admin", Id = Guid.NewGuid().ToString() };
             var userRole2 = new IdentityRole { Name = "Student", Id = Guid.NewGuid().ToString() };
             var userRole3 = new IdentityRole { Name = "Tutor", Id = Guid.NewGuid().ToString() };
@@ -112,9 +112,6 @@ namespace WebApplication2.Migrations
              new Student { StudentID = new Guid(obj3.Id), DateCreated = DateTime.Now }
 
              );
-
-
-
 
 
 

@@ -32,14 +32,41 @@ namespace WebApplication2.Models
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            // Primary keys
+            builder.Entity<Tutor>().HasKey(q => q.TutorID);
+            builder.Entity<Category>().HasKey(q => q.CategoryID);
+            builder.Entity<TutorExperties>().HasKey(q =>
+                new {
+                    q.TutorID,
+                    q.CategoryID
+                });
+
+            // Relationships
+            builder.Entity<TutorExperties>()
+                .HasRequired(t => t.tutor)
+                .WithMany(t => t.tutorExperties)
+                .HasForeignKey(t => t.TutorID);
+
+            builder.Entity<TutorExperties>()
+                .HasRequired(t => t.category)
+                .WithMany(t => t.tutorExperties)
+                .HasForeignKey(t => t.CategoryID);
+    }
+
         public DbSet<Student> Students { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
-
+        public DbSet<TutorExperties> TutorsExpertise { get; set; }
+     
         public DbSet<Question> Questions { get; set; }
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Files> Files { get; set; }
         public DbSet<Category> Categories { get; set; }
+     
 
+        
         public DbSet<Usera> Useras { get; set; }
         public DbSet<Connection> Connections { get; set; }
 

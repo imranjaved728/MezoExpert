@@ -72,10 +72,72 @@ namespace WebApplication2.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class TutorUpdateModel
+    {
+        [Required]
+        [Display(Name = "First Name")]
+        [DataType(DataType.Text)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [DataType(DataType.Text)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public string DOB { get; set; }
+
+        //[Required]
+        //[Display(Name = "Username")]
+        //[DataType(DataType.Text)]
+        //public string UserName { get; set; }
+
+        //[Required]
+        //[Display(Name = "Email Address")]
+        //[DataType(DataType.EmailAddress, ErrorMessage = "Enter a valid Email Address please.")]
+        //public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Degree")]
+        [DataType(DataType.Text)]
+        public string Degree { get; set; }
+
+        [Required]
+        [Display(Name = "University")]
+        [DataType(DataType.Text)]
+        public string University { get; set; }
+
+        [Required]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
+        [Display(Name = "About Me")]
+        [DataType(DataType.Text)]
+        public string AboutMe { get; set; }
+
+        [Required]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
+        [Display(Name = "Experience")]
+        [DataType(DataType.Text)]
+        public string Experience { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
+        [DataType(DataType.Text)]
+        public string City { get; set; }
 
 
+        [Required]
+        [Display(Name = "Country")]
+        [DataType(DataType.Text)]
+        public string Country { get; set; }
 
+        [DataType(DataType.Text)]
+        public string ProfileImage { get; set; }
 
+        [DataType(DataType.Text)]
+        public string []Expertise { get; set; }
     }
 
     public class StudentRegisterModel
