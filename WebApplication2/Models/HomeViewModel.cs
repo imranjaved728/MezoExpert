@@ -202,4 +202,15 @@ namespace WebApplication2.Models
         public string ProfileImage { get; set; }
     }
 
+    public class TutorHome
+    {
+        public TutorHome()
+        {
+            ActiveJobs = new List<QuestionViewModel>();
+            CompledJobs = new List<QuestionViewModel>();
+        }
+       public IEnumerable<QuestionViewModel> ActiveJobs { get; set; }
+       public IEnumerable<QuestionViewModel> CompledJobs { get; set; }
+    }
+
 }

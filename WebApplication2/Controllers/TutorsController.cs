@@ -11,6 +11,7 @@ using WebApplication2.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using AutoMapper;
+using WebApplication2.DBEntities;
 
 namespace WebApplication2.Controllers
 {
@@ -34,7 +35,15 @@ namespace WebApplication2.Controllers
             bool IsCompletedProfile = await isProfileCompleted();
 
             if (IsCompletedProfile == true)
-                return View();
+            {
+                var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
+                IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
+                TutorHome model = new TutorHome();
+                model.ActiveJobs = postedQuestions;
+                model.CompledJobs = postedQuestions;
+                return View(model);
+            }
+            
             else
                 return RedirectToAction("EditProfile");
 
@@ -166,6 +175,22 @@ namespace WebApplication2.Controllers
 
             return Json(new { result = "/Profiles/Tutors/" + user + "/" + fileName });
 
+        }
+
+
+        public ActionResult PostedRequests()
+        {
+            var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
+            IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
+            return  View(postedQuestions);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult QuestionDetails(Guid? PostId)
+        {
+            return  View();
         }
         public async Task<ActionResult> EditProfile()
         {

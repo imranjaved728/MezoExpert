@@ -331,6 +331,8 @@
     <Content Include="Theme\css\custom.css" />
     <Content Include="Theme\css\freelancer.css" />
     <Content Include="Theme\css\theme.min.css" />
+    <Content Include="Theme\dataTable\jquery.dataTables.min.css" />
+    <Content Include="Theme\dataTable\jquery.dataTables.min.js" />
     <Content Include="Theme\dropdownMultiple\semantic.min.css" />
     <Content Include="Theme\dropdownMultiple\semantic.min.js" />
     <Content Include="Theme\font-awesome\css\font-awesome.css" />
@@ -469,10 +471,13 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Tutors\EditProfile.cshtml" />
+    <Content Include="Views\Tutors\PostedRequests.cshtml" />
+    <Content Include="Views\Tutors\QuestionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Theme\dropdownMultiple\themes\" />
+    <Folder Include="Theme\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
