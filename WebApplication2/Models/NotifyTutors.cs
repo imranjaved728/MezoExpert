@@ -9,30 +9,16 @@ using System.Collections.Generic;
 
 namespace SignalRChat
 {
-    public class ChatHub : Hub
+    public class NotifyTutors : Hub
     {
-    //    public void Send(string name, string message)
-    //    {
-    //        // Call the broadcastMessage method to update clients.
-    //        Clients.All.addNewMessageToPage(name, message);
-    //    }
-    //    public void SendChatMessage(string who, string message)
-    //    {
-    //        string name = Context.User.Identity.Name;
-
-    //        Clients.Group(who).addChatMessage(name + ": " + message);
-    //      //  Clients.All.addChatMessage(name, message);
-    //    }
-
-    //    public override Task OnConnected()
-    //    {
-    //        string name = Context.User.Identity.Name;
-
-    //        Groups.Add(Context.ConnectionId, name);
-
-    //        return base.OnConnected();
-    //    }
-    //}
+        public void Send(string name)
+        {
+            // Call the broadcastMessage method to update tutors only.
+            // Clients.All.addNewMessageToPage(name, message);  //send to all
+            string roomName = "tutors";
+            Clients.Group(roomName).addNewMessageToPage(name,name);
+        }
+       
 
     public void SendChatMessage(string who, string message)
     {
@@ -70,7 +56,16 @@ namespace SignalRChat
 
     public override Task OnConnected()
     {
-        var name = Context.User.Identity.Name;
+         //adding expert to group
+        if(Context.User.IsInRole("Tutor"))
+         { 
+                string roomName = "tutors";
+                Groups.Add(Context.ConnectionId, roomName);
+
+         }
+
+
+            var name = Context.User.Identity.Name;
         using (var db = new ApplicationDbContext())
         {
             var user = db.Useras

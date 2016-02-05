@@ -12,6 +12,7 @@ using AutoMapper;
 using WebApplication2.DBEntities;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace WebApplication2.Controllers
 {
@@ -36,7 +37,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,CategoryID,DueDate,PostedTime")] QuestionViewModel question, HttpPostedFileBase[] files)
+        public  JsonResult Index([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,CategoryID,DueDate,PostedTime")] QuestionViewModel question, HttpPostedFileBase[] files)
         {
             if (ModelState.IsValid)
             {
@@ -45,10 +46,11 @@ namespace WebApplication2.Controllers
                 quest.PostedTime = DateTime.Now;
                 //initial posted Question Status
                 quest.Status = "Posted";
+               
                 //user posting question id
                 quest.StudentID = new Guid(User.Identity.GetUserId());
                 db.Questions.Add(quest);
-                await db.SaveChangesAsync();
+                 db.SaveChangesAsync();
                 try
                 {
                     if (!System.IO.Directory.Exists(Server.MapPath("~/UserFiles/Q" + quest.QuestionID)))
@@ -69,21 +71,27 @@ namespace WebApplication2.Controllers
                             qf.QuestionID = quest.QuestionID;
                             qf.Path = quest.QuestionID + "/" + filename;
                             db.Files.Add(qf);
-                            await db.SaveChangesAsync();
+                             db.SaveChangesAsync();
                         }
                     }
                 }
                 catch
                 {
                     ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-                    return View(question);
+                    return null;
+                   // return View(question);
                 }
-
-                return RedirectToAction("Index");
+                string response = quest.QuestionID + "$" + quest.StudentID +  "$" + quest.Amount+"$" + quest.DueDate ;
+                var result = new JsonResult
+                {
+                    Data = JsonConvert.SerializeObject(response)
+                };
+                return result;
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            return View(question);
+            return null;
+            // return View(question);
         }
 
       

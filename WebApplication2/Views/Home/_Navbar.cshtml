@@ -76,14 +76,20 @@
                         </li>
 
                       @{
-                           if (User.IsInRole("Student"))
-                           {
+                          if (User.IsInRole("Student"))
+                          {
+                                <li>
+                                    <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Inbox</a>
+                                </li>
                                 <li>
                                     <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Post Question</a>
                                 </li>
-                            }
-                              else if (User.IsInRole("Tutor"))
-                            {
+                          }
+                          else if (User.IsInRole("Tutor"))
+                          {
+                                <li>
+                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><span class="glyphicon glyphicon-question-sign"></span> Inbox</a>
+                                </li>
                                 <li>
                                     <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><span class="glyphicon glyphicon-question-sign"></span> View Posted Questions</a>
                                 </li>
