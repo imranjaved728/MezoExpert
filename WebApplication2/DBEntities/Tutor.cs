@@ -22,7 +22,8 @@ namespace WebApplication2.Models
         public DateTime DateCreated { get; set; }
         public float CurrentEarning { get; set; }
         public string ProfileImage { get; set; }
-      
+        public string Username { get; set; }
+
         public Boolean IsCompletedProfile { get; set; }
 
         public virtual ICollection<TutorExperties> tutorExperties { get; set; }

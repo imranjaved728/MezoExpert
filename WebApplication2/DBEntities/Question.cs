@@ -25,7 +25,8 @@ namespace WebApplication2.DBEntities
         public DateTime PostedTime { get; set; }
 
         public virtual Student student { get; set; }
-        public virtual ICollection<Reply> Replies { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
+        //public virtual ICollection<Reply> Replies { get; set; }
         public virtual ICollection<Files> Files { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
     }

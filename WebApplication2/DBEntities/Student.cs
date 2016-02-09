@@ -18,7 +18,8 @@ namespace WebApplication2.Models
         public DateTime DateCreated { get; set; }
         public float CurrentBalance { get; set; }
         public string ProfileImage { get; set; }
+        public string Username { get; set; }
 
-     
+
     }
 }

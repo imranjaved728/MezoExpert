@@ -22,13 +22,13 @@
 
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
-            <div class="alert alert-info alert-dismissable">
+            <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
                 <a class="panel-close close" data-dismiss="alert">×</a>
                 <i class="fa fa-coffee"></i>
-                This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                 Profile Updated Successfully.
             </div>
             <h3>Personal info</h3>
-          @using (Html.BeginForm("EditProfile", "Students",FormMethod.Post, new { @class = "form-horizontal" }))
+          @using (Ajax.BeginForm("EditProfile", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage" }, new {  @class = "form-horizontal" }))
           {
                  @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -107,27 +107,7 @@
                     </div>
                 </div>
 
-                @*<div class="form-group">
-                    <label class="col-md-3 control-label">@Html.LabelFor(model => model.University)</label>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.University, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">@Html.LabelFor(model => model.University)</label>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.University, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">@Html.LabelFor(model => model.University)</label>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.University, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
+                
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-6">
@@ -145,8 +125,25 @@
     
 <script>
 
+    function showMessage() {
+
+        $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
+
+        });
+      
+
+        $("#alerts").show();
+        window.setTimeout(function () {
+            $("#alerts").fadeTo(800, 0).slideUp(800, function () {
+                $(this).remove();
+            });
+        }, 5000);
+
+    }
 
     $(document).ready(function () {
+
+       
         $("#FileUpload").change(function () {
             var formData = new FormData();
             var totalFiles = document.getElementById("FileUpload").files.length;

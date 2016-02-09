@@ -19,13 +19,13 @@ namespace WebApplication2.App_Start
             AutoMapper.Mapper.CreateMap<TutorRegisterModel, Tutor>()
                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))
                .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.LastName))
-               .ForMember(dest => dest.DateOfBirth, opts => opts.MapFrom(src => src.DOB));
+               .ForMember(dest => dest.DateOfBirth, opts => opts.MapFrom(src => Convert.ToDateTime(src.DOB)));
 
             AutoMapper.Mapper.CreateMap<Tutor, TutorUpdateModel>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.LastName))
-                .ForMember(dest => dest.DOB, opts => opts.MapFrom(src => src.DateOfBirth))
-                .ForMember(d => d.Expertise, o => o.MapFrom(s => s.tutorExperties.Select(c => c.category.CategoryName).ToArray()));
+                .ForMember(dest => dest.DOB, opts => opts.MapFrom(src => src.DateOfBirth.ToString("MM/dd/yyyy")))
+                .ForMember(d => d.Expertise, o => o.MapFrom(s => s.tutorExperties.Select(c => c.category.CategoryID).ToArray()));
 
             AutoMapper.Mapper.CreateMap<TutorUpdateModel, Tutor>()
                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))
@@ -43,6 +43,11 @@ namespace WebApplication2.App_Start
 
             AutoMapper.Mapper.CreateMap<QuestionViewModel, Question>();
             AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>();
+
+            AutoMapper.Mapper.CreateMap<TutorQuestionDetails, Question>();
+            AutoMapper.Mapper.CreateMap<Question, TutorQuestionDetails>();
+
+            
         }
 
     }

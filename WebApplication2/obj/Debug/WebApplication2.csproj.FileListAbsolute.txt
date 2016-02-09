@@ -174,26 +174,10 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.M
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience2.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience3.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience4.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ApplicationInsights.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\csc.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\vbc.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Antlr3.Runtime.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\AutoMapper.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -260,12 +244,24 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Securi
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.InitialCreate.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.experience.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.experience1.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.experience2.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.experience3.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.experience4.resources
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ApplicationInsights.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\csc.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\vbc.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.pdb
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.singalR.resources

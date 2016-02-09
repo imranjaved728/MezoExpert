@@ -13,7 +13,6 @@ namespace WebApplication2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebApplication2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(WebApplication2.Models.ApplicationDbContext context)
@@ -112,7 +111,6 @@ namespace WebApplication2.Migrations
              new Student { StudentID = new Guid(obj3.Id), DateCreated = DateTime.Now }
 
              );
-
 
 
         }

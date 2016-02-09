@@ -21,7 +21,14 @@
                        "targets": [ 0 ],
                        "visible": false,
                        "searchable": false
+                   },
+                   {
+                       "targets": [ 6 ],
+                       "visible": false,
+                       "searchable": false
                    }],
+                   "order": [[ 6, "desc" ]],
+
                     
                         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
@@ -42,17 +49,28 @@
             
                 });
 
-    </script>
-
-
-  <script>
+  
         $(function () {
             // Declare a proxy to reference the hub.
             var chat = $.connection.notifyTutors;
    
-            chat.client.addNewMessageToPage = function (name, message) {
+            chat.client.addNewMessageToPage = function (message) {
                 // Add the message to the page.
-                alert(message);
+                //alert(message);
+                var splitData = message.split("$");
+                if (splitData != null)
+                {
+                    var table = $('#postedRequests').DataTable();
+                    table.row.add([
+                           splitData[0],
+                           splitData[1],
+                           "Posted",
+                           splitData[2],
+                           splitData[3],
+                           splitData[5],
+                           splitData[4]
+                    ]).draw(false);
+                }
                 //$('#discussion').append('<li><strong>' + htmlEncode(name)
                 //    + '</strong>: ' + htmlEncode(message) + '</li>');
             };
@@ -98,6 +116,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.DueDate)
                             </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PostedTime)
+                            </th>
 
                         </tr>
                     </thead>
@@ -122,6 +143,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostedTime)
                         </td>
                     </tr>
 

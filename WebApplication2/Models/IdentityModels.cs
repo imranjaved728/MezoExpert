@@ -43,6 +43,7 @@ namespace WebApplication2.Models
                     q.TutorID,
                     q.CategoryID
                 });
+            
 
             // Relationships
             builder.Entity<TutorExperties>()
@@ -64,9 +65,10 @@ namespace WebApplication2.Models
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Files> Files { get; set; }
         public DbSet<Category> Categories { get; set; }
-     
+        public DbSet<Session> sessions { get; set; }
 
-        
+
+
         public DbSet<Usera> Useras { get; set; }
         public DbSet<Connection> Connections { get; set; }
 
@@ -74,6 +76,7 @@ namespace WebApplication2.Models
         {
             [Key]
             public string UserName { get; set; }
+            public string SessionId { get; set; }
             public ICollection<Connection> Connections { get; set; }
         }
 

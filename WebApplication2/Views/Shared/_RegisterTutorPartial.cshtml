@@ -24,7 +24,7 @@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.FirstName)
+                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -33,7 +33,7 @@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.LastName)
+                                @Html.ValidationMessageFor(m => m.LastName,"", new { @class = "text-danger" })
                             </div>
                            
                         
@@ -44,6 +44,7 @@
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
+                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                          </div>
 
                           
@@ -59,7 +60,7 @@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.UserName)
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                             </div>
 
 
@@ -70,7 +71,7 @@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Email)
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
 
                             <div class="form-group">
@@ -79,7 +80,7 @@
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
-                                @Html.ValidationMessageFor(m => m.Password)
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
 
                             <div class="form-group">
@@ -88,7 +89,7 @@
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
-                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
                             <br />
                             <input type="submit" class="btn btn-success" value="Sign Up" />
@@ -108,3 +109,6 @@
 
 
 }
+
+
+

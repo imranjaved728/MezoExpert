@@ -19,12 +19,12 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Email Address", @class = "form-control", type = "email" })
+                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Username", @class = "form-control" })
                                     @*<input type="text" class="form-control" id="uLogin" placeholder="Login">*@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.UserName)
+                                @Html.ValidationMessageFor(m => m.UserName ,"", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
                             <div class="form-group">
                                 <div class="input-group">
@@ -32,7 +32,7 @@
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
-                                @Html.ValidationMessageFor(m => m.Password)
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
                             <div class="checkbox">
                                 <label>
