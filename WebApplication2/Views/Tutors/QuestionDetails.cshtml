@@ -35,7 +35,15 @@
                                         <b>@Model.question.Title</b><br/>
                                         @Html.Raw(Model.question.Details)<br/><br/>
                                         
-
+                                        @if (Model.session.question.Files.Count > 0)
+                                        {
+                                            foreach (var v in Model.session.question.Files)
+                                            {
+                                                var path = @v.Path.Split('/');
+                                                <strong class="text-success"><a href="@v.Path">@path[path.Length - 1]</a></strong><br />
+                                            }
+                                        }
+                                        <br/>
                                         <div class="col-lg-3 col-md-6">
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">
@@ -44,7 +52,13 @@
                                                             <i class="fa fa-tasks fa-5x"></i>
                                                         </div>
                                                         <div class="col-xs-9 text-right">
+                                                            @if (Model.question.DueDate.HasValue) {
                                                             <div class="huge">@Model.question.DueDate.Value.ToShortDateString()</div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="huge"></div>
+                                                            }
                                                             @*<div>New Tasks!</div>*@
                                                         </div>
                                                     </div>
@@ -110,14 +124,14 @@
                                                             <i class="fa fa-tasks fa-5x"></i>
                                                         </div>
                                                         <div class="col-xs-9 text-right">
-                                                            <div class="huge">12</div>
-                                                            <div>New Tasks!</div>
+                                                            <div class="huge">@Model.sessionCount</div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <a href="#">
                                                     <div class="panel-footer">
-                                                        <span class="pull-left">View Details</span>
+                                                        <span class="pull-left">Offers</span>
                                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                         <div class="clearfix"></div>
                                                     </div>

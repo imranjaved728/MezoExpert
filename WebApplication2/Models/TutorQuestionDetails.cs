@@ -19,5 +19,7 @@ namespace WebApplication2.Models
         public Session session { get; set; }
         public Student student { get; set; }
         public Tutor tutor { get; set; }
+
+        public int sessionCount { get; set; }
     }
 }

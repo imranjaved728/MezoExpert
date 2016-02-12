@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<header style="background-image: url('../../Images/MezoImages/homeback.jpg'); ">
+<header style="background-image: url('../../Images/MezoImages/homeback.jpg'); min-height:790px">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -24,3 +24,21 @@
     </div>
     @*@WebSecurity.CurrentUserName*@
 </header>
+
+
+@section scripts{
+ <script>
+     var error = "@ViewBag.error";
+     if (error == "login") {
+         $('#loginNewModal').modal('show');
+     }
+     else if (error == "registerT") {
+         $('#registerTutorModal').modal('show');
+     }
+     else if (error == "registerS") {
+         $('#registerStudentModal').modal('show');
+     }
+
+</script>
+    
+ }

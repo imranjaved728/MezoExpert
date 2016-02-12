@@ -81,7 +81,8 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                var lastreply = item.Replies.LastOrDefault();
+                                var val = item.Replies.OrderBy(c => c.PostedTime);
+                                var lastreply=val.LastOrDefault();
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.SessionID)

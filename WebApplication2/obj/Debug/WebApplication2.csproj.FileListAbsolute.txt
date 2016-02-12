@@ -1,183 +1,23 @@
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.Owin.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\ApplicationInsights.config
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\csc.exe
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\vbc.exe
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\WebApplication2.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\WebApplication2.pdb
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Antlr3.Runtime.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\EntityFramework.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.Agent.Intercept.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.PerfCounterCollector.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.ServerTelemetryChannel.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.Web.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.WindowsServer.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.ApplicationInsights.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.Core.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Host.SystemWeb.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Cookies.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Facebook.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Google.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.OAuth.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Web.Infrastructure.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Newtonsoft.Json.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Owin.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Helpers.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Mvc.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Optimization.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Razor.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.Deployment.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.Razor.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\WebGrease.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.ServerTelemetryChannel.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.Web.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AI.WindowsServer.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.ApplicationInsights.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Helpers.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Mvc.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Optimization.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.Razor.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.Deployment.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\System.Web.WebPages.Razor.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Antlr3.Runtime.pdb
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Newtonsoft.Json.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\EntityFramework.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.Core.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.Owin.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Host.SystemWeb.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Facebook.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Cookies.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.OAuth.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
-c:\users\obaid ullah\documents\visual studio 2015\Projects\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ApplicationInsights.config
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\csc.exe
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\vbc.exe
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\VBCSCompiler.exe
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebApplication2.dll.config
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebApplication2.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebApplication2.pdb
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Antlr3.Runtime.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\AutoMapper.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.SqlServer.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.Agent.Intercept.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.DependencyCollector.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.PerfCounterCollector.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.ServerTelemetryChannel.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.Web.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.WindowsServer.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.ApplicationInsights.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.Core.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.Owin.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.SignalR.Core.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Cookies.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Facebook.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Google.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.OAuth.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Twitter.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Newtonsoft.Json.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Owin.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Helpers.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Mvc.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Optimization.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Razor.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Deployment.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Razor.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebGrease.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\AutoMapper.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.DependencyCollector.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.ServerTelemetryChannel.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.Web.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.WindowsServer.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.ApplicationInsights.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.SignalR.Core.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Helpers.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Mvc.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Optimization.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.Razor.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Deployment.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Razor.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Antlr3.Runtime.pdb
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Newtonsoft.Json.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.SqlServer.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Facebook.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.InitialCreate.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience1.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience2.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience3.resources
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.experience4.resources
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ApplicationInsights.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\csc.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\vbc.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.pdb
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Antlr3.Runtime.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\AutoMapper.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -247,21 +87,4 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ApplicationInsights.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\csc.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\vbc.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.pdb
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.singalR.resources

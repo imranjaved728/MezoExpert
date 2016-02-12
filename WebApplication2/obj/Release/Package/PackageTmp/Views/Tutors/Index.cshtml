@@ -1,0 +1,122 @@
+﻿@model WebApplication2.Models.TutorHome
+@{
+    ViewBag.Title = "Tutors - Home Page";
+}
+
+
+@{
+    ViewBag.Title = "Posted Requests";
+}
+@section scripts{
+    
+    <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#postedRequests').DataTable({
+                "columnDefs": [
+                   {
+                       "targets": [ 0 ],
+                       "visible": false,
+                       "searchable": false
+                   }],
+
+                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                            // Bind click event
+                            $(nRow).click(function () {
+
+                               // alert('You clicked on ' + aData[0] + '\'s row');
+
+                                $("#PostId").val(aData[0]);
+                                document.getElementById('QuestionDetails').submit();
+                            });
+
+                            return nRow;
+                        }
+                    });
+
+            $("#postedRequests tr").css('cursor', 'pointer');
+
+                });
+
+    </script>
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("QuestionDetails", "Tutors", FormMethod.Post, new { id = "QuestionDetails" }))
+    {
+        @Html.Hidden("PostId")
+        @Html.AntiForgeryToken()
+    }
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Active Jobs</h1>
+            <hr>
+            @{
+                var items= Model.ActiveJobs.FirstOrDefault();
+                if (items != null)
+                {
+                    <table id="postedRequests" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => items.QuestionID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => items.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => items.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => items.StudentID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => items.Amount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => items.DueDate)
+                        </th>
+
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ActiveJobs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QuestionID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DueDate)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+                }
+            }
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+

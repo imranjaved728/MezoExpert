@@ -1,0 +1,112 @@
+﻿
+@model IEnumerable<WebApplication2.Models.StudentInbox>
+@{
+    ViewBag.Title = "Students - Inbox";
+}
+
+
+@section scripts{
+
+    <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#postedRequests').DataTable({
+                "columnDefs": [
+                   {
+                       "targets": [ 0 ],
+                       "visible": false,
+                       "searchable": false
+                   }],
+
+                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                            // Bind click event
+                            $(nRow).click(function () {
+
+                               // alert('You clicked on ' + aData[0] + '\'s row');
+
+                                $("#SessionId").val(aData[0]);
+                                document.getElementById('QuestionDetails').submit();
+                            });
+
+                            return nRow;
+                        }
+                    });
+
+            $("#postedRequests tr").css('cursor', 'pointer');
+
+                });
+
+    </script>
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
+    {
+        @Html.Hidden("SessionId")
+        @*@Html.AntiForgeryToken()*@
+    }
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Inbox</h1>
+            <hr>
+            @{
+
+                <table id="postedRequests" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("SessionId")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Sender")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Last Message")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Time")
+                            </th>
+
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                       @foreach (var item in Model)
+                       {
+                           //var lastreply = item.Replies.LastOrDefault();
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SessionId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SenderName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastMessage)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PostedTime)
+                            </td>
+                        </tr>
+                       }
+                    </tbody>
+
+                </table>
+            }
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

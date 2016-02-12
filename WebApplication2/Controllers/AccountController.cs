@@ -95,9 +95,11 @@ namespace WebApplication2.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
+
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("", "Username and password do not match.");
+                    ViewBag.error = "login";
+                    return View("../Home/Index",model);
             }
         }
 
@@ -113,10 +115,11 @@ namespace WebApplication2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                var roleresult = UserManager.AddToRole(user.Id, "Student");
+              
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    var roleresult = UserManager.AddToRole(user.Id, "Student");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     Student stu = new Student();
                     stu.StudentID = new Guid(user.Id);
@@ -136,7 +139,17 @@ namespace WebApplication2.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                else {
+
+                    var userE = _dbContext.Users.Where(c => c.Email == model.Email).FirstOrDefault();
+                    var userU = _dbContext.Users.Where(c => c.UserName == model.Username).FirstOrDefault();
+                    if (userE != null)
+                        ModelState.AddModelError("", "Email already exists.");
+                    if (userU != null)
+                        ModelState.AddModelError("", "Username already exists.");
+                    ViewBag.error = "registerS";
+                    return View("../Home/Index", model);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -155,9 +168,10 @@ namespace WebApplication2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                var roleresult = UserManager.AddToRole(user.Id, "Tutor");
+            
                 if (result.Succeeded)
                 {
+                    var roleresult = UserManager.AddToRole(user.Id, "Tutor");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     Tutor tutor = Mapper.Map<TutorRegisterModel, Tutor>(model);
                     tutor.TutorID = new Guid(user.Id);
@@ -179,7 +193,18 @@ namespace WebApplication2.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                else
+                {
+                    var userE= _dbContext.Users.Where(c => c.Email == model.Email).FirstOrDefault();
+                    var userU = _dbContext.Users.Where(c => c.UserName == model.UserName).FirstOrDefault();
+                    if (userE != null)
+                        ModelState.AddModelError("", "Email already exists.");
+                    if(userU!=null)
+                        ModelState.AddModelError("", "Username already exists.");
+                    ViewBag.error = "registerT";
+                    return View("../Home/Index", model);
+                }
+               
             }
 
             // If we got this far, something failed, redisplay form

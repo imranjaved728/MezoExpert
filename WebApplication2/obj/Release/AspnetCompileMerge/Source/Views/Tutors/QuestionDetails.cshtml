@@ -1,0 +1,328 @@
+﻿@model WebApplication2.Models.TutorQuestionDetails
+
+@{
+    ViewBag.Title = "Question Details";
+    
+}
+
+
+<link href="~/Theme/css/chat.css" rel="stylesheet" />
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2>Offer Services</h2>
+                </div>
+                <div class="panel-body comments">
+                    <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-coffee"></i>
+                        <span id="message">Replied to Question Successfully. Message will appear in Inbox if replied by Students.</span>
+                    </div>
+                    <hr>
+                    <ul class="media-list" id="chatlist">
+                        <li class="media">
+                            <div class="comment">
+                                <a href="#" class="pull-left">
+                                    <img src="@Model.student.ProfileImage" alt="" class="img-circle" width="100" height="100">
+                                </a>
+                                <div class="media-body">
+                                    <strong class="text-success">@Model.student.Username</strong>
+                                    
+                                    <p>
+                                        <b>@Model.question.Title</b><br/>
+                                        @Html.Raw(Model.question.Details)<br/><br/>
+                                        
+
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-tasks fa-5x"></i>
+                                                        </div>
+                                                        <div class="col-xs-9 text-right">
+                                                            <div class="huge">@Model.question.DueDate.Value.ToShortDateString()</div>
+                                                            @*<div>New Tasks!</div>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="#">
+                                                    <div class="panel-footer">
+                                                        <span class="pull-left">Deadline</span>
+                                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-tasks fa-5x"></i>
+                                                        </div>
+                                                        <div class="col-xs-9 text-right">
+                                                            <div class="huge">$ @Model.question.Amount</div>
+                                                            @*<div>New Tasks!</div>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="#">
+                                                    <div class="panel-footer">
+                                                        <span class="pull-left">Offered Fee</span>
+                                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-tasks fa-5x"></i>
+                                                        </div>
+                                                        <div class="col-xs-9 text-right">
+                                                            <div class="huge">@Model.question.Status</div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="#">
+                                                    <div class="panel-footer">
+                                                        <span class="pull-left">Status</span>
+                                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="panel panel-red">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-tasks fa-5x"></i>
+                                                        </div>
+                                                        <div class="col-xs-9 text-right">
+                                                            <div class="huge">12</div>
+                                                            <div>New Tasks!</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="#">
+                                                    <div class="panel-footer">
+                                                        <span class="pull-left">View Details</span>
+                                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <span class="text-muted" style="float:right">
+                                            <small class="text-muted">@Model.question.PostedTime</small>
+                                        </span>
+                                    </p>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+                            </div>
+                            
+                        </li>
+
+                     @if(Model.session==null)
+                     {
+                        <li class="media" id="poster">
+                            <div class="comment">
+                                <a href="#" class="pull-left">
+                                    <img id="tutImg" src="@Model.tutor.ProfileImage" alt="" class="img-circle" width="100" height="100">
+                                </a>
+                            @using (Ajax.BeginForm("QuestionsReply", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
+                            {
+                                @Html.HiddenFor(m=>m.QuestionID)
+                                @Html.AntiForgeryToken()
+                                <div class="media-body">
+                                    <strong class="text-success">@{ @Model.tutor.Username}</strong><br /><br/>
+                                    @Html.TextAreaFor(model => model.replyDetails, new { id = "QuestionText", placeholder = "Write your reply", @class = "form-control" })
+                                    @*<textarea class="form-control" placeholder="Write your reply" rows="5"></textarea>*@
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="file" multiple id="FileUpload" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-info pull-right">Send</button>
+                                    <div class="clearfix"></div>
+                                 
+                                </div>
+
+
+
+                             }
+                                <div class="clearfix"></div>
+                               
+                            </div>
+                        </li>
+                     }
+                      else
+                    {
+                        <li class="media">
+                            <div class="comment">
+                                <a href="#" class="pull-left">
+                                    <img src="@Model.tutor.ProfileImage" alt="" class="img-circle" width="100" height="100">
+                                </a>
+                                                   
+                                    <div class="media-body">
+                                        <strong  class="text-success userText" >@{ @Model.tutor.Username}</strong><br /><br />
+                                        @Html.Raw(Model.session.Replies.FirstOrDefault().Details)
+                                            <br>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                <div class="clearfix"></div>
+                                <hr>
+                            </div>
+                        </li>
+
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        if ($('#QuestionText').length == 0) {
+            $("#message").text("Message will appear in Inbox if replied by Students.");
+            $("#alerts").show();
+            window.setTimeout(function () {
+                $("#alerts").fadeTo(800, 0).slideUp(800, function () {
+                    $(this).hide();
+                });
+            }, 5000);
+
+        }
+
+        function notifyMessage(data)
+        {
+            var result = data.result;
+            if (data.result != "null")
+            {
+                var splitData = result.split("$");
+                var formData = new FormData();
+                var totalFiles = document.getElementById("FileUpload").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var file = document.getElementById("FileUpload").files[i];
+
+                    formData.append("FileUpload", file);
+                }
+                if (totalFiles > 0) {
+                    formData.append("replyId", splitData[0]);
+                    formData.append("sessionId", splitData[1]);
+                    $.ajax({
+                        type: "POST",
+                        url: '/Tutors/UploadQuestionFile',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            //alert("success");
+                            $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
+
+                            });
+
+
+                            $("#alerts").show();
+                            window.setTimeout(function () {
+                                $("#alerts").fadeTo(800, 0).slideUp(800, function () {
+                                    $(this).hide();
+                                });
+                            }, 5000);
+
+                        },
+                        error: function (error) {
+                            alert("errror uploading files");
+                        }
+                    });
+                }
+               
+                var src = $("#tutImg").attr('src');
+                var username = '@Model.tutor.Username';
+               
+                var detail = $("#QuestionText").val();
+                $("#poster").hide();
+                $("#chatlist").append('<li class="media">' +
+                                 '<div class="comment"> '+
+                                    '<a href="#" class="pull-left"><img src="'+src+'" alt="" class="img-circle" width="100" height="100"> </a>'+
+                                     ' <div class="media-body">'+
+                                     ' <strong class="text-success">'+username+'</strong><br /><br />'+
+                                       detail+
+                                     '<br>'+
+                                     '<div class="clearfix"></div>'+
+                                    ' </div>'+
+                                     ' <div class="clearfix"></div>'+
+                                     '<hr>'+
+                               '</div>'+
+                               '</li>');
+
+
+
+
+                
+
+
+
+
+
+                                        
+                                            
+                                        
+                                   
+
+                               
+                                
+                           
+
+
+            }
+            else {
+
+            }
+
+
+        }
+
+
+    </script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            if ($('#QuestionText').length > 0)
+            {
+                CKEDITOR.config.extraPlugins = "base64image";
+                CKEDITOR.config.removePlugins = "image";
+                CKEDITOR.replace('QuestionText');
+            }
+                
+           
+            });
+        
+    </script>
+
+}

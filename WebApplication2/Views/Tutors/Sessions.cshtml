@@ -40,10 +40,11 @@
                                         {
                                             foreach (var v in Model.session.question.Files)
                                             {
-                                                <strong class="text-success"><a href="@v.Path">@v.FileID</a></strong><br />
+                                                var path = @v.Path.Split('/');
+                                                <strong class="text-success"><a target="_blank"  href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                             }
                                         }
-
+                                        <br/>
                                         <div class="col-lg-3 col-md-6">
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">
@@ -52,7 +53,10 @@
                                                             <i class="fa fa-tasks fa-5x"></i>
                                                         </div>
                                                         <div class="col-xs-9 text-right">
-                                                            <div class="huge">@Model.session.question.DueDate.Value.ToShortDateString()</div>
+                                                            @if (Model.session.question.DueDate.HasValue)
+                                                            {
+                                                                <div class="huge">@Model.session.question.DueDate.Value.ToShortDateString()</div>
+                                                            }
                                                             @*<div>New Tasks!</div>*@
                                                         </div>
                                                     </div>
@@ -145,13 +149,14 @@
                                                 {
                                                     foreach (var v in reply.Files)
                                                     {
-                                                        <strong class="text-success"><a href="@v.Path">@v.FileID</a></strong><br />
+                                                        var path = @v.Path.Split('/');
+                                                        <strong class="text-success"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length-1]</a></strong><br />
                                                     }
                                                 }
                                                 <div class="clearfix"></div>
                                             </div>
                                             <span class="text-muted" style="float:right">
-                                                <small class="text-muted">@Model.session.question.PostedTime</small>
+                                                <small class="text-muted">@reply.PostedTime</small>
                                             </span>
                                             <div class="clearfix"></div>
                                             <hr>
@@ -175,13 +180,14 @@
                                                                     {
                                                                         foreach (var v in reply.Files)
                                                                         {
-                                                                            <strong class="text-success"><a href="@v.Path">@v.FileID</a></strong><br />
+                                                                            var path = @v.Path.Split('/');
+                                                                            <strong class="text-success"><a target="_blank"  href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                                         }
                                                                     }
                                                                     <div class="clearfix"></div>
                                                                 </div>
                                                                 <span class="text-muted" style="float:right">
-                                                                    <small class="text-muted">@Model.session.question.PostedTime</small>
+                                                                    <small class="text-muted">@reply.PostedTime</small>
                                                                 </span>
 
                                                                 <div class="clearfix"></div>
@@ -308,9 +314,9 @@
         var chat = $.connection.tutorStudentChat;
         
        // chat.qs = { "sessionId": sessionId };
-        chat.client.reciever1 = function (message) {
+        chat.client.recieverTutor2 = function (message) {
             // Add the message to the page.
-            alert("mine");
+          
             $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
             $(function () {
@@ -320,9 +326,9 @@
             });
         };
 
-        chat.client.reciever2 = function (message) {
+        chat.client.recieverStudent2 = function (message) {
             // Add the message to the page.
-            alert("other");
+           
             $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
             $(function () {

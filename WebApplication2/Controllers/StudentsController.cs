@@ -35,6 +35,7 @@ namespace WebApplication2.Controllers
             var session=await db.sessions.FindAsync(SessionId);
             ChatModel obj = new ChatModel();
             obj.session = session;
+            obj.session.Replies=obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
             return  View(obj);
         }
 
@@ -49,10 +50,11 @@ namespace WebApplication2.Controllers
                 {
                     StudentInbox obj = new StudentInbox();
                     obj.SenderName = session.tutor.Username;
-                    obj.PostedTime = session.Replies.LastOrDefault().PostedTime;
+                    var lastreply = session.Replies.OrderBy(c => c.PostedTime);
+                    obj.PostedTime = lastreply.FirstOrDefault().PostedTime;
                     obj.SessionId = session.SessionID;
                     obj.Status = question.Status;
-                    obj.LastMessage = session.Replies.LastOrDefault().Details;
+                    obj.LastMessage = lastreply.LastOrDefault().Details;
                     list.Add(obj);
 
                 }
@@ -149,14 +151,11 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc);
-                SendChatMessage1(obj.SessionID.ToString(), username, message, context); //send message to urself 
-
+                string message = generateMessage(username, obj.Details, imgsrc,obj.PostedTime.ToString());
+                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
-                var imgsrc2 = tutor.ProfileImage;
-                string message2 = generateMessage(username2, obj.Details, imgsrc2);
-                SendChatMessage2(obj.SessionID.ToString(), username2, message2, context); //send message to other person 
+                SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
 
             return new JsonResult()
                 {
@@ -166,7 +165,7 @@ namespace WebApplication2.Controllers
            
         }
 
-        public string generateMessage(string username, string detail, string imgsrc)
+        public string generateMessage(string username, string detail, string imgsrc,string postedTime)
         {
             string message = "";
             message = message + "<li class=\"media\">" +
@@ -178,6 +177,9 @@ namespace WebApplication2.Controllers
                                      "<br>" +
                                      "<div class=\"clearfix\"></div>" +
                                      " </div>" +
+                                     "< span class=\"text-muted\" style=\"float:right\">"+
+                                              "<small class=\"text-muted\">"+postedTime + "</small>"+
+                                       " </span>"+
                                      "<div class=\"clearfix\"></div>" +
                                      "<hr>" +
                                "</div>" +
@@ -185,7 +187,7 @@ namespace WebApplication2.Controllers
             return message;
         }
 
-        public void SendChatMessage2(string sessionId, string sendTo, string message, IHubContext context)
+        public void SendChatMessageTutorReciever(string sessionId, string sendTo, string message, IHubContext context)
         {
             //var name = Context.User.Identity.Name;
             using (var db = new ApplicationDbContext())
@@ -212,13 +214,13 @@ namespace WebApplication2.Controllers
                         foreach (var connection in user.Connections)
                         {
                             context.Clients.Client(connection.ConnectionID)
-                                 .reciever2(message);
+                                 .recieverStudent2(message);
                         }
                     }
                 }
             }
         }
-        public void SendChatMessage1(string sessionId, string sendTo, string message, IHubContext context)
+        public void SendChatMessageStudentReciever(string sessionId, string sendTo, string message, IHubContext context)
         {
             //var name = Context.User.Identity.Name;
             using (var db = new ApplicationDbContext())
@@ -245,7 +247,7 @@ namespace WebApplication2.Controllers
                         foreach (var connection in user.Connections)
                         {
                             context.Clients.Client(connection.ConnectionID)
-                                 .reciever1(message);
+                                 .recieverStudent(message);
                         }
                     }
                 }
@@ -263,6 +265,11 @@ namespace WebApplication2.Controllers
             {
                 System.IO.Directory.CreateDirectory(Server.MapPath("~/UserFiles/Questions/" + sessionId));
             }
+
+            if (!System.IO.Directory.Exists(Server.MapPath("~/UserFiles/Questions/" + sessionId+"/"+replyId)))
+            {
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/UserFiles/Questions/" + sessionId + "/" + replyId));
+            }
             string path = "";
             var fileName = "";
 
@@ -273,15 +280,15 @@ namespace WebApplication2.Controllers
                 if (file != null)
                 {
 
-                    fileName = i.ToString() + replyId + Path.GetExtension(file.FileName);
-                    path = Path.Combine(Server.MapPath("~/UserFiles/Questions/" + sessionId), fileName);
+                    fileName = Path.GetFileName(file.FileName);
+                    path = Path.Combine(Server.MapPath("~/UserFiles/Questions/" + sessionId + "/" + replyId), fileName);
 
                     file.SaveAs(path);
 
                     Files qf = new Files();
                     qf.FileID = Guid.NewGuid();
                     qf.ReplyID = replyId;
-                    qf.Path = "~/UserFiles/Questions/" + sessionId + "/" + fileName;
+                    qf.Path = "~/UserFiles/Questions/" + sessionId + "/" + replyId + "/" + fileName;
                     db.Files.Add(qf);
                     await db.SaveChangesAsync();
                 }
@@ -296,9 +303,9 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> UploadQuestionFile()
         {
             var user = new Guid(User.Identity.GetUserId());
-            if (!System.IO.Directory.Exists(Server.MapPath("~/UserFiles/" + user)))
+            if (!System.IO.Directory.Exists(Server.MapPath("~/UserFiles/Questions/" + user)))
             {
-                System.IO.Directory.CreateDirectory(Server.MapPath("~/UserFiles/" + user));
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/UserFiles/Questions/" + user));
             }
             string path = "";
             var fileName = "";
@@ -311,14 +318,14 @@ namespace WebApplication2.Controllers
                 {
 
                     fileName = Path.GetFileName(file.FileName);
-                    path = Path.Combine(Server.MapPath("~/UserFiles/" + user), fileName);
+                    path = Path.Combine(Server.MapPath("~/UserFiles/Questions/" + user), fileName);
                   
                     file.SaveAs(path);
 
                     Files qf = new Files();
                     qf.FileID = Guid.NewGuid();
                     qf.QuestionID = QuestionID;
-                    qf.Path = QuestionID + "/" + fileName;
+                    qf.Path = "~/UserFiles/Questions/" + user + "/" + fileName;
                     db.Files.Add(qf);
                     await db.SaveChangesAsync();
                 }
@@ -327,6 +334,16 @@ namespace WebApplication2.Controllers
 
             return Json(new { result = "true"});
 
+        }
+
+        public FileResult Download(string fileName)
+        {
+            var path = Server.MapPath(fileName);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            var file = fileName.Split('/');
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, file[file.Length - 1]);
+
+            // return File(virtualFilePath, System.Net.Mime.MediaTypeNames.Application.Octet, Path.GetFileName(virtualFilePath));
         }
 
         /*
