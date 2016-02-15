@@ -65,6 +65,30 @@ namespace WebApplication2.Controllers
 
         public ActionResult Index()
         {
+
+            var user = new Guid(User.Identity.GetUserId());
+            var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
+            List<StudentInbox> list = new List<StudentInbox>();
+            foreach (var question in MineSessions)
+            {
+                foreach (var session in question.Sessions)
+                {
+                    StudentInbox obj = new StudentInbox();
+                    obj.SenderName = session.tutor.Username;
+                    var lastreply = session.Replies.OrderBy(c => c.PostedTime);
+                    obj.PostedTime = lastreply.FirstOrDefault().PostedTime;
+                    obj.SessionId = session.SessionID;
+                    obj.Status = question.Status;
+                    obj.LastMessage = lastreply.LastOrDefault().Details;
+                    list.Add(obj);
+
+                }
+            }
+            return View(list);
+        }
+
+        public ActionResult PostQuestion()
+        {
            
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
@@ -72,7 +96,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Index([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,CategoryID,DueDate,PostedTime")] QuestionViewModel question)
+        public async Task<JsonResult> PostQuestion([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,CategoryID,DueDate,PostedTime")] QuestionViewModel question)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +140,7 @@ namespace WebApplication2.Controllers
                 //    return null;
                 //   // return View(question);
                 //}
-                string response = quest.QuestionID +"$"+quest.Title+ "$" + quest.StudentID +  "$" + quest.Amount+"$"+quest.PostedTime+"$" + quest.DueDate ;
+                string response = quest.QuestionID +"$"+quest.Title+ "$" + User.Identity.Name +  "$" + quest.Amount+"$"+quest.PostedTime+"$" + quest.DueDate ;
                 //var result = new JsonResult
                 //{
                 //    Data = JsonConvert.SerializeObject(response)
@@ -151,7 +175,7 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc,obj.PostedTime.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString());
                 SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
@@ -165,26 +189,60 @@ namespace WebApplication2.Controllers
            
         }
 
-        public string generateMessage(string username, string detail, string imgsrc,string postedTime)
+        public string generateMessage(string username, string detail, string imgsrc,string postedTime,string replyID)
         {
+             string filestring = "<div id=\""+replyID+"\"></div>";
+          
             string message = "";
             message = message + "<li class=\"media\">" +
                             "<div class=\"comment\"> " +
-                                    "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle\" width=\"100\" height=\"100\"> </a>" +
+                                    "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle imgSize\"> </a>" +
                                      " <div class=\"media-body\">" +
-                                     " <strong class=\"text-success\">" + username + "</strong><br /><br />" +
+                                     " <strong class=\"text-success userText username\">" + username + "</strong><br /><br />" +
                                        detail +
-                                     "<br>" +
+                                      filestring +
                                      "<div class=\"clearfix\"></div>" +
                                      " </div>" +
-                                     "< span class=\"text-muted\" style=\"float:right\">"+
-                                              "<small class=\"text-muted\">"+postedTime + "</small>"+
-                                       " </span>"+
-                                     "<div class=\"clearfix\"></div>" +
+                                     "<div style=\"margin-bottom:20px\">" +
+                                              "<small class=\"text-muted pull-right\">" + postedTime + "</small>"+
+                                       " </div>"+
                                      "<hr>" +
                                "</div>" +
                                "</li>";
             return message;
+        }
+        public void SendChatMessageTutorRecieverFile(string sessionId, string sendTo, string message, IHubContext context)
+        {
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                if (user == null)
+                {
+                    // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                }
+                else
+                {
+                    db.Entry(user)
+                        .Collection(u => u.Connections)
+                        .Query()
+                        .Where(c => c.Connected == true)
+                        .Load();
+
+                    if (user.Connections == null)
+                    {
+                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                    }
+                    else
+                    {
+                        foreach (var connection in user.Connections)
+                        {
+                            context.Clients.Client(connection.ConnectionID)
+                                 .recieverStudentFile(message);
+                        }
+                    }
+                }
+            }
         }
 
         public void SendChatMessageTutorReciever(string sessionId, string sendTo, string message, IHubContext context)
@@ -272,6 +330,8 @@ namespace WebApplication2.Controllers
             }
             string path = "";
             var fileName = "";
+            string filestring = replyId + "$";
+            string filestringTutor = replyId + "$";
 
             for (int i = 0; i < Request.Files.Count; i++)
             {
@@ -279,7 +339,6 @@ namespace WebApplication2.Controllers
 
                 if (file != null)
                 {
-
                     fileName = Path.GetFileName(file.FileName);
                     path = Path.Combine(Server.MapPath("~/UserFiles/Questions/" + sessionId + "/" + replyId), fileName);
 
@@ -291,11 +350,23 @@ namespace WebApplication2.Controllers
                     qf.Path = "~/UserFiles/Questions/" + sessionId + "/" + replyId + "/" + fileName;
                     db.Files.Add(qf);
                     await db.SaveChangesAsync();
+
+                    filestring = filestring + "<br />";
+                    filestringTutor= filestringTutor +"<br />";
+                    var pathhtml = qf.Path.Split('/');
+                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName="+qf.Path+"\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestringTutor= filestringTutor+ "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+
                 }
 
             }
 
-            return Json(new { result = "true" });
+            var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+            var tutorusername = db.sessions.Where(c => c.SessionID == sessionId).FirstOrDefault().tutor.Username;
+            SendChatMessageTutorRecieverFile(sessionId.ToString(), tutorusername, filestringTutor, context); //send message to urself 
+
+
+            return Json(new { result =  filestring });
 
         }
 

@@ -1,6 +1,4 @@
-﻿body {
-}
-<style>
+﻿
     .comments ul ul {
         margin-left: 60px;
     }
@@ -66,4 +64,56 @@
     .huge {
         font-size: 20px;
     }
-</style>
+
+.hrclass{
+    margin-top:5px !important;
+    margin-bottom:5px;
+}
+
+.pchat hr{
+     margin-top:5px !important;
+    margin-bottom:5px;
+}
+
+.pchat p{
+    font-size:16px;
+}
+
+.imgSize{
+    width:50px;
+    height:50px;
+}
+@media(min-width:768px) {
+    .hrclass {
+        margin-top: 21px !important;
+        margin-bottom: 21px !important;
+    }
+    .pchat hr{
+     margin-top:21px !important;
+     margin-bottom:21px !important;
+  }
+    .imgSize
+    {
+    width:100px;
+    height:100px;
+    }
+}
+
+.username{
+    font-size:18px !important;
+}
+
+strong a{
+    text-decoration:underline;
+    color:black;
+
+}
+
+footer strong a{
+    text-decoration:none;
+    
+
+}
+#mypost .row{
+    margin-top:20px;margin-bottom:20px;
+}

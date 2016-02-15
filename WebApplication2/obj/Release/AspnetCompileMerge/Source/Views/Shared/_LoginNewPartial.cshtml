@@ -12,7 +12,6 @@
                             <hr class="star-primary">
                             @*<p>Fill the details to login to your account.</p>*@
                             @*<form role="form">*@
-
                             @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
@@ -34,27 +33,44 @@
                                 </div> <!-- /.input-group -->
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
-                            <div class="checkbox">
-                                <label>
-                                    @*<input type="checkbox">*@
-                                    @Html.CheckBoxFor(m => m.RememberMe) Remember me
-                                </label>
-                            </div> <!-- /.checkbox -->
 
-                            <input type="submit" class="btn btn-success" value="Login" />
+                                if (Request.Form.AllKeys.Contains("Login"))
+                                {
+                                    <span class="help-block">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                     </span>
+                                }
 
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 
-                            }
+                                        <div class="checkbox">
+                                            <label>
+                                                @*<input type="checkbox">*@
+                                                @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                                            </label>
+                                        </div> <!-- /.checkbox -->
 
-                            
-                            <section id="socialLoginForm" style="padding:15px !important">
-                                    @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", Model.externalLogin=new WebApplication2.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                                  
-                            </section>
-                           
-                        </div>
-                        <p class="error">@TempData["LoginError"]</p>
+                                <div class="row">
+                                    <div class="col-xs-2"></div>
+                                        <div class="col-xs-4">
+                                            <input type="submit" style="width:100px" class="btn btn-success" name="Login" value="Login" /></div>
+                                        <div class="col-xs-3">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                        </div>
+                                     <div class="col-xs-3"></div>
+                                    </div>
+                                       
+
+                                       
+                                        }
+
+
+                                        <section id="socialLoginForm" style="padding:15px !important">
+                                            @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", Model.externalLogin = new WebApplication2.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
+                                        </section>
+
+</div>
+               
                     </div>
 
 

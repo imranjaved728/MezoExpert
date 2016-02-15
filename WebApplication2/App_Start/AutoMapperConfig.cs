@@ -42,7 +42,8 @@ namespace WebApplication2.App_Start
             AutoMapper.Mapper.CreateMap<StudentUpdateModel, Student>();
 
             AutoMapper.Mapper.CreateMap<QuestionViewModel, Question>();
-            AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>();
+            AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>()
+                 .ForMember(dest => dest.StudentName, opts => opts.MapFrom(src => src.student.Username));
 
             AutoMapper.Mapper.CreateMap<TutorQuestionDetails, Question>();
             AutoMapper.Mapper.CreateMap<Question, TutorQuestionDetails>();

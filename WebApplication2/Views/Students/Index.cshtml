@@ -1,146 +1,129 @@
-﻿@model WebApplication2.Models.QuestionViewModel
+﻿
+@model IEnumerable<WebApplication2.Models.StudentInbox>
 @{
-ViewBag.Title = "Students - Home Page";
+    ViewBag.Title = "Students - Home";
 }
 
-<section style="background-image: url('../../Images/MezoImages/bluebacksmall.png');background-repeat:repeat ">>
-   @using (Ajax.BeginForm("Index", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyTutors" }, new {  id = "mypost", enctype = "multipart/form-data" }))
-   {
-             @Html.AntiForgeryToken()
 
-            <div class="container">
-            <div class="QuestionBox col-lg-8 col-lg-offset-2">
-                
+@section scripts{
 
-                <h3>Ask a Question and Get Tutors Help</h3>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
-                @*<div class="form-group">
-                        @Html.LabelFor(model => model.TutorID, "TutorID", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("TutorID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.TutorID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
+            $('#postedRequests').DataTable({
+                //"ordering": false,
+                "info": false,
+                "pageLength": 25,
+                "bLengthChange": false,
+                "scrollX": true,
+                "columnDefs": [
+                   {
+                       "targets": [ 0 ],
+                       "visible": false,
+                       "searchable": false
+                   },
+                        {
+                            "targets": [2],
+                            "width": "60%"
+                        },
+                 { 'bSortable': false, 'aTargets': [1, 2, 3] }
+                ],
+                "order": [[4, "desc"]],
+
+                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                            // Bind click event
+                            $(nRow).click(function () {
+
+                               // alert('You clicked on ' + aData[0] + '\'s row');
+
+                                $("#SessionId").val(aData[0]);
+                                document.getElementById('QuestionDetails').submit();
+                            });
+
+                            return nRow;
+                        }
+                    });
+
+            $("#postedRequests tr").css('cursor', 'pointer');
+
+                });
+
+    </script>
+}
+
+<div class="container fill img-rounded">
+
+    @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
+    {
+        @Html.Hidden("SessionId")
+        @*@Html.AntiForgeryToken()*@
+    }
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Current Active Sessions</h1>
+            <hr>
+            @{
+
+                <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("SessionId")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Sender")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Last Message")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Time")
+                            </th>
 
 
-                <div class="form-group">
-                    @Html.TextBoxFor(model => model.Title, new { placeholder = "Question Title", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                </div>
+                        </tr>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2", @style = " text-align: left;" })
-                    <div class="input-group">
-                        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var length = item.LastMessage.Length;
+                            //var lastreply = item.Replies.LastOrDefault();
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SessionId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SenderName)
+                                </td>
+                                <td>
+                                   @item.LastMessage.Substring(0, Math.Min(length, 256))
+                                    @if (length > 256)
+                                    {
+                                        <b>@Html.Raw("...")</b>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostedTime)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
-                <div class="form-group">
-                    @Html.TextAreaFor(model => model.Details, new { id = "QuestionText" })
-                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    <input type="file" multiple  id="FileUpload"/>
-                </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-
-                </div>
-
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                    <div class='date' id='datetimepicker1'>
-                        @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                    @*@Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })*@
-
-                </div>
-
-                <div class="form-group col-md-6">
-                    @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <button type="submit" class="btn btn-success form-control">Post this Question</button>
-                </div>
-
-            </div>
+                </table>
+            }
 
         </div>
-
-    }
-</section>
-
-@section scripts {
-
-  <script src="~/ckeditor/ckeditor.js"></script>
-    
-
-    <script type="text/javascript">
-                $(document).ready(function () {
-                    CKEDITOR.config.extraPlugins = "base64image";
-                    CKEDITOR.config.removePlugins = "image";
-                    CKEDITOR.replace('QuestionText');
-                    
-                });
-    </script>
-    
-
-
-<!--Script references. -->
-<!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
-<!--Reference the SignalR library. -->
-<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
-<!--Reference the autogenerated SignalR hub script. -->
-<script src="~/signalr/hubs"></script>
-<script>
-
-    function notifyTutors(data) {
-
-        var result = data.result;
-        var splitData = result.split("$");
-        var formData = new FormData();
-        var totalFiles = document.getElementById("FileUpload").files.length;
-        for (var i = 0; i < totalFiles; i++) {
-            var file = document.getElementById("FileUpload").files[i];
-
-            formData.append("FileUpload", file);
-        }
-        if (totalFiles > 0) {
-            formData.append("QuestionId", splitData[0]);
-            $.ajax({
-                type: "POST",
-                url: '/Students/UploadQuestionFile',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    //alert("success");
-                    
-                },
-                error: function (error) {
-                    alert("errror uploading files");
-                }
-            });
-        }
-        var notify = $.connection.notifyTutors;
-         
-        // Start the connection. And send messages to server
-        $.connection.hub.start().done(function () {
-
-            // Call the Send method on the hub.
-            notify.server.send(result);           
-            window.location = '/Students/Inbox';
-        });
-        
-    }
-   
-</script>
-
-}
+        <div class="col-md-1"></div>
+    </div>
+</div>

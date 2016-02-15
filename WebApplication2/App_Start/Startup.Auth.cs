@@ -65,6 +65,7 @@ namespace WebApplication2
 
             //});
 
+           
             var googleOAuth2AuthenticationOptions = new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "259220371178-kf7so13q10iqtpbg3b6ev431qimln1ng.apps.googleusercontent.com",

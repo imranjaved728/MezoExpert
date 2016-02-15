@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
+<link href="~/Theme/buttons/social-buttons.css" rel="stylesheet" />
 
-<Center><h4>OR</h4></Center>
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -12,15 +12,34 @@
                 for details on setting up this ASP.NET application to support logging in via external services.
             </p>
         </div>
-    }
-    else {
-        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+   }
+     else {
+                    var i = 0;
+      
+     
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                    }
+
+
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (i == 0)
+                        {
+                            <button class="btn btn-google-plus" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"><i class="fa fa-google-plus"></i> | Connect with Google+</button><br />
+
+                        }
+                        else
+                        {
+                            <button class="btn btn-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"><i class="fa fa-facebook"></i> | Connect with Facebook</button><br />
+
+
+                        }
+                        i = i + 1;
+                        @*<button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>*@
+                    }                      
                 </p>
             </div>
         }

@@ -60,27 +60,42 @@ namespace SignalRChat
             var name = Context.User.Identity.Name;
             using (var db = new ApplicationDbContext())
             {
+                string SessionId = Context.QueryString["SessionId"];
                 var user = db.Useras
                     .Include(u => u.Connections)
-                    .SingleOrDefault(u => u.UserName == name);
+                    .SingleOrDefault(u => u.UserName == name && u.SessionId == SessionId);
 
                 if (user == null)
                 {
                     user = new ApplicationDbContext.Usera
                     {
                         UserName = name,
-                        SessionId= Context.QueryString["SessionId"],
+                        SessionId= SessionId,
                         Connections = new List<ApplicationDbContext.Connection>()
                     };
                     db.Useras.Add(user);
                 }
 
-                user.Connections.Add(new ApplicationDbContext.Connection
+                if(user.Connections.Count==0)
+                { 
+                        user.Connections.Add(new ApplicationDbContext.Connection
+                        {
+                            ConnectionID = Context.ConnectionId,
+                            UserAgent = Context.Request.Headers["User-Agent"],
+                            Connected = true
+                        });
+                }
+                else
                 {
-                    ConnectionID = Context.ConnectionId,
-                    UserAgent = Context.Request.Headers["User-Agent"],
-                    Connected = true
-                });
+                    var connection = user.Connections.FirstOrDefault();
+                    db.Connections.Remove(connection);
+                    user.Connections.Add(new ApplicationDbContext.Connection
+                    {
+                        ConnectionID = Context.ConnectionId,
+                        UserAgent = Context.Request.Headers["User-Agent"],
+                        Connected = true
+                    });
+                }
                 db.SaveChanges();
             }
             return base.OnConnected();

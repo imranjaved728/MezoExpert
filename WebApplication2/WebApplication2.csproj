@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201602090943496_InitialCreate.Designer.cs">
       <DependentUpon>201602090943496_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602141922421_updatedpRIMARYkey.cs" />
+    <Compile Include="Migrations\201602141922421_updatedpRIMARYkey.Designer.cs">
+      <DependentUpon>201602141922421_updatedpRIMARYkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\TutorStudentChat.cs" />
@@ -581,6 +585,8 @@
     <Content Include="Theme\bootstrap-3.3.4-dist\js\bootstrap.js" />
     <Content Include="Theme\bootstrap-3.3.4-dist\js\bootstrap.min.js" />
     <Content Include="Theme\bootstrap-3.3.4-dist\js\npm.js" />
+    <Content Include="Theme\buttons\bootstrap-social.css" />
+    <Content Include="Theme\buttons\social-buttons.css" />
     <Content Include="Theme\css\bootstrap.css" />
     <Content Include="Theme\css\bootstrap.min.css" />
     <Content Include="Theme\css\chat.css" />
@@ -707,7 +713,7 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Manage.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Students\PostQuestion.cshtml" />
     <Content Include="Views\Students\EditProfile.cshtml" />
     <Content Include="Views\Tutors\Create.cshtml" />
     <Content Include="Views\Tutors\Delete.cshtml" />
@@ -728,9 +734,13 @@
     <Content Include="Views\Tutors\Inbox.cshtml" />
     <Content Include="Views\Students\Sessions.cshtml" />
     <Content Include="Views\Tutors\Sessions.cshtml" />
+    <Content Include="Theme\buttons\bootstrap-social.less" />
+    <Content Include="Theme\buttons\bootstrap-social.scss" />
+    <Content Include="Views\Students\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Theme\buttons\assets\" />
     <Folder Include="Theme\dropdownMultiple\themes\" />
     <Folder Include="Theme\images\" />
   </ItemGroup>
@@ -748,6 +758,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602090943496_InitialCreate.resx">
       <DependentUpon>201602090943496_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602141922421_updatedpRIMARYkey.resx">
+      <DependentUpon>201602141922421_updatedpRIMARYkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -84,7 +84,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Securi
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.Migrations.InitialCreate.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.Migrations.updatedpRIMARYkey.resources
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.pdb
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.csprojResolveAssemblyReference.cache

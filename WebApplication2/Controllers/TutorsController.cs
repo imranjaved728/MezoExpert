@@ -36,27 +36,44 @@ namespace WebApplication2.Controllers
            
             bool IsCompletedProfile = await isProfileCompleted();
 
+            //if (IsCompletedProfile == true)
+            //{
+            //    var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
+            //    IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
+            //    TutorHome model = new TutorHome();
+            //    model.ActiveJobs = postedQuestions;
+            //    model.CompledJobs = postedQuestions;
+            //    return View(model);
+            //}
+
+           
             if (IsCompletedProfile == true)
             {
-                var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
-                IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
-                TutorHome model = new TutorHome();
-                model.ActiveJobs = postedQuestions;
-                model.CompledJobs = postedQuestions;
-                return View(model);
+                var user = new Guid(User.Identity.GetUserId());
+                var MineSessions = db.sessions.Where(c => c.TutorID == user).ToList();
+                return View(MineSessions);
             }
-            
-            else
+            else {
+                TempData["isValidate"] = false;
                 return RedirectToAction("EditProfile");
+            }
 
         }
 
 
         public async Task<ActionResult> Inbox()
         {
-            var user = new Guid(User.Identity.GetUserId());
-            var MineSessions = db.sessions.Where(c=>c.TutorID== user).ToList();
-            return View(MineSessions);
+            bool IsCompletedProfile = await isProfileCompleted();
+            if (IsCompletedProfile == true)
+            {
+                var user = new Guid(User.Identity.GetUserId());
+                var MineSessions = db.sessions.Where(c => c.TutorID == user).ToList();
+                return View(MineSessions);
+            }
+            else {
+                TempData["isValidate"] = false;
+                return RedirectToAction("EditProfile");
+            }
         }
         #region Admin Functionality
         // GET: Tutors
@@ -192,11 +209,21 @@ namespace WebApplication2.Controllers
         }
 
 
-        public ActionResult PostedRequests()
+        public async Task<ActionResult> PostedRequests()
         {
-            var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
-            IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
-            return  View(postedQuestions);
+            bool IsCompletedProfile =  await isProfileCompleted();
+            if (IsCompletedProfile == true)
+            {
+                var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
+                IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
+               
+                return View(postedQuestions);
+            }
+            else
+            {
+                TempData["isValidate"] = false;
+                return RedirectToAction("EditProfile");
+            }
 
         }
 
@@ -294,7 +321,7 @@ namespace WebApplication2.Controllers
             var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
             var username = User.Identity.Name;
             var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString());
+            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString());
             SendChatTutorReciever(obj.SessionID.ToString(),username, message, context); //send message to urself 
 
             var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
@@ -310,23 +337,23 @@ namespace WebApplication2.Controllers
 
         }
 
-        public string generateMessage(string username,string detail,string imgsrc,string postedTime)
+        public string generateMessage(string username,string detail,string imgsrc,string postedTime, string replyID)
         {
+            string filestring = "<div id=\"" + replyID + "\"></div>";
             string message = "";
             message=message+"<li class=\"media\">" +
                             "<div class=\"comment\"> " +
-                                    "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle\" width=\"100\" height=\"100\"> </a>" +
+                                    "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle imgSize\"> </a>" +
                                      " <div class=\"media-body\">" +
-                                     " <strong class=\"text-success\">" + username + "</strong><br /><br />" +
+                                     " <strong class=\"text-success userText username\">" + username + "</strong><br /><br />" +
                                        detail +
-                                     "<br>" +
+                                      filestring +
                                      "<div class=\"clearfix\"></div>" +
                                      " </div>" +
-                                     "< span class=\"text-muted\" style=\"float:right\">" +
-                                              "<small class=\"text-muted\">" + postedTime + "</small>" +
-                                       " </span>" +
-                                     "<div class=\"clearfix\"></div>" +
-                                     "<hr>"+
+                                    "<div style=\"margin-bottom:20px\">" +
+                                              "<small class=\"text-muted pull-right\">" + postedTime + "</small>" +
+                                       " </div>" +
+                                     "<hr>" +
                                "</div>" +
                                "</li>";
             return message;
@@ -398,6 +425,40 @@ namespace WebApplication2.Controllers
             }
         }
 
+        public void SendChatStudentReieverFile(string sessionId, string sendTo, string message, IHubContext context)
+        {
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                if (user == null)
+                {
+                    // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                }
+                else
+                {
+                    db.Entry(user)
+                        .Collection(u => u.Connections)
+                        .Query()
+                        .Where(c => c.Connected == true)
+                        .Load();
+
+                    if (user.Connections == null)
+                    {
+                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                    }
+                    else
+                    {
+                        foreach (var connection in user.Connections)
+                        {
+                            context.Clients.Client(connection.ConnectionID)
+                                 .recieverTutorFile(message);
+                        }
+                    }
+                }
+            }
+        }
+
 
 
         [HttpPost]
@@ -419,6 +480,8 @@ namespace WebApplication2.Controllers
             }
             string path = "";
             var fileName = "";
+            string filestring = replyId + "$";
+            string filestringTutor = replyId + "$";
 
             for (int i = 0; i < Request.Files.Count; i++)
             {
@@ -438,13 +501,24 @@ namespace WebApplication2.Controllers
                     qf.Path = "~/UserFiles/Questions/" + sessionId + "/" + replyId + "/" + fileName;
                     db.Files.Add(qf);
                     await db.SaveChangesAsync();
+
+                    filestring = filestring + "<br />";
+                    filestringTutor = filestringTutor + "<br />";
+                    var pathhtml = qf.Path.Split('/');
+                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestringTutor = filestringTutor + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+
                 }
 
             }
+            var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+            var StudentUsername = db.sessions.Where(c => c.SessionID == sessionId).FirstOrDefault().question.student.Username;
+            SendChatStudentReieverFile(sessionId.ToString(), StudentUsername, filestring, context); //send message to urself 
 
-            return Json(new { result = "true" });
 
-        }
+            return Json(new { result = filestringTutor });
+
+            }
 
         public FileResult Download(string fileName)
         {
@@ -463,6 +537,7 @@ namespace WebApplication2.Controllers
             return new MultiSelectList(db.Categories, "CategoryID", "CategoryName", selectedValues);
 
         }
+
         public async Task<ActionResult> EditProfile()
         {
             Guid user = new Guid(User.Identity.GetUserId());
@@ -471,7 +546,7 @@ namespace WebApplication2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tutor tutor = await db.Tutors.FindAsync(user);
-            TutorUpdateModel t = Mapper.Map<Tutor, TutorUpdateModel>(tutor);
+            TutorUpdateModel tmodel = Mapper.Map<Tutor, TutorUpdateModel>(tutor);
             
             if (tutor == null)
             {
@@ -479,9 +554,9 @@ namespace WebApplication2.Controllers
             }
             // ViewBag.ExpertiseVal = new SelectList(db.Categories, "CategoryID", "CategoryName", t.Expertise);
             // ViewBag.ExpertiseVal = GetCategories(t.Expertise);
-            ViewBag.Expertise = new MultiSelectList(db.Categories, "CategoryID", "CategoryName", t.Expertise);
-
-            return View(t);
+            ViewBag.Expertise = new MultiSelectList(db.Categories, "CategoryID", "CategoryName", tmodel.Expertise);
+            ViewBag.isValidated = TempData["isValidate"] == null ? true : TempData["isValidate"];
+            return View(tmodel);
 
         }
 
@@ -514,20 +589,31 @@ namespace WebApplication2.Controllers
 
                 //look this thing later.
 
-                IEnumerable<TutorExperties> obj =loaddb.tutorExperties.AsEnumerable();
+
+                //deleting added items
+                IEnumerable<TutorExperties> obj = loaddb.tutorExperties.AsEnumerable();
+                foreach (var category in obj.ToList())
+                {
+                    bool result = tutor.Expertise.Contains(category.CategoryID.ToString());
+                    if (result == false)
+                    {
+                        var removedExpertise = db.TutorsExpertise.Where(c=>c.CategoryID==category.CategoryID && c.TutorID==category.TutorID).FirstOrDefault();
+                        db.TutorsExpertise.Remove(removedExpertise);
+                    }
+
+                }
+               
                 foreach (var category in tutor.Expertise)
                 {
                     var result = obj.Where(c => c.CategoryID == new Guid(category)).ToList();
-                    if(result.Count==0) //dont exist add it
-                          db.TutorsExpertise.Add(new TutorExperties { TutorID = loaddb.TutorID, CategoryID = new Guid(category) });
-                    
-                    //add logic to remove as well.
+                    if (result.Count == 0) //dont exist add it
+                        db.TutorsExpertise.Add(new TutorExperties { TutorID = loaddb.TutorID, CategoryID = new Guid(category) });
 
                 }
 
                 loaddb.IsCompletedProfile = true;
                 db.Entry(loaddb).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(tutor);

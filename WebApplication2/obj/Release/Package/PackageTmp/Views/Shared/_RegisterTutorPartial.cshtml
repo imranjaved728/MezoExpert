@@ -33,7 +33,7 @@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
                                 </div>
-                                @Html.ValidationMessageFor(m => m.LastName,"", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                             </div>
                            
                         
@@ -91,12 +91,32 @@
                                 </div> <!-- /.input-group -->
                                 @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
-                            <br />
-                            <input type="submit" class="btn btn-success" value="Sign Up" />
+                           @{
+                               if (Request.Form.AllKeys.Contains("registerT"))
+                               {
+                                <span class="help-block">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    </span>
+                              }
+                       }
+                                    <br />
+                            <div class="row">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-4">
+                                    <input type="submit" class="btn btn-success" style="width:100px" name="registerT" value="Sign Up" />
+                                   
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                </div>
+                                <div class="col-xs-3"></div>
+                            </div>
 
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                        <p class="error">@TempData["ExpertRegisterError"]</p>
+                                  
+
+                                   
+</div>
+            
                     </div>
 
 

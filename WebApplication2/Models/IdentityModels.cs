@@ -8,6 +8,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using WebApplication2.DBEntities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication2.Models
 {
@@ -74,8 +75,9 @@ namespace WebApplication2.Models
 
         public class Usera
         {
-            [Key]
+            [Key, Column(Order = 0)]
             public string UserName { get; set; }
+            [Key, Column(Order =1)]
             public string SessionId { get; set; }
             public ICollection<Connection> Connections { get; set; }
         }

@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#page-top">Mezo Experts</a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Mezo Experts</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,7 +63,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#page-top">Mezo Experts</a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Mezo Experts</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -77,19 +77,25 @@
                           if (User.IsInRole("Student"))
                           {
                                 <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Inbox</a>
+                                    <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><i class="fa fa-home"></i> Home</a>
                                 </li>
                                 <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Post Question</a>
+                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Students")'"><i class="fa fa-envelope"></i> Inbox</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="location.href='@Url.Action("PostQuestion","Students")'"><i class="fa fa-stack-exchange"></i> Post Question</a>
                                 </li>
                           }
                           else if (User.IsInRole("Tutor"))
                           {
+                            <li>
+                                <a href="#" onclick="location.href='@Url.Action("Index","Tutors")'"><i class="fa fa-home"></i> Home</a>
+                            </li>
                                 <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><span class="glyphicon glyphicon-question-sign"></span> Inbox</a>
+                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><i class="fa fa-envelope "></i> Inbox</a>
                                 </li>
                                 <li>
-                                    <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><span class="glyphicon glyphicon-question-sign"></span> View Posted Questions</a>
+                                    <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><i class="fa fa-stack-exchange"></i> Posted Questions</a>
                                 </li>
                           }
                           else
@@ -112,16 +118,16 @@
                             <li class="dropdown">
                                 <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Account Settings</a></li>
+                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"> Account Settings</a></li>
                                     @if (  User.IsInRole("Tutor"))
                                     {
-                                      <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"><span class="glyphicon glyphicon-log-out"></span> Profile</a></li>
+                                      <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> Profile</a></li>
                                     }
                                     else{
-                                    <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"><span class="glyphicon glyphicon-log-out"></span> Profile</a></li>
+                                    <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"> Profile</a></li>
                                     }
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Help</a></li>
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                   
+                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i> Logout</a></li>
                                  </ul>
                             </li>
                           }

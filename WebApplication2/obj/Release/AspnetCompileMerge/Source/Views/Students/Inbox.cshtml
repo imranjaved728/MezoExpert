@@ -13,12 +13,24 @@
         $(document).ready(function () {
 
             $('#postedRequests').DataTable({
+               // "ordering": false,
+                "info": false,
+                "pageLength": 25,
+                "bLengthChange": false,
+                "scrollX": true,
                 "columnDefs": [
                    {
                        "targets": [ 0 ],
                        "visible": false,
                        "searchable": false
-                   }],
+                   },
+                        {
+                            "targets": [2],
+                            "width": "60%"
+                        },
+                  { 'bSortable': false, 'aTargets': [1, 2, 3] }
+                  ],
+                "order": [[4, "desc"]],
 
                         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
@@ -42,7 +54,7 @@
     </script>
 }
 
-<div class="container">
+<div class="container fill img-rounded">
 
     @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
     {
@@ -56,7 +68,7 @@
             <hr>
             @{
 
-                <table id="postedRequests" class="display" cellspacing="0" width="100%">
+                <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>
@@ -80,27 +92,33 @@
 
                     </thead>
                     <tbody>
-                       @foreach (var item in Model)
-                       {
-                           //var lastreply = item.Replies.LastOrDefault();
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SessionId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SenderName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastMessage)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PostedTime)
-                            </td>
-                        </tr>
-                       }
+                        @foreach (var item in Model)
+                        {
+                            var length = item.LastMessage.Length;
+                            //var lastreply = item.Replies.LastOrDefault();
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SessionId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SenderName)
+                                </td>
+                                <td>
+                                    
+                                    @item.LastMessage.Substring(0, Math.Min(length, 256))
+                                    @if (length > 256)
+                                    {
+                                        <b>@Html.Raw("...")</b>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostedTime)
+                                </td>
+                            </tr>
+                        }
                     </tbody>
 
                 </table>
