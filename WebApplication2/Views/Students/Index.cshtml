@@ -11,11 +11,14 @@
     <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+            });
 
             $('#postedRequests').DataTable({
                 //"ordering": false,
                 "info": false,
-                "pageLength": 25,
+                "pageLength": 10,
                 "bLengthChange": false,
                 "scrollX": true,
                 "columnDefs": [
@@ -24,9 +27,13 @@
                        "visible": false,
                        "searchable": false
                    },
+                   {
+                       "targets": [1],
+                       "width": "22%"
+                   },
                         {
                             "targets": [2],
-                            "width": "60%"
+                            "width": "55%"
                         },
                  { 'bSortable': false, 'aTargets': [1, 2, 3] }
                 ],
@@ -49,81 +56,226 @@
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
+           });
+
+    </script>
+    <script>
+        $('#postedQuestions').DataTable({
+            //"ordering": false,
+            "info": false,
+            "pageLength": 10,
+            "bLengthChange": false,
+            "scrollX": true,
+            "columnDefs": [
+               {
+                   "targets": [0],
+                   "visible": false,
+                   "searchable": false
+               },
+               {
+                   "targets": [1],
+                   "width": "22%"
+               },
+                    {
+                        "targets": [2],
+                        "width": "55%"
+                    },
+             { 'bSortable': false, 'aTargets': [1, 2, 3] }
+            ],
+            "order": [[4, "desc"]],
+
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                // Bind click event
+                $(nRow).click(function () {
+
+                    // alert('You clicked on ' + aData[0] + '\'s row');
+
+                    //$("#SessionId").val(aData[0]);
+                    //document.getElementById('QuestionDetails').submit();
                 });
 
+                return nRow;
+            }
+        });
     </script>
 }
 
 <div class="container fill img-rounded">
+    
 
-    @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
-    {
-        @Html.Hidden("SessionId")
-        @*@Html.AntiForgeryToken()*@
-    }
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10 personal-info">
-            <h1>Current Active Sessions</h1>
-            <hr>
-            @{
+        @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
+        {
+            @Html.Hidden("SessionId")
+            @*@Html.AntiForgeryToken()*@
+        }
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 personal-info">
+                <h1>Home</h1>
+                <hr>
+                <br />
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a data-toggle="tab" href="#1">Active Sessions</a></li>
+                    <li role="presentation"><a data-toggle="tab" href="#2">Posted Questions</a></li>
 
-                <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayName("SessionId")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Sender")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Last Message")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Status")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Time")
-                            </th>
+                </ul>
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="1">
+
+                        @{
+
+                            <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("SessionId")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Sender")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Last Message")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Status")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Time")
+                                        </th>
 
 
-                        </tr>
+                                    </tr>
 
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
                         {
                             var length = item.LastMessage.Length;
                             //var lastreply = item.Replies.LastOrDefault();
-                            <tr>
+                            <tr style="@(item.newMessage== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.SessionId)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SenderName)
+                                    <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
+
                                 </td>
                                 <td>
-                                   @item.LastMessage.Substring(0, Math.Min(length, 256))
+                                    @item.LastMessage.Substring(0, Math.Min(length, 256))
                                     @if (length > 256)
                                     {
-                                        <b>@Html.Raw("...")</b>
+                                <b>@Html.Raw("...")</b>
                                     }
                                 </td>
                                 <td>
-                                    <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    @if (item.Status == "Approved")
+                                    {
+                                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Conflict")
+                                    {
+                                <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Hired")
+                                    {
+                                <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Posted")
+                                    {
+                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else
+                                    {
+                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
                                 </td>
-                                <td>
+                                <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                     @Html.DisplayFor(modelItem => item.PostedTime)
                                 </td>
                             </tr>
                         }
-                    </tbody>
+                                </tbody>
 
-                </table>
-            }
+                            </table>
+                        }
 
+                    </div>
+                
+                    <div class="tab-pane" id="2">
+
+                        @{
+                            var questions = Model.FirstOrDefault().questions;
+                            <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("Question ID")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Title")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Details")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Status")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Time")
+                                        </th>
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in questions)
+                            {
+                                var length = item.Details.Length;
+                                //var lastreply = item.Replies.LastOrDefault();
+                            <tr style="background-color:#F1F1F1 !important">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.QuestionID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+
+                                </td>
+                                <td>
+                                    @item.Details.Substring(0, Math.Min(length, 256))
+                                    @if (length > 256)
+                                        {
+                                        <b>@Html.Raw("...")</b>
+                                        }
+                                </td>
+                                <td>
+
+                                    @if (item.Status == "Hired")
+                                        {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                        }
+                                        else if (item.Status == "Posted")
+                                        {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                        }
+                                </td>
+                                <td style="background-color:#F1F1F1 ">
+                                    @Html.DisplayFor(modelItem => item.PostedTime)
+                                </td>
+                            </tr>
+                            }
+                                </tbody>
+
+                            </table>
+                        }
+                    </div>
+                 </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
     </div>
-</div>

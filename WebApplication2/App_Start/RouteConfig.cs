@@ -24,6 +24,11 @@ namespace WebApplication2
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+              name: "Student",
+              url: "{controller}/{action}/{id}",
+              defaults: new { controller = "Student", action = "PostQuestion", id = UrlParameter.Optional }
+          );
 
         }
     }

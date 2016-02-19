@@ -12,6 +12,7 @@ namespace WebApplication2.Models
         public Guid QuestionID { get; set; }
         public Guid StudentID { get; set; }
         public string StudentName { get; set; }
+        public string StudentProfile { get; set; }
 
         public Guid? TutorID { get; set; }
 
@@ -29,8 +30,9 @@ namespace WebApplication2.Models
         public float Amount { get; set; }
 
         public Guid? CategoryID { get; set; }
+        public string CategoryName { get; set; }
 
-       
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
         public DateTime PostedTime { get; set; }

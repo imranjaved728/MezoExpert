@@ -50,7 +50,7 @@ namespace WebApplication2.Controllers
             if (IsCompletedProfile == true)
             {
                 var user = new Guid(User.Identity.GetUserId());
-                var MineSessions = db.sessions.Where(c => c.TutorID == user).ToList();
+                var MineSessions = db.sessions.Where(c => c.TutorID == user && c.Status == Status.Hired).ToList();
                 return View(MineSessions);
             }
             else {
@@ -235,6 +235,7 @@ namespace WebApplication2.Controllers
             ChatModel obj = new ChatModel();
             obj.session = session;
             obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
+            obj.offer.amount = obj.session.OfferedFees;
             
             return View(obj);
         }
@@ -276,6 +277,7 @@ namespace WebApplication2.Controllers
                 //obj.StudentID = reply.StudentID;
                 obj.QuestionID = reply.QuestionID;
                 obj.PostedTime = DateTime.Now;
+                obj.Status = Status.Posted;
                 db.sessions.Add(obj);
             
                 Reply rep = new Reply();
@@ -314,8 +316,12 @@ namespace WebApplication2.Controllers
             obj.SessionID = reply.sessionID;
             obj.PostedTime = DateTime.Now;
             obj.Details = reply.replyDetail;
-
             db.Replies.Add(obj);
+
+            var session = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault();
+            session.NewMessageStudent = true;
+            db.Entry(session).State = EntityState.Modified;
+            
             await db.SaveChangesAsync();
 
             var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
@@ -618,6 +624,154 @@ namespace WebApplication2.Controllers
             }
             return View(tutor);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> SendOffer( Offer question)
+        {
+            var user = User.Identity.GetUserId();
+            var sessionId = question.SessionId;
+            var session = db.sessions.Where(c => c.SessionID ==sessionId && c.TutorID.Value ==new Guid(user)).First();
+            if(session.Status==Status.Posted || session.Status == Status.Offered)
+            { 
+                session.OfferedFees = question.amount;
+                session.Status = Status.Offered;
+                db.Entry(session).State = EntityState.Modified;
+
+                Reply obj = new Reply();
+                obj.ReplyID = Guid.NewGuid();
+                obj.ReplierID = new Guid(User.Identity.GetUserId());
+                obj.SessionID = sessionId;
+                obj.PostedTime = DateTime.Now;
+                obj.Details = " Automatically Generated Message: I have sent offer to do your work for " + question.amount + "$. Press Hire Button if you are interested in my services.";
+                session.Replies.Add(obj);
+                db.SaveChanges();
+
+                var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                //send message reply
+                var username = User.Identity.Name;
+                var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                SendChatTutorReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
+
+                var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
+                var username2 = student.Username;
+                SendChatStudentReiever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+               
+                //send button update
+                var message2 = "<button type=\"button\" id=\"offer\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#hireNewModal\">Hire for ("+question.amount+"$)</button>";
+                SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = question.amount }
+                };
+            }
+            else
+            {
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "" }
+                };
+            }
+
+        }
+
+  
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Invoice(Offer question)
+        {
+            var user = User.Identity.GetUserId();
+            var sessionId = question.SessionId;
+            var session = db.sessions.Where(c => c.SessionID == sessionId && c.TutorID.Value == new Guid(user)).First();
+            if (session.Status == Status.Hired || session.Status==Status.Invoiced)
+            {
+                session.OfferedFees = question.amount;
+                session.Status = Status.Invoiced;
+                db.Entry(session).State = EntityState.Modified;
+
+                Reply obj = new Reply();
+                obj.ReplyID = Guid.NewGuid();
+                obj.ReplierID = new Guid(User.Identity.GetUserId());
+                obj.SessionID = sessionId;
+                obj.PostedTime = DateTime.Now;
+                obj.Details = " Automatically Generated Message: I have sent Invoice for the work for " + question.amount + "$. Press Accept Button if you are satisfied with the services and pay to tutor. Pressing Reject button will cause the admin to decide the dispute.";
+                session.Replies.Add(obj);
+
+                db.SaveChanges();
+
+                var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                //send message reply
+                var username = User.Identity.Name;
+                var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                SendChatTutorReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
+
+                var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
+                var username2 = student.Username;
+                SendChatStudentReiever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+
+                //send button
+                
+                var message2 = "<button type =\"button\" id=\"accept\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#approveNewModal\" style=\"margin-right:5px\">Accept </button>";
+                message2 = message2 + "<button type =\"button\" id=\"reject\" class=\"btn  btn-primary\" data-toggle=\"modal\" data-target=\"#rejectNewModal\">Reject </button>";
+
+                   SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = question.amount }
+                };
+            }
+            else
+            {
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "" }
+                };
+            }
+
+        }
+
+        public void SendButtonStudent(string sessionId, string sendTo, string message, IHubContext context)
+        {
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                if (user == null)
+                {
+                    // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                }
+                else
+                {
+                    db.Entry(user)
+                        .Collection(u => u.Connections)
+                        .Query()
+                        .Where(c => c.Connected == true)
+                        .Load();
+
+                    if (user.Connections == null)
+                    {
+                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                    }
+                    else
+                    {
+                        foreach (var connection in user.Connections)
+                        {
+                            context.Clients.Client(connection.ConnectionID)
+                                 .recieverButtons(message);
+                        }
+                    }
+                }
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

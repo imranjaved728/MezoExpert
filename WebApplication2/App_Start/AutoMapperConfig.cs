@@ -43,6 +43,8 @@ namespace WebApplication2.App_Start
 
             AutoMapper.Mapper.CreateMap<QuestionViewModel, Question>();
             AutoMapper.Mapper.CreateMap<Question, QuestionViewModel>()
+                 .ForMember(dest => dest.CategoryName, opts => opts.MapFrom(src => src.Categories.FirstOrDefault().CategoryName))
+                 .ForMember(dest => dest.StudentProfile, opts => opts.MapFrom(src => src.student.ProfileImage))
                  .ForMember(dest => dest.StudentName, opts => opts.MapFrom(src => src.student.Username));
 
             AutoMapper.Mapper.CreateMap<TutorQuestionDetails, Question>();

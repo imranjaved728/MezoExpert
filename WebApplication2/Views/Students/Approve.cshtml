@@ -1,0 +1,49 @@
+﻿
+@model WebApplication2.Models.Offer
+<div class="modal fade" id="approveNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2>Approve Invoice</h2>
+                        <hr class="star-primary">
+
+                        @using (Ajax.BeginForm("ApprovePayment", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "updateButtonsApprove" }, new { id = "myOffer" }))
+                        {
+                            @Html.HiddenFor(model => model.SessionId, new { id = "HiddenText" })
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    Are you sure you want to approve the invoice ? <br />
+                                    The amount will be transferred to tutor account.                                </div>
+
+                            </div> <!-- /.form-group -->
+
+                            <div class="row">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-4">
+                                    <input type="submit" style="width:100px" class="btn btn-success" value="Yes" />
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+                                </div>
+                                <div class="col-xs-3"></div>
+                            </div>
+
+                        }
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

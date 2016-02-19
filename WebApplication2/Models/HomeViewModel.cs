@@ -53,7 +53,7 @@ namespace WebApplication2.Models
 
         [Required]
         [Display(Name = "Username")]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string UserName { get; set; }
 
         [Required]
@@ -72,12 +72,14 @@ namespace WebApplication2.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public ExternalLoginListViewModel externalLogin;
     }
 
     public class TutorUpdateModel
     {
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
@@ -91,9 +93,9 @@ namespace WebApplication2.Models
         public string DOB { get; set; }
 
         //[Required]
-        //[Display(Name = "Username")]
-        //[DataType(DataType.Text)]
-        //public string UserName { get; set; }
+         [Display(Name = "Username")]
+         [DataType(DataType.Text)]
+         public string UserName { get; set; }
 
         //[Required]
         //[Display(Name = "Email Address")]
@@ -136,6 +138,9 @@ namespace WebApplication2.Models
         [DataType(DataType.Text)]
         public string ProfileImage { get; set; }
 
+        [Display(Name = "Rating")]
+        public float Rating { get; set; }
+
         [DataType(DataType.Text)]
         public string []Expertise { get; set; }
     }
@@ -150,7 +155,7 @@ namespace WebApplication2.Models
         [Required]
         [Display(Name = "Username")]
         [StringLength(100, ErrorMessage = "Username must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string Username { get; set; }
 
         [Required]
@@ -165,12 +170,12 @@ namespace WebApplication2.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-       
+        public ExternalLoginListViewModel externalLogin;
     }
 
     public class StudentUpdateModel
     {
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType  = typeof(Resource))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
@@ -183,9 +188,9 @@ namespace WebApplication2.Models
         [Display(Name = "Date of Birth")]
         public string DateOfBirth { get; set; }
 
-
+        
         [Display(Name = "Username")]
-        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string UserName { get; set; }
 
         [Display(Name = "Degree")]

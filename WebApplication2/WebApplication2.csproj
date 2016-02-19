@@ -48,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -204,6 +208,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CultureHelper.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -216,6 +221,7 @@
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TutorsController.cs" />
     <Compile Include="DBEntities\Category.cs" />
+    <Compile Include="DBEntities\Transaction.cs" />
     <Compile Include="DBEntities\Files.cs" />
     <Compile Include="DBEntities\Question.cs" />
     <Compile Include="DBEntities\Reply.cs" />
@@ -225,16 +231,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602090943496_InitialCreate.cs" />
-    <Compile Include="Migrations\201602090943496_InitialCreate.Designer.cs">
-      <DependentUpon>201602090943496_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602141922421_updatedpRIMARYkey.cs" />
-    <Compile Include="Migrations\201602141922421_updatedpRIMARYkey.Designer.cs">
-      <DependentUpon>201602141922421_updatedpRIMARYkey.cs</DependentUpon>
+    <Compile Include="Migrations\201602190454215_rating.cs" />
+    <Compile Include="Migrations\201602190454215_rating.Designer.cs">
+      <DependentUpon>201602190454215_rating.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\TutorStudentChat.cs" />
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
@@ -244,6 +247,16 @@
     <Compile Include="Models\StudentInbox.cs" />
     <Compile Include="Models\TutorQuestionDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Models\NotifyTutors.cs" />
   </ItemGroup>
@@ -517,6 +530,7 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\MezoImages\bluebacksmall.png" />
     <Content Include="Images\MezoImages\homeback.jpg" />
+    <Content Include="Images\MezoImages\logo.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -620,6 +634,24 @@
     <Content Include="Theme\js\jquery.form.min.js" />
     <Content Include="Theme\js\jquery.js" />
     <Content Include="Theme\js\prettify.js" />
+    <Content Include="Theme\rating\css\star-rating.css" />
+    <Content Include="Theme\rating\css\star-rating.min.css" />
+    <Content Include="Theme\rating\css\theme-krajee-fa.css" />
+    <Content Include="Theme\rating\css\theme-krajee-fa.min.css" />
+    <Content Include="Theme\rating\css\theme-krajee-svg.css" />
+    <Content Include="Theme\rating\css\theme-krajee-svg.min.css" />
+    <Content Include="Theme\rating\css\theme-krajee-uni.css" />
+    <Content Include="Theme\rating\css\theme-krajee-uni.min.css" />
+    <Content Include="Theme\rating\examples\index.html" />
+    <Content Include="Theme\rating\examples\sample.html" />
+    <Content Include="Theme\rating\img\loading.gif" />
+    <Content Include="Theme\rating\js\star-rating.js" />
+    <Content Include="Theme\rating\js\star-rating.min.js" />
+    <Content Include="Theme\rating\js\star-rating_locale_de.js" />
+    <Content Include="Theme\rating\js\star-rating_locale_LANG.js" />
+    <Content Include="Theme\rating\js\star-rating_locale_pt-br.js" />
+    <Content Include="Theme\rating\js\star-rating_locale_ru.js" />
+    <Content Include="Theme\rating\js\star-rating_locale_ua.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -655,7 +687,6 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_Navbar.cshtml" />
     <Content Include="Theme\bootstrap-3.3.4-dist\css\bootstrap-theme.css.map" />
@@ -737,6 +768,20 @@
     <Content Include="Theme\buttons\bootstrap-social.less" />
     <Content Include="Theme\buttons\bootstrap-social.scss" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Tutors\SendOffer.cshtml" />
+    <Content Include="Views\Students\Hire.cshtml" />
+    <Content Include="Views\Tutors\Invoice.cshtml" />
+    <Content Include="Views\Students\Approve.cshtml" />
+    <Content Include="Views\Students\Reject.cshtml" />
+    <Content Include="Views\Students\AddFunds.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Theme\rating\bower.json" />
+    <Content Include="Theme\rating\CHANGE.md" />
+    <Content Include="Theme\rating\composer.json" />
+    <Content Include="Theme\rating\LICENSE.md" />
+    <Content Include="Theme\rating\package.json" />
+    <Content Include="Theme\rating\README.md" />
+    <Content Include="Views\Students\Rate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -756,11 +801,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602090943496_InitialCreate.resx">
-      <DependentUpon>201602090943496_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602190454215_rating.resx">
+      <DependentUpon>201602190454215_rating.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602141922421_updatedpRIMARYkey.resx">
-      <DependentUpon>201602141922421_updatedpRIMARYkey.cs</DependentUpon>
+    <EmbeddedResource Include="Resource.ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

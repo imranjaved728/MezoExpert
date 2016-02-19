@@ -67,6 +67,7 @@ namespace WebApplication2.Models
         public DbSet<Files> Files { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Session> sessions { get; set; }
+        public DbSet<Transaction> transcations { get; set; }
 
 
 

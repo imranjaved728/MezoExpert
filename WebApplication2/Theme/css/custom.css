@@ -61,3 +61,28 @@ h1{
           }
 
 }
+
+.imgSizeInbox{
+    width:30px;
+    height:30px;
+    
+}
+
+          table.display tbody tr:nth-child(even) {
+            background-color: #F1F1F1 !important;
+        }
+
+        table.display tbody tr:nth-child(odd)  {
+            background-color: #F1F1F1 !important;
+        }
+          
+        table.display tbody tr:nth-child(even):hover td{
+            background-color: white !important;
+        }
+
+        table.display tbody tr:nth-child(odd):hover td {
+            background-color: white !important;
+        }
+        .paddclass{
+            padding:11px 15px;
+        }

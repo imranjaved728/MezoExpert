@@ -165,7 +165,7 @@
                                             @Html.AntiForgeryToken()
                                             <div class="media-body">
                                                 <strong class="text-success">@{ @Model.tutor.Username}</strong><br /><br />
-                                                @Html.TextAreaFor(model => model.replyDetails, new { id = "QuestionText", placeholder = "Write your reply", @class = "form-control" })
+                                                @Html.TextAreaFor(model => model.replyDetails, new { id = "QuestionText", placeholder = "Write your reply",@rows = "6", @columns = "48", @class = "form-control" })
                                                
                                                  @*<textarea class="form-control" placeholder="Write your reply" rows="5"></textarea>*@
                                                 <br>

@@ -14,7 +14,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
 
-            <h1>Conversation with  @Model.session.tutor.Username</h1>
+            <h1>Conversation with  @Model.session.question.student.Username</h1>
             <hr />
             <div class="panel-body comments">
                 @*<div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
@@ -55,7 +55,7 @@
                                                     <div class="col-xs-9 text-right">
                                                         @if (Model.session.question.DueDate.HasValue)
                                                         {
-                                                            <div class="huge">@Model.session.question.DueDate.Value.ToShortDateString()</div>
+                                                            <div class="medium">@Model.session.question.DueDate.Value.ToShortDateString()</div>
                                                         }
                                                         @*<div>New Tasks!</div>*@
                                                     </div>
@@ -100,7 +100,7 @@
                                                         <i class="fa fa-stack-exchange fa-4x"></i>
                                                     </div>
                                                     <div class="col-xs-9 text-right">
-                                                        <div class="huge">@Model.session.question.Status</div>
+                                                        <div class="medium">@Model.session.Status @Model.session.OfferedFees$</div>
 
                                                     </div>
                                                 </div>
@@ -131,8 +131,10 @@
                     </li>
 
                     @{
+                        var count = 0;
                         foreach (var reply in Model.session.Replies)
                         {
+                            count++;
                             var IsTutor = reply.ReplierID == Model.session.TutorID ? true : false;
                             var tutor = Model.session.tutor;
                             if (IsTutor == true)
@@ -144,15 +146,15 @@
                                         </a>
 
                                         <div class="media-body">
-                                            <strong class="text-success userText username">@{ @tutor.Username}</strong><br />
+                                            <a style="text-decoration:none" href="@Url.Action("Profile","Home",new { username =tutor.Username })"> <strong class="text-success userText username">@{ @tutor.Username}</strong></a><br />
                                             @Html.Raw(reply.Details)
 
                                             @if (reply.Files.Count > 0)
-                                            {
+                            {
                                                 <br /><br/>
                                                 foreach (var v in reply.Files)
-                                                {
-                                                    var path = @v.Path.Split('/');
+                                {
+                                    var path = @v.Path.Split('/');
                                                     <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                 }
                                             }
@@ -171,6 +173,9 @@
                                                 else
                                                 {
                                                     var student = Model.session.question.student;
+                                                    var isTeacher = Model.session.question.TutorID;
+                                                    if (isTeacher == null || (isTeacher != null && count != 1))
+                                                    {
                                                     <li class="media">
                                                         <div class="comment">
                                                             <a href="#" class="pull-left">
@@ -182,10 +187,10 @@
                                                                 @Html.Raw(reply.Details)
 
                                                                 @if (reply.Files.Count > 0)
-                                                                { <br /><br />
+                        { <br /><br />
                                                                     foreach (var v in reply.Files)
-                                                                    {
-                                                                        var path = @v.Path.Split('/');
+                            {
+                                var path = @v.Path.Split('/');
                                                                         <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                                     }
                                                                 }
@@ -201,6 +206,7 @@
                                                             <hr>
                                                         </div>
                                                     </li>
+                                                                            }
 
                                                                         }
                                                                     }
@@ -217,15 +223,70 @@
                                                                                 <div class="media-body">
                                                                                     <strong class="text-success username">@{ @Ctutor.Username}</strong><br /><br />
                                                                                     @*@Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", placeholder = "Write your reply", @class = "form-control" })*@
-                                                                                    @Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
-                                                                                    @Html.ValidationMessageFor(model => model.replyDetail, "", new { @class = "text-danger" })
+                                                                                    @if (Model.session.isClosed)
+                                                                                    {
+                                                                                           @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true ,id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        @Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
+
+                                                                                    }
+                                                                                         @Html.ValidationMessageFor(model => model.replyDetail, "", new { @class = "text-danger" })
                                                                                     <br>
                                                                                     <div class="form-group">
                                                                                         <input type="file" multiple id="FileUpload" />
                                                                                     </div>
+                                                                                    <div class="pull-right">
+                                                                                        <table>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <div id="buttonsUpdate" style="padding-right:10px">
+                                                                                                        @if (Model.session.Status == "Posted")
+                                                                                                    {
+                                                                                                            <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#offerNewModal">Send Offer</button>
+                                                                                                    }
+                                                                                                    else if (Model.session.Status == "Offered")
+                                                                                                    {
+                                                                                                            <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#offerNewModal">Update Offer (@Model.session.OfferedFees$)</button>
 
-                                                                                    <button type="submit" id="formsubmit" class="btn  btn-success pull-right" style="width:100px">Send</button>
-                                                                                    <div class="clearfix"></div>
+                                                                                                    }
+                                                                                                    else if (Model.session.Status == "Hired")
+                                                                                                    {
+                                                                                                            <button type="button" id="hire" class="btn  btn-primary" data-toggle="modal" data-target="#invoiceNewModal">Send Invoice</button>
+                                                                                                    }
+                                                                                                    else if (Model.session.Status == "Invoiced")
+                                                                                                    {
+                                                                                                            <button type="button" id="invoiced" class="btn  btn-primary" data-toggle="modal" data-target="#invoiceNewModal">Update Invoice</button>
+
+                                                                                                    }
+                                                                                                      else if (Model.session.Status == "Approved")
+                                                                                                        {
+                                                                                                            <button type="button" id="accepted" disabled class="btn  btn-primary">Accepted Invoice</button>
+
+                                                                                                        }
+                                                                                                      else if (Model.session.Status == "Conflict")
+                                                                                                        {
+                                                                                                            <button type="button" id="rejected" disabled class="btn  btn-primary">Rejected Invoice</button>
+
+                                                                                                        }
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    @if (Model.session.isClosed)
+                                                                                                    {
+                                                                                                    <button type="submit" disabled id="formsubmit" class="btn  btn-success" style="width:100px">Send</button>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        <button type="submit" id="formsubmit" class="btn  btn-success" style="width:100px">Send</button>
+
+                                                                                                    }
+</td>                                                                                                                               
+                                                                                                </tr>
+                                                                                            </table>
+                                                                                                 </div>
+                                                                                        <div class="clearfix"></div>
 
                                                                                 </div>
                                                                                         }
@@ -242,6 +303,8 @@
     </div>
 </div>
 
+@Html.Partial("~/Views/Tutors/SendOffer.cshtml",Model.offer)
+@Html.Partial("~/Views/Tutors/Invoice.cshtml", Model.offer)
 
 @section scripts {
 
@@ -366,7 +429,7 @@
             };
 
             chat.client.recieverStudentFile = function (message) {
-                alert(message);
+             
                 var splitData = message.split("$");
                 $("#" + splitData[0]).html(splitData[1]).fadeIn('slow');
                 // Add the message to the page.
@@ -382,9 +445,19 @@
                     // CKEDITOR.instances.QuestionText.setData('');
                 });
             };
-            //chat.client.test = function (message) {
-            //    alert(message);
-            //}
+           
+            chat.client.recieverButtons = function (message) {
+
+
+                $("#buttonsUpdate").html(message).fadeIn('slow');
+
+                $(function () {
+                    setTimeout(function () {
+                        $("#QuestionText").focus();
+                    }, 0);
+
+                });
+            };
 
             $.connection.hub.qs = { "sessionId": sessionId };
 
@@ -396,24 +469,26 @@
         });
 
     </script>
-    @*<script src="~/ckeditor/ckeditor.js"></script>
+   
+    
+    <script>
+
+    function updateButtonsOffer(data)
+    {
+        var result = data.result;
+        $("#offer").html("Update Offer ("+result+"$)");
+        $('#offerNewModal').modal('hide');
+        $("#statusText").text("Offered Service "+result+"$");
+    }
 
 
-        <script type="text/javascript">
+    function updateButtonsInvoice(data) {
+        $("#hire").html("Update Invoice");
+        $('#invoiceNewModal').modal('hide');
+        $("#statusText").text("Invoiced " + data.result+"$");
+    }
 
-            $(document).ready(function () {
-
-                if ($('#QuestionText').length > 0) {
-                    CKEDITOR.config.extraPlugins = "base64image";
-                    CKEDITOR.config.removePlugins = "image";
-                    CKEDITOR.replace('QuestionText');
-
-                }
-
-
-            });
-
-        </script>*@
+</script>  
 
 }
 

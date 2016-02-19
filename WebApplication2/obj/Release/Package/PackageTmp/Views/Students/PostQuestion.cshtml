@@ -5,18 +5,14 @@
 <link href="~/Theme/css/chat.css" rel="stylesheet" />
 <div class="container fill img-rounded">
     <div class="row">
-
-
-        <div class="col-md-1"></div>
+                <div class="col-md-1"></div>
                 <div class="col-md-10">
-
-
                     <h1>Post a Question</h1>
                     <hr />
                 </div>
                 <div class="col-md-1"></div>
-            </div>
-    <div class="row">
+     </div>
+<div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-8">
     @using (Ajax.BeginForm("PostQuestion", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyTutors" }, new { id = "mypost", enctype = "multipart/form-data" }))

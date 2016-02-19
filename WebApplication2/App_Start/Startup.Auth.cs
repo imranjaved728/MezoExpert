@@ -6,11 +6,14 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using WebApplication2.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace WebApplication2
 {
     public partial class Startup
     {
+        public object Scope { get; private set; }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -54,9 +57,33 @@ namespace WebApplication2
             //   consumerKey: "",
             //   consumerSecret: "");
 
+
+#if DEBUG
             app.UseFacebookAuthentication(
-               appId: "515055968665351",
-               appSecret: "7ad4ca245e6e7d31a362c2be31753b8e");
+                       appId: "515055968665351",
+                       appSecret: "7ad4ca245e6e7d31a362c2be31753b8e"
+                       );
+               var googleOAuth2AuthenticationOptions = new GoogleOAuth2AuthenticationOptions
+            {
+                ClientId = "259220371178-kf7so13q10iqtpbg3b6ev431qimln1ng.apps.googleusercontent.com",
+                ClientSecret = "fRCjYpSuxKXvxSrkgl5aA4V0",
+            };
+            app.UseGoogleAuthentication(googleOAuth2AuthenticationOptions);
+#else
+
+            app.UseFacebookAuthentication(
+                  appId: "726801970789753",
+                  appSecret: "3e87672f3367633b59a0e48d2b2f3002"
+                  );
+            var googleOAuth2AuthenticationOptions = new GoogleOAuth2AuthenticationOptions
+            {
+                ClientId = "583888418148-48ia6icig9kcl9l08t7rtbkte2jd0s2c.apps.googleusercontent.com",
+                ClientSecret = "61BZluOJEApkeupUcvuQ_ZQo",
+            };
+            app.UseGoogleAuthentication(googleOAuth2AuthenticationOptions);
+#endif
+
+
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
@@ -65,13 +92,8 @@ namespace WebApplication2
 
             //});
 
-           
-            var googleOAuth2AuthenticationOptions = new GoogleOAuth2AuthenticationOptions
-            {
-                ClientId = "259220371178-kf7so13q10iqtpbg3b6ev431qimln1ng.apps.googleusercontent.com",
-                ClientSecret = "fRCjYpSuxKXvxSrkgl5aA4V0",
-            };
-            app.UseGoogleAuthentication(googleOAuth2AuthenticationOptions);
+
+
             app.MapSignalR();
         }
     }

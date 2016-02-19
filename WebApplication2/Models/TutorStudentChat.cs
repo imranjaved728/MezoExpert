@@ -61,6 +61,15 @@ namespace SignalRChat
             using (var db = new ApplicationDbContext())
             {
                 string SessionId = Context.QueryString["SessionId"];
+               
+                //all messages read
+                var session = db.sessions.Where(c => c.SessionID == new Guid(SessionId)).FirstOrDefault();
+                if(name==session.tutor.Username)
+                    session.NewMessageTutor = false;
+                else
+                     session.NewMessageStudent = false;
+                db.Entry(session).State = EntityState.Modified;
+
                 var user = db.Useras
                     .Include(u => u.Connections)
                     .SingleOrDefault(u => u.UserName == name && u.SessionId == SessionId);
@@ -105,8 +114,19 @@ namespace SignalRChat
         {
             using (var db = new ApplicationDbContext())
             {
+                var name = Context.User.Identity.Name;
                 var connection = db.Connections.Find(Context.ConnectionId);
                 connection.Connected = false;
+
+                string SessionId = Context.QueryString["SessionId"];
+                var session = db.sessions.Where(c => c.SessionID == new Guid(SessionId)).FirstOrDefault();
+                if (name == session.tutor.Username)
+                    session.NewMessageTutor = false;
+                else
+                    session.NewMessageStudent = false;
+                db.Entry(session).State = EntityState.Modified;
+
+
                 db.SaveChanges();
             }
             return base.OnDisconnected(stopCalled);

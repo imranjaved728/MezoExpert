@@ -25,6 +25,7 @@ namespace WebApplication2.Models
         public string Username { get; set; }
 
         public Boolean IsCompletedProfile { get; set; }
+        public float Rating { get; set; }
 
         public virtual ICollection<TutorExperties> tutorExperties { get; set; }
 

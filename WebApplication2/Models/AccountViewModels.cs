@@ -8,8 +8,11 @@ namespace WebApplication2.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        public string HomeTown { get; set; }
-        public System.DateTime? BirthDate { get; set; }
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+        public string SignupAS { get; set; }
+      
     }
 
     public class ExternalLoginListViewModel

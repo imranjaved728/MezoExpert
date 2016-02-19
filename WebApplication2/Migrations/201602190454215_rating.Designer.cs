@@ -7,13 +7,13 @@ namespace WebApplication2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class updatedpRIMARYkey : IMigrationMetadata
+    public sealed partial class rating : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedpRIMARYkey));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(rating));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602141922421_updatedpRIMARYkey"; }
+            get { return "201602190454215_rating"; }
         }
         
         string IMigrationMetadata.Source

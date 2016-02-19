@@ -1,13 +1,14 @@
 ﻿@model WebApplication2.Models.TutorRegisterModel
 
-@using (Html.BeginForm("RegisterTutor", "Account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
     <div class="modal fade" id="registerTutorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body text-center">
+
+                        @using (Html.BeginForm("RegisterTutor", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
                     <div class="row ">
 
                         <div class="col-md-8 col-md-offset-2">
@@ -118,8 +119,11 @@
 </div>
             
                     </div>
+                               }
+                    <section id="socialLoginForm" style="padding:15px !important">
+                        @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", Model.externalLogin = new WebApplication2.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
 
-
+                    </section>
                 </div>
             </div>
 
@@ -128,7 +132,7 @@
 
 
 
-}
+
 
 
 

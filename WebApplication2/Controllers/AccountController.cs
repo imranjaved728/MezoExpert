@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication2.Models;
 using AutoMapper;
+using Facebook;
 
 namespace WebApplication2.Controllers
 {
@@ -245,7 +246,14 @@ namespace WebApplication2.Controllers
                 var firstName = givenNameClaim.Value;
                 var lastname = lastNameClaim.Value;
             }
-
+            //else
+            //{
+            //    var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+            //    var access_token = identity.FindFirstValue("FacebookAccessToken");
+            //    var fb = new FacebookClient(access_token);
+            //    dynamic myInfo = fb.Get("/me?fields=email"); // specify the email field
+            //    loginInfo.Email = myInfo.email;
+            //}
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
@@ -262,7 +270,7 @@ namespace WebApplication2.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email,Username=loginInfo.DefaultUserName });
             }
         }
         [AllowAnonymous]
@@ -292,15 +300,46 @@ namespace WebApplication2.Controllers
                 }
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.Username,
                     Email = model.Email,
 
                 };
-
+               
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (model.SignupAS == "1")
+                    {
+                        var roleresult = UserManager.AddToRole(user.Id, Status.Student);
+                        Student stu = new Student();
+                        stu.StudentID = new Guid(user.Id);
+                        stu.DateCreated = DateTime.Today;
+                        Random rnd = new Random();
+                        int filename = rnd.Next(1, 4);
+                        stu.ProfileImage = "/Profiles/default/" + filename + ".png";
+                        stu.Username = user.UserName;
+                        _dbContext.Students.Add(stu);
+                        _dbContext.SaveChanges();
+
+                    }
+                    else
+                    {
+                        var roleresult = UserManager.AddToRole(user.Id, Status.Tutor);
+                        Tutor tutor = new Tutor();
+                        tutor.DateOfBirth = DateTime.Today;
+                        tutor.TutorID = new Guid(user.Id);
+                        tutor.DateCreated = DateTime.Today;
+                        tutor.IsCompletedProfile = false;
+                        tutor.Username = user.UserName;
+                        Random rnd = new Random();
+                        int filename = rnd.Next(1, 4);
+                        tutor.ProfileImage = "/Profiles/default/" + filename + ".png";
+                        _dbContext.Tutors.Add(tutor);
+                        _dbContext.SaveChanges();
+                    }
+
+
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

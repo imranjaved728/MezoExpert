@@ -18,6 +18,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Antlr3.Runtime.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\AutoMapper.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Facebook.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -52,6 +53,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.WebPages.d
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.WebPages.Razor.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebGrease.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\AutoMapper.xml
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Facebook.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AI.Web.xml
@@ -88,3 +90,4 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplicatio
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Release\WebApplication2.csprojResolveAssemblyReference.cache
