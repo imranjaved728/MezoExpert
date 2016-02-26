@@ -20,6 +20,9 @@
     <!-- Custom Fonts -->
     <link href="~/Theme/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
+  
+
+    <link href="~/Theme/rating/css/star-rating.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,9 +57,13 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+   
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
    
+    <script src="~/Theme/rating/js/star-rating.min.js"></script>
+
+  
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
@@ -85,6 +92,27 @@
             function(){ $(this).removeClass('open') }
         );
     });
+
+          
+    $(function () {
+        $('a[href="#search"]').on('click', function (event) {
+            
+        event.preventDefault();
+        $('#search').addClass('open');
+        $('#search > form > input[type="search"]').focus();
+    });
+
+    $('#search, #search button.close').on('click keyup', function(event) {
+        if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            $(this).removeClass('open');
+        }
+    });
+
+
+    
+
+});
+    
     </script>
 
     @*@{Html.EnableClientValidation(true);}

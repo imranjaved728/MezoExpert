@@ -1,22 +1,26 @@
 ﻿@model WebApplication2.Models.QuestionViewModel
 @{
-    ViewBag.Title = "Students - Home Page";
+    ViewBag.Title = "Students - Post Question";
 }
 <link href="~/Theme/css/chat.css" rel="stylesheet" />
 <div class="container fill img-rounded">
     <div class="row">
-
-
-        <div class="col-md-1"></div>
+                <div class="col-md-1"></div>
                 <div class="col-md-10">
-
-
-                    <h1>Post a Question</h1>
+                    @if (ViewBag.Username != null)
+                    {
+                        <h1>Ask a Question from @ViewBag.Username</h1>
+                    }
+                    else
+                    {
+                        <h1>Post a Question</h1>
+                    }
+                    
                     <hr />
                 </div>
                 <div class="col-md-1"></div>
-            </div>
-    <div class="row">
+     </div>
+<div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-8">
     @using (Ajax.BeginForm("PostQuestion", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyTutors" }, new { id = "mypost", enctype = "multipart/form-data" }))
@@ -32,6 +36,8 @@
                     @Html.ValidationMessageFor(model => model.TutorID, "", new { @class = "text-danger" })
                 </div>
             </div>*@
+     
+        @Html.Hidden("TutorID", (string)ViewBag.Id)
             <div class="row">
                   <div class="col-md-2">@Html.LabelFor(model => model.Title)</div>
                   <div class="col-md-10">@Html.TextBoxFor(model => model.Title, new { placeholder = "Question Title", @class = "form-control" })
@@ -98,19 +104,7 @@
 
         @section scripts {
 
-            @*<script src="~/ckeditor/ckeditor.js"></script>
-
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    CKEDITOR.config.extraPlugins = "base64image";
-                    CKEDITOR.config.removePlugins = "image";
-                    CKEDITOR.replace('QuestionText');
-
-                });
-            </script>*@
-
-
+           
 
             <!--Script references. -->
             <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -156,7 +150,7 @@
 
                         // Call the Send method on the hub.
                         notify.server.send(result);
-                        window.location = '/Students/Inbox';
+                        window.location = '/Students/Index';
                     });
 
                 }

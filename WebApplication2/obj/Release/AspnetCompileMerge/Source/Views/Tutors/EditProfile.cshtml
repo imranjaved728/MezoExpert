@@ -212,6 +212,19 @@
     });
 
     $(document).ready(function () {
+         
+        $("#AboutMe").keyup(function () {
+            if ($(this).val().length > 255) {
+                $(this).val($(this).val().substr(0, 255));
+            }
+        });
+
+        $("#Experience").keyup(function () {
+            if ($(this).val().length > 255) {
+                $(this).val($(this).val().substr(0, 255));
+            }
+        });
+
         $("#FileUpload").change(function () {
             var formData = new FormData();
             var totalFiles = document.getElementById("FileUpload").files.length;

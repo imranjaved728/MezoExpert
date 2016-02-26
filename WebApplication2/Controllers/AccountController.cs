@@ -11,10 +11,11 @@ using Microsoft.Owin.Security;
 using WebApplication2.Models;
 using AutoMapper;
 using Facebook;
+using WebApplication2.App_Start;
 
 namespace WebApplication2.Controllers
 {
-    [Authorize]
+   
     public class AccountController : Controller
     {
         #region Properties

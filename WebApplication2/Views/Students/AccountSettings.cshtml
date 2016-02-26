@@ -1,0 +1,86 @@
+﻿@model  WebApplication2.Models.Payment
+@{
+    ViewBag.Title = "Account";
+}
+
+<div class="container fill img-rounded">
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1 class="h1over">Account Settings</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+       
+        <div class="col-md-2" style="border:dotted;margin-top:25px">
+            <br />
+            <center>
+                <h1> @Model.Balance $</h1>
+                <h6>Current Balance</h6>
+            </center>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8 personal-info">
+            <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-check"></i>
+                Funds added to your account Successfully !!!
+            </div>
+            <h3> Add Funds to your Account</h3><br /><br />
+            @using (Html.BeginForm("Payment", "Students", FormMethod.Post, new { id = "QuestionDetails" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">@Html.Label("Amount:")</label>
+                    <div class="col-lg-6">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                            <br />
+                            <input type="submit" class="btn btn-success" value="Add Funds">
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+        var tech = getUrlParameter('guid');
+        if (tech != null)
+          $("#alerts").show();
+
+    </script>
+
+
+}

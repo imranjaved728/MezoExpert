@@ -66,10 +66,37 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+
+        public ActionResult Search(string search)
+        {
+            var top10 = db.Tutors.Where(c=>c.IsCompletedProfile==true).OrderByDescending(c => c.Rating).Take(10).ToList();
+            var result = db.Tutors.Where(c => c.Username.Contains( search ) && c.IsCompletedProfile==true).ToList();
+            var tutorExpertise = db.TutorsExpertise.Where(c => c.category.CategoryName.Contains(search)).ToList();
+            SearchViewModel obj = new SearchViewModel();
+            foreach (var v in tutorExpertise)
+            {
+                obj.Results.Add(v.tutor);
+            }
+
+            foreach (var v in result)
+            {
+                obj.Results.Add(v);
+            }
+
+
+            obj.Top10 = top10;
+            return View(obj);
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Unauthorized()
+        {
             return View();
         }
     }

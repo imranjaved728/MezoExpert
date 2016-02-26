@@ -24,9 +24,13 @@
                        "visible": false,
                        "searchable": false
                    },
+                   {
+                       "targets": [1],
+                       "width": "22%"
+                   },
                         {
                             "targets": [2],
-                            "width": "60%"
+                            "width": "55%"
                         },
                   { 'bSortable': false, 'aTargets': [1, 2, 3] }
                   ],
@@ -67,7 +71,7 @@
             <h1>Inbox</h1>
             <hr>
             @{
-
+                
                 <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -94,14 +98,16 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            
                             var length = item.LastMessage.Length;
                             //var lastreply = item.Replies.LastOrDefault();
-                            <tr>
+                             
+                            <tr style="@(item.newMessage== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.SessionId)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SenderName)
+                                    <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
                                 </td>
                                 <td>
                                     
@@ -112,9 +118,28 @@
                                     }
                                 </td>
                                 <td>
-                                    <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    @if ( item.Status == "Approved")
+                                    {
+                                        <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Conflict")
+                                    {
+                                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Hired")
+                                    {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if(item.Status == "Posted" ) {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+
 </td>
-                                <td>
+                                <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                     @Html.DisplayFor(modelItem => item.PostedTime)
                                 </td>
                             </tr>

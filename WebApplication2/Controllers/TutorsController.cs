@@ -14,13 +14,24 @@ using AutoMapper;
 using WebApplication2.DBEntities;
 using Microsoft.AspNet.SignalR;
 using SignalRChat;
+using WebApplication2.App_Start;
+using PayPal.Sample;
+using PayPal.Api;
 
 namespace WebApplication2.Controllers
 {
-    [System.Web.Mvc.Authorize(Roles = "Tutor")]
+    [CustomAuthorize(Roles = "Tutor")]
     public class TutorsController : Controller
     {
+        private PayPal.Api.Payment payment;
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private PayPal.Api.Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+        {
+            var paymentExecution = new PaymentExecution() { payer_id = payerId };
+            this.payment = new PayPal.Api.Payment() { id = paymentId };
+            return this.payment.Execute(apiContext, paymentExecution);
+        }
 
         private async Task<bool> isProfileCompleted()
         {
@@ -50,7 +61,7 @@ namespace WebApplication2.Controllers
             if (IsCompletedProfile == true)
             {
                 var user = new Guid(User.Identity.GetUserId());
-                var MineSessions = db.sessions.Where(c => c.TutorID == user && c.Status == Status.Hired).ToList();
+                var MineSessions = db.sessions.Where(c => c.TutorID == user && (c.Status == Status.Hired|| c.Status==Status.Conflict)).ToList();
                 return View(MineSessions);
             }
             else {
@@ -734,6 +745,182 @@ namespace WebApplication2.Controllers
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
                     Data = new { result = "" }
                 };
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Payment(Models.Payment model)
+        {
+            //Dictionary<string, string> payPalConfig = new Dictionary<string, string>();
+            //payPalConfig.Add("mode", "sandbox");
+            //OAuthTokenCredential tokenCredential = new AuthTokenCredential("AXVrBytGm6RdmOYfcUFM-VoOa8TvQhVYN6-TapoUzU2oErEpO0XzbYn8qD26R3iFduECZqOQmB78bZbS", "EGz3u0h-poL7i3MbLUQQXgqiYPEbbdzX95h57JzlnKrjKRV1-MNLPApqgKt30Y7VWmgwb5UxFWja0__2", payPalConfig);
+            //string accessToken = tokenCredential.GetAccessToken();
+            var apiContext = Configuration.GetAPIContext();
+            try
+            {
+                string payerId = Request.Params["PayerID"];
+
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    // ###Items
+                    // Items within a transaction.
+                    var itemList = new PayPal.Api.ItemList()
+                    {
+                        items = new List<Item>()
+                    {
+                        new Item()
+                        {
+                            name = "Mezo Experts",
+                            currency = "USD",
+                            price = model.Amount.ToString(),
+                            quantity = "1",
+                            sku = "sku"
+                        }
+                    }
+                    };
+
+                    // ###Payer
+                    // A resource representing a Payer that funds a payment
+                    // Payment Method
+                    // as `paypal`
+                    var payer = new PayPal.Api.Payer() { payment_method = "paypal" };
+
+                    // ###Redirect URLS
+                    // These URLs will determine how the user is redirected from PayPal once they have either approved or canceled the payment.
+                    var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Tutors/AccountSettings?";
+                    var guid = Convert.ToString((new Random()).Next(100000));
+                    var redirectUrl = baseURI + "guid=" + guid;
+                    var redirUrls = new RedirectUrls()
+                    {
+                        cancel_url = redirectUrl + "&cancel=true",
+                        return_url = redirectUrl
+                    };
+
+                    // ###Details
+                    // Let's you specify details of a payment amount.
+                    var details = new PayPal.Api.Details()
+                    {
+                        tax = "0",
+                        shipping = "0",
+                        subtotal = model.Amount.ToString()
+                    };
+
+                    // ###Amount
+                    // Let's you specify a payment amount.
+                    var amount = new PayPal.Api.Amount()
+                    {
+                        currency = "USD",
+                        total = model.Amount.ToString(), // Total must be equal to sum of shipping, tax and subtotal.
+                        details = details
+                    };
+
+                    // ###Transaction
+                    // A transaction defines the contract of a
+                    // payment - what is the payment for and who
+                    // is fulfilling it. 
+                    var transactionList = new List<PayPal.Api.Transaction>();
+
+                    // The Payment creation API requires a list of
+                    // Transaction; add the created `Transaction`
+                    // to a List
+                    transactionList.Add(new PayPal.Api.Transaction()
+                    {
+                        description = "Mezo Experts Services",
+                        invoice_number = Common.GetRandomInvoiceNumber(),
+                        amount = amount,
+                        item_list = itemList
+                    });
+
+                    // ###Payment
+                    // A Payment Resource; create one using
+                    // the above types and intent as `sale` or `authorize`
+                    var payment = new PayPal.Api.Payment()
+                    {
+                        intent = "sale",
+                        payer = payer,
+                        transactions = transactionList,
+                        redirect_urls = redirUrls,
+
+                    };
+
+                    // Create a payment using a valid APIContext
+
+                    var createdPayment = payment.Create(apiContext);
+
+                    var links = createdPayment.links.GetEnumerator();
+
+                    string paypalRedirectUrl = null;
+
+                    while (links.MoveNext())
+                    {
+                        Links lnk = links.Current;
+
+                        if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            //saving the payapalredirect URL to which user will be redirected for payment
+                            paypalRedirectUrl = lnk.href;
+                        }
+                    }
+
+                    // saving the paymentID in the key guid
+                    Session.Add(guid, createdPayment.id);
+
+                    return Redirect(paypalRedirectUrl);
+                }
+               
+                return null;
+            }
+            catch (Exception ex)
+            {
+              
+                return View("FailureView");
+            }
+            // return  Json(new { result = createdPayment.links[0].href, redirect = createdPayment.links[1].href, execute = createdPayment.links[2].href });
+       
+            return null;
+        }
+
+
+        public async Task<ActionResult> AccountSettings()
+        {
+            bool IsCompletedProfile = await isProfileCompleted();
+
+            if (IsCompletedProfile == true)
+            {
+                string payerId = Request.Params["PayerID"];
+
+                if (string.IsNullOrEmpty(payerId))
+                {
+
+                }
+                else
+                {
+                    // This section is executed when we have received all the payments parameters
+
+                    // from the previous call to the function Create
+
+                    // Executing a payment
+                    var apiContext = Configuration.GetAPIContext();
+                    var guid = Request.Params["guid"];
+
+                    var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+
+                    if (executedPayment.state.ToLower() != "approved")
+                    {
+                        return View("FailureView");
+                    }
+                }
+
+                Models.Payment obj = new Models.Payment();
+                obj.Amount = db.Students.Where(c => c.Username == User.Identity.Name).FirstOrDefault().CurrentBalance;
+                return View();
+            }
+            else
+            {
+                TempData["isValidate"] = false;
+                return RedirectToAction("EditProfile");
             }
 
         }

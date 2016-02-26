@@ -1,5 +1,6 @@
 ﻿@model WebApplication2.Models.HomeViewModel
 @using Microsoft.AspNet.Identity
+
 @{
     if (!User.Identity.IsAuthenticated)
     {  
@@ -24,6 +25,7 @@
                             <a href="#page-top"></a>
                         </li>
 
+                        <li><a href="#search"><i class="fa fa-search"></i></a></li>
                         <li class="dropdown">
                             <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -63,7 +65,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Mezo Experts</a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        @*<img src="~/Images/MezoImages/logo.png" />*@Mezo Experts</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,8 +77,12 @@
                         </li>
 
                       @{
+
                           if (User.IsInRole("Student"))
                           {
+                            
+                                <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                           
                                 <li>
                                     <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><i class="fa fa-home"></i> Home</a>
                                 </li>
@@ -88,6 +95,9 @@
                           }
                           else if (User.IsInRole("Tutor"))
                           {
+                            
+                                <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                           
                             <li>
                                 <a href="#" onclick="location.href='@Url.Action("Index","Tutors")'"><i class="fa fa-home"></i> Home</a>
                             </li>
@@ -96,9 +106,12 @@
                                 </li>
                                 <li>
                                     <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><i class="fa fa-stack-exchange"></i> Posted Questions</a>
+
                                 </li>
+
+
                           }
-                          else
+                          else if (User.IsInRole("Admin"))
                           {
                             <li>
                                 <a href="#" onclick="location.href='@Url.Action("Manage","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Students</a>
@@ -118,7 +131,14 @@
                             <li class="dropdown">
                                 <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"> Account Settings</a></li>
+                                    @if (User.IsInRole("Tutor"))
+                                    {
+                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"> Account Settings</a></li>
+                                    }
+                                    else {
+                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Students")'"> Account Settings</a></li>
+                                    }
+                                  
                                     @if (  User.IsInRole("Tutor"))
                                     {
                                       <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> Profile</a></li>
@@ -140,7 +160,9 @@
                         {
                             @Html.AntiForgeryToken()
                         }
+                        
                     </ul>
+                    
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -148,3 +170,13 @@
         </nav>
     }
 }
+
+<div id="search" style="z-index:10000;">
+    <button type="button" class="close">×</button>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        <input type="search" name="search" value="" autocomplete="off" placeholder="type keyword(s) here" />
+        <button type="submit" class="btn btn-success">Search</button>
+    }
+</div>
+

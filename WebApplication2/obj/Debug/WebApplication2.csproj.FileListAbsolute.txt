@@ -14,6 +14,7 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\roslyn\VBCSCompiler.e
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll.config
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ar\WebApplication2.resources.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Antlr3.Runtime.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\AutoMapper.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.dll
@@ -44,6 +45,8 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Securi
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Newtonsoft.Json.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Owin.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\PayPal.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\PayPalCoreSDK.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Helpers.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Mvc.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Optimization.dll
@@ -62,6 +65,8 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Application
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Newtonsoft.Json.xml
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\PayPal.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Helpers.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Mvc.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.Optimization.xml
@@ -70,7 +75,6 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.WebPages.x
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\System.Web.WebPages.Razor.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Antlr3.Runtime.pdb
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Newtonsoft.Json.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\EntityFramework.SqlServer.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.AspNet.Identity.Core.xml
@@ -85,12 +89,11 @@ C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Securi
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\bin\ar\WebApplication2.resources.dll
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Resource.resources
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Resource.ar.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\ar\WebApplication2.resources.dll
-C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.rating.resources
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Imran\Desktop\WebApplication2\WebApplication2\obj\Debug\WebApplication2.Migrations.onserver.resources

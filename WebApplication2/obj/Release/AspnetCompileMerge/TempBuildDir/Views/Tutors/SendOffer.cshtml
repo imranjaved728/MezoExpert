@@ -1,0 +1,51 @@
+﻿@model WebApplication2.Models.Offer
+
+
+<div class="modal fade" id="offerNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2>Offer Service</h2>
+                        <hr class="star-primary">
+                      
+                       @using (Ajax.BeginForm("SendOffer", "Tutor", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "updateButtonsOffer" }, new { id = "myOffer" }))
+                       {
+
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.SessionId, new { id = "HiddenText" })
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.TextBoxFor(m => m.amount, new { @class = "form-control" })
+                                   
+
+                                </div>
+                                @Html.ValidationMessageFor(m => m.amount, "", new { @class = "text-danger" })
+                            </div> <!-- /.form-group -->
+                            
+                            <div class="row">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-4">
+                                    <input type="submit" style="width:100px" class="btn btn-success" value="Send" />
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                </div>
+                                <div class="col-xs-3"></div>
+                            </div>
+
+                        }
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

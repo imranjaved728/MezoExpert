@@ -16,15 +16,15 @@
 
     <script>
         $(document).ready(function () {
-          
+
             $('#postedRequests').DataTable({
                 //"ordering": false,
-               
+
                 "info": false,
                 "pageLength": 25,
                 "bLengthChange": false,
                 "scrollX": true,
-                
+
                 "columnDefs": [
                    {
                        "targets": [ 0 ],
@@ -36,8 +36,8 @@
                         "width":"50%"
                     },
                     {
-                        "targets": [3],
-                        "width":"12%"
+                        "targets": [2],
+                        "width":"20%"
                     },
                    {
                        "targets": [ 6 ],
@@ -48,17 +48,17 @@
 
                 ],
                 "order": [[6, "desc"]],
-                
+
                 //"aaSorting": [[6, "desc"]],
-                  
-                    
+
+
                         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
                             // Bind click event
                             $(nRow).click(function () {
 
                                // alert('You clicked on ' + aData[0] + '\'s row');
-                               
+
                                 $("#PostId").val(aData[0]);
                                 document.getElementById('QuestionDetails').submit();
                             });
@@ -68,26 +68,27 @@
                     });
 
             $("#postedRequests tr").css('cursor', 'pointer');
-            
+
                 });
 
-  
+
         $(function () {
             // Declare a proxy to reference the hub.
             var chat = $.connection.notifyTutors;
-   
+
             chat.client.addNewMessageToPage = function (message) {
                 // Add the message to the page.
                 //alert(message);
                 var splitData = message.split("$");
+                var titleAndProfile = splitData[2].split("%");
                 if (splitData != null)
                 {
                     var table = $('#postedRequests').DataTable();
                     table.row.add([
                            splitData[0],
                            splitData[1],
-                           '<span class="label label-success">'+"Posted"+'</span>',
-                           splitData[2],
+                           '<img src="' + titleAndProfile[0] + '" class="img-circle imgSizeInbox"><b>&nbsp;' + titleAndProfile[1] + '</b>',
+                           '<span class="label label-success">' + "Posted" + '</span>',
                            splitData[3],
                            splitData[5],
                            splitData[4]
@@ -96,11 +97,11 @@
                 //$('#discussion').append('<li><strong>' + htmlEncode(name)
                 //    + '</strong>: ' + htmlEncode(message) + '</li>');
             };
-                   
+
             $.connection.hub.start().done(function () {
-               
+
             });
-         
+
         });
 </script>
 }
@@ -126,11 +127,12 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Title)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
+                       
                         <th>
                             @Html.DisplayName("Posted By")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Amount)
@@ -154,12 +156,20 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Title)
                             </td>
+                            
                             <td>
-                                <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
-                          
+                                <img src="@item.StudentProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.StudentName)</b>
+                              
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.StudentName)
+                                @if (item.Status == "Hired")
+                                {
+                                    <span class="label label-primary">@Html.DisplayFor(modelItem => item.Status)</span>
+
+                                }
+                                else {
+                                <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                }
                             </td>
                             <td>
                                 $@Html.DisplayFor(modelItem => item.Amount)
@@ -167,7 +177,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.DueDate)
                             </td>
-                            <td>
+                            <td style= "background-color:#F1F1F1 ">
                                 @Html.DisplayFor(modelItem => item.PostedTime)
                             </td>
                         </tr>

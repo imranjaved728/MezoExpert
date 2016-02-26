@@ -1,0 +1,178 @@
+﻿@model WebApplication2.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<link href="~/Theme/css/search.css" rel="stylesheet" />
+
+<div class="container fill img-rounded">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Matched Results</h1>
+            <hr>
+            @if (Model.Results.Count == 0)
+            {
+                <div class="alert alert-info alert-dismissable" id="alerts">
+
+                    <i class="fa fa-close"></i>
+                     No Results found matching your query.
+                </div>
+            }
+            <br /><br />
+            <div class="row">
+                @foreach (var v in Model.Results)
+                {
+                    <div class="col-sm-3 mbottom" >
+                        <div class="card">
+                            <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                            <div class="avatar">
+                                <img src="@v.ProfileImage" width="200" height="200" alt="" />
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Name: <span class="whiteColor">@v.FirstName @v.LastName </span><br>
+                                    Username:<span class="whiteColor"> @v.Username</span><br /><br/>
+                                    Expertise<br/>
+                                    @{ 
+
+                                            var expertise = v.tutorExperties.ToList();
+                                            var count = 0;
+                                            foreach (var ex in expertise )
+                                            {
+                                                <span class="whiteColor">
+                                                    <b>@ex.category.CategoryName</b>
+                                                </span>
+                                                <br/>
+                                            count++;
+                                        }
+                                        while (count < 4)
+                                        {
+                                            count++;
+                                            <br/>
+                                        }
+                                   }
+
+                                    <br/><br />
+                                    Rating<input value="@v.Rating" data-size="xs" class="rating1 rating-loading">
+                                </p>
+                                <p>
+                                 @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get, new { @class = "form-horizontal" }))
+                                 {
+                                    if (User.IsInRole("Student"))
+                                    {
+
+                                             <input type="submit" class="btn btn-success" width="250" value="Contact">
+
+                                    }
+                                    else if (User.IsInRole("Tutor"))
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="Contact">
+
+                                    }
+                                    <a style="text-decoration:none" class="btn btn-default" href="@Url.Action("Profile", "Home", new { username = v.Username })">View Profile</a>
+                                 }  
+                                  </p><br />
+                                 
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+
+               
+            </div>
+           
+            <br /><br />
+            <h1>Top Tutors for this month</h1>
+            <hr>
+            <br /><br />
+            <div class="row">
+              @{
+
+                  foreach (var v in Model.Top10)
+                  {
+
+                    <div class="col-sm-3 mbottom">
+                        <div class="card">
+                            <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                            <div class="avatar">
+                                <img src="@v.ProfileImage" width="200" height="200" alt="" />
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Name: <span class="whiteColor">@v.FirstName @v.LastName </span><br>
+                                    Username:<span class="whiteColor"> @v.Username</span><br /><br />
+                                    Expertise<br />
+                                    @{
+
+                                        var expertise = v.tutorExperties.ToList();
+                                        var count = 0;
+                                        foreach (var ex in expertise)
+                                        {
+                                            <span class="whiteColor">
+                                                <b>@ex.category.CategoryName</b>
+                                            </span>
+                                                <br />
+                                            count++;
+                                        }
+                                        while (count < 4)
+                                        {
+                                            count++;
+                                            <br />
+                                        }
+                                    }
+                                    Rating<input value="@v.Rating" data-size="xs" class="rating1 rating-loading">
+                                </p>
+                                <p>
+                                @*<button type="button" class="btn btn-success">Contact</button>*@
+                                    @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get, new { @class = "form-horizontal" }))
+                                    {
+                                        if (User.IsInRole("Student"))
+                                        {
+
+                                            <input type="submit" class="btn btn-success" width="250" value="Contact">
+
+                                        }
+                                        else if (User.IsInRole("Tutor"))
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="Contact">
+
+                                        }
+                                        <a style="text-decoration:none" class="btn btn-default" href="@Url.Action("Profile", "Home", new { username = v.Username })">View Profile</a>
+                                    }  
+                                </p><br />
+                            </div>
+                        </div>
+                    </div>
+
+                  }
+
+                  
+            }
+            </div>
+        </div>
+       </div>
+    
+  
+</div>
+
+@section scripts{
+    <script>
+     $(document).on('ready', function () {
+        $('.rating1').rating({ displayOnly: true, step: 0.5 });
+     });
+
+</script>
+
+  }

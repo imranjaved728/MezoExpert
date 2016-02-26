@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<WebApplication2.Models.StudentInbox>
+@model WebApplication2.Models.StudentHomeModel
 @{
     ViewBag.Title = "Students - Home";
 }
@@ -149,7 +149,7 @@
 
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.obj)
                         {
                             var length = item.LastMessage.Length;
                             //var lastreply = item.Replies.LastOrDefault();
@@ -205,7 +205,7 @@
                     <div class="tab-pane" id="2">
 
                         @{
-                            var questions = Model.FirstOrDefault().questions;
+                            var questions = Model.questions;
                             <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

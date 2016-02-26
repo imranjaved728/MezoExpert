@@ -16,9 +16,9 @@
         </div>
         <form role="form" class="QuestionBox col-lg-6 col-lg-offset-3">
             <div class="form-group">
-                <textarea class="form-control" placeholder="Ask a question."></textarea>
+                <textarea class="form-control" style="resize:none"  rows="5" placeholder="Ask a question."></textarea>
             </div>
-            <button type="submit" class="btn btn-success">Get Help Now</button>
+            <button type="button" id="helpnow"  class="btn btn-success">Get Help Now</button>
 
         </form>
     </div>
@@ -38,6 +38,10 @@
      else if (error == "registerS") {
          $('#registerStudentModal').modal('show');
      }
+
+     $("#helpnow").click(function() {
+         $('#registerStudentModal').modal('show');
+     });
 
 </script>
     

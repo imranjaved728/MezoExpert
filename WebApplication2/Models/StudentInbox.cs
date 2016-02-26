@@ -15,7 +15,16 @@ namespace WebApplication2.Models
         public string SenderProfile { get; set; }
         public bool newMessage { get; set; }
         public DateTime PostedTime { get; set; }
+    }
 
+    public class StudentHomeModel
+    {
+        public StudentHomeModel()
+        {
+            obj = new List<StudentInbox>();
+        }
+
+        public List<StudentInbox> obj;
         public List<Question> questions { get; set; }
     }
 }
