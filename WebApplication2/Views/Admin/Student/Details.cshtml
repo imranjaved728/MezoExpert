@@ -90,9 +90,17 @@
             @Html.DisplayFor(model => model.ProfileImage)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
-    @Html.ActionLink("Back to List", "Manage")
+    @Html.ActionLink("Back to List", "Index")
 </p>

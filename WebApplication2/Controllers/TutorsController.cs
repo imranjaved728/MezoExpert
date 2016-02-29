@@ -17,6 +17,7 @@ using SignalRChat;
 using WebApplication2.App_Start;
 using PayPal.Sample;
 using PayPal.Api;
+using System.Web.Helpers;
 
 namespace WebApplication2.Controllers
 {
@@ -26,6 +27,8 @@ namespace WebApplication2.Controllers
         private PayPal.Api.Payment payment;
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+    
         private PayPal.Api.Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
         {
             var paymentExecution = new PaymentExecution() { payer_id = payerId };
@@ -46,17 +49,6 @@ namespace WebApplication2.Controllers
         {
            
             bool IsCompletedProfile = await isProfileCompleted();
-
-            //if (IsCompletedProfile == true)
-            //{
-            //    var postedRequests = db.Questions.Where(c => c.TutorID == null).ToList();
-            //    IEnumerable<QuestionViewModel> postedQuestions = Mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>(postedRequests);
-            //    TutorHome model = new TutorHome();
-            //    model.ActiveJobs = postedQuestions;
-            //    model.CompledJobs = postedQuestions;
-            //    return View(model);
-            //}
-
            
             if (IsCompletedProfile == true)
             {
@@ -86,109 +78,7 @@ namespace WebApplication2.Controllers
                 return RedirectToAction("EditProfile");
             }
         }
-        #region Admin Functionality
-        // GET: Tutors
-        public async Task<ActionResult> Manage()
-        {
-            return View(await db.Tutors.ToListAsync());
-        }
-
-        // GET: Tutors/Details/5
-        public async Task<ActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tutor);
-        }
-
-        // GET: Tutors/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Tutors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TutorID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentEarning")] Tutor tutor)
-        {
-            if (ModelState.IsValid)
-            {
-                tutor.TutorID = Guid.NewGuid();
-                db.Tutors.Add(tutor);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(tutor);
-        }
-
-        // GET: Tutors/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tutor);
-        }
-
-        // POST: Tutors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "TutorID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentEarning")] Tutor tutor)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tutor).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(tutor);
-        }
-
-        // GET: Tutors/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            if (tutor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tutor);
-        }
-
-        // POST: Tutors/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
-        {
-            Tutor tutor = await db.Tutors.FindAsync(id);
-            db.Tutors.Remove(tutor);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Manage");
-        }
-        #endregion
+     
 
         [HttpPost]
         public ActionResult UploadProfile()
@@ -207,7 +97,14 @@ namespace WebApplication2.Controllers
                 fileName = Path.GetFileName(file.FileName);
 
                 path = Path.Combine(Server.MapPath("~/Profiles/Tutors/" + user), fileName);
-                file.SaveAs(path);
+                //file.SaveAs(path);
+
+                WebImage img = new WebImage(file.InputStream);
+
+                if (img.Width > 1000)
+                    img.Resize(1000, 1000);
+                img.Save(path);
+
 
                 Tutor loaddb = db.Tutors.Find(user);
                 loaddb.ProfileImage = "/Profiles/Tutors/" + user + "/" + fileName;
@@ -959,6 +856,7 @@ namespace WebApplication2.Controllers
             }
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

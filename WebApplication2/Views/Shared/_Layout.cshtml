@@ -5,13 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Need help in your studies. We have the top tutors from around the globe to help you.">
+    <meta name="author" content="Imran Jawaid">
+    <meta property="og:title" content="Need help in your studies. We have the top tutors from around the globe to help you.">
+    <meta property="og:site_name" content="MezoExperts">
+    <meta property="og:url" content="https://www.MezoExperts.com">
+    <meta property="og:description" content="Need help is solving a problem in assignment, understanding a concept, preparation of exam. Visit us and get help from our top tutors">
+    <meta property="og:type" content="eLearning">
+    <meta property="og:locale" content="en_US">
     <title>Mezo Experts</title>
 
-   
+    
     <link href="~/Theme/dropdownMultiple/semantic.min.css" rel="stylesheet" />
     <link href="~/Theme/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
@@ -56,33 +61,33 @@
     <!-- jQuery -->
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-   
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
    
-    <script src="~/Theme/rating/js/star-rating.min.js"></script>
-
-  
-
-    <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    @*@Scripts.Render("~/bundles/ratings")*@ 
+    @RenderSection("scripts", required: false)
     
+    <script src="~/Theme/rating/js/star-rating.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    @*<script type="text/javascript" src="~/Scripts/moment.min.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Theme/js/prettify.js"></script>
 
     <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker({
-                keepOpen: false,
-                format: 'MM/DD/YYYY',
-               
-            });;
-        });
+        $(document).ready(function () {
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    keepOpen: false,
+                    format: 'MM/DD/YYYY',
 
+                });;
+            });
+      
         $('#datetimepicker1 input').click(function (event) {
             $('#datetimepicker1 ').data("DateTimePicker").show();
+        });
+
         });
     </script>
     <script>
@@ -114,9 +119,6 @@
 });
     
     </script>
-
-    @*@{Html.EnableClientValidation(true);}
-    @{Html.EnableUnobtrusiveJavaScript(true);}*@
 </body>
 
 

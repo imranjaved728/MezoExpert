@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebApplication2.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts{
+
+    <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#tutorlist').DataTable({
+                "ordering": false,
+                "info": false,
+                "pageLength": 25,
+                "bLengthChange": false,
+                "scrollX": true,
+                'bSortable': false
+            });
+        });
+
+    </script>
+}
+
+<div class="container-fluid fill img-rounded">
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Students</h1>
+            <hr>
+
+            <p>
+                @Html.ActionLink("Create New", "CreateStudent", "", new { @class = "btn btn-success" })
+            </p>
+            <table class="display list finallist" cellspacing="0" width="100%" id="tutorlist">
+                <thead>
+                    <tr>
+                    
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </th>
+                     
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateCreated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CurrentBalance)
+                        </th>
+                       
+                        <th>
+                            @Html.DisplayNameFor(model => model.Username)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CurrentBalance)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Username)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditStudent", "Admin", new { id = item.StudentID })"><i class="fa fa-pencil-square-o"></i></a>
+                                |
+                                <a href="@Url.Action("DeleteStudent", "Admin", new { id = item.StudentID })"><i class="fa fa-trash-o"></i></a>
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+

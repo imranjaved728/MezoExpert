@@ -18,6 +18,9 @@ using SignalRChat;
 using WebApplication2.App_Start;
 using PayPal.Sample;
 using PayPal.Api;
+using System.Web.Helpers;
+using System.Net.Mail;
+using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
@@ -35,15 +38,12 @@ namespace WebApplication2.Controllers
         }
 
 
-        public async Task<ActionResult> Manage()
-        {
-            //  ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            return View(await db.Students.ToListAsync());
-        }
+       
 
         [HttpGet]
         public async Task<ActionResult>Sessions(Guid SessionId)
         {
+         
             var session=await db.sessions.FindAsync(SessionId);
             ChatModel obj = new ChatModel();
             obj.session = session;
@@ -53,6 +53,16 @@ namespace WebApplication2.Controllers
 
         public async Task<ActionResult> Inbox()
         {
+            /*Mailer.GmailUsername = "question@mezoexperts.com";
+            Mailer.GmailPassword = "123123123";
+
+            Mailer mailer = new Mailer();
+            mailer.ToEmail = "imranjaved728@gmail.com";
+            mailer.Subject = "New Question Posted on MezoExperts.com";
+            mailer.Body = "New question posted on Mezoexperts.com";
+            mailer.IsHtml = true;
+            mailer.Send();*/
+
             var user = new Guid(User.Identity.GetUserId());
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
             List<StudentInbox> list = new List<StudentInbox>();
@@ -348,7 +358,8 @@ namespace WebApplication2.Controllers
                     rep.Details =quest.Title;
                     db.Replies.Add(rep);
                 }
-               
+
+
                 //user posting question id
                 quest.StudentID = new Guid(User.Identity.GetUserId());
                 db.Questions.Add(quest);
@@ -908,52 +919,8 @@ namespace WebApplication2.Controllers
 
             // return File(virtualFilePath, System.Net.Mime.MediaTypeNames.Application.Octet, Path.GetFileName(virtualFilePath));
         }
+        
 
-        /*
-        // GET: Students
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Students.ToListAsync());
-        }*/
-
-        // GET: Students/Details/5
-        public async Task<ActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = await db.Students.FindAsync(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
-
-        // GET: Students/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "StudentID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentBalance")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                student.StudentID = Guid.NewGuid();
-                db.Students.Add(student);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(student);
-        }
 
         [HttpPost]
         public ActionResult UploadProfile()
@@ -973,7 +940,13 @@ namespace WebApplication2.Controllers
                  fileName = Path.GetFileName(file.FileName);
                    
                     path = Path.Combine(Server.MapPath("~/Profiles/Students/" + user), fileName);
-                file.SaveAs(path);
+               
+                //file.SaveAs(path);
+                WebImage img = new WebImage(file.InputStream);
+
+                if (img.Width > 1000)
+                    img.Resize(1000, 1000);
+                img.Save(path);
 
                 Student loaddb =  db.Students.Find(user);
                 loaddb.ProfileImage = "/Profiles/Students/" + user + "/" + fileName;
@@ -1040,63 +1013,7 @@ namespace WebApplication2.Controllers
         }
 
 
-
-        // GET: Students/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = await db.Students.FindAsync(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
-
-        // POST: Students/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "StudentID,FirstName,LastName,DateOfBirth,Degree,University,AboutMe,City,Country,DateCreated,CurrentBalance")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(student).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(student);
-        }
-
-        // GET: Students/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = await db.Students.FindAsync(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
-
-        // POST: Students/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
-        {
-            Student student = await db.Students.FindAsync(id);
-            db.Students.Remove(student);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Manage");
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

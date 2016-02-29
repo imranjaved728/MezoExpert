@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebApplication2.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@section scripts{
+
+    <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#Categorylist').DataTable({
+                "ordering": false,
+                "info": false,
+                "pageLength": 25,
+                "bLengthChange": false,
+                "scrollX": true,
+                'bSortable': false
+            });
+        });
+
+    </script>
+}
+
+<div class="container-fluid fill img-rounded">
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Categories</h1>
+            <hr>
+            
+            <p>
+                @Html.ActionLink("Create New", "CreateCategories", "", new { @class = "btn btn-success" })
+            </p>
+            <table class="display list finallist " cellspacing="0" width="100%" id="Categorylist">
+                <thead>
+                    <tr>
+                        <th align="center" class="dt-head-center">
+                            Category Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr align="center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditCategories", "Admin", new { id = item.CategoryID })"><i class="fa fa-pencil-square-o"></i></a>
+                                |
+                                <a href="@Url.Action("DeleteCategories", "Admin", new { id = item.CategoryID })"><i class="fa fa-trash-o"></i></a>
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+

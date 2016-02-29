@@ -225,8 +225,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthTokenCredential.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -243,6 +241,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Mailer.cs" />
     <Compile Include="Migrations\201602211947480_onserver.cs" />
     <Compile Include="Migrations\201602211947480_onserver.Designer.cs">
       <DependentUpon>201602211947480_onserver.cs</DependentUpon>
@@ -252,7 +251,7 @@
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\TutorStudentChat.cs" />
+    <Compile Include="Helpers\TutorStudentChat.cs" />
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -272,7 +271,7 @@
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Models\NotifyTutors.cs" />
+    <Compile Include="Helpers\NotifyTutors.cs" />
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\Configuration.cs" />
   </ItemGroup>
@@ -633,6 +632,12 @@
     <Content Include="Theme\font-awesome\css\font-awesome.min.css" />
     <Content Include="Theme\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Theme\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Theme\images\favicon.ico" />
+    <Content Include="Theme\images\sort_asc.png" />
+    <Content Include="Theme\images\sort_asc_disabled.png" />
+    <Content Include="Theme\images\sort_both.png" />
+    <Content Include="Theme\images\sort_desc.png" />
+    <Content Include="Theme\images\sort_desc_disabled.png" />
     <Content Include="Theme\img\portfolio\cabin.png" />
     <Content Include="Theme\img\portfolio\cake.png" />
     <Content Include="Theme\img\portfolio\circus.png" />
@@ -758,25 +763,10 @@
     <Content Include="Views\Shared\_RegisterStudentPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterTutorPartial.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Manage.cshtml" />
     <Content Include="Views\Students\PostQuestion.cshtml" />
     <Content Include="Views\Students\EditProfile.cshtml" />
-    <Content Include="Views\Tutors\Create.cshtml" />
-    <Content Include="Views\Tutors\Delete.cshtml" />
-    <Content Include="Views\Tutors\Details.cshtml" />
-    <Content Include="Views\Tutors\Edit.cshtml" />
     <Content Include="Views\Tutors\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Tutors\Manage.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Tutors\EditProfile.cshtml" />
     <Content Include="Views\Tutors\PostedRequests.cshtml" />
     <Content Include="Views\Tutors\QuestionDetails.cshtml" />
@@ -805,12 +795,28 @@
     <Content Include="Views\Students\AccountSettings.cshtml" />
     <Content Include="Views\Tutors\AccountSettings.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
+    <Content Include="Theme\images\Sorting icons.psd" />
+    <Content Include="Views\Admin\Tutor\Create.cshtml" />
+    <Content Include="Views\Admin\Tutor\Delete.cshtml" />
+    <Content Include="Views\Admin\Tutor\Details.cshtml" />
+    <Content Include="Views\Admin\Tutor\Edit.cshtml" />
+    <Content Include="Views\Admin\Tutor\Index.cshtml" />
+    <Content Include="Views\Admin\Categories\Create.cshtml" />
+    <Content Include="Views\Admin\Categories\Delete.cshtml" />
+    <Content Include="Views\Admin\Categories\Details.cshtml" />
+    <Content Include="Views\Admin\Categories\Edit.cshtml" />
+    <Content Include="Views\Admin\Categories\Index.cshtml" />
+    <Content Include="Views\Admin\Student\Create.cshtml" />
+    <Content Include="Views\Admin\Student\Delete.cshtml" />
+    <Content Include="Views\Admin\Student\Details.cshtml" />
+    <Content Include="Views\Admin\Student\Edit.cshtml" />
+    <Content Include="Views\Admin\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Theme\buttons\assets\" />
     <Folder Include="Theme\dropdownMultiple\themes\" />
-    <Folder Include="Theme\images\" />
+    <Folder Include="Views\Admin\Questions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

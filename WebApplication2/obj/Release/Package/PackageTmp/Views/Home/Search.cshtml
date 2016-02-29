@@ -24,46 +24,185 @@
             <div class="row">
                 @foreach (var v in Model.Results)
                 {
-                    <div class="col-sm-3 mbottom" >
-                        <div class="card">
-                            <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
-                            <div class="avatar">
-                                <img src="@v.ProfileImage" width="200" height="200" alt="" />
+                      <div class="col-sm-4">
+
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">@v.Username</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3" align="center"></div>
+                                 <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" src="@v.ProfileImage" class="img-circle" width="100" height="100"> </div>
+                                 <div class="col-md-4 col-lg-4" align="center"></div>
+                             </div>
+
+                            <div class="row">
+                                <div class="col-md-9 col-lg-12">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td>@v.FirstName @v.LastName</td>
+                                            </tr>
+
+
+                                            <tr>
+                                            <tr>
+                                                <td>Expertise:</td>
+                                                <td>
+                                                    <ul style="padding-left:5px;list-style-type: none;">
+                                                        @{
+
+                                                            var expertise = v.tutorExperties.ToList();
+                                                            var count = 0;
+
+                                                            foreach (var ex in expertise)
+                                                            {
+
+                                                                <li> <b>@ex.category.CategoryName</b></li>
+
+
+                                                                count++;
+                                                            }
+                                                            while (count < 4)
+                                                            {
+                                                                count++;
+                                                               <li><br /></li> 
+                                                            }
+
+                                                        }
+
+                                                          </ul>
+
+</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top:15px;">Rating:</td>
+                                                <td> <input value="@v.Rating" data-size="xs" class="rating1 rating-loading"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                   
+                                </div>
                             </div>
-                            <div class="content">
-                                <p>
-                                    Name: <span class="whiteColor">@v.FirstName @v.LastName </span><br>
-                                    Username:<span class="whiteColor"> @v.Username</span><br /><br/>
-                                    Expertise<br/>
-                                    @{ 
+                        </div>
+                        <div class="panel-footer">
+                            @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get))
+                            {
+                                if (User.IsInRole("Student"))
+                                {
 
-                                            var expertise = v.tutorExperties.ToList();
-                                            var count = 0;
-                                            foreach (var ex in expertise )
-                                            {
-                                                <span class="whiteColor">
-                                                    <b>@ex.category.CategoryName</b>
-                                                </span>
-                                                <br/>
-                                            count++;
-                                        }
-                                        while (count < 4)
-                                        {
-                                            count++;
-                                            <br/>
-                                        }
-                                   }
+                                    <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact">
 
-                                    <br/><br />
-                                    Rating<input value="@v.Rating" data-size="xs" class="rating1 rating-loading">
-                                </p>
-                                <p>
-                                 @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get, new { @class = "form-horizontal" }))
-                                 {
+                                }
+                                else if (User.IsInRole("Tutor"))
+                                {
+
+                                }
+                                else
+                                {
+                                    <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="Contact">
+
+                                }
+
+
+
+                            <span class="pull-right">
+                                <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> View Profile</a>
+                                
+                            </span>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </div>
+
+
+
+            <br /><br />
+            <h1>Top Tutors for this month</h1>
+            <hr>
+            <br /><br />
+            <div class="row">
+                @foreach (var v in Model.Top10)
+                {
+                    <div class="col-sm-4">
+
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">@v.Username</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-lg-3" align="center"></div>
+                                    <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" src="@v.ProfileImage" class="img-circle" width="100" height="100"> </div>
+                                    <div class="col-md-4 col-lg-4" align="center"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-9 col-lg-12">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Name:</td>
+                                                    <td>@v.FirstName @v.LastName</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                <tr>
+                                                    <td>Expertise:</td>
+                                                    <td>
+                                                        <ul style="padding-left:5px;list-style-type: none;">
+                                                            @{
+
+                                                                var expertise = v.tutorExperties.ToList();
+                                                                var count = 0;
+
+                                                                foreach (var ex in expertise)
+                                                                {
+
+                                                                    <li> <b>@ex.category.CategoryName</b></li>
+
+
+                                                                    count++;
+                                                                }
+                                                                while (count < 4)
+                                                                {
+                                                                    count++;
+                                                                    <li><br /></li>
+                                                                }
+
+                                                            }
+
+                                                        </ul>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top:15px;">Rating:</td>
+                                                    <td> <input value="@v.Rating" data-size="xs" class="rating1 rating-loading"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get))
+                                {
                                     if (User.IsInRole("Student"))
                                     {
 
-                                             <input type="submit" class="btn btn-success" width="250" value="Contact">
+                                        <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact">
 
                                     }
                                     else if (User.IsInRole("Tutor"))
@@ -72,94 +211,22 @@
                                     }
                                     else
                                     {
-                                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="Contact">
+                                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="Contact">
 
                                     }
-                                    <a style="text-decoration:none" class="btn btn-default" href="@Url.Action("Profile", "Home", new { username = v.Username })">View Profile</a>
-                                 }  
-                                  </p><br />
-                                 
+
+
+
+                                    <span class="pull-right">
+                                        <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> View Profile</a>
+
+                                    </span>
+                                }
                             </div>
+
                         </div>
                     </div>
-
-
-                }
-
-               
-            </div>
-           
-            <br /><br />
-            <h1>Top Tutors for this month</h1>
-            <hr>
-            <br /><br />
-            <div class="row">
-              @{
-
-                  foreach (var v in Model.Top10)
-                  {
-
-                    <div class="col-sm-3 mbottom">
-                        <div class="card">
-                            <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
-                            <div class="avatar">
-                                <img src="@v.ProfileImage" width="200" height="200" alt="" />
-                            </div>
-                            <div class="content">
-                                <p>
-                                    Name: <span class="whiteColor">@v.FirstName @v.LastName </span><br>
-                                    Username:<span class="whiteColor"> @v.Username</span><br /><br />
-                                    Expertise<br />
-                                    @{
-
-                                        var expertise = v.tutorExperties.ToList();
-                                        var count = 0;
-                                        foreach (var ex in expertise)
-                                        {
-                                            <span class="whiteColor">
-                                                <b>@ex.category.CategoryName</b>
-                                            </span>
-                                                <br />
-                                            count++;
-                                        }
-                                        while (count < 4)
-                                        {
-                                            count++;
-                                            <br />
-                                        }
-                                    }
-                                    Rating<input value="@v.Rating" data-size="xs" class="rating1 rating-loading">
-                                </p>
-                                <p>
-                                @*<button type="button" class="btn btn-success">Contact</button>*@
-                                    @using (Html.BeginForm("PostQuestion", "Students", new { id = v.TutorID }, FormMethod.Get, new { @class = "form-horizontal" }))
-                                    {
-                                        if (User.IsInRole("Student"))
-                                        {
-
-                                            <input type="submit" class="btn btn-success" width="250" value="Contact">
-
-                                        }
-                                        else if (User.IsInRole("Tutor"))
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="Contact">
-
-                                        }
-                                        <a style="text-decoration:none" class="btn btn-default" href="@Url.Action("Profile", "Home", new { username = v.Username })">View Profile</a>
-                                    }  
-                                </p><br />
-                            </div>
-                        </div>
-                    </div>
-
-                  }
-
-                  
-            }
+                                                                }
             </div>
         </div>
        </div>

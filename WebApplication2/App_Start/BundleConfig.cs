@@ -10,7 +10,14 @@ namespace WebApplication2
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                     "~/Scripts/jquery-{version}.js",
-                    "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                    "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                    "~/Scripts/jquery.validate*",
+                    "~/Scripts/moment.min.js"
+                   ));
+
+            bundles.Add(new ScriptBundle("~/bundles/ratings").Include(
+                        "~/Theme/rating/js/star-rating.min.js",
+                        "~/Theme/js/prettify.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -21,12 +28,22 @@ namespace WebApplication2
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/respond.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css"));
+
+            //bundles.Add(new StyleBundle("~/Theme/css").Include(
+            //          "~/Theme/dropdownMultiple/semantic.min.css",
+            //          "~/Theme/css/bootstrap.min.css",
+            //          "~/Theme/css/freelancer.css",
+            //          "~/Theme/css/custom.css",
+            //          "~/Theme/font-awesome/css/font-awesome.min.css",
+            //          "~/Content/bootstrap-datetimepicker.min.css",
+            //          "~/Theme/rating/css/star-rating.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
