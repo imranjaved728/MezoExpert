@@ -1,21 +1,43 @@
-﻿<style>
+﻿<link href="~/Theme/css/footer-distributed-with-address-and-phones.css" rel="stylesheet" />
 
-</style>
-<footer id="footer" class="midnight-blue">
+<footer class="footer-distributed">
+    <div class="footer-left" style="width:35%;">
+        <h3><span>Mezo</span>Experts</h3>
+        <p class="footer-links">
+           
+            <a href="@Url.Action("Contact","Home")">Contact Us</a>
+        </p>
+        <!-- PayPal Logo -->
+       
+        <p class="footer-company-name">MezoExperts &copy; 2016</p><br />
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <strong><a href="@Url.Action("Index", "Home")" title="Mezo Experts">Copyright &copy; Mezo Experts 2016.</a>  </strong>
-            </div>
-
-            <div class="col-sm-6">
-                <ul class="pull-right">
-                    
-                    <li><strong><a href="#">About Us</a></strong></li>
-                    <li><strong><a href="#">Contact Us</a></strong></li>
-                </ul>
-            </div>
+        <table border="0" cellpadding="10" cellspacing="0"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/bdg_secured_by_pp_2line.png" border="0" alt="Secured by PayPal"></a><div style="text-align:center"><a href="https://www.paypal.com/webapps/mpp/how-paypal-works"><font size="2" face="Arial" color="#0079CD"><b></b></font></a></div></td></tr></table><!-- PayPal Logo -->
+       
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>23-39 Centennial Street</span> Regina, Canada</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 555 123456</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:support@mezoexperts.com">support@mezoexperts.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about" >
+            <span>About the company</span>
+           We help the students that are struggling with their studies by connecting them with best tutors in the subject from around the globe.
+        </p>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/MezoExperts" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/mezoexperts" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://plus.google.com/100696565080727581302/about?gmbpt=true&hl=en&_ga=1.151483129.1172941307.1456780614"><i class="fa fa-google-plus" target="_blank"></i></a>
+           
         </div>
     </div>
 </footer>

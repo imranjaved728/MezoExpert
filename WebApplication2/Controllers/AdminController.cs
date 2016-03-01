@@ -14,6 +14,7 @@ using Facebook;
 using WebApplication2.App_Start;
 using System.Data.Entity;
 using System.Net;
+using WebApplication2.DBEntities;
 
 namespace WebApplication2.Controllers
 {
@@ -181,8 +182,7 @@ namespace WebApplication2.Controllers
             return RedirectToAction("IndexTutor");
         }
         #endregion
-
-
+        
         #region Categories
 
         // GET: Categories
@@ -404,8 +404,156 @@ namespace WebApplication2.Controllers
 
         #endregion
 
+        #region Questions
 
 
+        // GET: Questions
+        public async Task<ActionResult> IndexQuestion()
+        {
+            var questions = db.Questions.Include(q => q.student);
+            return View("Question/Index",await questions.ToListAsync());
+        }
+
+        // GET: Questions/Details/5
+        public async Task<ActionResult> DetailsQuestion(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = await db.Questions.FindAsync(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View(question);
+        }
+
+        // GET: Questions/Create
+        public ActionResult CreateQuestion()
+        {
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName");
+            return View("Question/Create");
+        }
+
+        // POST: Questions/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateQuestion([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,DueDate")] Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                question.PostedTime = DateTime.Now;
+                question.QuestionID = Guid.NewGuid();
+                db.Questions.Add(question);
+                await db.SaveChangesAsync();
+                return RedirectToAction("IndexQuestion");
+            }
+
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", question.StudentID);
+            return View("Question/Create",question);
+        }
+
+        // GET: Questions/Edit/5
+        public async Task<ActionResult> EditQuestion(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = await db.Questions.FindAsync(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", question.StudentID);
+            return View("Question/Edit",question);
+        }
+
+        // POST: Questions/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditQuestion([Bind(Include = "QuestionID,StudentID,TutorID,Title,Details,Status,Amount,DueDate,PostedTime")] Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(question).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("IndexQuestion");
+            }
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName", question.StudentID);
+            return View("Question/Edit",question);
+        }
+
+        // GET: Questions/Delete/5
+        public async Task<ActionResult> DeleteQuestion(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = await db.Questions.FindAsync(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Question/Delete",question);
+        }
+
+        // POST: Questions/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmedQuestion(Guid id)
+        {
+            Question question = await db.Questions.FindAsync(id);
+            db.Questions.Remove(question);
+            await db.SaveChangesAsync();
+            return RedirectToAction("IndexQuestion");
+        }
+
+        #endregion
+
+
+        #region contactus
+
+        // GET: Questions
+        public async Task<ActionResult> IndexContact()
+        {
+            var contacts =await db.contactus.ToListAsync();
+            return View("Contact/Index", contacts);
+        }
+
+        // GET: Questions/Delete/5
+        public async Task<ActionResult> DeleteContact(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ContactUs question = await db.contactus.FindAsync(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Contact/Delete", question);
+        }
+
+        // POST: Questions/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmedContact(Guid id)
+        {
+            ContactUs question = await db.contactus.FindAsync(id);
+            db.contactus.Remove(question);
+            await db.SaveChangesAsync();
+            return RedirectToAction("IndexContact");
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

@@ -95,6 +95,24 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact([Bind(Include = "Name,Email,Message")] ContactUs model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ContactUsID = Guid.NewGuid();
+                if(User.Identity.IsAuthenticated)
+                    model.Username = User.Identity.Name;
+                db.contactus.Add(model);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            
+            return View("Index");
+        }
+
         public ActionResult Unauthorized()
         {
             return View();

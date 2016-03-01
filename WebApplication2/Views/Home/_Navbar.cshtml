@@ -10,7 +10,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
                     
-                    <a class="navbar-brand" style="margin-left:55px" href="@Url.Action("Index", "Home")">Mezo Experts</a>
+                    <a class="navbar-brand" style="margin-left:55px" href="@Url.Action("Index", "Home")"><span class="themeGreen">Mezo</span>Experts</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,7 +19,7 @@
                         <li class="hidden">
                             <a href="#page-top"></a>
                         </li>
-
+                        <li class="marginclass2"><a href="#howitworkModal" data-toggle="modal">How it works</a></li>
                         <li><a href="#search"><i class="fa fa-search"></i></a></li>
                         <li class="dropdown">
                             <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up<span class="caret"></span></a>
@@ -46,9 +46,12 @@
         @Html.Partial("~/Views/Shared/_RegisterStudentPartial.cshtml", Model.RegisterClient)
 
         @Html.Partial("~/Views/Shared/_RegisterTutorPartial.cshtml", Model.RegisterExpert)
+
+        @Html.Partial("~/Views/Shared/howitworks.cshtml")
     }
     else
     {
+        @Html.Partial("~/Views/Shared/howitworks.cshtml")
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top blackBackgroundNav" role="navigation">
             <div class="container-fluid">
@@ -61,7 +64,9 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" style="margin-left:55px" href="@Url.Action("Index", "Home")">
-                        @*<img src="~/Images/MezoImages/logo.png" />*@Mezo Experts</a>
+                        @*<img src="~/Images/MezoImages/logo.png" />*@<span class="themeGreen">Mezo</span>Experts
+                    </a>
+                    
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -76,6 +81,7 @@
                           if (User.IsInRole("Student"))
                           {
                             
+                                <li class="marginclass"><a href="#howitworkModal" data-toggle="modal" >How it works</a></li>
                                 <li><a href="#search"><i class="fa fa-search"></i></a></li>
                            
                                 <li>
@@ -109,6 +115,9 @@
                           else if (User.IsInRole("Admin"))
                           {
                             <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                            <li>
+                                <a href="#" onclick="location.href='@Url.Action("Index","Admin")'"><i class="fa fa-home"></i> Home</a>
+                            </li>
                             @*
                                 <li>
                                     <a href="#" onclick="location.href='@Url.Action("Manage","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Students</a>

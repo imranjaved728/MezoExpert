@@ -34,8 +34,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
             <h1>Categories</h1>
-            <hr>
-            
+            <hr>            
             <p>
                 @Html.ActionLink("Create New", "CreateCategories", "", new { @class = "btn btn-success" })
             </p>
@@ -67,7 +66,12 @@
                     }
                 </tbody>
             </table>
+
+            <div>
+                <a class="btn btn-warning" href="@Url.Action("Index","Admin","")"><i class="fa fa-arrow-left"> Back to Home</i></a>
+            </div>
         </div>
+
         <div class="col-md-1"></div>
     </div>
 </div>

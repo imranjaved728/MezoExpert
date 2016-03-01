@@ -69,7 +69,8 @@ namespace WebApplication2.Models
         public DbSet<Session> sessions { get; set; }
         public DbSet<Transaction> transcations { get; set; }
         public DbSet<PaypalPayments> payments { get; set; }
-
+        public DbSet<ContactUs> contactus { get; set; }
+        public DbSet<OnlineUsers> online { get; set; }
 
 
         public DbSet<Usera> Useras { get; set; }

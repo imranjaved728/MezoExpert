@@ -5,11 +5,6 @@
 }
 
 
-
-
-@{
-    ViewBag.Title = "Index";
-}
 @section scripts{
 
     <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
@@ -84,8 +79,8 @@
                                 @Html.DisplayFor(modelItem => item.DateCreated)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CurrentBalance)
-                            </td>
+                                <span class="label label-success"> $@Html.DisplayFor(modelItem => item.CurrentBalance)</span>
+</td>
                             
                             <td>
                                 @Html.DisplayFor(modelItem => item.Username)
@@ -101,7 +96,13 @@
                     }
                 </tbody>
             </table>
+
+            <div>
+                <a class="btn btn-warning" href="@Url.Action("Index","Admin","")"><i class="fa fa-arrow-left"> Back to Home</i></a>
+            </div>
         </div>
+
+ 
         <div class="col-md-1"></div>
     </div>
 </div>

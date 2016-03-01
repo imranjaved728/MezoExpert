@@ -4,18 +4,91 @@
 }
 
 
-<div class="container fill img-rounded">
+<div class="container-fluid fill img-rounded">
 
 
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
-            <h1>Home</h1>
+            <h1>Dashboard</h1>
             <hr>
             <br />
-            
-      
-        </div>
+            <!-- Small boxes (Stat box) -->
+            <div class="row" style="color:black">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>150</h3>
+                            <p><b>Students</b></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <a href="@Url.Action("IndexStudent","Admin")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <p><b>Tutors</b></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <a href="@Url.Action("IndexTutor","Admin")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>44</h3>
+                            <p><b>Categories</b></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-desktop"></i>
+
+                        </div>
+                        <a href="@Url.Action("IndexCategories","Admin")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p><b>Questions</b></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-question"></i>
+                        </div>
+                        <a  href="@Url.Action("IndexQuestion","Admin")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+            </div><!-- /.row -->
+            <div class="row" style="color:black">
+               
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>14<sup style="font-size: 20px"></sup></h3>
+                            <p><b>Complaints</b></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-thumbs-down"></i>
+                        </div>
+                        <a href="@Url.Action("IndexContact","Admin")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+               
+               
+            </div><!-- /.row -->
+
+            </div>
         <div class="col-md-1"></div>
     </div>
 </div>
