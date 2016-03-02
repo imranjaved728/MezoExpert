@@ -7,3 +7,4 @@ C:\Users\Obaid Ullah\Desktop\project\ClassLibrary1\obj\Debug\MyResources.csproj.
 C:\Users\Obaid Ullah\Desktop\project\ClassLibrary1\obj\Debug\ar\ClassLibrary1.resources.dll
 C:\Users\Obaid Ullah\Desktop\project\ClassLibrary1\obj\Debug\ClassLibrary1.dll
 C:\Users\Obaid Ullah\Desktop\project\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+C:\Users\Obaid Ullah\Desktop\project\ClassLibrary1\obj\Debug\MyResources.csprojResolveAssemblyReference.cache

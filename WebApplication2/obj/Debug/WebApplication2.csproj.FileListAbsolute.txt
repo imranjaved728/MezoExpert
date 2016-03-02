@@ -201,3 +201,4 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.c
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\ar\WebApplication2.resources.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.newupdates.resources

@@ -234,6 +234,7 @@
     <Compile Include="DBEntities\Category.cs" />
     <Compile Include="DBEntities\ContactUs.cs" />
     <Compile Include="DBEntities\OnlineUsers.cs" />
+    <Compile Include="DBEntities\PaymentRequests.cs" />
     <Compile Include="DBEntities\PaypalPayments.cs" />
     <Compile Include="DBEntities\Transaction.cs" />
     <Compile Include="DBEntities\Files.cs" />
@@ -259,6 +260,10 @@
     <Compile Include="Migrations\201603010013067_onlneusers.cs" />
     <Compile Include="Migrations\201603010013067_onlneusers.Designer.cs">
       <DependentUpon>201603010013067_onlneusers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603022019202_newupdates.cs" />
+    <Compile Include="Migrations\201603022019202_newupdates.Designer.cs">
+      <DependentUpon>201603022019202_newupdates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -617,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603010013067_onlneusers.resx">
       <DependentUpon>201603010013067_onlneusers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603022019202_newupdates.resx">
+      <DependentUpon>201603022019202_newupdates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

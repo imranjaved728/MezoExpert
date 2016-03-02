@@ -372,17 +372,39 @@
   <data name="help1" xml:space="preserve">
     <value>الحصول على 1 1 على اساس مساعدة</value>
   </data>
+  <data name="messagePayment" xml:space="preserve">
+    <value>إذا لم يكن لديك باي بال يمكننا ان تحويل الاموال الى حسابك المصرفي.
+أرسل لنا التفاصيل المصرفية الخاصة بك على support@mezoexperts.com</value>
+  </data>
+  <data name="messagepayment2" xml:space="preserve">
+    <value>طلب السداد. سوف تتلقى المال في نهاية الشهر. !!!</value>
+  </data>
+  <data name="messagepayment3" xml:space="preserve">
+    <value>باي بال حساب التحديث بنجاح !!!</value>
+  </data>
   <data name="MessageRequired" xml:space="preserve">
     <value>مطلوب مجال رسالة</value>
   </data>
   <data name="offeredFee" xml:space="preserve">
     <value>رسوم المقدمة</value>
   </data>
+  <data name="PaypalEmail" xml:space="preserve">
+    <value>باي بال البريد الإلكتروني</value>
+  </data>
+  <data name="Requested" xml:space="preserve">
+    <value>طلب</value>
+  </data>
+  <data name="RequestPayment" xml:space="preserve">
+    <value>طلب الدفع</value>
+  </data>
   <data name="SaveChages" xml:space="preserve">
     <value>حفظ التغيرات</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>إرسال</value>
+  </data>
+  <data name="UpdateEmail" xml:space="preserve">
+    <value>تحديث البريد الإلكتروني</value>
   </data>
   <data name="updateprofile" xml:space="preserve">
     <value>تحديث الملف</value>

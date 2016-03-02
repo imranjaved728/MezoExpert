@@ -393,4 +393,26 @@
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="messagePayment" xml:space="preserve">
+    <value>If you donot have paypal we can transfer money to your bank account.
+Send us your bank details on support@mezoexperts.com</value>
+  </data>
+  <data name="messagepayment2" xml:space="preserve">
+    <value>Request for payment made. You will recieve money at the end of the month. !!!</value>
+  </data>
+  <data name="messagepayment3" xml:space="preserve">
+    <value>Paypal Account Updated Successfully !!!</value>
+  </data>
+  <data name="PaypalEmail" xml:space="preserve">
+    <value>Paypal Email </value>
+  </data>
+  <data name="Requested" xml:space="preserve">
+    <value>Requested</value>
+  </data>
+  <data name="RequestPayment" xml:space="preserve">
+    <value>Request Payment</value>
+  </data>
+  <data name="UpdateEmail" xml:space="preserve">
+    <value>UpdateEmail</value>
+  </data>
 </root>

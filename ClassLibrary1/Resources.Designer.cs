@@ -502,6 +502,34 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If you donot have paypal we can transfer money to your bank account.
+        ///Send us your bank details on support@mezoexperts.com.
+        /// </summary>
+        public static string messagePayment {
+            get {
+                return ResourceManager.GetString("messagePayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request for payment made. You will recieve money at the end of the month. !!!.
+        /// </summary>
+        public static string messagepayment2 {
+            get {
+                return ResourceManager.GetString("messagepayment2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paypal Account Updated Successfully !!!.
+        /// </summary>
+        public static string messagepayment3 {
+            get {
+                return ResourceManager.GetString("messagepayment3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Message field is required.
         /// </summary>
         public static string MessageRequired {
@@ -579,6 +607,15 @@ namespace ClassLibrary1 {
         public static string PasswordRequired {
             get {
                 return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paypal Email .
+        /// </summary>
+        public static string PaypalEmail {
+            get {
+                return ResourceManager.GetString("PaypalEmail", resourceCulture);
             }
         }
         
@@ -696,6 +733,24 @@ namespace ClassLibrary1 {
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested.
+        /// </summary>
+        public static string Requested {
+            get {
+                return ResourceManager.GetString("Requested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request Payment.
+        /// </summary>
+        public static string RequestPayment {
+            get {
+                return ResourceManager.GetString("RequestPayment", resourceCulture);
             }
         }
         
@@ -831,6 +886,15 @@ namespace ClassLibrary1 {
         public static string University {
             get {
                 return ResourceManager.GetString("University", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UpdateEmail.
+        /// </summary>
+        public static string UpdateEmail {
+            get {
+                return ResourceManager.GetString("UpdateEmail", resourceCulture);
             }
         }
         

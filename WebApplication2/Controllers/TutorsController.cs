@@ -793,33 +793,12 @@ namespace WebApplication2.Controllers
 
             if (IsCompletedProfile == true)
             {
-                string payerId = Request.Params["PayerID"];
-
-                if (string.IsNullOrEmpty(payerId))
-                {
-
-                }
-                else
-                {
-                    // This section is executed when we have received all the payments parameters
-
-                    // from the previous call to the function Create
-
-                    // Executing a payment
-                    var apiContext = Configuration.GetAPIContext();
-                    var guid = Request.Params["guid"];
-
-                    var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
-
-                    if (executedPayment.state.ToLower() != "approved")
-                    {
-                        return View("FailureView");
-                    }
-                }
-
+                Tutor loaddb = db.Tutors.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
                 Models.Payment obj = new Models.Payment();
-                obj.Amount = db.Students.Where(c => c.Username == User.Identity.Name).FirstOrDefault().CurrentBalance;
-                return View();
+                obj.Balance = db.Tutors.Where(c => c.Username == User.Identity.Name).FirstOrDefault().CurrentEarning.ToString();
+                obj.Email = loaddb.paypalEmail;
+                obj.Requested = loaddb.moneyStatus=="Requested"?true:false;
+                return View(obj);
             }
             else
             {
@@ -827,6 +806,39 @@ namespace WebApplication2.Controllers
                 return RedirectToAction("EditProfile");
             }
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  ActionResult updatePaypal(Models.Payment model)
+        {
+            Tutor loaddb = db.Tutors.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
+            loaddb.paypalEmail = model.Email;
+            db.Entry(loaddb).State = EntityState.Modified;
+            db.SaveChangesAsync();
+            return View("AccountSettings",model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult requestPayment(Models.Payment model)
+        {
+            Tutor loaddb =  db.Tutors.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
+            loaddb.moneyStatus = "Requested";            
+            db.Entry(loaddb).State = EntityState.Modified;
+            db.SaveChanges();
+
+            PaymentRequests obj = new PaymentRequests();
+            obj.PaymentId = new Guid();
+            obj.amount = loaddb.CurrentEarning;
+            obj.status = "Requested";
+            obj.postedTime = DateTime.Now;
+            obj.UserName = loaddb.Username;
+            db.paymentRequests.Add(obj);
+            db.SaveChanges();
+
+
+            return View("AccountSettings", model);
         }
 
         public void SendButtonStudent(string sessionId, string sendTo, string message, IHubContext context)

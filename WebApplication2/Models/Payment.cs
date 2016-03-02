@@ -11,5 +11,12 @@ namespace WebApplication2.Models
         public string Balance { get; set; }
         [Required]
         public float Amount { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        public Boolean Requested { get; set; }
+        public string DateRecieved { get; set; }
     }
 }

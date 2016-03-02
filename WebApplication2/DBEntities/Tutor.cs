@@ -26,6 +26,8 @@ namespace WebApplication2.Models
 
         public Boolean IsCompletedProfile { get; set; }
         public float Rating { get; set; }
+        public string paypalEmail { get; set; }
+        public string moneyStatus { get; set; }
 
         public virtual ICollection<TutorExperties> tutorExperties { get; set; }
 
