@@ -160,6 +160,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Files.
+        /// </summary>
+        public static string ChooseFiles {
+            get {
+                return ResourceManager.GetString("ChooseFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -205,6 +214,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Us.
         /// </summary>
         public static string ContactUs {
@@ -223,6 +241,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Balance.
+        /// </summary>
+        public static string CurrentBalance {
+            get {
+                return ResourceManager.GetString("CurrentBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date of Birth.
         /// </summary>
         public static string DateOfBirth {
@@ -237,6 +264,15 @@ namespace ClassLibrary1 {
         public static string DateOfBirthRequired {
             get {
                 return ResourceManager.GetString("DateOfBirthRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadline.
+        /// </summary>
+        public static string deadline {
+            get {
+                return ResourceManager.GetString("deadline", resourceCulture);
             }
         }
         
@@ -313,6 +349,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expertise.
+        /// </summary>
+        public static string Expertise {
+            get {
+                return ResourceManager.GetString("Expertise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string FirstName {
@@ -349,6 +394,24 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get matched with tutor.
+        /// </summary>
+        public static string getmatched {
+            get {
+                return ResourceManager.GetString("getmatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get 1-on-1 help.
+        /// </summary>
+        public static string help1 {
+            get {
+                return ResourceManager.GetString("help1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -372,6 +435,15 @@ namespace ClassLibrary1 {
         public static string Inbox {
             get {
                 return ResourceManager.GetString("Inbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Message.
+        /// </summary>
+        public static string LastMessage {
+            get {
+                return ResourceManager.GetString("LastMessage", resourceCulture);
             }
         }
         
@@ -421,6 +493,78 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MATCHED RESULTS.
+        /// </summary>
+        public static string MATCHEDRESULTS {
+            get {
+                return ResourceManager.GetString("MATCHEDRESULTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Message field is required.
+        /// </summary>
+        public static string MessageRequired {
+            get {
+                return ResourceManager.GetString("MessageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Page.
+        /// </summary>
+        public static string NextPage {
+            get {
+                return ResourceManager.GetString("NextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Results found matching your query..
+        /// </summary>
+        public static string NoResults {
+            get {
+                return ResourceManager.GetString("NoResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offered Fee.
+        /// </summary>
+        public static string offeredFee {
+            get {
+                return ResourceManager.GetString("offeredFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -457,6 +601,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Posted By.
+        /// </summary>
+        public static string PostedBy {
+            get {
+                return ResourceManager.GetString("PostedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Posted Questions.
         /// </summary>
         public static string PostedQuestions {
@@ -466,11 +619,38 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Posted Time.
+        /// </summary>
+        public static string PostedTime {
+            get {
+                return ResourceManager.GetString("PostedTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Posts.
+        /// </summary>
+        public static string Posts {
+            get {
+                return ResourceManager.GetString("Posts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post this question.
         /// </summary>
         public static string POSTthisQUESTION {
             get {
                 return ResourceManager.GetString("POSTthisQUESTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Page.
+        /// </summary>
+        public static string PreviousPage {
+            get {
+                return ResourceManager.GetString("PreviousPage", resourceCulture);
             }
         }
         
@@ -520,6 +700,42 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string SaveChages {
+            get {
+                return ResourceManager.GetString("SaveChages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search .
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sender.
+        /// </summary>
+        public static string Sender {
+            get {
+                return ResourceManager.GetString("Sender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
@@ -556,6 +772,24 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
@@ -574,11 +808,56 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TOP TUTORS FOR THIS MONTH.
+        /// </summary>
+        public static string TOPTUTORS {
+            get {
+                return ResourceManager.GetString("TOPTUTORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to type keyword(s) here.
+        /// </summary>
+        public static string typehere {
+            get {
+                return ResourceManager.GetString("typehere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to University.
         /// </summary>
         public static string University {
             get {
                 return ResourceManager.GetString("University", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Profile.
+        /// </summary>
+        public static string updateprofile {
+            get {
+                return ResourceManager.GetString("updateprofile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile Updated Successfully..
+        /// </summary>
+        public static string updatesuccess {
+            get {
+                return ResourceManager.GetString("updatesuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload a different photo....
+        /// </summary>
+        public static string uploadphote {
+            get {
+                return ResourceManager.GetString("uploadphote", resourceCulture);
             }
         }
         
@@ -597,6 +876,15 @@ namespace ClassLibrary1 {
         public static string UserNameRequired {
             get {
                 return ResourceManager.GetString("UserNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Profile.
+        /// </summary>
+        public static string ViewProfile {
+            get {
+                return ResourceManager.GetString("ViewProfile", resourceCulture);
             }
         }
     }
