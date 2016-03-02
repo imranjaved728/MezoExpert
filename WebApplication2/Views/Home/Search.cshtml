@@ -22,10 +22,12 @@
             }
             <br /><br />
             <div class="row">
+               @{ int i = 0; }
+
                 @foreach (var v in Model.Results)
                 {
                       <div class="col-sm-4">
-
+                         @{i += 1;}
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -45,9 +47,15 @@
                                             <tr>
                                                 <td>Name:</td>
                                                 <td>@v.FirstName @v.LastName<br/>
-
+                                                @if(Model.OnlineResults[i-1]==true)
+                                                {
                                                 <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> Online</a>
-                                                
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> Offline</a>
+
+                                                }
                                                 </td>
                                             </tr>
 
@@ -133,11 +141,12 @@
             <hr>
             <br /><br />
             <div class="row">
+                @{ int j= 0; }
                 @foreach (var v in Model.Top10)
                 {
                     <div class="col-sm-4">
 
-
+                        @{j += 1;}
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h3 class="panel-title">@v.Username</h3>
@@ -156,8 +165,15 @@
                                                 <tr>
                                                     <td>Name:</td>
                                                     <td>@v.FirstName @v.LastName<br/>
+                                                       @if (Model.OnlineTop10[j - 1] == true)
+                                                       {
                                                         <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> Online</a>
-                                                    
+                                                       }
+                                                       else
+                                                       {
+                                                        <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> Offline</a>
+
+                                                       }
                                                     </td>
                                                 </tr>
 

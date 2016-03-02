@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\Mailer.cs" />
     <Compile Include="Helpers\Onlines.cs" />
     <Compile Include="Migrations\201602211947480_onserver.cs" />
@@ -292,6 +294,8 @@
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-rtl.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -321,20 +325,30 @@
     <Content Include="Profiles\default\2.png" />
     <Content Include="Profiles\default\3.png" />
     <Content Include="Profiles\default\4.png" />
+    <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\alert.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-rtl.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\beta.mezoexperts.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mezoexperts.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mezoexperts.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\button.js" />
+    <Content Include="Scripts\carousel-rtl.js" />
+    <Content Include="Scripts\collapse.js" />
+    <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -346,13 +360,19 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popover.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scrollspy.js" />
+    <Content Include="Scripts\tab.js" />
+    <Content Include="Scripts\tooltip.js" />
+    <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Theme\bootstrap-3.3.4-dist\css\bootstrap-theme.css" />
     <Content Include="Theme\bootstrap-3.3.4-dist\css\bootstrap-theme.min.css" />
@@ -572,8 +592,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\" />
     <Folder Include="Theme\buttons\assets\" />
     <Folder Include="Theme\dropdownMultiple\themes\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -604,6 +626,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\MyResources.csproj">
+      <Project>{95fb715e-06aa-489c-a162-4be213aa9bb2}</Project>
+      <Name>MyResources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

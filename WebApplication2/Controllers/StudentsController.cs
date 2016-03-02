@@ -25,7 +25,7 @@ using WebApplication2.Helpers;
 namespace WebApplication2.Controllers
 {
     [CustomAuthorize(Roles = "Student,Admin")]
-    public class StudentsController : Controller
+    public class StudentsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private PayPal.Api.Payment payment;
@@ -47,6 +47,7 @@ namespace WebApplication2.Controllers
             var session=await db.sessions.FindAsync(SessionId);
             ChatModel obj = new ChatModel();
             obj.session = session;
+            obj.status = db.online.Where(c => c.Username == session.tutor.Username).FirstOrDefault().Status;
             obj.session.Replies=obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
             return  View(obj);
         }
@@ -66,12 +67,15 @@ namespace WebApplication2.Controllers
             var user = new Guid(User.Identity.GetUserId());
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
             List<StudentInbox> list = new List<StudentInbox>();
+            var onlineusers = db.online.Where(c => c.Status == true).ToList();
             foreach (var question in MineSessions)
             {
                 foreach (var session in question.Sessions)
                 {
                     StudentInbox obj = new StudentInbox();
                     obj.SenderName = session.tutor.Username;
+                    var online= onlineusers.Where(c => c.Username == obj.SenderName).FirstOrDefault();
+                    obj.onlineStatus = online == null ? false : online.Status;
                     obj.SenderProfile = session.tutor.ProfileImage;
                     var lastreply = session.Replies.OrderBy(c => c.PostedTime);
                     obj.PostedTime = lastreply.LastOrDefault().PostedTime;
@@ -288,6 +292,8 @@ namespace WebApplication2.Controllers
             var user = new Guid(User.Identity.GetUserId());
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
             List<StudentInbox> list = new List<StudentInbox>();
+            var onlineusers = db.online.Where(c => c.Status == true).ToList();
+
             foreach (var question in MineSessions)
             {
                 var hiredSession = question.Sessions.Where(c => c.Status == Status.Hired || c.Status== Status.Conflict);
@@ -296,6 +302,9 @@ namespace WebApplication2.Controllers
                     StudentInbox obj = new StudentInbox();
                     obj.SenderName = session.tutor.Username;
                     obj.SenderProfile = session.tutor.ProfileImage;
+                    var online = onlineusers.Where(c => c.Username == obj.SenderName).FirstOrDefault();
+                    obj.onlineStatus = online == null ? false : online.Status;
+
                     var lastreply = session.Replies.OrderBy(c => c.PostedTime);
                     obj.PostedTime = lastreply.LastOrDefault().PostedTime;
                     obj.SessionId = session.SessionID;
@@ -411,7 +420,7 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
                 SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
@@ -522,7 +531,7 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
                 SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
@@ -591,7 +600,7 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
                 SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
@@ -678,10 +687,15 @@ namespace WebApplication2.Controllers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString());
-                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
+              
+               //part moved up
                 var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
+                var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
+
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
+                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
+               
                 SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
 
             return new JsonResult()
@@ -692,12 +706,12 @@ namespace WebApplication2.Controllers
            
         }
 
-        public string generateMessage(string username, string detail, string imgsrc,string postedTime,string replyID)
+        public string generateMessage(string username, string detail, string imgsrc,string postedTime,string replyID, bool online)
         {
              string filestring = "<div id=\""+replyID+"\"></div>";
           
             string message = "";
-            message = message + "<li class=\"media\">" +
+            message = message + "<li class=\"" + online + "\"></li><li class=\"media\">" +
                             "<div class=\"comment\"> " +
                                     "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle imgSize\"> </a>" +
                                      " <div class=\"media-body\">" +

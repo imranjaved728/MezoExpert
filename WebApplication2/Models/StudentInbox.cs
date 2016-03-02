@@ -15,6 +15,7 @@ namespace WebApplication2.Models
         public string SenderProfile { get; set; }
         public bool newMessage { get; set; }
         public DateTime PostedTime { get; set; }
+        public bool onlineStatus { get; set; }
     }
 
     public class StudentHomeModel

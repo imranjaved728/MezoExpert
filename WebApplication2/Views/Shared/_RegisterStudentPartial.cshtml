@@ -11,14 +11,14 @@
 
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2>Sign Up</h2>
+                            <h2>@Resources.SignUp</h2>
                             <hr class="star-primary">
 
                             @*<form role="form">*@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control", type = "email", id = "emailStudent" })
+                                    @Html.TextBoxFor(m => m.Email, new { placeholder = @Resources.Email, @class = "form-control", type = "email", id = "emailStudent" })
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Username, new { placeholder = "Username", @class = "form-control", id = "usernameStudent" })
+                                    @Html.TextBoxFor(m => m.Username, new { placeholder = @Resources.UserName, @class = "form-control", id = "usernameStudent" })
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control", id = "passwordStudent" })
+                                    @Html.PasswordFor(m => m.Password, new { placeholder = @Resources.Password, @class = "form-control", id = "passwordStudent" })
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
@@ -43,7 +43,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control", id = "confirmPasswordStudent" })
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = @Resources.ConfirmPassword, @class = "form-control", id = "confirmPasswordStudent" })
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
@@ -62,10 +62,10 @@
                             <div class="row">
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-4">
-                                    <input type="submit" class="btn btn-success"  style="width:100px"  name="registerS" value="Sign Up" />
+                                    <input type="submit" class="btn btn-success"  style="width:100px"  name="registerS" value="@Resources.SignUp" />
                                 </div>
                                 <div class="col-xs-3">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> @Resources.Close</button>
                                 </div>
                                 <div class="col-xs-3"></div>
                             </div>

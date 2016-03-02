@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ClassLibrary1;
 
 namespace WebApplication2.Models
 {
@@ -20,56 +21,65 @@ namespace WebApplication2.Models
     }
     public class LoginModel
     {
-        [Required]
-        [Display(Name = "Email Address")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+           ErrorMessageResourceName = "UserNameRequired")]
+        [Display(Name = "UserName", ResourceType = typeof(Resources))]
         [DataType(DataType.EmailAddress, ErrorMessage = "Enter a valid Email Address please.")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+           ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(Resources))]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "RememberMe", ResourceType = typeof(Resources))]
         public bool RememberMe { get; set; }
 
        public ExternalLoginListViewModel externalLogin;
     }
     public class TutorRegisterModel
     {
-        [Required]
-        [Display(Name = "First Name")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+            ErrorMessageResourceName = "FirstNameRequired")]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Last Name")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+            ErrorMessageResourceName = "LastNameRequired")]       
+        [Display(Name = "LastName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Date of Birth")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+            ErrorMessageResourceName = "DateOfBirthRequired")]
+        [Display(Name = "DOB", ResourceType = typeof(Resources))]
         public string DOB { get; set; }
 
-        [Required]
-        [Display(Name = "Username")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+          ErrorMessageResourceName = "UserNameRequired")]
+        [Display(Name = "UserName", ResourceType = typeof(Resources))]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string UserName { get; set; }
 
-        [Required]
-        [Display(Name = "Email Address")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+          ErrorMessageResourceName = "EmailRequired")]
+        [Display(Name = "Email", ResourceType = typeof(Resources))]
         [DataType(DataType.EmailAddress, ErrorMessage = "Enter a valid Email Address please.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+         ErrorMessageResourceName = "PasswordRequired")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(Resources))]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+         ErrorMessageResourceName = "ConfirmRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resources))]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -84,17 +94,17 @@ namespace WebApplication2.Models
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "DOB", ResourceType = typeof(Resource))]
         public string DOB { get; set; }
 
         //[Required]
-         [Display(Name = "Username")]
-         [DataType(DataType.Text)]
+        [Display(Name = "UserName", ResourceType = typeof(Resource))]
+        [DataType(DataType.Text)]
          public string UserName { get; set; }
 
         //[Required]
@@ -103,43 +113,43 @@ namespace WebApplication2.Models
         //public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Degree")]
+        [Display(Name = "Degree", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string Degree { get; set; }
 
         [Required]
-        [Display(Name = "University")]
+        [Display(Name = "University", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string University { get; set; }
 
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
-        [Display(Name = "About Me")]
+        [Display(Name = "AboutMe", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string AboutMe { get; set; }
 
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
-        [Display(Name = "Experience")]
+        [Display(Name = "Experience", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string Experience { get; set; }
 
         [Required]
-        [Display(Name = "City")]
+        [Display(Name = "City", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string City { get; set; }
 
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string Country { get; set; }
 
         [DataType(DataType.Text)]
         public string ProfileImage { get; set; }
 
-        [Display(Name = "Rating")]
-        public float Rating { get; set; }
+        [Display(Name = "Rating", ResourceType = typeof(Resource))]
+         public float Rating { get; set; }
 
         [DataType(DataType.Text)]
         public string []Expertise { get; set; }
@@ -147,26 +157,29 @@ namespace WebApplication2.Models
 
     public class StudentRegisterModel
     {
-        [Required]
-        [Display(Name = "Email Address")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+        ErrorMessageResourceName = "EmailRequired")]
+       // [Display(Name = "Email", ResourceType = typeof(Resource))]
         [DataType(DataType.EmailAddress, ErrorMessage = "Enter a valid Email Address please.")]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Username")]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+       ErrorMessageResourceName = "UserNameRequired")]
+       // [Display(Name = "UserName", ResourceType = typeof(Resource))]
         [StringLength(100, ErrorMessage = "Username must be at least {2} characters long.", MinimumLength = 6)]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+       ErrorMessageResourceName = "PasswordRequired")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+       // [Display(Name = "Password", ResourceType = typeof(Resource))]
+         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+        ErrorMessageResourceName = "ConfirmRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+       // [Display(Name = "ConfirmPassword", ResourceType = typeof(Resource))]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -175,37 +188,37 @@ namespace WebApplication2.Models
 
     public class StudentUpdateModel
     {
-        [Display(Name = "FirstName", ResourceType  = typeof(Resource))]
+        [Display(Name = "FirstName", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
 
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "DateOfBirth", ResourceType = typeof(Resource))]
         public string DateOfBirth { get; set; }
 
-        
-        [Display(Name = "Username")]
+
+        [Display(Name = "UserName", ResourceType = typeof(Resource))]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string UserName { get; set; }
 
-        [Display(Name = "Degree")]
+        [Display(Name = "Degree", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string Degree { get; set; }
 
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string Country { get; set; }
 
-        [Display(Name = "City")]
+        [Display(Name = "City", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string City { get; set; }
 
-        [Display(Name = "University")]
+        [Display(Name = "University", ResourceType = typeof(Resource))]
         [DataType(DataType.Text)]
         public string University { get; set; }
 

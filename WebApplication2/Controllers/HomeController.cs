@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,24 +15,12 @@ using WebApplication2.Models;
 namespace WebApplication2.Controllers
 {
   
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
-        {
-            string culture = CultureHelper.GetImplementedCulture("");
-            // Save culture in a cookie
-            HttpCookie cookie = Request.Cookies["_culture"];
-            if (cookie != null)
-                cookie.Value = culture;   // update cookie value
-            else
-            {
-                cookie = new HttpCookie("_culture");
-                cookie.Value = culture;
-                cookie.Expires = DateTime.Now.AddYears(1);
-            }
-            Response.Cookies.Add(cookie);
+        {           
             return View();
         }
 
@@ -66,23 +55,88 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        public ActionResult Language(string language)
+        {
+            if (language.CompareTo("English")==0)
+            
+                SetCulture("en");
+            
+            else
+                SetCulture("ar");
+
+            string cultureName = null;
+            HttpCookie cultureCookie = Request.Cookies["_culture"];
+            if (cultureCookie != null)
+                cultureName = cultureCookie.Value;
+            else
+                cultureName = Request.UserLanguages != null && Request.UserLanguages.Length > 0 ?
+                        Request.UserLanguages[0] :  // obtain it from HTTP header AcceptLanguages
+                        null;
+            // Validate culture name
+             cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
+
+            // Modify current thread's cultures            
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+
+
+            return View("Index");
+        }
+        public ActionResult SetCulture(string culture)
+        {
+            // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;   // update cookie value
+            else
+            {
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Index");
+        }
 
         public ActionResult Search(string search)
         {
             var top10 = db.Tutors.Where(c=>c.IsCompletedProfile==true).OrderByDescending(c => c.Rating).Take(10).ToList();
             var result = db.Tutors.Where(c => c.Username.Contains( search ) && c.IsCompletedProfile==true).ToList();
             var tutorExpertise = db.TutorsExpertise.Where(c => c.category.CategoryName.Contains(search)).ToList();
+            var onlineUsers = db.online.Where(c => c.Status == true).ToList(); ;
+
             SearchViewModel obj = new SearchViewModel();
             foreach (var v in tutorExpertise)
             {
+               var isTutor= onlineUsers.Where(c => c.Username == v.tutor.Username).FirstOrDefault();
+                if(isTutor!=null)
+                obj.OnlineResults.Add(true);
+                else
+                obj.OnlineResults.Add(false);
+
                 obj.Results.Add(v.tutor);
             }
 
             foreach (var v in result)
             {
+                var isTutor = onlineUsers.Where(c => c.Username == v.Username).FirstOrDefault();
+                if (isTutor != null)
+                    obj.OnlineResults.Add(true);
+                else
+                    obj.OnlineResults.Add(false);
                 obj.Results.Add(v);
             }
 
+            foreach(var v in top10)
+            {
+                var isTutor = onlineUsers.Where(c => c.Username == v.Username).FirstOrDefault();
+                if (isTutor != null)
+                    obj.OnlineTop10.Add(true);
+                else
+                    obj.OnlineTop10.Add(false);
+            }
 
             obj.Top10 = top10;
             return View(obj);

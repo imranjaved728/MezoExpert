@@ -575,3 +575,15 @@ footer {
     font-weight:bold;
     margin-top:10px
 }
+.navbar-brand{
+    color:white !important;
+}
+
+ .open a:hover{
+    background-color:#1a242f !important;
+}
+ 
+.navbar-nav > li > a {
+color:white !important;
+
+}

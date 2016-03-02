@@ -112,17 +112,17 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10 personal-info">
-                <h1>Home</h1>
+                <h1>@Resources.Home</h1>
                 <hr>
                 <br />
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a data-toggle="tab" href="#1"><b>Active Sessions</b></a></li>
-                    <li role="presentation"><a data-toggle="tab" href="#2"><b>Posted Questions</b></a></li>
+                    <li role="presentation" class="active"><a data-toggle="tab" href="#1"><b>@Resources.ActiveSessions</b></a></li>
+                    <li role="presentation"><a data-toggle="tab" href="#2"><b>@Resources.PostedQuestions</b></a></li>
 
                 </ul>
                 <div class="tab-content ">
                     <div class="tab-pane active" id="1">
-
+                        <br />
                         @{
 
                             <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
@@ -158,7 +158,7 @@
                                     @Html.DisplayFor(modelItem => item.SessionId)
                                 </td>
                                 <td>
-                                    <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
+                                    <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(@item.onlineStatus == true ? "text-success" : "text-danger")"></i></a>  <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
 
                                 </td>
                                 <td>
@@ -203,7 +203,7 @@
                     </div>
                 
                     <div class="tab-pane" id="2">
-
+                        <br />
                         @{
                             var questions = Model.questions;
                             <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">

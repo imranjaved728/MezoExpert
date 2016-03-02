@@ -34,6 +34,13 @@ namespace WebApplication2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-rtl").Include(
+           "~/Scripts/bootstrap-rtl.js",
+           "~/Scripts/respond.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css-rtl").Include(
+                      "~/Content/bootstrap-rtl.css"));
+
             //bundles.Add(new StyleBundle("~/Theme/css").Include(
             //          "~/Theme/dropdownMultiple/semantic.min.css",
             //          "~/Theme/css/bootstrap.min.css",

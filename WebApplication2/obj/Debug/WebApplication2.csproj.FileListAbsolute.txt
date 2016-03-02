@@ -116,6 +116,7 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebApplication2.pdb
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ar\WebApplication2.resources.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Antlr3.Runtime.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\AutoMapper.dll
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ClassLibrary1.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\EntityFramework.SqlServer.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Facebook.dll
@@ -154,6 +155,7 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Dep
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\System.Web.WebPages.Razor.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\WebGrease.dll
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ClassLibrary1.pdb
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\AutoMapper.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Facebook.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.AI.DependencyCollector.xml
@@ -188,13 +190,14 @@ C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\bin\ar\ClassLibrary1.resources.dll
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.onserver.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.contactus.resources
+C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.onlneusers.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Resource.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Resource.ar.resources
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\ar\WebApplication2.resources.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.pdb
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Obaid Ullah\Desktop\project\WebApplication2\obj\Debug\WebApplication2.Migrations.onlneusers.resources

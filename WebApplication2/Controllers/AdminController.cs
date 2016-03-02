@@ -19,7 +19,7 @@ using WebApplication2.DBEntities;
 namespace WebApplication2.Controllers
 {
     [CustomAuthorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         #region Properties
         private ApplicationSignInManager _signInManager;

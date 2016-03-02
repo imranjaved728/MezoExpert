@@ -12,7 +12,7 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-    public class QuestionsController : Controller
+    public class QuestionsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

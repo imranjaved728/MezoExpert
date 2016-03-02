@@ -20,6 +20,7 @@ namespace WebApplication2.Models
         public String  replyDetail { get; set; }
         public Guid sessionID { get; set; }
         public Offer offer { get; set; }
+        public Boolean status { get; set; }
     }
 
 

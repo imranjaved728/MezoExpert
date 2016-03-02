@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ClassLibrary1;
+using System.ComponentModel;
 
 namespace WebApplication2.Models
 {
@@ -54,8 +56,9 @@ namespace WebApplication2.Models
 
     public class LoginViewModel
     {
-        [Required]
+
         [Display(Name = "Email")]
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
 

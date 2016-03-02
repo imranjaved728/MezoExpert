@@ -22,7 +22,7 @@ using System.Web.Helpers;
 namespace WebApplication2.Controllers
 {
     [CustomAuthorize(Roles = "Tutor")]
-    public class TutorsController : Controller
+    public class TutorsController : BaseController
     {
         private PayPal.Api.Payment payment;
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -142,6 +142,8 @@ namespace WebApplication2.Controllers
   
             ChatModel obj = new ChatModel();
             obj.session = session;
+            obj.status = db.online.Where(c => c.Username == session.question.student.Username).FirstOrDefault().Status;
+
             obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
             obj.offer.amount = obj.session.OfferedFees;
             
@@ -234,12 +236,17 @@ namespace WebApplication2.Controllers
 
             var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
             var username = User.Identity.Name;
-            var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString());
-            SendChatTutorReciever(obj.SessionID.ToString(),username, message, context); //send message to urself 
-
+           
+            //part moved up
             var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
             var username2 = student.Username;
+            var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
+
+            var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
+            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
+            SendChatTutorReciever(obj.SessionID.ToString(),username, message, context); //send message to urself 
+
+            
             SendChatStudentReiever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
             //context.Clients.All.test("hello world");
 
@@ -251,11 +258,11 @@ namespace WebApplication2.Controllers
 
         }
 
-        public string generateMessage(string username,string detail,string imgsrc,string postedTime, string replyID)
+        public string generateMessage(string username,string detail,string imgsrc,string postedTime, string replyID,bool online)
         {
             string filestring = "<div id=\"" + replyID + "\"></div>";
             string message = "";
-            message=message+"<li class=\"media\">" +
+            message=message+"<li class=\""+online+"\"></li><li class=\"media\">" +
                             "<div class=\"comment\"> " +
                                     "<a href=\"#\" class=\"pull-left\"><img src=\"" + imgsrc + "\" alt=\"\" class=\"img-circle imgSize\"> </a>" +
                                      " <div class=\"media-body\">" +
@@ -559,7 +566,7 @@ namespace WebApplication2.Controllers
                 //send message reply
                 var username = User.Identity.Name;
                 var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
                 SendChatTutorReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
 
                 var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
@@ -615,7 +622,7 @@ namespace WebApplication2.Controllers
                 //send message reply
                 var username = User.Identity.Name;
                 var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString());
+                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
                 SendChatTutorReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
 
                 var student = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().question.student;
