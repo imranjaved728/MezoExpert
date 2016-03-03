@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
-            <h1 class="h1over">Account Settings</h1>
+            <h1 class="h1over">Add Funds </h1>
             <hr>
         </div>
     </div>
@@ -16,13 +16,20 @@
     <div class="row">
         <div class="col-md-1"></div>
        
-        <div class="col-md-2" style="border:dotted;margin-top:25px">
-            <br />
-            <center>
-                <h1> @Model.Balance $</h1>
-                <h6>Current Balance</h6>
-            </center>
-        </div>
+        
+        <div class="col-lg-3 col-xs-6" style="margin-top:20px;color:white">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h1>$ @Model.Balance <sup style="font-size: 25px"></sup></h1>
+                    
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                <a href="#" class="small-box-footer"> <p><b>Current Balance</b></p></a>
+            </div>
+        </div><!-- ./col -->
         <div class="col-md-1"></div>
         <div class="col-md-8 personal-info">
             <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
@@ -30,7 +37,7 @@
                 <i class="fa fa-check"></i>
                 Funds added to your account Successfully !!!
             </div>
-            <h3> Add Funds to your Account</h3><br /><br />
+           <br />
             @using (Html.BeginForm("Payment", "Students", FormMethod.Post, new { id = "QuestionDetails" }))
             {
                 @Html.AntiForgeryToken()
@@ -49,6 +56,10 @@
                             <input type="submit" class="btn btn-success" value="Add Funds">
 
                         </div>
+                    </div>
+                    <div class="form-group">
+                       <br/>
+                        <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/paypal.jpg" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
                     </div>
                 </div>
 

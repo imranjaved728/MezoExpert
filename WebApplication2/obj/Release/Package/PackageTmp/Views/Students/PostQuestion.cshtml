@@ -9,11 +9,11 @@
                 <div class="col-md-10">
                     @if (ViewBag.Username != null)
                     {
-                        <h1>Ask a Question from @ViewBag.Username</h1>
+                        <h1>@Resources.askquestionfrom  @ViewBag.Username</h1>
                     }
                     else
                     {
-                        <h1>Post a Question</h1>
+                        <h1>@Resources.POSTAQUESTION</h1>
                     }
                     
                     <hr />
@@ -39,12 +39,12 @@
      
         @Html.Hidden("TutorID", (string)ViewBag.Id)
             <div class="row">
-                  <div class="col-md-2">@Html.LabelFor(model => model.Title)</div>
+                  <div class="col-md-2"><label>@Resources.Title</label></div>
                   <div class="col-md-10">@Html.TextBoxFor(model => model.Title, new { placeholder = "Question Title", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</div>
             </div>
             <div class="row">
-                <div class="col-md-2">@Html.LabelFor(model => model.CategoryID, "Category")</div>
+                <div class="col-md-2">@Html.LabelFor(model => model.CategoryID, Resources.Category )</div>
                 <div class="col-md-6">
                     @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
@@ -52,7 +52,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2">@Html.LabelFor(model => model.Details)</div>
+            <div class="col-md-2"><label>@Resources.Details</label></div>
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Question Details", @rows = "6", @columns = "48", @style = "resize: none;" })
                 @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
@@ -69,7 +69,7 @@
 
 
             <div class="row">
-                <div class="col-md-2">@Html.LabelFor(model => model.Amount)</div>
+                <div class="col-md-2"><label>@Resources.Amount</label></div>
                 <div class="col-md-4">
 
                     @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">@Html.Label("Due Date")</div>
+                <div class="col-md-2"><label>@Resources.DueDate</label></div>
                 <div class="col-md-4 input-group date" style="padding-left:15px" id='datetimepicker1'>
 
                    @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -91,7 +91,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-3" >
 
-                    <button type="submit" class="btn btn-success form-control">Post this Question</button>
+                    <button type="submit" class="btn btn-success form-control">@Resources.POSTthisQUESTION</button>
                 </div>
             </div>
             

@@ -122,10 +122,13 @@ header .intro-text .skills {
         font-size: 1.75em;
     }
 }
+.navbar-brand{
 
+    padding:17.5px 15px !important;
+}
 @media(min-width:768px) {
     .navbar-fixed-top {
-        padding: 10px 0;
+        /*padding: 10px 0;*/
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
@@ -169,7 +172,13 @@ header .intro-text .skills {
 .navbar-inverse {
     border: 0;
 }
-#footer{padding-top:30px;padding-bottom:30px;background:#2c3e50;}
+/*navbar hover*/
+.dropdown-menu > li > a:hover, dropdown-menu  > li > a:focus {
+    background-color: #000000 !important;
+    color: #18bc9c;
+}
+.blackBackgroundNav{background:#000000 !important;}
+#footer{padding-top:30px;padding-bottom:30px;background:#000000;}
 #footer a{color:#fff;}
 #footer a:hover{color:#18bc9c;text-decoration:none}
 #footer ul{list-style:none;padding:0;margin:0;}
@@ -549,4 +558,32 @@ footer {
     /*position: absolute;
     bottom: 0;
     left: 0;*/
+}
+.searchUp{
+    z-index:10000;
+}
+.list td{
+    padding:15px !important
+}
+
+.finallist a{
+   
+    color:black;
+}
+.pstyle{
+    font-size:16px;
+    font-weight:bold;
+    margin-top:10px
+}
+.navbar-brand{
+    color:white !important;
+}
+
+ .open a:hover{
+    background-color:#1a242f !important;
+}
+ 
+.navbar-nav > li > a {
+color:white !important;
+
 }
