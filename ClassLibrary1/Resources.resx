@@ -285,8 +285,32 @@
   <data name="askquestionfrom" xml:space="preserve">
     <value>Ask a question from</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
   <data name="detailRequired" xml:space="preserve">
     <value>The Details field is required</value>
+  </data>
+  <data name="Expertise" xml:space="preserve">
+    <value>Expertise</value>
+  </data>
+  <data name="LastMessage" xml:space="preserve">
+    <value>Last Message</value>
+  </data>
+  <data name="MATCHEDRESULTS" xml:space="preserve">
+    <value>MATCHED RESULTS</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No Results found matching your query.</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
   </data>
   <data name="POSTAQUESTION" xml:space="preserve">
     <value>POST A QUESTION</value>
@@ -294,7 +318,79 @@
   <data name="POSTthisQUESTION" xml:space="preserve">
     <value>Post this question</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search </value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
   <data name="titleRequired" xml:space="preserve">
     <value>The Title field is required</value>
+  </data>
+  <data name="TOPTUTORS" xml:space="preserve">
+    <value>TOP TUTORS FOR THIS MONTH</value>
+  </data>
+  <data name="typehere" xml:space="preserve">
+    <value>type keyword(s) here</value>
+  </data>
+  <data name="ViewProfile" xml:space="preserve">
+    <value>View Profile</value>
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>Next Page</value>
+  </data>
+  <data name="PostedBy" xml:space="preserve">
+    <value>Posted By</value>
+  </data>
+  <data name="PostedTime" xml:space="preserve">
+    <value>Posted Time</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>Previous Page</value>
+  </data>
+  <data name="CurrentBalance" xml:space="preserve">
+    <value>Current Balance</value>
+  </data>
+  <data name="getmatched" xml:space="preserve">
+    <value>Get matched with tutor</value>
+  </data>
+  <data name="help1" xml:space="preserve">
+    <value>Get 1-on-1 help</value>
+  </data>
+  <data name="SaveChages" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="updateprofile" xml:space="preserve">
+    <value>Update Profile</value>
+  </data>
+  <data name="updatesuccess" xml:space="preserve">
+    <value>Profile Updated Successfully.</value>
+  </data>
+  <data name="uploadphote" xml:space="preserve">
+    <value>Upload a different photo...</value>
+  </data>
+  <data name="ChooseFiles" xml:space="preserve">
+    <value>Choose Files</value>
+  </data>
+  <data name="deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>The Message field is required</value>
+  </data>
+  <data name="offeredFee" xml:space="preserve">
+    <value>Offered Fee</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
   </data>
 </root>

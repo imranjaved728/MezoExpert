@@ -22,10 +22,10 @@
                         <li class="dropdown">
                             @{
                                 var result = Request.Cookies["_culture"];
-                                var Language = result.Value;
+                                var Language = result != null ? result.Value : null;
                                 var selectedLanguge = "English";
                                 var otherLanguage = "العربية";
-                                if (Language == "ar")
+                                if (Language!=null && Language == "ar")
                                 {
                                     selectedLanguge = "العربية";
                                     otherLanguage = "English";
@@ -100,10 +100,11 @@
                         <li class="dropdown">
                             @{ 
                                 var result = Request.Cookies["_culture"];
-                                var Language = result.Value;
+
+                                var Language = result!=null?result.Value:null;
                                 var selectedLanguge = "English";
                                 var otherLanguage = "العربية";
-                                if (Language == "ar") {
+                                if (Language!=null && Language == "ar") {
                                     selectedLanguge = "العربية";
                                     otherLanguage = "English";
                                 }
@@ -148,7 +149,7 @@
                                     <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><i class="fa fa-envelope "></i> @Resources.Inbox</a>
                                 </li>
                                 <li>
-                                    <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><i class="fa fa-stack-exchange"></i> Posts</a>
+                                    <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><i class="fa fa-stack-exchange"></i> @Resources.Posts</a>
 
                                 </li>
 
@@ -235,8 +236,8 @@
     <button type="button" class="close">×</button>
     @using (Html.BeginForm("Search", "Home", FormMethod.Get))
     {
-        <input type="search" name="search" value="" autocomplete="off" placeholder="type keyword(s) here" />
-        <button type="submit" class="btn btn-success">Search</button>
+        <input type="search" name="search" value="" autocomplete="off" placeholder="@Resources.typehere" />
+        <button type="submit" class="btn btn-success">@Resources.Search</button>
     }
 </div>
 

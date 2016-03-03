@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary1;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace WebApplication2.Models
             offer = new Offer();
         }
         public Session session { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources),
+      ErrorMessageResourceName = "MessageRequired")]        
         [Display(Name = "Message")]
         public String  replyDetail { get; set; }
         public Guid sessionID { get; set; }

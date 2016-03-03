@@ -54,15 +54,15 @@ namespace WebApplication2.Controllers
 
         public async Task<ActionResult> Inbox()
         {
-            /*Mailer.GmailUsername = "question@mezoexperts.com";
-            Mailer.GmailPassword = "123123123";
+            Mailer.GmailUsername = "support@mezoexperts.com";
+            Mailer.GmailPassword = "123123";
 
             Mailer mailer = new Mailer();
             mailer.ToEmail = "imranjaved728@gmail.com";
             mailer.Subject = "New Question Posted on MezoExperts.com";
             mailer.Body = "New question posted on Mezoexperts.com";
             mailer.IsHtml = true;
-            mailer.Send();*/
+            mailer.Send();
 
             var user = new Guid(User.Identity.GetUserId());
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();

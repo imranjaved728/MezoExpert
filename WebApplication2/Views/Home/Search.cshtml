@@ -10,14 +10,14 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
-            <h1>Matched Results</h1>
+            <h1>@Resources.MATCHEDRESULTS</h1>
             <hr>
             @if (Model.Results.Count == 0)
             {
                 <div class="alert alert-info alert-dismissable" id="alerts">
 
                     <i class="fa fa-close"></i>
-                     No Results found matching your query.
+                     @Resources.NoResults
                 </div>
             }
             <br /><br />
@@ -45,15 +45,15 @@
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
-                                                <td>Name:</td>
+                                                <td>@Resources.Name:</td>
                                                 <td>@v.FirstName @v.LastName<br/>
                                                 @if(Model.OnlineResults[i-1]==true)
                                                 {
-                                                <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> Online</a>
+                                                <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> @Resources.Online</a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> Offline</a>
+                                                    <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> @Resources.Offline</a>
 
                                                 }
                                                 </td>
@@ -62,7 +62,7 @@
 
                                             <tr>
                                             <tr>
-                                                <td>Expertise:</td>
+                                                <td>@Resources.Expertise:</td>
                                                 <td>
                                                     <ul style="padding-left:5px;list-style-type: none;">
                                                         @{
@@ -91,7 +91,7 @@
 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-top:15px;">Rating:</td>
+                                                <td style="padding-top:15px;">@Resources.Rating:</td>
                                                 <td> <input value="@v.Rating" data-size="xs" class="rating1 rating-loading"></td>
                                             </tr>
                                         </tbody>
@@ -107,23 +107,23 @@
                                 if (User.IsInRole("Student"))
                                 {
 
-                                    <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact">
+                                    <input type="submit" class="btn btn-sm btn-success" width="250" value="@Resources.Contact">
 
                                 }
                                 else if (User.IsInRole("Tutor"))
                                 {
-                                    <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact" style="visibility:hidden">
+                                    <input type="submit" class="btn btn-sm btn-success" width="250" value="@Resources.Contact" style="visibility:hidden">
                                 }
                                 else
                                 {
-                                    <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="Contact">
+                                    <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="@Resources.Contact">
 
                                 }
 
 
 
-                            <span class="pull-right">
-                                <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> View Profile</a>
+                            <span class="pull-right" style="padding-left:10px">
+                                <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> @Resources.ViewProfile</a>
                                 
                             </span>
                             }
@@ -137,7 +137,7 @@
 
 
             <br /><br />
-            <h1>Top Tutors for this month</h1>
+            <h1>@Resources.TOPTUTORS</h1>
             <hr>
             <br /><br />
             <div class="row">
@@ -163,15 +163,15 @@
                                         <table class="table table-user-information">
                                             <tbody>
                                                 <tr>
-                                                    <td>Name:</td>
+                                                    <td>@Resources.Name:</td>
                                                     <td>@v.FirstName @v.LastName<br/>
                                                        @if (Model.OnlineTop10[j - 1] == true)
                                                        {
-                                                        <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> Online</a>
+                                                        <a href="#" style="text-decoration:none"><i class="fa fa-circle text-success"></i> @Resources.Online</a>
                                                        }
                                                        else
                                                        {
-                                                        <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> Offline</a>
+                                                        <a href="#" class="text-danger" style="text-decoration:none;"><i class="fa fa-circle text-danger"></i> @Resources.Offline</a>
 
                                                        }
                                                     </td>
@@ -180,7 +180,7 @@
 
                                                 <tr>
                                                 <tr>
-                                                    <td>Expertise:</td>
+                                                    <td>@Resources.Expertise:</td>
                                                     <td>
                                                         <ul style="padding-left:5px;list-style-type: none;">
                                                             @{
@@ -209,7 +209,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="padding-top:15px;">Rating:</td>
+                                                    <td style="padding-top:15px;">@Resources.Rating:</td>
                                                     <td> <input value="@v.Rating" data-size="xs" class="rating1 rating-loading"></td>
                                                 </tr>
                                             </tbody>
@@ -225,23 +225,23 @@
                                     if (User.IsInRole("Student"))
                                     {
 
-                                        <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact">
+                                        <input type="submit" class="btn btn-sm btn-success" width="250" value="@Resources.Contact">
 
                                     }
                                     else if (User.IsInRole("Tutor"))
                                     {
-                                        <input type="submit" class="btn btn-sm btn-success" width="250" value="Contact" style="visibility:hidden">
+                                        <input type="submit" class="btn btn-sm btn-success" width="250" value="@Resources.Contact" style="visibility:hidden">
                                     }
                                     else
                                     {
-                                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="Contact">
+                                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-sm btn-success" width="250" value="@Resources.Contact">
 
                                     }
 
 
 
-                                    <span class="pull-right">
-                                        <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> View Profile</a>
+                                    <span class="pull-right" style="padding-left:10px">
+                                        <a href="@Url.Action("Profile", "Home", new { username = v.Username })" data-original-title="View Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> @Resources.ViewProfile</a>
 
                                     </span>
                                 }

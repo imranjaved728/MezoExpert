@@ -89,21 +89,21 @@ namespace WebApplication2.Models
     public class TutorUpdateModel
     {
         [Required]
-        [Display(Name = "FirstName", ResourceType = typeof(Resource))]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "LastName", ResourceType = typeof(Resource))]
+        [Display(Name = "LastName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "DOB", ResourceType = typeof(Resource))]
+        [Display(Name = "DOB", ResourceType = typeof(Resources))]
         public string DOB { get; set; }
 
         //[Required]
-        [Display(Name = "UserName", ResourceType = typeof(Resource))]
+        [Display(Name = "UserName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
          public string UserName { get; set; }
 
@@ -113,42 +113,42 @@ namespace WebApplication2.Models
         //public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Degree", ResourceType = typeof(Resource))]
+        [Display(Name = "Degree", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Degree { get; set; }
 
         [Required]
-        [Display(Name = "University", ResourceType = typeof(Resource))]
+        [Display(Name = "University", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string University { get; set; }
 
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
-        [Display(Name = "AboutMe", ResourceType = typeof(Resource))]
+        [Display(Name = "AboutMe", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string AboutMe { get; set; }
 
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
-        [Display(Name = "Experience", ResourceType = typeof(Resource))]
+        [Display(Name = "Experience", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Experience { get; set; }
 
         [Required]
-        [Display(Name = "City", ResourceType = typeof(Resource))]
+        [Display(Name = "City", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string City { get; set; }
 
 
         [Required]
-        [Display(Name = "Country", ResourceType = typeof(Resource))]
+        [Display(Name = "Country", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Country { get; set; }
 
         [DataType(DataType.Text)]
         public string ProfileImage { get; set; }
 
-        [Display(Name = "Rating", ResourceType = typeof(Resource))]
+        [Display(Name = "Rating", ResourceType = typeof(Resources))]
          public float Rating { get; set; }
 
         [DataType(DataType.Text)]
@@ -188,37 +188,37 @@ namespace WebApplication2.Models
 
     public class StudentUpdateModel
     {
-        [Display(Name = "FirstName", ResourceType = typeof(Resource))]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
 
-        [Display(Name = "LastName", ResourceType = typeof(Resource))]
+        [Display(Name = "LastName", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
 
-        [Display(Name = "DateOfBirth", ResourceType = typeof(Resource))]
+        [Display(Name = "DateOfBirth", ResourceType = typeof(Resources))]
         public string DateOfBirth { get; set; }
 
 
-        [Display(Name = "UserName", ResourceType = typeof(Resource))]
+        [Display(Name = "UserName", ResourceType = typeof(Resources))]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username can contain only numbers and alphabets")]
         public string UserName { get; set; }
 
-        [Display(Name = "Degree", ResourceType = typeof(Resource))]
+        [Display(Name = "Degree", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Degree { get; set; }
 
-        [Display(Name = "Country", ResourceType = typeof(Resource))]
+        [Display(Name = "Country", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Country { get; set; }
 
-        [Display(Name = "City", ResourceType = typeof(Resource))]
+        [Display(Name = "City", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string City { get; set; }
 
-        [Display(Name = "University", ResourceType = typeof(Resource))]
+        [Display(Name = "University", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string University { get; set; }
 
