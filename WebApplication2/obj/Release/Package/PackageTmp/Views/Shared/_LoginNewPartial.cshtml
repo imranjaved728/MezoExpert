@@ -2,13 +2,14 @@
 
 
 
+
     <div class="modal fade" id="loginNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2>Login</h2>
+                            <h2>@Resources.Login</h2>
                             <hr class="star-primary">
                             @*<p>Fill the details to login to your account.</p>*@
                             @*<form role="form">*@
@@ -18,7 +19,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Username", @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.UserName, new { placeholder = @Resources.UserName, @class = "form-control" })
                                     @*<input type="text" class="form-control" id="uLogin" placeholder="Login">*@
                                     <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
 
@@ -27,7 +28,7 @@
                             </div> <!-- /.form-group -->
                             <div class="form-group">
                                 <div class="input-group">
-                                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                                    @Html.PasswordFor(m => m.Password, new { placeholder = @Resources.Password, @class = "form-control" })
                                     @*<input type="password" class="form-control" id="uPassword" placeholder="Password">*@
                                     <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                                 </div> <!-- /.input-group -->
@@ -45,16 +46,16 @@
                                         <div class="checkbox">
                                             <label>
                                                 @*<input type="checkbox">*@
-                                                @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                                                @Html.CheckBoxFor(m => m.RememberMe) @Resources.RememberMe
                                             </label>
                                         </div> <!-- /.checkbox -->
 
                                 <div class="row">
                                     <div class="col-xs-2"></div>
                                         <div class="col-xs-4">
-                                            <input type="submit" style="width:100px" class="btn btn-success" name="Login" value="Login" /></div>
+                                            <input type="submit" style="width:100px" class="btn btn-success" name="Login" value="@Resources.Login" /></div>
                                         <div class="col-xs-3">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> @Resources.Close</button>
                                         </div>
                                      <div class="col-xs-3"></div>
                                     </div>

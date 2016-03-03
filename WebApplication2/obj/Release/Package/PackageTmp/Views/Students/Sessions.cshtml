@@ -11,7 +11,12 @@
         <div class="col-md-10">
 
 
-            <h1>Conversation with  @Model.session.tutor.Username</h1>
+            <h1> 
+            
+            <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.tutor.Username
+           
+            
+            </h1>
             <hr />
             <div class="panel-body comments">
                 @*<div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
@@ -401,7 +406,19 @@
                 // Add the message to the page.
 
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
-
+                if ($(".pchat li").hasClass("True"))
+                {
+                   
+                    $(".True").remove();
+                    $("#onlineStatus").removeClass("text-danger");
+                    $("#onlineStatus").addClass("text-success");
+                }
+                else {
+                    
+                    $(".False").remove();
+                    $("#onlineStatus").removeClass("text-success");
+                    $("#onlineStatus").addClass("text-danger");
+                }
                 $(function () {
 
                     $("#QuestionText").val("");
