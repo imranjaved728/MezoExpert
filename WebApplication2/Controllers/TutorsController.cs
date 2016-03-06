@@ -276,6 +276,7 @@ namespace WebApplication2.Controllers
                 rep.SessionID = obj.SessionID;
                 rep.ReplierID = obj.TutorID.Value;
                 rep.PostedTime = DateTime.Now;
+                reply.replyDetails= reply.replyDetails.Replace(Environment.NewLine, "<br/>");
                 rep.Details = reply.replyDetails;
                 db.Replies.Add(rep);
                 await db.SaveChangesAsync();
@@ -306,6 +307,7 @@ namespace WebApplication2.Controllers
             obj.ReplierID = new Guid(User.Identity.GetUserId());
             obj.SessionID = reply.sessionID;
             obj.PostedTime = DateTime.Now;
+            reply.replyDetail=reply.replyDetail.Replace(Environment.NewLine, "<br/>");
             obj.Details = reply.replyDetail;
             db.Replies.Add(obj);
 

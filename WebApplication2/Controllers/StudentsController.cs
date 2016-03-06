@@ -411,6 +411,7 @@ namespace WebApplication2.Controllers
                 //initial posted Question Status
                 quest.Status = Status.Posted;
                 quest.TutorID = question.TutorID;
+                quest.Details=quest.Details.Replace(Environment.NewLine, "<br/>");
 
                 bool singleTutor = false;
                 if(question.TutorID!=null)
@@ -873,6 +874,7 @@ namespace WebApplication2.Controllers
                 obj.ReplierID= new Guid(User.Identity.GetUserId());
                 obj.SessionID = reply.sessionID;
                 obj.PostedTime = DateTime.Now;
+                reply.replyDetail=reply.replyDetail.Replace(Environment.NewLine, "<br/>");
                 obj.Details = reply.replyDetail;
             
                 db.Replies.Add(obj);

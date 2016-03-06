@@ -16,6 +16,8 @@ namespace WebApplication2.Models
             offer = new Offer();
         }
         public Session session { get; set; }
+
+      
         [Required(ErrorMessageResourceType = typeof(Resources),
       ErrorMessageResourceName = "MessageRequired")]        
         [Display(Name = "Message")]
