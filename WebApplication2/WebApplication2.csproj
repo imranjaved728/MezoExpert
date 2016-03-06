@@ -322,6 +322,7 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Images\paypal.jpg" />
+    <Content Include="Images\Preloader_2.gif" />
     <Content Include="Profiles\default\1.png" />
     <Content Include="Profiles\default\2.png" />
     <Content Include="Profiles\default\3.png" />

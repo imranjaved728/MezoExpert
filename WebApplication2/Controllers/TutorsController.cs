@@ -18,6 +18,7 @@ using WebApplication2.App_Start;
 using PayPal.Sample;
 using PayPal.Api;
 using System.Web.Helpers;
+using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
@@ -657,6 +658,34 @@ namespace WebApplication2.Controllers
                 var message2 = "<button type=\"button\" id=\"offer\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#hireNewModal\">Hire for ("+question.amount+"$)</button>";
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
 
+
+                try
+                {
+
+                    string body;
+                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = email;
+                    mailer.Subject = "Tutor Offered service on MezoExperts.com";
+                    mailer.Body = string.Format(body, username + " has offered to do your job for $"+question.amount);
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
+
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -693,7 +722,7 @@ namespace WebApplication2.Controllers
                 obj.ReplierID = new Guid(User.Identity.GetUserId());
                 obj.SessionID = sessionId;
                 obj.PostedTime = DateTime.Now;
-                obj.Details = " Automatically Generated Message: I have sent Invoice for the work for " + question.amount + "$. Press Accept Button if you are satisfied with the services and pay to tutor. Pressing Reject button will cause the admin to decide the dispute.";
+                obj.Details = " Automatically Generated Message: I have sent Invoice for the work for $" + question.amount + ". Press Accept Button if you are satisfied with the services and pay to tutor. Pressing Reject button will cause the admin to decide the dispute.";
                 session.Replies.Add(obj);
 
                 db.SaveChanges();
@@ -715,6 +744,33 @@ namespace WebApplication2.Controllers
                 message2 = message2 + "<button type =\"button\" id=\"reject\" class=\"btn  btn-primary\" data-toggle=\"modal\" data-target=\"#rejectNewModal\">Reject </button>";
 
                    SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+
+                try
+                {
+
+                    string body;
+                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = email;
+                    mailer.Subject = "Tutor sent Invoice on MezoExperts.com";
+                    mailer.Body = string.Format(body, username + " has sent invoice for $" + question.amount);
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
 
                 return new JsonResult()
                 {

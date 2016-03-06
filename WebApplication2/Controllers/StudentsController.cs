@@ -412,8 +412,10 @@ namespace WebApplication2.Controllers
                 quest.Status = Status.Posted;
                 quest.TutorID = question.TutorID;
 
+                bool singleTutor = false;
                 if(question.TutorID!=null)
                 {
+                    singleTutor = true;
                     Session obj = new Session();
                     obj.SessionID = Guid.NewGuid();
                     obj.TutorID = question.TutorID; 
@@ -442,38 +444,64 @@ namespace WebApplication2.Controllers
        
                 string response = quest.QuestionID +"$"+quest.Title+ "$" + student.ProfileImage + "%" + User.Identity.Name +  "$" + quest.Amount+"$"+quest.PostedTime+"$" + quest.DueDate ;
 
-                //send emails
-                var tutors = db.Tutors.Where(c => c.IsCompletedProfile == true).ToList();
-                var allusers = db.Users.ToList();
-
                 string body;
                 using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "email.html"))
                 {
                     body = sr.ReadToEnd();
-               }
-                try {
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
-                    foreach (var v in tutors)
+                }
+
+                //send emails
+                if (singleTutor == false)
+                {
+                    var tutors = db.Tutors.Where(c => c.IsCompletedProfile == true).ToList();
+                    var allusers = db.Users.ToList();
+                    
+                    try
                     {
-                        var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
-                        if (emailUser != null)
+                        Mailer.GmailUsername = "support@mezoexperts.com";
+                        Mailer.GmailPassword = "123123";
+                        foreach (var v in tutors)
                         {
-                            var email = emailUser.Email;
-                            Mailer mailer = new Mailer();
-                            mailer.ToEmail = email;
-                            mailer.Subject = "New Question Posted on MezoExperts.com";
-                            mailer.Body = string.Format(body, question.Title, quest.Details);
-                            mailer.IsHtml = true;
-                            mailer.Send();
+                            var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
+                            if (emailUser != null)
+                            {
+                                var email = emailUser.Email;
+                                Mailer mailer = new Mailer();
+                                mailer.ToEmail = email;
+                                mailer.Subject = "New Question Posted on MezoExperts.com";
+                                mailer.Body = string.Format(body, question.Title, quest.Details);
+                                mailer.IsHtml = true;
+                                mailer.Send();
+                            }
                         }
                     }
-                }
-                catch(Exception e)
-                {
+                    catch (Exception e)
+                    {
 
+                    }
                 }
-                
+                else
+                {
+                    try
+                    {
+                        Mailer.GmailUsername = "support@mezoexperts.com";
+                        Mailer.GmailPassword = "123123";
+
+                        var email = db.Users.Find(quest.TutorID.ToString()).Email;
+                        Mailer mailer = new Mailer();
+                        mailer.ToEmail = email;
+                        mailer.Subject = "New Question Posted on MezoExperts.com";
+                        mailer.Body = string.Format(body, question.Title, quest.Details);
+                        mailer.IsHtml = true;
+                        mailer.Send();
+
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
 
                 return new JsonResult()
                 {
@@ -526,6 +554,33 @@ namespace WebApplication2.Controllers
                 var message2 = " <button type=\"button\" id=\"rejected\" disabled class=\"btn btn-primary\">Rejected Invoice</button>";
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+
+                try
+                {
+
+                    string body;
+                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = email;
+                    mailer.Subject = "Invoice Rejected on MezoExperts.com";
+                    mailer.Body = string.Format(body, username + " rejected the invoice. Now administrator will handle the session.");
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
 
                 return new JsonResult()
                 {
@@ -642,6 +697,32 @@ namespace WebApplication2.Controllers
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
 
+                try
+                {
+
+                    string body;
+                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = email;
+                    mailer.Subject = "Invoice Approved on MezoExperts.com";
+                    mailer.Body = string.Format(body, username+" approved the Invoice.");
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
 
                 return new JsonResult()
                 {
@@ -693,7 +774,7 @@ namespace WebApplication2.Controllers
                 obj.ReplierID = new Guid(User.Identity.GetUserId());
                 obj.SessionID = sessionId;
                 obj.PostedTime = DateTime.Now;
-                obj.Details = " Automatically Generated Message: I have Hired you for " + session.OfferedFees + "$. You can start working on task." ;
+                obj.Details = " Automatically Generated Message: I have Hired you for $" + session.OfferedFees + ". You can start working on task." ;
                 session.Replies.Add(obj);
 
                 
@@ -716,6 +797,32 @@ namespace WebApplication2.Controllers
                                                                                        
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
 
+                try
+                {
+
+                    string body;
+                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = db.Users.Where(c=>c.Id==quest.TutorID.ToString()).FirstOrDefault().Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = email;
+                    mailer.Subject = "Hired on MezoExperts.com";
+                    mailer.Body = string.Format(body, username + " has hired you for the job.");
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
 
                 return new JsonResult()
                 {

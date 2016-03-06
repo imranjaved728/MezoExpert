@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.DBEntities.Session>
+﻿@model WebApplication2.Models.TutorInbox
 @{
     ViewBag.Title = "Tutors - Inbox";
 }
@@ -41,10 +41,18 @@
                    },
                 {
                          "targets": [2],
-                         "width": "57%"
+                         "width": "50%"
+                },
+                {
+                    "targets": [3],
+                    "width": "8%"
+                },
+                 {
+                     "targets": [4],
+                     "width": "12%"
                  },
 
-                   { 'bSortable': false, 'aTargets': [1, 2, 3] }
+                   { 'bSortable': false, 'aTargets': [1, 2, 3,5] }
                 ],
                 "order": [[4, "desc"]],
 
@@ -65,7 +73,7 @@
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
-                });
+               });
 
     </script>
 }
@@ -83,13 +91,14 @@
             <h1>@Resources.Inbox</h1>
             <hr>
             @{
-               
+
                     <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>
                                     @Html.DisplayName("SessionId")
                                 </th>
+                               
                                 <th>
                                     @Html.DisplayName(Resources.Sender)
                                 </th>
@@ -102,14 +111,18 @@
                                 <th>
                                     @Html.DisplayName(Resources.Time)
                                 </th>
-                              
+                                <th>
+
+                                </th>
 
                             </tr>
 
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @{ var i = 0;}
+                            @foreach (var item in Model.sessions)
                             {
+                                i++;
                                 var val = item.Replies.OrderBy(c => c.PostedTime);
                                 var lastreply = val.LastOrDefault();
                               
@@ -118,8 +131,10 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.SessionID)
                                     </td>
+                                    
                                     <td>
-                                        <img src="@item.question.student.ProfileImage" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.question.student.Username)</b>
+                                         
+                                        <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(Model.online[i-1] == true ? "text-success" : "text-danger")"></i></a>&nbsp; <img src="@item.question.student.ProfileImage" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.question.student.Username)</b>
 
                                     </td>
                                     <td>
@@ -133,7 +148,7 @@
                                             }
                                         }
                                     </td>
-                                    <td>
+                                    <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                         @if (item.Status == "Approved")
                                         {
                                             <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
@@ -157,6 +172,9 @@
                                     </td>
                                     <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                         @Html.DisplayFor(modelItem => lastreply.PostedTime)
+                                    </td>
+                                    <td>
+                                        <a style="color:black" href="@Url.Action("DeleteSession", "Tutors", new { sessionid = item.SessionID })"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             }

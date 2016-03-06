@@ -13,20 +13,21 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <h1> 
+            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")"> 
            
-                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.question.student.Username
-    
-           
+                 @Model.session.question.student.Username
+                
+                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status == true ? "text-success" : "text-danger")"></i></a>
             </h1>
       
             <hr />
+            <div class="alert alert-danger alert-dismissable" style="display: none;" id="alerts">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-check"></i>
+                The Session has been closed by student.
+            </div>
             <div class="panel-body comments">
-                @*<div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>
-                    <span id="message">Replied to Question Successfully. Message will appear in Inbox if replied by Students.</span>
-                    </div>*@
+                
 
                 <ul class="media-list pchat" id="chatlist">
                     <li class="media">
@@ -217,10 +218,13 @@
                                                                     }
                                                                     var Ctutor = Model.session.tutor;
                                                                     <li class="media" id="poster">
+                                                                        @if (!Model.session.isClosed)
+                                                                        {
                                                                         <div class="comment">
                                                                             <a href="#" class="pull-left">
                                                                                 <img id="tutImg" src="@Ctutor.ProfileImage" alt="" class="img-circle imgSize">
                                                                             </a>
+                                                                  
                                                                             @using (Ajax.BeginForm("Chat", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
                                                                             {
                                                                                 @Html.HiddenFor(m => m.sessionID)
@@ -230,7 +234,7 @@
                                                                                     @*@Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", placeholder = "Write your reply", @class = "form-control" })*@
                                                                                     @if (Model.session.isClosed)
                                                                                     {
-                                                                                           @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true ,id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
+                                                                                           @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true, id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
                                                                                     }
                                                                                     else
                                                                                     {
@@ -248,29 +252,29 @@
                                                                                                 <td>
                                                                                                     <div id="buttonsUpdate" style="padding-right:10px;padding-left:10px">
                                                                                                         @if (Model.session.Status == "Posted")
-                                                                                                    {
+                                                                                                        {
                                                                                                             <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#offerNewModal">Send Offer</button>
-                                                                                                    }
-                                                                                                    else if (Model.session.Status == "Offered")
-                                                                                                    {
+                                                                                                        }
+                                                                                                        else if (Model.session.Status == "Offered")
+                                                                                                        {
                                                                                                             <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#offerNewModal">Update Offer $@Model.session.OfferedFees</button>
 
-                                                                                                    }
-                                                                                                    else if (Model.session.Status == "Hired")
-                                                                                                    {
+                                                                                                        }
+                                                                                                        else if (Model.session.Status == "Hired")
+                                                                                                        {
                                                                                                             <button type="button" id="hire" class="btn  btn-primary" data-toggle="modal" data-target="#invoiceNewModal">Send Invoice</button>
-                                                                                                    }
-                                                                                                    else if (Model.session.Status == "Invoiced")
-                                                                                                    {
+                                                                                                        }
+                                                                                                        else if (Model.session.Status == "Invoiced")
+                                                                                                        {
                                                                                                             <button type="button" id="invoiced" class="btn  btn-primary" data-toggle="modal" data-target="#invoiceNewModal">Update Invoice</button>
 
-                                                                                                    }
-                                                                                                      else if (Model.session.Status == "Approved")
+                                                                                                        }
+                                                                                                        else if (Model.session.Status == "Approved")
                                                                                                         {
                                                                                                             <button type="button" id="accepted" disabled class="btn  btn-primary">Accepted Invoice</button>
 
                                                                                                         }
-                                                                                                      else if (Model.session.Status == "Conflict")
+                                                                                                        else if (Model.session.Status == "Conflict")
                                                                                                         {
                                                                                                             <button type="button" id="rejected" disabled class="btn  btn-primary">Rejected Invoice</button>
 
@@ -295,9 +299,11 @@
 
                                                                                 </div>
                                                                                         }
+                                                                     
                                                                             <div class="clearfix"></div>
 
                                                                         </div>
+                                                                                        }
                                                                     </li>
                     }
 
@@ -310,6 +316,7 @@
 
 @Html.Partial("~/Views/Tutors/SendOffer.cshtml",Model.offer)
 @Html.Partial("~/Views/Tutors/Invoice.cshtml", Model.offer)
+@Html.Partial("~/Views/Tutors/sessionclosed.cshtml")
 
 @section scripts {
 
@@ -320,13 +327,19 @@
     <!--Reference the autogenerated SignalR hub script. -->
     <script src="~/signalr/hubs"></script>
     <script>
+        var result = '@(Model.session.isClosed)';
+     
+        if (result == "True") {
+            $("#alerts").show();
+        }
+
         $(function () {
             $("#QuestionText").val("");
-            setTimeout(function () {
+    setTimeout(function () {
                 $("#QuestionText").focus();
-            }, 0);
-          
-        });
+    }, 0);
+
+         });
 
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -401,6 +414,12 @@
 
             // chat.qs = { "sessionId": sessionId };
 
+            chat.client.recieverSessionClosed = function (message) {
+                $('#sessionClose').modal('show');
+                $("#alerts").show();
+                $("#poster").hide();
+                $(".comment").last().hide();
+            };
 
             chat.client.recieverTutor2 = function (message) {
                 // Add the message to the page.

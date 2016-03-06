@@ -199,3 +199,4 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\ar\WebApplication
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.pdb
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.updates.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.sessiondelete.resources

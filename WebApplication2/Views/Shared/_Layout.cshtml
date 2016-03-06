@@ -17,7 +17,19 @@
     <meta property="og:locale" content="en_US">
     <title>Mezo Experts</title>
 
-
+    <style>
+        .no-js #loader { display: none;  }
+        .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+        .se-pre-con {
+	        position: fixed;
+	        left: 0px;
+	        top: 0px;
+	        width: 100%;
+	        height: 100%;
+	        z-index: 9999;
+	        background: url(/Images/Preloader_2.gif) center no-repeat #fff;
+        }
+    </style>
     <link href="~/Theme/dropdownMultiple/semantic.min.css" rel="stylesheet" />
      @if (CultureHelper.IsRighToLeft())
      {
@@ -44,11 +56,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body id="page-top" class="index">
 
-
+    <div class="se-pre-con"></div>
     @Html.Partial("~/Views/Home/_Navbar.cshtml", new WebApplication2.Models.HomeViewModel())
 
     @RenderSection("featured", required: false)
@@ -84,6 +97,13 @@
     <script src="~/Theme/js/prettify.js"></script>
 
     <script type="text/javascript">
+       
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");
+            $("body").fadeIn("slow");
+        });
+
         $(document).ready(function () {
             $(function () {
                 $('#datetimepicker1').datetimepicker({
