@@ -668,8 +668,6 @@ namespace WebApplication2.Controllers
                         body = sr.ReadToEnd();
                     }
 
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
 
                     var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
                     Mailer mailer = new Mailer();
@@ -753,10 +751,7 @@ namespace WebApplication2.Controllers
                     {
                         body = sr.ReadToEnd();
                     }
-
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
-
+                    
                     var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
                     Mailer mailer = new Mailer();
                     mailer.ToEmail = email;

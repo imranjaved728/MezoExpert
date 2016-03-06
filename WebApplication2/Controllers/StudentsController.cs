@@ -458,8 +458,7 @@ namespace WebApplication2.Controllers
                     
                     try
                     {
-                        Mailer.GmailUsername = "support@mezoexperts.com";
-                        Mailer.GmailPassword = "123123";
+                        
                         foreach (var v in tutors)
                         {
                             var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
@@ -484,9 +483,6 @@ namespace WebApplication2.Controllers
                 {
                     try
                     {
-                        Mailer.GmailUsername = "support@mezoexperts.com";
-                        Mailer.GmailPassword = "123123";
-
                         var email = db.Users.Find(quest.TutorID.ToString()).Email;
                         Mailer mailer = new Mailer();
                         mailer.ToEmail = email;
@@ -563,10 +559,7 @@ namespace WebApplication2.Controllers
                     {
                         body = sr.ReadToEnd();
                     }
-
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
-
+                    
                     var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
                     Mailer mailer = new Mailer();
                     mailer.ToEmail = email;
@@ -705,10 +698,7 @@ namespace WebApplication2.Controllers
                     {
                         body = sr.ReadToEnd();
                     }
-
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
-
+                    
                     var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
                     Mailer mailer = new Mailer();
                     mailer.ToEmail = email;
@@ -805,9 +795,7 @@ namespace WebApplication2.Controllers
                     {
                         body = sr.ReadToEnd();
                     }
-
-                    Mailer.GmailUsername = "support@mezoexperts.com";
-                    Mailer.GmailPassword = "123123";
+                    
 
                     var email = db.Users.Where(c=>c.Id==quest.TutorID.ToString()).FirstOrDefault().Email;
                     Mailer mailer = new Mailer();

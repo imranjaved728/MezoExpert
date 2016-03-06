@@ -29,6 +29,8 @@ namespace WebApplication2.Helpers
             Mailer.GmailHost = "smtpout.secureserver.net ";
             Mailer.GmailPort = 3535;
             Mailer.GmailSSL = false;
+            Mailer.GmailUsername = "support@mezoexperts.com";
+            Mailer.GmailPassword = "123123";
         }
 
         public void Send()
