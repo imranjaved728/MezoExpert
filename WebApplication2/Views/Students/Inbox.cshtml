@@ -4,7 +4,6 @@
     ViewBag.Title = "Students - Inbox";
 }
 
-
 @section scripts{
 
     <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
@@ -13,7 +12,7 @@
         $(document).ready(function () {
 
             $('#postedRequests').DataTable({
-               // "ordering": false,
+                // "ordering": false,
                 "info": false,
                 "pageLength": 25,
                 "bLengthChange": false,
@@ -33,7 +32,7 @@
 
                 "columnDefs": [
                    {
-                       "targets": [ 0 ],
+                       "targets": [0],
                        "visible": false,
                        "searchable": false
                    },
@@ -42,39 +41,39 @@
                        "width": "22%"
                    },
                     {
-                            "targets": [2],
-                            "width": "50%"
+                        "targets": [2],
+                        "width": "50%"
                     },
                     {
-                              "targets": [3],
-                              "width": "8%"
+                        "targets": [3],
+                        "width": "8%"
                     },
                  {
                      "targets": [4],
                      "width": "12%"
                  },
                   { 'bSortable': false, 'aTargets': [1, 2, 3] }
-                  ],
+                ],
                 "order": [[4, "desc"]],
 
-                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                            // Bind click event
-                            $(nRow).click(function () {
+                    // Bind click event
+                    $(nRow).click(function () {
 
-                               // alert('You clicked on ' + aData[0] + '\'s row');
+                        // alert('You clicked on ' + aData[0] + '\'s row');
 
-                                $("#SessionId").val(aData[0]);
-                                document.getElementById('QuestionDetails').submit();
-                            });
-
-                            return nRow;
-                        }
+                        $("#SessionId").val(aData[0]);
+                        document.getElementById('QuestionDetails').submit();
                     });
+
+                    return nRow;
+                }
+            });
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
-                });
+        });
 
     </script>
 }
@@ -91,9 +90,9 @@
         <div class="col-md-10 personal-info">
             <h1>@Resources.Inbox</h1>
             <hr>
-          
+
             @{
-                
+
                 <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -120,10 +119,10 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            
+
                             var length = item.LastMessage.Length;
                             //var lastreply = item.Replies.LastOrDefault();
-                             
+
                             <tr style="@(item.newMessage== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.SessionId)
@@ -132,7 +131,7 @@
                                     <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(@item.onlineStatus == true ? "text-success" : "text-danger")"></i></a>  <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
                                 </td>
                                 <td>
-                                    
+
                                     @item.LastMessage.Substring(0, Math.Min(length, 256))
                                     @if (length > 256)
                                     {
@@ -140,7 +139,7 @@
                                     }
                                 </td>
                                 <td>
-                                    @if ( item.Status == "Approved")
+                                    @if (item.Status == "Approved")
                                     {
                                         <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
                                     }
@@ -152,7 +151,8 @@
                                     {
                                         <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
                                     }
-                                    else if(item.Status == "Posted" ) {
+                                    else if (item.Status == "Posted")
+                                    {
                                         <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
                                     }
                                     else
@@ -160,7 +160,7 @@
                                         <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
                                     }
 
-</td>
+                                </td>
                                 <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                     @Html.DisplayFor(modelItem => item.PostedTime)
                                 </td>

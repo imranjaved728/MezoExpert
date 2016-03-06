@@ -13,17 +13,17 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <h1> 
-           
-                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.question.student.Username 
+            <h1>
+
+                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.question.student.Username
                 and
                 <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status2nd == true ? "text-success" : "text-danger")"></i></a> @Model.session.tutor.Username
-           
+
             </h1>
-      
+
             <hr />
             <div class="panel-body comments">
-            
+
 
                 <ul class="media-list pchat" id="chatlist">
                     <li class="media">
@@ -152,11 +152,11 @@
                                             @Html.Raw(reply.Details)
 
                                             @if (reply.Files.Count > 0)
-                            {
-                                                <br /><br/>
+                                            {
+                                                <br /><br />
                                                 foreach (var v in reply.Files)
-                                {
-                                    var path = @v.Path.Split('/');
+                                                {
+                                                    var path = @v.Path.Split('/');
                                                     <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                 }
                                             }
@@ -178,44 +178,44 @@
                                                     var isTeacher = Model.session.question.TutorID;
                                                     if (isTeacher == null || (isTeacher != null && count != 1))
                                                     {
-                                                    <li class="media">
-                                                        <div class="comment">
-                                                            <a href="#" class="pull-left">
-                                                                <img src="@student.ProfileImage" alt="" class="img-circle imgSize">
-                                                            </a>
+                                                        <li class="media">
+                                                            <div class="comment">
+                                                                <a href="#" class="pull-left">
+                                                                    <img src="@student.ProfileImage" alt="" class="img-circle imgSize">
+                                                                </a>
 
-                                                            <div class="media-body">
-                                                                <strong class="text-success userText username">@{ @student.Username}</strong><br />
-                                                                @Html.Raw(reply.Details)
+                                                                <div class="media-body">
+                                                                    <strong class="text-success userText username">@{ @student.Username}</strong><br />
+                                                                    @Html.Raw(reply.Details)
 
-                                                                @if (reply.Files.Count > 0)
+                                                                    @if (reply.Files.Count > 0)
                         { <br /><br />
-                                                                    foreach (var v in reply.Files)
-                            {
-                                var path = @v.Path.Split('/');
-                                                                        <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
-                                                                    }
-                                                                }
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                            <br />
-
-                                                            <div style="margin-bottom:20px">
-                                                                <small class="text-muted pull-right">@reply.PostedTime</small>
-                                                            </div>
-
-
-                                                            <hr>
-                                                        </div>
-                                                    </li>
-                                                                            }
-
+                                                                        foreach (var v in reply.Files)
+                                                                        {
+                                                                            var path = @v.Path.Split('/');
+                                                                            <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                                         }
                                                                     }
-                                                                    var Ctutor = Model.session.tutor;
-                                                                    <li class="media" id="poster">
-                                                                       
-                                                                    </li>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <br />
+
+                                                                <div style="margin-bottom:20px">
+                                                                    <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                                </div>
+
+
+                                                                <hr>
+                                                            </div>
+                                                        </li>
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                        var Ctutor = Model.session.tutor;
+                                                                        <li class="media" id="poster">
+
+                                                                        </li>
                     }
 
                 </ul>
@@ -225,7 +225,7 @@
     </div>
 </div>
 
-@Html.Partial("~/Views/Tutors/SendOffer.cshtml",Model.offer)
+@Html.Partial("~/Views/Tutors/SendOffer.cshtml", Model.offer)
 @Html.Partial("~/Views/Tutors/Invoice.cshtml", Model.offer)
 
 @section scripts {
@@ -242,7 +242,7 @@
             setTimeout(function () {
                 $("#QuestionText").focus();
             }, 0);
-          
+
         });
 
         var getUrlParameter = function getUrlParameter(sParam) {
@@ -325,7 +325,7 @@
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
                 if ($(".pchat li").hasClass("True")) {
-                    
+
                     $(".True").remove();
                     $("#onlineStatus").removeClass("text-danger");
                     $("#onlineStatus").addClass("text-success");
@@ -337,12 +337,12 @@
                     $("#onlineStatus").addClass("text-danger");
                 }
                 $(function () {
-                   
+
                     $("#QuestionText").val("");
                     setTimeout(function () {
                         $("#QuestionText").focus();
                     }, 0);
-                   
+
                     // CKEDITOR.instances.QuestionText.setData('');
                 });
             };
@@ -353,8 +353,8 @@
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
                 $(function () {
-                   
-                   // $("#QuestionText").val("");
+
+                    // $("#QuestionText").val("");
                     setTimeout(function () {
                         $("#QuestionText").focus();
                     }, 0);
@@ -363,7 +363,7 @@
             };
 
             chat.client.recieverStudentFile = function (message) {
-             
+
                 var splitData = message.split("$");
                 $("#" + splitData[0]).html(splitData[1]).fadeIn('slow');
                 // Add the message to the page.
@@ -371,7 +371,7 @@
                 //$('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
                 $(function () {
-                    
+
                     //$("#QuestionText").val("");
                     setTimeout(function () {
                         $("#QuestionText").focus();
@@ -379,7 +379,7 @@
                     // CKEDITOR.instances.QuestionText.setData('');
                 });
             };
-           
+
             chat.client.recieverButtons = function (message) {
 
 
@@ -403,26 +403,25 @@
         });
 
     </script>
-   
-    
+
+
     <script>
 
-    function updateButtonsOffer(data)
-    {
-        var result = data.result;
-        $("#offer").html("Update Offer ("+result+"$)");
-        $('#offerNewModal').modal('hide');
-        $("#statusText").text("Offered Service "+result+"$");
-    }
+        function updateButtonsOffer(data) {
+            var result = data.result;
+            $("#offer").html("Update Offer (" + result + "$)");
+            $('#offerNewModal').modal('hide');
+            $("#statusText").text("Offered Service " + result + "$");
+        }
 
 
-    function updateButtonsInvoice(data) {
-        $("#hire").html("Update Invoice");
-        $('#invoiceNewModal').modal('hide');
-        $("#statusText").text("Invoiced " + data.result+"$");
-    }
+        function updateButtonsInvoice(data) {
+            $("#hire").html("Update Invoice");
+            $('#invoiceNewModal').modal('hide');
+            $("#statusText").text("Invoiced " + data.result + "$");
+        }
 
-</script>  
+    </script>
 
 }
 

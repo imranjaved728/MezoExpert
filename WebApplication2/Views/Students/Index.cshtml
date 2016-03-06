@@ -21,21 +21,21 @@
                 "pageLength": 10,
                 "bLengthChange": false,
                 "scrollX": true,
-               
+
                 "oLanguage": {
                     "oPaginate": {
                         "sFirst": "First page", // This is the link to the first page
                         "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
                         "sNext": "@Resources.NextPage", // This is the link to the next page
                         "sLast": "Last page", // This is the link to the last page
-                      
+
                     }
                     ,
                     "sSearch": "@Resources.Search"
                 },
                 "columnDefs": [
                    {
-                       "targets": [ 0 ],
+                       "targets": [0],
                        "visible": false,
                        "searchable": false
                    },
@@ -51,24 +51,24 @@
                 ],
                 "order": [[4, "desc"]],
 
-                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                            // Bind click event
-                            $(nRow).click(function () {
+                    // Bind click event
+                    $(nRow).click(function () {
 
-                               // alert('You clicked on ' + aData[0] + '\'s row');
+                        // alert('You clicked on ' + aData[0] + '\'s row');
 
-                                $("#SessionId").val(aData[0]);
-                                document.getElementById('QuestionDetails').submit();
-                            });
-
-                            return nRow;
-                        }
+                        $("#SessionId").val(aData[0]);
+                        document.getElementById('QuestionDetails').submit();
                     });
+
+                    return nRow;
+                }
+            });
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
-           });
+        });
 
     </script>
     <script>
@@ -78,7 +78,7 @@
             "pageLength": 10,
             "bLengthChange": false,
             "scrollX": true,
-            
+
             "oLanguage": {
                 "oPaginate": {
                     "sFirst": "First page", // This is the link to the first page
@@ -124,180 +124,180 @@
 }
 
 <div class="container fill img-rounded">
-    
-
-        @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
-        {
-            @Html.Hidden("SessionId")
-            @*@Html.AntiForgeryToken()*@
-        }
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10 personal-info">
-                <h1>@Resources.Home</h1>
-                <hr>
-                <br />
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a data-toggle="tab" href="#1"><b>@Resources.ActiveSessions</b></a></li>
-                    <li role="presentation"><a data-toggle="tab" href="#2"><b>@Resources.PostedQuestions</b></a></li>
-
-                </ul>
-                <div class="tab-content ">
-                    <div class="tab-pane active" id="1">
-                        <br />
-                        @{
-
-                            <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayName("SessionId")
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Sender)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.LastMessage)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Status)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Time)
-                                        </th>
 
 
+    @using (Html.BeginForm("Sessions", "Students", FormMethod.Get, new { id = "QuestionDetails" }))
+    {
+        @Html.Hidden("SessionId")
+        @*@Html.AntiForgeryToken()*@
+    }
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>@Resources.Home</h1>
+            <hr>
+            <br />
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a data-toggle="tab" href="#1"><b>@Resources.ActiveSessions</b></a></li>
+                <li role="presentation"><a data-toggle="tab" href="#2"><b>@Resources.PostedQuestions</b></a></li>
+
+            </ul>
+            <div class="tab-content ">
+                <div class="tab-pane active" id="1">
+                    <br />
+                    @{
+
+                        <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("SessionId")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Sender)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.LastMessage)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Status)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Time)
+                                    </th>
+
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.obj)
+                                {
+                                    var length = item.LastMessage.Length;
+                                    //var lastreply = item.Replies.LastOrDefault();
+                                    <tr style="@(item.newMessage== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SessionId)
+                                        </td>
+                                        <td>
+                                            <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(@item.onlineStatus == true ? "text-success" : "text-danger")"></i></a>  <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
+
+                                        </td>
+                                        <td>
+                                            @item.LastMessage.Substring(0, Math.Min(length, 256))
+                                            @if (length > 256)
+                                            {
+                                                <b>@Html.Raw("...")</b>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.Status == "Approved")
+                                            {
+                                                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else if (item.Status == "Conflict")
+                                            {
+                                                <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else if (item.Status == "Hired")
+                                            {
+                                                <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else if (item.Status == "Posted")
+                                            {
+                                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                        </td>
+                                        <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
+                                            @Html.DisplayFor(modelItem => item.PostedTime)
+                                        </td>
                                     </tr>
+                                }
+                            </tbody>
 
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.obj)
-                        {
-                            var length = item.LastMessage.Length;
-                            //var lastreply = item.Replies.LastOrDefault();
-                            <tr style="@(item.newMessage== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SessionId)
-                                </td>
-                                <td>
-                                    <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(@item.onlineStatus == true ? "text-success" : "text-danger")"></i></a>  <img src="@item.SenderProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.SenderName)</b>
+                        </table>
+                    }
 
-                                </td>
-                                <td>
-                                    @item.LastMessage.Substring(0, Math.Min(length, 256))
-                                    @if (length > 256)
-                                    {
-                                <b>@Html.Raw("...")</b>
-                                    }
-                                </td>
-                                <td>
-                                    @if (item.Status == "Approved")
-                                    {
-                                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                    }
-                                    else if (item.Status == "Conflict")
-                                    {
-                                <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                    }
-                                    else if (item.Status == "Hired")
-                                    {
-                                <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                    }
-                                    else if (item.Status == "Posted")
-                                    {
-                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                    }
-                                    else
-                                    {
-                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                    }
-                                </td>
-                                <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
-                                    @Html.DisplayFor(modelItem => item.PostedTime)
-                                </td>
-                            </tr>
-                        }
-                                </tbody>
+                </div>
 
-                            </table>
-                        }
-
-                    </div>
-                
-                    <div class="tab-pane" id="2">
-                        <br />
-                        @{
-                            var questions = Model.questions;
-                            <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayName("Question ID")
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Title)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Details)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Status)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName(Resources.Time)
-                                        </th>
+                <div class="tab-pane" id="2">
+                    <br />
+                    @{
+                        var questions = Model.questions;
+                        <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("Question ID")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Details)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Status)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(Resources.Time)
+                                    </th>
 
 
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in questions)
+                                {
+                                    var length = item.Details.Length;
+                                    //var lastreply = item.Replies.LastOrDefault();
+                                    <tr style="background-color:#F1F1F1 !important">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuestionID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+
+                                        </td>
+                                        <td>
+                                            @item.Details.Substring(0, Math.Min(length, 256))
+                                            @if (length > 256)
+                                            {
+                                                <b>@Html.Raw("...")</b>
+                                            }
+                                        </td>
+                                        <td>
+
+                                            @if (item.Status == "Hired")
+                                            {
+                                                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else if (item.Status == "Posted")
+                                            {
+                                                <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                            }
+                                        </td>
+                                        <td style="background-color:#F1F1F1 ">
+                                            @Html.DisplayFor(modelItem => item.PostedTime)
+                                        </td>
                                     </tr>
+                                }
+                            </tbody>
 
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in questions)
-                            {
-                                var length = item.Details.Length;
-                                //var lastreply = item.Replies.LastOrDefault();
-                            <tr style="background-color:#F1F1F1 !important">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.QuestionID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-
-                                </td>
-                                <td>
-                                    @item.Details.Substring(0, Math.Min(length, 256))
-                                    @if (length > 256)
-                                        {
-                                        <b>@Html.Raw("...")</b>
-                                        }
-                                </td>
-                                <td>
-
-                                    @if (item.Status == "Hired")
-                                        {
-                                        <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else if (item.Status == "Posted")
-                                        {
-                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else
-                                        {
-                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                </td>
-                                <td style="background-color:#F1F1F1 ">
-                                    @Html.DisplayFor(modelItem => item.PostedTime)
-                                </td>
-                            </tr>
-                            }
-                                </tbody>
-
-                            </table>
-                        }
-                    </div>
-                 </div>
+                        </table>
+                    }
+                </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
+        <div class="col-md-1"></div>
     </div>
+</div>

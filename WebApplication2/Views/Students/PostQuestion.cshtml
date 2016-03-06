@@ -5,65 +5,59 @@
 <link href="~/Theme/css/chat.css" rel="stylesheet" />
 <div class="container fill img-rounded">
     <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    @if (ViewBag.Username != null)
-                    {
-                        <h1>@Resources.askquestionfrom  @ViewBag.Username</h1>
-                    }
-                    else
-                    {
-                        <h1>@Resources.POSTAQUESTION</h1>
-                    }
-                    
-                    <hr />
-                </div>
-                <div class="col-md-1"></div>
-     </div>
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-8">
-    @using (Ajax.BeginForm("PostQuestion", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyTutors" }, new { id = "mypost", enctype = "multipart/form-data" }))
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            @if (ViewBag.Username != null)
             {
-        @Html.AntiForgeryToken()
+                <h1>@Resources.askquestionfrom  @ViewBag.Username</h1>
+            }
+            else
+            {
+                <h1>@Resources.POSTAQUESTION</h1>
+            }
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <hr />
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            @using (Ajax.BeginForm("PostQuestion", "Student", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyTutors" }, new { id = "mypost", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.TutorID, "TutorID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("TutorID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TutorID, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.Hidden("TutorID", (string)ViewBag.Id)
+                <div class="row">
+                    <div class="col-md-2"><label>@Resources.Title</label></div>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Title, new { placeholder = "Question Title", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
-     
-        @Html.Hidden("TutorID", (string)ViewBag.Id)
-            <div class="row">
-                  <div class="col-md-2"><label>@Resources.Title</label></div>
-                  <div class="col-md-10">@Html.TextBoxFor(model => model.Title, new { placeholder = "Question Title", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</div>
             </div>
             <div class="row">
-                <div class="col-md-2">@Html.LabelFor(model => model.CategoryID, Resources.Category )</div>
+                <div class="col-md-2">@Html.LabelFor(model => model.CategoryID, Resources.Category)</div>
                 <div class="col-md-6">
                     @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-2"><label>@Resources.Details</label></div>
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Question Details", @rows = "6", @columns = "48", @style = "resize: none;" })
-                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-2"><label>@Resources.Details</label></div>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Question Details", @rows = "6", @columns = "48", @style = "resize: none;" })
+                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
 
 
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-2"><input type="file" multiple id="FileUpload" /></div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2"><input type="file" multiple id="FileUpload" /></div>
 
             </div>
 
@@ -80,7 +74,7 @@
                 <div class="col-md-2"><label>@Resources.DueDate</label></div>
                 <div class="col-md-4 input-group date" style="padding-left:15px" id='datetimepicker1'>
 
-                   @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -89,78 +83,78 @@
 
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-5" >
+                <div class="col-md-5">
                     <div class="col-md-6" style="padding:0px;">
                         <button type="submit" class="btn btn-success form-control">@Resources.POSTthisQUESTION</button>
-                   </div>
+                    </div>
                     <div class="col-md-6">
-                        <a class="btn btn-info" href="@Url.Action("Search","Home")">@Resources.check</a>
+                        <a class="btn btn-info" href="@Url.Action("Search","Home")>@Resources.check</a>
                     </div>
 
 
-                    </div>
+                </div>
             </div>
-            
 
-    }
- </div>
 
-      </div>
+            }
+        </div>
+
     </div>
+</div>
 
-        @section scripts {
+@section scripts {
 
-           
 
-            <!--Script references. -->
-            <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
-            <!--Reference the SignalR library. -->
-            <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
-            <!--Reference the autogenerated SignalR hub script. -->
-            <script src="~/signalr/hubs"></script>
-            <script>
 
-                function notifyTutors(data) {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <script>
 
-                    var result = data.result;
-                    var splitData = result.split("$");
-                    var formData = new FormData();
-                    var totalFiles = document.getElementById("FileUpload").files.length;
-                    for (var i = 0; i < totalFiles; i++) {
-                        var file = document.getElementById("FileUpload").files[i];
+        function notifyTutors(data) {
 
-                        formData.append("FileUpload", file);
+            var result = data.result;
+            var splitData = result.split("$");
+            var formData = new FormData();
+            var totalFiles = document.getElementById("FileUpload").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("FileUpload").files[i];
+
+                formData.append("FileUpload", file);
+            }
+            if (totalFiles > 0) {
+                formData.append("QuestionId", splitData[0]);
+                $.ajax({
+                    type: "POST",
+                    url: '/Students/UploadQuestionFile',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        //alert("success");
+
+                    },
+                    error: function (error) {
+                        alert("errror uploading files");
                     }
-                    if (totalFiles > 0) {
-                        formData.append("QuestionId", splitData[0]);
-                        $.ajax({
-                            type: "POST",
-                            url: '/Students/UploadQuestionFile',
-                            data: formData,
-                            dataType: 'json',
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                //alert("success");
+                });
+            }
+            var notify = $.connection.notifyTutors;
 
-                            },
-                            error: function (error) {
-                                alert("errror uploading files");
-                            }
-                        });
-                    }
-                    var notify = $.connection.notifyTutors;
+            // Start the connection. And send messages to server
+            $.connection.hub.start().done(function () {
 
-                    // Start the connection. And send messages to server
-                    $.connection.hub.start().done(function () {
-
-                        // Call the Send method on the hub.
-                        notify.server.send(result);
-                        window.location = '/Students/Index';
-                    });
-
-                }
-
-            </script>
+                // Call the Send method on the hub.
+                notify.server.send(result);
+                window.location = '/Students/Index';
+            });
 
         }
+
+    </script>
+
+}

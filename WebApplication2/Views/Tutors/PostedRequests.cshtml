@@ -3,12 +3,8 @@
     ViewBag.Title = "Posted Questions";
 }
 @section scripts{
-        <!--Script references. -->
-    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+
     <!--Reference the SignalR library. -->
-
- 
-
     <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
 
@@ -35,24 +31,24 @@
                 },
                 "columnDefs": [
                    {
-                       "targets": [ 0 ],
+                       "targets": [0],
                        "visible": false,
                        "searchable": false
                    },
                     {
                         "targets": [1],
-                        "width":"50%"
+                        "width": "50%"
                     },
                     {
                         "targets": [2],
-                        "width":"20%"
+                        "width": "20%"
                     },
                    {
-                       "targets": [ 6 ],
+                       "targets": [6],
                        "visible": true,
                        "searchable": false
                    },
-                    { 'bSortable': false, 'aTargets': [1,2,3,4,5] }
+                    { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5] }
 
                 ],
                 "order": [[6, "desc"]],
@@ -60,25 +56,25 @@
                 //"aaSorting": [[6, "desc"]],
 
 
-                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                            // Bind click event
-                            $(nRow).click(function () {
+                    // Bind click event
+                    $(nRow).click(function () {
 
-                               // alert('You clicked on ' + aData[0] + '\'s row');
+                        // alert('You clicked on ' + aData[0] + '\'s row');
 
-                                $("#PostId").val(aData[0]);
-                                document.getElementById('QuestionDetails').submit();
-                            });
-
-                            return nRow;
-                        }
+                        $("#PostId").val(aData[0]);
+                        document.getElementById('QuestionDetails').submit();
                     });
+
+                    return nRow;
+                }
+            });
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
 
-                });
+        });
 
 
         $(function () {
@@ -90,8 +86,7 @@
                 //alert(message);
                 var splitData = message.split("$");
                 var titleAndProfile = splitData[2].split("%");
-                if (splitData != null)
-                {
+                if (splitData != null) {
                     var table = $('#postedRequests').DataTable();
                     table.row.add([
                            splitData[0],
@@ -112,7 +107,7 @@
             });
 
         });
-</script>
+    </script>
 }
 
 <div class="container fill img-rounded">
@@ -136,7 +131,7 @@
                         <th>
                             @Html.DisplayName(Resources.Title)
                         </th>
-                       
+
                         <th>
                             @Html.DisplayName(Resources.PostedBy)
                         </th>
@@ -157,7 +152,7 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-                {
+                    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.QuestionID)
@@ -165,10 +160,10 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Title)
                             </td>
-                            
+
                             <td>
                                 <img src="@item.StudentProfile" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.StudentName)</b>
-                              
+
                             </td>
                             <td>
                                 @if (item.Status == "Hired")
@@ -177,7 +172,7 @@
 
                                 }
                                 else {
-                                <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
                                 }
                             </td>
                             <td>
@@ -186,33 +181,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.DueDate)
                             </td>
-                            <td style= "background-color:#F1F1F1 ">
+                            <td style="background-color:#F1F1F1 ">
                                 @Html.DisplayFor(modelItem => item.PostedTime)
                             </td>
                         </tr>
 
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.AboutMe)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Country)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DateCreated)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CurrentEarning)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.TutorID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.TutorID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.TutorID })
-                            </td>*@
 
-                }
+                    }
                 </tbody>
 
             </table>
@@ -220,4 +195,4 @@
         <div class="col-md-1"></div>
     </div>
 </div>
-       
+

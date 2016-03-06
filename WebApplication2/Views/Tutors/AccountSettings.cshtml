@@ -21,7 +21,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    @{ 
+                    @{
                         var result = Resources.Requested;
                         if (Model.Requested == false)
                         {
@@ -42,7 +42,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-8 personal-info">
 
-            <div id="message" class="alert alert-info alert-dismissable" style="display: none;" >
+            <div id="message" class="alert alert-info alert-dismissable" style="display: none;">
                 <a class="panel-close close" data-dismiss="alert">×</a>
                 <i class="fa fa-check"></i>
                 @Resources.messagepayment3
@@ -51,21 +51,21 @@
                 <a class="panel-close close" data-dismiss="alert">×</a>
                 <i class="fa fa-check"></i>
                 @Resources.messagepayment2
-             </div>
-            <div id="message3" class="alert alert-warning alert-dismissable" >
+            </div>
+            <div id="message3" class="alert alert-warning alert-dismissable">
                 <a class="panel-close close" data-dismiss="alert">×</a>
                 <i class="fa fa-check"></i>
                 @Resources.messagePayment
-             </div>
-            
+            </div>
+
             <br />
 
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">@Html.Label(  Resources.PaypalEmail+": ")</label>
-                    
+            <div class="form-group">
+                <label class="col-lg-3 control-label">@Html.Label(Resources.PaypalEmail + ": ")</label>
+
                 @using (Ajax.BeginForm("updatePaypal", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage" }, new { @class = "form-horizontal" }))
-                 {
-                                 @Html.AntiForgeryToken()
+                {
+                    @Html.AntiForgeryToken()
                     <div class="col-lg-6">
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -75,33 +75,32 @@
 
                     <div class="col-md-6">
                         <br />
-                        <div class="col-lg-7">&nbsp;
-                    </div>
-                            <input type="submit" class="btn btn-success" value="@Resources.UpdateEmail">
-
-
+                        <div class="col-lg-7">
+                            &nbsp;
                         </div>
-                   
+                        <input type="submit" class="btn btn-success" value="@Resources.UpdateEmail">
+                    </div>
+
                 }
-                   
-                        @using (Ajax.BeginForm("requestPayment", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage2" }, new { @class = "form-horizontal" }))
-                        { @Html.AntiForgeryToken()
-                            <div class="col-md-2">
-                                <br />
-                                <input type="submit" class="btn btn-info" value="@Resources.RequestPayment">
-                            </div>
-                        }
-                            </div>
-                        <div class="form-group">
-                            <br /><br />
-                            <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/paypal.jpg" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
-                        </div>
-                    </div>
 
-            
+                @using (Ajax.BeginForm("requestPayment", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage2" }, new { @class = "form-horizontal" }))
+                { @Html.AntiForgeryToken()
+                    <div class="col-md-2">
+                        <br />
+                        <input type="submit" class="btn btn-info" value="@Resources.RequestPayment">
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <br /><br />
+                <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/paypal.jpg" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
+            </div>
         </div>
 
+
     </div>
+
+</div>
 
 
 
@@ -109,32 +108,19 @@
     <script>
 
         function showMessage() {
-
-
             $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
 
             });
             $("#message").show();
 
-       
-           
-
         }
 
         function showMessage2() {
-
-
             $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
 
             });
             $("#message2").show();
-
-
-
-
         }
-
-     
 
     </script>
 

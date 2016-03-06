@@ -370,6 +370,12 @@
                 if (totalFiles > 0) {
                     formData.append("replyId", splitData[0]);
                     formData.append("sessionId", splitData[1]);
+                    //clear file
+                    var control = $("#FileUpload");
+                    control.replaceWith(control = control.clone(true));
+
+                    var loader = "<br/><div style=\"background: url(/Images/Preloader_2.gif) center no-repeat #fff;width:45px;height:45px\"></div><b>Loading Files</b>";
+                    $("#" + splitData[0]).html(loader).fadeIn('slow');
                     $.ajax({
                         type: "POST",
                         url: '/Tutors/UploadQuestionFile',
@@ -424,7 +430,7 @@
             chat.client.recieverTutor2 = function (message) {
                 // Add the message to the page.
 
-                $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+             
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
                 if ($(".pchat li").hasClass("True")) {
                     

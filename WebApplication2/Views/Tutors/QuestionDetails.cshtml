@@ -2,224 +2,222 @@
 
 @{
     ViewBag.Title = "Question Details";
-    
+
 }
-
-
 
 <div class="container fill img-rounded">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-                
+
             <h1>@Resources.PostedQuestion</h1>
             <hr>
-                    <div class="panel-body comments">
-                        <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
-                            <a class="panel-close close" data-dismiss="alert">×</a>
-                            <i class="fa fa-coffee"></i>
-                            <span id="message">Replied to Question Successfully. Message will appear in Inbox if replied by Students.</span>
-                        </div>
-                       
-                        <ul class="media-list pchat" id="chatlist">
-                            <li class="media">
-                                <div class="comment">
-                                    <a href="#" class="pull-left">
-                                        <img src="@Model.student.ProfileImage" alt="" class="img-circle imgSize" >
-                                    </a>
-                                    <div class="media-body">
-                                        <strong class="text-success">@Model.student.Username</strong>
+            <div class="panel-body comments">
+                <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+                    <span id="message">Replied to Question Successfully. Message will appear in Inbox if replied by Students.</span>
+                </div>
 
-                                        <p>
-                                            <b>@Model.question.Title</b><br />
-                                            @Html.Raw(Model.question.Details)<br /><br />
+                <ul class="media-list pchat" id="chatlist">
+                    <li class="media">
+                        <div class="comment">
+                            <a href="#" class="pull-left">
+                                <img src="@Model.student.ProfileImage" alt="" class="img-circle imgSize">
+                            </a>
+                            <div class="media-body">
+                                <strong class="text-success">@Model.student.Username</strong>
 
-                                            @if (Model.question.Files.Count > 0)
-                                            {
-                                                foreach (var v in Model.question.Files)
-                                                {
-                                                    var path = @v.Path.Split('/');
-                                                    <strong class="text-success"><a href="@v.Path">@path[path.Length - 1]</a></strong><br />
-                                                }
-                                            }
-                                            <br />
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <i class="fa fa-calendar fa-4x"></i>
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                @if (Model.question.DueDate.HasValue)
-                                                                {
-                                                                    <div class="medium">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.DueDate.Value.ToShortDateString()</div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="medium"></div>
-                                                                }
-                                                                @*<div>New Tasks!</div>*@
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#">
-                                                        <div class="panel-footer">
-                                                            <span class="pull-left">@Resources.deadline</span>
-                                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <i class="fa fa-dollar fa-4x"></i>
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                <div class="huge">$ @Model.question.Amount</div>
-                                                                @*<div>New Tasks!</div>*@
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#">
-                                                        <div class="panel-footer">
-                                                            <span class="pull-left">@Resources.offeredFee</span>
-                                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <i class="fa fa-stack-exchange fa-4x"></i>
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                <div class="huge">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.Status</div>
+                                <p>
+                                    <b>@Model.question.Title</b><br />
+                                    @Html.Raw(Model.question.Details)<br /><br />
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#">
-                                                        <div class="panel-footer">
-                                                            <span class="pull-left">@Resources.Status</span>
-                                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="panel panel-red">
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <i class="fa fa-tasks fa-4x"></i>
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                <div class="huge">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.sessionCount</div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#">
-                                                        <div class="panel-footer">
-                                                            <span class="pull-left">@Resources.Offers</span>
-                                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                               <br/>
-                                             <div style="margin-bottom:20px">
-                                                <small class="text-muted pull-right">@Model.question.PostedTime</small>
-                                            </div>
-                                        </p>
-
-                                    </div>
-                               
-                                    <hr class="hrclass">
-                                </div>
-
-                            </li>
-
-                            @if (Model.session == null)
-                            {
-                                <li class="media" id="poster">
-                                    <div class="comment">
-                                        <a href="#" class="pull-left">
-                                            <img id="tutImg" src="@Model.tutor.ProfileImage" alt="" class="img-circle imgSize" >
-                                        </a>
-                                        @using (Ajax.BeginForm("QuestionsReply", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
+                                    @if (Model.question.Files.Count > 0)
+                                    {
+                                        foreach (var v in Model.question.Files)
                                         {
-                                            @Html.HiddenFor(m => m.QuestionID)
-                                            @Html.AntiForgeryToken()
-                                            <div class="media-body">
-                                                <strong class="text-success">@{ @Model.tutor.Username}</strong><br /><br />
-                                                @Html.TextAreaFor(model => model.replyDetails, new { id = "QuestionText", placeholder = "Write your reply",@rows = "6", @columns = "48", @class = "form-control" })
-                                               
-                                                 @*<textarea class="form-control" placeholder="Write your reply" rows="5"></textarea>*@
-                                                <br>
-                                                <div class="form-group">
-                                                    <input type="file" multiple id="FileUpload" />
+                                            var path = @v.Path.Split('/');
+                                            <strong class="text-success"><a href="@v.Path">@path[path.Length - 1]</a></strong><br />
+                                        }
+                                    }
+                                    <br />
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-calendar fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        @if (Model.question.DueDate.HasValue)
+                                                        {
+                                                            <div class="medium">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.DueDate.Value.ToShortDateString()</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="medium"></div>
+                                                        }
+                                                        @*<div>New Tasks!</div>*@
+                                                    </div>
                                                 </div>
-
-                                                <button type="submit" class="btn btn-success pull-right">Send</button>
-                                                <div class="clearfix"></div>
-
                                             </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.deadline</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-dollar fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <div class="huge">$ @Model.question.Amount</div>
+                                                        @*<div>New Tasks!</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.offeredFee</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-stack-exchange fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <div class="huge">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.Status</div>
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.Status</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-red">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-tasks fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <div class="huge">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.sessionCount</div>
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.Offers</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
 
-                                                    }
+                                    <br />
+                                    <div style="margin-bottom:20px">
+                                        <small class="text-muted pull-right">@Model.question.PostedTime</small>
+                                    </div>
+                                </p>
+
+                            </div>
+
+                            <hr class="hrclass">
+                        </div>
+
+                    </li>
+
+                    @if (Model.session == null)
+                    {
+                        <li class="media" id="poster">
+                            <div class="comment">
+                                <a href="#" class="pull-left">
+                                    <img id="tutImg" src="@Model.tutor.ProfileImage" alt="" class="img-circle imgSize">
+                                </a>
+                                @using (Ajax.BeginForm("QuestionsReply", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
+                                {
+                                    @Html.HiddenFor(m => m.QuestionID)
+                                    @Html.AntiForgeryToken()
+                                    <div class="media-body">
+                                        <strong class="text-success">@{ @Model.tutor.Username}</strong><br /><br />
+                                        @Html.TextAreaFor(model => model.replyDetails, new { id = "QuestionText", placeholder = "Write your reply", @rows = "6", @columns = "48", @class = "form-control" })
+
+                                        @*<textarea class="form-control" placeholder="Write your reply" rows="5"></textarea>*@
+                                        <br>
+                                        <div class="form-group">
+                                            <input type="file" multiple id="FileUpload" />
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success pull-right">Send</button>
                                         <div class="clearfix"></div>
 
                                     </div>
-                                </li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li class="media">
-                                                            <div class="comment">
-                                                                <a href="#" class="pull-left">
-                                                                    <img src="@Model.tutor.ProfileImage" alt="" class="img-circle imgSize" >
-                                                                </a>
 
-                                                                <div class="media-body">
-                                                                    <strong class="text-success userText">@{ @Model.tutor.Username}</strong><br /><br />
-                                                                    @Html.Raw(Model.session.Replies.FirstOrDefault().Details)
-                                                                    <br>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                                   <br/>
-                                                                 <div style="margin-bottom:20px">
-                                                                    <small class="text-muted pull-right">@Model.question.PostedTime</small>
-                                                                </div>
-                                                               
-                                                                <hr class="hrclass">
-                                                            </div>
-                                                        </li>
 
-                                                                        }
-                        </ul>
-                    </div>
-                </div>
+
+                                            }
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="media">
+                                                    <div class="comment">
+                                                        <a href="#" class="pull-left">
+                                                            <img src="@Model.tutor.ProfileImage" alt="" class="img-circle imgSize">
+                                                        </a>
+
+                                                        <div class="media-body">
+                                                            <strong class="text-success userText">@{ @Model.tutor.Username}</strong><br /><br />
+                                                            @Html.Raw(Model.session.Replies.FirstOrDefault().Details)
+                                                            <br>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <br />
+                                                        <div style="margin-bottom:20px">
+                                                            <small class="text-muted pull-right">@Model.question.PostedTime</small>
+                                                        </div>
+
+                                                        <hr class="hrclass">
+                                                    </div>
+                                                </li>
+
+                                                                }
+                </ul>
             </div>
         </div>
+    </div>
+</div>
 
 
 
 @section scripts {
-<link href="~/Theme/css/chat.css" rel="stylesheet" />
+    <link href="~/Theme/css/chat.css" rel="stylesheet" />
     <script>
 
         if ($('#QuestionText').length == 0) {
@@ -233,11 +231,9 @@
 
         }
 
-        function notifyMessage(data)
-        {
+        function notifyMessage(data) {
             var result = data.result;
-            if (data.result != "null")
-            {
+            if (data.result != "null") {
                 var splitData = result.split("$");
                 var formData = new FormData();
                 var totalFiles = document.getElementById("FileUpload").files.length;
@@ -276,44 +272,25 @@
                         }
                     });
                 }
-               
+
                 var src = $("#tutImg").attr('src');
                 var username = '@Model.tutor.Username';
-               
+
                 var detail = $("#QuestionText").val();
                 $("#poster").hide();
                 $("#chatlist").append('<li class="media">' +
-                                 '<div class="comment"> '+
+                                 '<div class="comment"> ' +
                                     '<a href="#" class="pull-left"><img src="' + src + '" alt="" class="img-circle imgSize"> </a>' +
-                                     ' <div class="media-body">'+
-                                     ' <strong class="text-success">'+username+'</strong><br /><br />'+
-                                       detail+
-                                     '<br>'+
-                                     '<div class="clearfix"></div>'+
-                                    ' </div>'+
-                                     ' <div class="clearfix"></div>'+
+                                     ' <div class="media-body">' +
+                                     ' <strong class="text-success">' + username + '</strong><br /><br />' +
+                                       detail +
+                                     '<br>' +
+                                     '<div class="clearfix"></div>' +
+                                    ' </div>' +
+                                     ' <div class="clearfix"></div>' +
                                      '<hr class="hrclass">' +
-                               '</div>'+
+                               '</div>' +
                                '</li>');
-
-
-
-
-                
-
-
-
-
-
-                                        
-                                            
-                                        
-                                   
-
-                               
-                                
-                           
-
 
             }
             else {
@@ -322,26 +299,6 @@
 
 
         }
-
-
     </script>
-    @*<script src="~/ckeditor/ckeditor.js"></script>
-
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            if ($('#QuestionText').length > 0)
-            {
-                CKEDITOR.config.extraPlugins = "base64image";
-                CKEDITOR.config.removePlugins = "image";
-                CKEDITOR.replace('QuestionText');
-            }
-                
-           
-            });
-        
-    </script>*@
 
 }

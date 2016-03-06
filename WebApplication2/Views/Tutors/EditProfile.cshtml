@@ -4,8 +4,6 @@
     ViewBag.Title = "Update Profile";
 }
 
-
-
 <div class="container fill img-rounded">
     <div class="row">
         <div class="col-md-1"></div>
@@ -14,50 +12,47 @@
             <hr>
         </div>
     </div>
-        <div class="row">
+    <div class="row">
 
-            <!-- left column -->
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
+        <!-- left column -->
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
 
-                <div class="text-center">
-                    <img src="@Model.ProfileImage" class="avatar img-circle" id="profImg" alt="avatar" width="200" height="200">
-                    <h6>@Resources.uploadphote</h6>
-
-                    <input type="file" id="FileUpload" class="form-control" accept="image/*">
-
-
-                </div>
+            <div class="text-center">
+                <img src="@Model.ProfileImage" class="avatar img-circle" id="profImg" alt="avatar" width="200" height="200">
+                <h6>@Resources.uploadphote</h6>
+                <input type="file" id="FileUpload" class="form-control" accept="image/*">
             </div>
+        </div>
 
-            <!-- edit form column -->
-            <div class="col-md-8 personal-info">
-                @if (ViewBag.isValidated == false)
-                {
-                    <div class="alert alert-danger" id="iscompletedProfile">
-                        <a class="panel-close close" data-dismiss="alert">×</a>
-                        <i class="fa fa-exclamation"></i>
-                         Please complete your profile.
-                    </div>
-                }
-                <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-check"></i>
-                    @Resources.updatesuccess
-                </div>
-                <h3>@Resources.PersonalInfo</h3>
-                @using (Ajax.BeginForm("EditProfile", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage" }, new { @class = "form-horizontal" }))
+        <!-- edit form column -->
+        <div class="col-md-8 personal-info">
+            @if (ViewBag.isValidated == false)
             {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { style = "display: none;" } })
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">@Html.LabelFor(model => model.FirstName)</label>
-                        <div class="col-lg-6">
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                        </div>
+                <div class="alert alert-danger" id="iscompletedProfile">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-exclamation"></i>
+                    Please complete your profile.
+                </div>
+            }
+            <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-check"></i>
+                @Resources.updatesuccess
+            </div>
+            <h3>@Resources.PersonalInfo</h3>
+            @using (Ajax.BeginForm("EditProfile", "Tutors", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "showMessage" }, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { style = "display: none;" } })
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">@Html.LabelFor(model => model.FirstName)</label>
+                    <div class="col-lg-6">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
+                </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">@Html.LabelFor(model => model.LastName)</label>
                         <div class="col-lg-6">
@@ -77,24 +72,6 @@
                         </div>
                         @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger", @style = "margin-left:240px;" })
                     </div>
-
-                    @*<div class="form-group">
-                            <label class="col-lg-3 control-label">Time Zone:</label>
-                            <div class="col-lg-8">
-                                <div class="ui-select">
-                                    <select id="user_time_zone" class="form-control">
-                                        <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                        <option value="Alaska">(GMT-09:00) Alaska</option>
-                                        <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                        <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                        <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                        <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                        <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>*@
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">@Html.LabelFor(model => model.Country)</label>
@@ -179,86 +156,79 @@
 
                         </div>
                     </div>
-                }
+            }
 
 
-            </div>
         </div>
     </div>
+</div>
 
 @section scripts{
 
-<script src="~/Theme/dropdownMultiple/semantic.min.js"></script>
-<script>
-   
-    function showMessage() {
+    <script src="~/Theme/dropdownMultiple/semantic.min.js"></script>
+    <script>
+
+        function showMessage() {
 
 
-        $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
+            $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
 
-        });
-        $("#iscompletedProfile").hide();
-
-        $("#alerts").show();
-        window.setTimeout(function () {
-            $("#alerts").fadeTo(800, 0).slideUp(800, function () {
-                $(this).remove();
             });
-        }, 5000);
+            $("#iscompletedProfile").hide();
 
-    }
+            $("#alerts").show();
+            window.setTimeout(function () {
+                $("#alerts").fadeTo(800, 0).slideUp(800, function () {
+                    $(this).remove();
+                });
+            }, 5000);
 
-    $('.ui.fluid.normal.dropdown').dropdown({
-        maxSelections: 3
-    });
+        }
 
-    $(document).ready(function () {
-         
-        $("#AboutMe").keyup(function () {
-            if ($(this).val().length > 255) {
-                $(this).val($(this).val().substr(0, 255));
-            }
+        $('.ui.fluid.normal.dropdown').dropdown({
+            maxSelections: 3
         });
 
-        $("#Experience").keyup(function () {
-            if ($(this).val().length > 255) {
-                $(this).val($(this).val().substr(0, 255));
-            }
-        });
+        $(document).ready(function () {
 
-        $("#FileUpload").change(function () {
-            var formData = new FormData();
-            var totalFiles = document.getElementById("FileUpload").files.length;
-            for (var i = 0; i < totalFiles; i++) {
-                var file = document.getElementById("FileUpload").files[i];
-
-                formData.append("FileUpload", file);
-            }
-            $.ajax({
-                type: "POST",
-                url: '/Tutors/UploadProfile',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    $("#profImg").attr("src", response.result);
-                    $("#ProfileImage").val(response.result);
-                                    
-                },
-                error: function (error) {
-                    alert("errror uploading profile");
+            $("#AboutMe").keyup(function () {
+                if ($(this).val().length > 255) {
+                    $(this).val($(this).val().substr(0, 255));
                 }
             });
+
+            $("#Experience").keyup(function () {
+                if ($(this).val().length > 255) {
+                    $(this).val($(this).val().substr(0, 255));
+                }
+            });
+
+            $("#FileUpload").change(function () {
+                var formData = new FormData();
+                var totalFiles = document.getElementById("FileUpload").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var file = document.getElementById("FileUpload").files[i];
+
+                    formData.append("FileUpload", file);
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/Tutors/UploadProfile',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $("#profImg").attr("src", response.result);
+                        $("#ProfileImage").val(response.result);
+
+                    },
+                    error: function (error) {
+                        alert("errror uploading profile");
+                    }
+                });
+            });
         });
-    });
 
-
-
-   </script>    
-    
-    
-    
-    
-    
+    </script>
 }

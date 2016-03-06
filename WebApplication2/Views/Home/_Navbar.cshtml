@@ -3,9 +3,9 @@
 
 @{
     if (!User.Identity.IsAuthenticated)
-    {  
+    {
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top blackBackgroundNav" role="navigation" >
+        <nav class="navbar navbar-default navbar-fixed-top blackBackgroundNav" role="navigation">
             <div class="container-fluid">
 
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,7 +21,7 @@
                     </a>
 
                 </div>
-              
+
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,86 +35,8 @@
                                 var Language = result != null ? result.Value : null;
                                 var selectedLanguge = "English";
                                 var otherLanguage = "العربية";
-                                if (Language!=null && Language == "ar")
+                                if (Language != null && Language == "ar")
                                 {
-                                    selectedLanguge = "العربية";
-                                    otherLanguage = "English";
-                                }
-                            }
-                            <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="location.href='@Url.Action("Language", "Home",new {language=selectedLanguge}))'">@selectedLanguge<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="location.href='@Url.Action("Language", "Home",new {language=otherLanguage})'"> <b> @otherLanguage</b></a></li>
-                            </ul>
-                        </li>
-                   </ul>
-                        <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
-                            <li class="hidden">
-                                <a href="#page-top"></a>
-                            </li>
-                            @*<li class="marginclass2"><a href="#howitworkModal" data-toggle="modal">How it works</a></li>*@
-                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
-                            <li class="dropdown">
-                                <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @Resources.SignUp<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="CloseNavBarOnClick" href="#registerStudentModal" data-toggle="modal"><b>@Resources.signupStudent</b></a></li>
-                                    <li><a class="CloseNavBarOnClick" href="#registerTutorModal" data-toggle="modal"><b>@Resources.signupTutor</b></a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a class="CloseNavBarOnClick" href="#loginNewModal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> @Resources.Login</a>
-                            </li>
-
-
-                        </ul>
-</div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-        <!-- Modals -->
-        @Html.Partial("~/Views/Shared/_LoginNewPartial.cshtml", Model.Login)
-
-        @Html.Partial("~/Views/Shared/_RegisterStudentPartial.cshtml", Model.RegisterClient)
-
-        @Html.Partial("~/Views/Shared/_RegisterTutorPartial.cshtml", Model.RegisterExpert)
-
-        @Html.Partial("~/Views/Shared/howitworks.cshtml")
-    }
-    else
-    {
-        @Html.Partial("~/Views/Shared/howitworks.cshtml")
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top blackBackgroundNav" role="navigation" >
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" style="margin-left:55px" href="@Url.Action("Index", "Home")">
-                        @*<img src="~/Images/MezoImages/logo.png" />*@<span class="themeGreen">Mezo</span>Experts
-                    </a>
-                    
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                    <ul class="nav navbar-nav navbar-left" style="margin-left:20px">
-                        <li>
-                            <a href="#howitworkModal" data-toggle="modal">@Resources.HowWorks</a>
-                        </li>
-                        <li class="dropdown">
-                            @{ 
-                                var result = Request.Cookies["_culture"];
-
-                                var Language = result!=null?result.Value:null;
-                                var selectedLanguge = "English";
-                                var otherLanguage = "العربية";
-                                if (Language!=null && Language == "ar") {
                                     selectedLanguge = "العربية";
                                     otherLanguage = "English";
                                 }
@@ -129,117 +51,196 @@
                         <li class="hidden">
                             <a href="#page-top"></a>
                         </li>
+                        @*<li class="marginclass2"><a href="#howitworkModal" data-toggle="modal">How it works</a></li>*@
+                        <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                        <li class="dropdown">
+                            <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @Resources.SignUp<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="CloseNavBarOnClick" href="#registerStudentModal" data-toggle="modal"><b>@Resources.signupStudent</b></a></li>
+                                <li><a class="CloseNavBarOnClick" href="#registerTutorModal" data-toggle="modal"><b>@Resources.signupTutor</b></a></li>
+                            </ul>
+                        </li>
 
-                      @{
-
-                          if (User.IsInRole("Student"))
-                          {
-                            
-                                <li><a href="#search"><i class="fa fa-search"></i></a></li>
-                           
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><i class="fa fa-home"></i> @Resources.Home</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Students")'"><i class="fa fa-envelope"></i> @Resources.Inbox</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("PostQuestion","Students")'"><i class="fa fa-stack-exchange"></i> @Resources.askqu</a>
-                                </li>
-                          }
-                          else if (User.IsInRole("Tutor"))
-                          {
-                            
-                                <li><a href="#search"><i class="fa fa-search"></i></a></li>
-                           
-                            <li>
-                                <a href="#" onclick="location.href='@Url.Action("Index","Tutors")'"><i class="fa fa-home"></i> @Resources.Home</a>
-                            </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><i class="fa fa-envelope "></i> @Resources.Inbox</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'" ><i class="fa fa-stack-exchange"></i> @Resources.Posts</a>
-
-                                </li>
+                        <li>
+                            <a class="CloseNavBarOnClick" href="#loginNewModal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> @Resources.Login</a>
+                        </li>
 
 
-                          }
-                          else if (User.IsInRole("Admin"))
-                          {
-                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
-                            <li>
-                                <a href="#" onclick="location.href='@Url.Action("Index","Admin")'"><i class="fa fa-home"></i> @Resources.Home</a>
-                            </li>
-                            @*
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Manage","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Students</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Manage","Tutors")'"><span class="glyphicon glyphicon-question-sign"></span> Tutors</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="location.href='@Url.Action("Index","Categories")'"><span class="glyphicon glyphicon-question-sign"></span> Categories</a>
-                                </li>*@
-
-                          }
-
-
-                          if (User.IsInRole("Student") || User.IsInRole("Tutor"))
-                          {
-                            <li class="dropdown">
-                                <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @if (User.IsInRole("Tutor"))
-                                    {
-                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>
-                                    }
-                                    else {
-                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Students")'"><i class="fa fa-usd"></i><b> @Resources.AddFunds </b></a></li>
-                                    }
-                                  
-                                    @if (  User.IsInRole("Tutor"))
-                                    {
-                                      <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> <i class="fa fa-user"></i><b>@Resources.Profile</b></a></li>
-                                    }
-                                    else{
-                                    <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"><i class="fa fa-user"></i><b> @Resources.Profile</b></a></li>
-                                    }
-                                   
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i><b> @Resources.LogOut</b></a></li>
-                                 </ul>
-                            </li>
-                          }
-                          else
-                          {
-                            <li class="dropdown">
-                                <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    
-                                    <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>
-                             
-
-                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i><b> @Resources.LogOut</b></a></li>
-                                </ul>
-                            </li>
-
-                          }
-                    }
-                      
-
-                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "LogoutForm" }))
-                        {
-                            @Html.AntiForgeryToken()
-                        }
-                        
                     </ul>
-                    
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
-    }
+        <!-- Modals -->
+                                @Html.Partial("~/Views/Shared/_LoginNewPartial.cshtml", Model.Login)
+
+                                @Html.Partial("~/Views/Shared/_RegisterStudentPartial.cshtml", Model.RegisterClient)
+
+                                @Html.Partial("~/Views/Shared/_RegisterTutorPartial.cshtml", Model.RegisterExpert)
+
+                                @Html.Partial("~/Views/Shared/howitworks.cshtml")
+                                }
+                                else
+                                {
+                                    @Html.Partial("~/Views/Shared/howitworks.cshtml")
+        <!-- Navigation -->
+                                    <nav class="navbar navbar-default navbar-fixed-top blackBackgroundNav" role="navigation">
+                                        <div class="container-fluid">
+                                            <!-- Brand and toggle get grouped for better mobile display -->
+                                            <div class="navbar-header page-scroll">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                                    <span class="sr-only">Toggle navigation</span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                </button>
+                                                <a class="navbar-brand" style="margin-left:55px" href="@Url.Action("Index", "Home")">
+                                                    @*<img src="~/Images/MezoImages/logo.png" />*@<span class="themeGreen">Mezo</span>Experts
+                                                </a>
+
+                                            </div>
+
+                                            <!-- Collect the nav links, forms, and other content for toggling -->
+                                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                <ul class="nav navbar-nav navbar-left" style="margin-left:20px">
+                                                    <li>
+                                                        <a href="#howitworkModal" data-toggle="modal">@Resources.HowWorks</a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        @{
+                                                            var result = Request.Cookies["_culture"];
+
+                                                            var Language = result != null ? result.Value : null;
+                                                            var selectedLanguge = "English";
+                                                            var otherLanguage = "العربية";
+                                                            if (Language != null && Language == "ar")
+                                                            {
+                                                                selectedLanguge = "العربية";
+                                                                otherLanguage = "English";
+                                                            }
+                                                        }
+                                                        <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="location.href='@Url.Action("Language", "Home",new {language=selectedLanguge}))'">@selectedLanguge<span class="caret"></span></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#" onclick="location.href='@Url.Action("Language", "Home",new {language=otherLanguage})'"> <b> @otherLanguage</b></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                                                    <li class="hidden">
+                                                        <a href="#page-top"></a>
+                                                    </li>
+
+                                                    @{
+
+                                                        if (User.IsInRole("Student"))
+                                                        {
+
+                                                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
+
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><i class="fa fa-home"></i> @Resources.Home</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("Inbox","Students")'"><i class="fa fa-envelope"></i> @Resources.Inbox</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("PostQuestion","Students")'"><i class="fa fa-stack-exchange"></i> @Resources.askqu</a>
+                                                            </li>
+                                                        }
+                                                        else if (User.IsInRole("Tutor"))
+                                                        {
+
+                                                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
+
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("Index","Tutors")'"><i class="fa fa-home"></i> @Resources.Home</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("Inbox","Tutors")'"><i class="fa fa-envelope "></i> @Resources.Inbox</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("PostedRequests","Tutors")'"><i class="fa fa-stack-exchange"></i> @Resources.Posts</a>
+
+                                                            </li>
+
+
+                                                        }
+                                                        else if (User.IsInRole("Admin"))
+                                                        {
+                                                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                                                            <li>
+                                                                <a href="#" onclick="location.href='@Url.Action("Index","Admin")'"><i class="fa fa-home"></i> @Resources.Home</a>
+                                                            </li>
+                                                            @*
+                                                                <li>
+                                                                    <a href="#" onclick="location.href='@Url.Action("Manage","Students")'"><span class="glyphicon glyphicon-question-sign"></span> Students</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" onclick="location.href='@Url.Action("Manage","Tutors")'"><span class="glyphicon glyphicon-question-sign"></span> Tutors</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" onclick="location.href='@Url.Action("Index","Categories")'"><span class="glyphicon glyphicon-question-sign"></span> Categories</a>
+                                                                </li>*@
+
+                                                        }
+
+
+                                                        if (User.IsInRole("Student") || User.IsInRole("Tutor"))
+                                                        {
+                                                            <li class="dropdown">
+                                                                <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
+                                                                <ul class="dropdown-menu">
+                                                                    @if (User.IsInRole("Tutor"))
+                                                                    {
+                                                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>
+                                                                    }
+                                                                    else {
+                                                                        <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Students")'"><i class="fa fa-usd"></i><b> @Resources.AddFunds </b></a></li>
+                                                                    }
+
+                                                                    @if (User.IsInRole("Tutor"))
+                                                                    {
+                                                                        <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> <i class="fa fa-user"></i><b>@Resources.Profile</b></a></li>
+                                                                    }
+                                                                    else {
+                                                                        <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"><i class="fa fa-user"></i><b> @Resources.Profile</b></a></li>
+                                                                    }
+
+                                                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i><b> @Resources.LogOut</b></a></li>
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li class="dropdown">
+                                                                <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
+                                                                <ul class="dropdown-menu">
+
+                                                                    <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>
+
+
+                                                                    <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i><b> @Resources.LogOut</b></a></li>
+                                                                </ul>
+                                                            </li>
+
+                                                        }
+                                                    }
+
+
+                                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "LogoutForm" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                    }
+
+                                                </ul>
+
+                                            </div>
+                                            <!-- /.navbar-collapse -->
+                                        </div>
+                                        <!-- /.container-fluid -->
+                                    </nav>
+                                                        }
 }
 
 <div id="search" class="searchUp">

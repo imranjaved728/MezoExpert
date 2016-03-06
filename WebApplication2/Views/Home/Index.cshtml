@@ -16,18 +16,6 @@
         </div>
         @if (!User.Identity.IsAuthenticated)
         {
-        <form role="form" class="QuestionBox col-lg-6 col-lg-offset-3">
-            <div class="form-group">
-                <textarea class="form-control" style="resize:none"  rows="5" placeholder="@Resources.askQuestion"></textarea>
-            </div>
-            <button type="button" id="helpnow"  class="btn btn-success">@Resources.getHelpNow</button>
-
-        </form>
-        }
-        else
-        {
-            if (User.IsInRole("Tutor"))
-            {
             <form role="form" class="QuestionBox col-lg-6 col-lg-offset-3">
                 <div class="form-group">
                     <textarea class="form-control" style="resize:none" rows="5" placeholder="@Resources.askQuestion"></textarea>
@@ -35,44 +23,56 @@
                 <button type="button" id="helpnow" class="btn btn-success">@Resources.getHelpNow</button>
 
             </form>
+        }
+        else
+        {
+            if (User.IsInRole("Tutor"))
+            {
+                <form role="form" class="QuestionBox col-lg-6 col-lg-offset-3">
+                    <div class="form-group">
+                        <textarea class="form-control" style="resize:none" rows="5" placeholder="@Resources.askQuestion"></textarea>
+                    </div>
+                    <button type="button" id="helpnow" class="btn btn-success">@Resources.getHelpNow</button>
+
+                </form>
             }
             else
             {
-                using (Html.BeginForm("PostQuestion", "Students", FormMethod.Get, new { id = "QuestionDetails",@class="QuestionBox col-lg-6 col-lg-offset-3" }))
+                using (Html.BeginForm("PostQuestion", "Students", FormMethod.Get, new { id = "QuestionDetails", @class = "QuestionBox col-lg-6 col-lg-offset-3" }))
                 {
-               
+
                     <div class="form-group">
                         <textarea class="form-control" name="question" style="resize:none" rows="5" placeholder="@Resources.askQuestion"></textarea>
                     </div>
-                    <button type="submit"  class="btn btn-success">@Resources.getHelpNow</button>
+                    <button type="submit" class="btn btn-success">@Resources.getHelpNow</button>
 
-            
-               }
 
-           }
+                }
+
+            }
         }
     </div>
-   
+
 </header>
 
 
 @section scripts{
- <script>
-     var error = "@ViewBag.error";
-     if (error == "login") {
-         $('#loginNewModal').modal('show');
-     }
-     else if (error == "registerT") {
-         $('#registerTutorModal').modal('show');
-     }
-     else if (error == "registerS") {
-         $('#registerStudentModal').modal('show');
-     }
+    <script>
+        var error = "@ViewBag.error";
+        if (error == "login") {
+            $('#loginNewModal').modal('show');
+        }
+        else if (error == "registerT") {
+            $('#registerTutorModal').modal('show');
+        }
+        else if (error == "registerS") {
+            $('#registerStudentModal').modal('show');
+        }
 
-     $("#helpnow").click(function() {
-         $('#registerStudentModal').modal('show');
-     });
+        $("#helpnow").click(function () {
+            $('#registerStudentModal').modal('show');
+        });
 
-</script>
-    
- }
+    </script>
+
+}
