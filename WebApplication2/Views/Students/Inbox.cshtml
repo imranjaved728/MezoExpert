@@ -41,10 +41,18 @@
                        "targets": [1],
                        "width": "22%"
                    },
-                        {
+                    {
                             "targets": [2],
-                            "width": "57%"
-                        },
+                            "width": "50%"
+                    },
+                    {
+                              "targets": [3],
+                              "width": "8%"
+                    },
+                 {
+                     "targets": [4],
+                     "width": "12%"
+                 },
                   { 'bSortable': false, 'aTargets': [1, 2, 3] }
                   ],
                 "order": [[4, "desc"]],
@@ -104,7 +112,7 @@
                             <th>
                                 @Html.DisplayName(Resources.Time)
                             </th>
-
+                            <th></th>
 
                         </tr>
 
@@ -155,6 +163,9 @@
 </td>
                                 <td style="@(item.newMessage== true ? "background-color:white " : "background-color:#F1F1F1 ")">
                                     @Html.DisplayFor(modelItem => item.PostedTime)
+                                </td>
+                                <td>
+                                    <a style="color:black" href="@Url.Action("DeleteSession", "Students", new { sessionid = item.SessionId })"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         }

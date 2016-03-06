@@ -415,4 +415,37 @@ Send us your bank details on support@mezoexperts.com</value>
   <data name="UpdateEmail" xml:space="preserve">
     <value>UpdateEmail</value>
   </data>
+  <data name="Offers" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="PostedQuestion" xml:space="preserve">
+    <value>Posted Question</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>Check top tutors</value>
+  </data>
+  <data name="EmailLink" xml:space="preserve">
+    <value>Email Link</value>
+  </data>
+  <data name="Enteremail" xml:space="preserve">
+    <value>Enter your email.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="ForgotPasswordmsg" xml:space="preserve">
+    <value>Please check your email to reset your password. We have sent password reset link to the given email.</value>
+  </data>
+  <data name="reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="resetmesg1" xml:space="preserve">
+    <value>Your password has been reset. Please</value>
+  </data>
+  <data name="resetmesg2" xml:space="preserve">
+    <value>Click here to login</value>
+  </data>
+  <data name="resetpass" xml:space="preserve">
+    <value>Reset your password.</value>
+  </data>
 </root>

@@ -1,0 +1,151 @@
+﻿@model WebApplication2.Models.Tutor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container fill img-rounded">
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+            <h1>Tutor - Details</h1>
+            <hr>
+            <br />
+            <div>
+                
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Degree):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Degree)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.University):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.University)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AboutMe):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AboutMe)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Experience):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Experience)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateCreated):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateCreated)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CurrentEarning):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CurrentEarning)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProfileImage):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProfileImage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Username):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Username)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsCompletedProfile):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsCompletedProfile)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Rating):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Rating)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "EditTutor", new { id = Model.TutorID },new { @class="btn btn-default"} ) 
+                @Html.ActionLink("Back to List", "IndexTutor","",new { @class="btn btn-success"})
+            </p>
+
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+

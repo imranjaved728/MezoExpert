@@ -22,9 +22,13 @@ namespace WebApplication2.Helpers
 
         static Mailer()
         {
-            GmailHost = "smtpout.secureserver.net";
-            GmailPort = 25; // Gmail can use ports 25, 465 & 587; but must be 25 for medium trust environment.
-            GmailSSL = false;
+            //GmailHost = "smtp.gmail.com";
+            //GmailPort = 587; // Gmail can use ports 25, 465 & 587; but must be 25 for medium trust environment.
+            //GmailSSL = true;
+
+            Mailer.GmailHost = "smtpout.secureserver.net ";
+            Mailer.GmailPort = 3535;
+            Mailer.GmailSSL = false;
         }
 
         public void Send()

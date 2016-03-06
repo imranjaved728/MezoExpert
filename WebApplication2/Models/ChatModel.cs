@@ -23,6 +23,7 @@ namespace WebApplication2.Models
         public Guid sessionID { get; set; }
         public Offer offer { get; set; }
         public Boolean status { get; set; }
+        public Boolean status2nd { get; set; }
     }
 
 

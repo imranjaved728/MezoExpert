@@ -1,0 +1,428 @@
+﻿@model WebApplication2.Models.ChatModel
+@{
+    ViewBag.Title = "Admin- Sessions";
+}
+
+<link href="~/Theme/css/chat.css" rel="stylesheet" />
+
+
+
+
+
+<div class="container fill img-rounded">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h1> 
+           
+                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.question.student.Username 
+                and
+                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle @(@Model.status2nd == true ? "text-success" : "text-danger")"></i></a> @Model.session.tutor.Username
+           
+            </h1>
+      
+            <hr />
+            <div class="panel-body comments">
+            
+
+                <ul class="media-list pchat" id="chatlist">
+                    <li class="media">
+                        <div class="comment">
+                            <a href="#" class="pull-left">
+                                <img src="@Model.session.question.student.ProfileImage" alt="" class="img-circle imgSize">
+                            </a>
+                            <div class="media-body">
+                                <strong class="text-success username">@Model.session.question.student.Username</strong>
+
+                                <p>
+                                    <b>@Model.session.question.Title</b><br />
+                                    @Html.Raw(Model.session.question.Details)<br /><br />
+
+                                    @if (Model.session.question.Files.Count > 0)
+                                    { <br /><br />
+                                        foreach (var v in Model.session.question.Files)
+                                        {
+                                            var path = @v.Path.Split('/');
+                                            <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                        }
+                                    }
+
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-calendar fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        @if (Model.session.question.DueDate.HasValue)
+                                                        {
+                                                            <div class="medium">&nbsp;&nbsp;&nbsp;&nbsp;@Model.session.question.DueDate.Value.ToShortDateString()</div>
+                                                        }
+                                                        @*<div>New Tasks!</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.deadline</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-dollar fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <div class="huge">$ @Model.session.question.Amount</div>
+                                                        @*<div>New Tasks!</div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.offeredFee</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <i class="fa fa-stack-exchange fa-4x"></i>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <div class="medium">@Model.session.Status @Model.session.OfferedFees$</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <div class="panel-footer">
+                                                    <span class="pull-left">@Resources.Status</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                </p>
+
+                            </div>
+                            <br />
+                            <div style="margin-bottom:20px">
+                                <small class="text-muted pull-right">@Model.session.question.PostedTime</small>
+                            </div>
+
+
+                            <hr>
+                        </div>
+
+                    </li>
+
+                    @{
+                        var count = 0;
+                        foreach (var reply in Model.session.Replies)
+                        {
+                            count++;
+                            var IsTutor = reply.ReplierID == Model.session.TutorID ? true : false;
+                            var tutor = Model.session.tutor;
+                            if (IsTutor == true)
+                            {
+                                <li class="media">
+                                    <div class="comment">
+                                        <a href="#" class="pull-left">
+                                            <img src="@tutor.ProfileImage" alt="" class="img-circle imgSize">
+                                        </a>
+
+                                        <div class="media-body">
+                                            <a style="text-decoration:none" href="@Url.Action("Profile","Home",new { username =tutor.Username })"> <strong class="text-success userText username">@{ @tutor.Username}</strong></a><br />
+                                            @Html.Raw(reply.Details)
+
+                                            @if (reply.Files.Count > 0)
+                            {
+                                                <br /><br/>
+                                                foreach (var v in reply.Files)
+                                {
+                                    var path = @v.Path.Split('/');
+                                                    <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                                }
+                                            }
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <div style="margin-bottom:20px">
+                                            <small class="text-muted pull-right">@reply.PostedTime</small>
+                                        </div>
+
+
+                                        <hr>
+                                    </div>
+                                </li>
+                                                }
+                                                else
+                                                {
+                                                    var student = Model.session.question.student;
+                                                    var isTeacher = Model.session.question.TutorID;
+                                                    if (isTeacher == null || (isTeacher != null && count != 1))
+                                                    {
+                                                    <li class="media">
+                                                        <div class="comment">
+                                                            <a href="#" class="pull-left">
+                                                                <img src="@student.ProfileImage" alt="" class="img-circle imgSize">
+                                                            </a>
+
+                                                            <div class="media-body">
+                                                                <strong class="text-success userText username">@{ @student.Username}</strong><br />
+                                                                @Html.Raw(reply.Details)
+
+                                                                @if (reply.Files.Count > 0)
+                        { <br /><br />
+                                                                    foreach (var v in reply.Files)
+                            {
+                                var path = @v.Path.Split('/');
+                                                                        <strong class="text-info"><a target="_blank" href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                                                    }
+                                                                }
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <br />
+
+                                                            <div style="margin-bottom:20px">
+                                                                <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                            </div>
+
+
+                                                            <hr>
+                                                        </div>
+                                                    </li>
+                                                                            }
+
+                                                                        }
+                                                                    }
+                                                                    var Ctutor = Model.session.tutor;
+                                                                    <li class="media" id="poster">
+                                                                       
+                                                                    </li>
+                    }
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Tutors/SendOffer.cshtml",Model.offer)
+@Html.Partial("~/Views/Tutors/Invoice.cshtml", Model.offer)
+
+@section scripts {
+
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            $("#QuestionText").val("");
+            setTimeout(function () {
+                $("#QuestionText").focus();
+            }, 0);
+          
+        });
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+        function notifyMessage(data) {
+            var result = data.result;
+            if (data.result != "null") {
+                var splitData = result.split("$");
+                var formData = new FormData();
+                var totalFiles = document.getElementById("FileUpload").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var file = document.getElementById("FileUpload").files[i];
+
+                    formData.append("FileUpload", file);
+                }
+                if (totalFiles > 0) {
+                    formData.append("replyId", splitData[0]);
+                    formData.append("sessionId", splitData[1]);
+                    $.ajax({
+                        type: "POST",
+                        url: '/Tutors/UploadQuestionFile',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            var result = response.result;
+                            var parseresult = result.split("$");
+                            $("#" + splitData[0]).html(parseresult[1]);
+                            var control = $("#FileUpload");
+                            control.replaceWith(control = control.clone(true));
+
+                        },
+                        error: function (error) {
+                            alert("errror uploading files");
+                            var control = $("#FileUpload");
+                            control.replaceWith(control = control.clone(true));
+                        }
+                    });
+                }
+                else {
+                    var control = $("#FileUpload");
+                    control.replaceWith(control = control.clone(true));
+                }
+
+
+
+            }
+            else {
+
+            }
+
+
+        }
+
+        $(function () {
+            // Declare a proxy to reference the hub.
+            var sessionId = getUrlParameter('SessionId');
+            var chat = $.connection.tutorStudentChat;
+
+            // chat.qs = { "sessionId": sessionId };
+
+
+            chat.client.recieverTutor2 = function (message) {
+                // Add the message to the page.
+
+                $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+                $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+                if ($(".pchat li").hasClass("True")) {
+                    
+                    $(".True").remove();
+                    $("#onlineStatus").removeClass("text-danger");
+                    $("#onlineStatus").addClass("text-success");
+                }
+                else {
+
+                    $(".False").remove();
+                    $("#onlineStatus").removeClass("text-success");
+                    $("#onlineStatus").addClass("text-danger");
+                }
+                $(function () {
+                   
+                    $("#QuestionText").val("");
+                    setTimeout(function () {
+                        $("#QuestionText").focus();
+                    }, 0);
+                   
+                    // CKEDITOR.instances.QuestionText.setData('');
+                });
+            };
+
+            chat.client.recieverStudent2 = function (message) {
+                // Add the message to the page.
+
+                $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+
+                $(function () {
+                   
+                   // $("#QuestionText").val("");
+                    setTimeout(function () {
+                        $("#QuestionText").focus();
+                    }, 0);
+                    //CKEDITOR.instances.QuestionText.setData('');
+                });
+            };
+
+            chat.client.recieverStudentFile = function (message) {
+             
+                var splitData = message.split("$");
+                $("#" + splitData[0]).html(splitData[1]).fadeIn('slow');
+                // Add the message to the page.
+
+                //$('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+
+                $(function () {
+                    
+                    //$("#QuestionText").val("");
+                    setTimeout(function () {
+                        $("#QuestionText").focus();
+                    }, 0);
+                    // CKEDITOR.instances.QuestionText.setData('');
+                });
+            };
+           
+            chat.client.recieverButtons = function (message) {
+
+
+                $("#buttonsUpdate").html(message).fadeIn('slow');
+
+                $(function () {
+                    setTimeout(function () {
+                        $("#QuestionText").focus();
+                    }, 0);
+
+                });
+            };
+
+            $.connection.hub.qs = { "sessionId": sessionId };
+
+
+            $.connection.hub.start().done(function () {
+
+            });
+
+        });
+
+    </script>
+   
+    
+    <script>
+
+    function updateButtonsOffer(data)
+    {
+        var result = data.result;
+        $("#offer").html("Update Offer ("+result+"$)");
+        $('#offerNewModal').modal('hide');
+        $("#statusText").text("Offered Service "+result+"$");
+    }
+
+
+    function updateButtonsInvoice(data) {
+        $("#hire").html("Update Invoice");
+        $('#invoiceNewModal').modal('hide');
+        $("#statusText").text("Invoiced " + data.result+"$");
+    }
+
+</script>  
+
+}
+

@@ -20,6 +20,10 @@ namespace SignalRChat
         public override Task OnConnected()
         {
             var name = Context.User.Identity.Name;
+            if (name != "")
+            {
+
+           
             using (var db = new ApplicationDbContext())
             {
                 var user = db.online                 
@@ -42,6 +46,8 @@ namespace SignalRChat
                 }
                 db.SaveChanges();
             }
+
+            }
             return base.OnConnected();
         }
 
@@ -50,6 +56,10 @@ namespace SignalRChat
             using (var db = new ApplicationDbContext())
             {
                 var name = Context.User.Identity.Name;
+                if (name != "")
+                {
+
+               
                 var connection = db.online.Find(name);
                 connection.Status = false;
                 
@@ -57,6 +67,7 @@ namespace SignalRChat
 
 
                 db.SaveChanges();
+                }
             }
             return base.OnDisconnected(stopCalled);
         }

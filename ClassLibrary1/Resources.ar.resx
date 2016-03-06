@@ -415,4 +415,37 @@
   <data name="uploadphote" xml:space="preserve">
     <value>تحميل صورة مختلفة ...</value>
   </data>
+  <data name="Offers" xml:space="preserve">
+    <value>عروض</value>
+  </data>
+  <data name="PostedQuestion" xml:space="preserve">
+    <value>مسألة نشر</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>تحقق أعلى المعلمين</value>
+  </data>
+  <data name="EmailLink" xml:space="preserve">
+    <value>البريد الإلكتروني لينك</value>
+  </data>
+  <data name="Enteremail" xml:space="preserve">
+    <value>ادخل بريدك الإلكتروني.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>نسيت رقمك السري؟</value>
+  </data>
+  <data name="ForgotPasswordmsg" xml:space="preserve">
+    <value>يرجى التحقق من البريد الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك. لقد قمنا بإرسال رابط لإعادة تعيين كلمة المرور إلى البريد الإلكتروني المحدد.</value>
+  </data>
+  <data name="reset" xml:space="preserve">
+    <value>إعادة تعيين</value>
+  </data>
+  <data name="resetmesg1" xml:space="preserve">
+    <value>تم إعادة تعيين كلمة المرور الخاصة بك. من فضلك</value>
+  </data>
+  <data name="resetmesg2" xml:space="preserve">
+    <value>انقر هنا لتسجيل الدخول</value>
+  </data>
+  <data name="resetpass" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور الخاصة بك.</value>
+  </data>
 </root>

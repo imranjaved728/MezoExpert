@@ -11,7 +11,8 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10 personal-info">
-                <h1 class="h1over">@Model.UserName</h1>
+                <h1 class="h1over"><a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.isOnline == true ? "text-success" : "text-danger")"></i></a> @Model.UserName</h1>
+              
                 <hr>
             </div>
         </div>
@@ -25,10 +26,10 @@
                     <img src="@Model.ProfileImage" class="avatar img-circle" id="profImg" alt="avatar" width="200" height="200">
                     <br />
 
-                    <br /><h5>Rating</h5><input id="rating" value="@Model.Rating" class="rating-loading">
+                    <br /><h5>@Resources.Rating</h5><input id="rating" value="@Model.Rating" class="rating-loading">
                     @if (User.IsInRole("Student"))
                 {
-                        <input type="submit" class="btn btn-success" width="250" value="Contact">
+                        <input type="submit" class="btn btn-success" width="250" value="@Resources.Contact">
                     }
                     else if (User.IsInRole("Tutor"))
                     {
@@ -36,7 +37,7 @@
                     }
                     else
                     {
-                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="Contact">
+                        <input type="button" data-toggle="modal" data-target="#registerStudentModal" class="btn btn-success" width="250" value="@Resources.Contact">
 
                     }
 
@@ -47,12 +48,12 @@
             <!-- edit form column -->
             <div class="col-md-8 personal-info">
 
-                <h3>Personal info</h3>
+                <h3>@Resources.PersonalInfo</h3>
 
 
                 @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { style = "display: none;" } })
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Name:</label>
+                    <label class="col-lg-3 control-label">@Resources.Name:</label>
                     <div class="col-lg-6 paddclass">
                         @Model.FirstName @Model.LastName
                     </div>
@@ -97,7 +98,7 @@
 
                 <div class="form-group">
                     <label class="col-md-3 control-label">
-                        @Html.LabelFor(model => model.Expertise, "Expertise"):
+                        @Html.LabelFor(model => model.Expertise, @Resources.Expertise):
                     </label>
                     <div class="col-md-6">
                         @*@Html.DropDownListFor(model => model.Expertise, new SelectList(ViewBag.Expertise, "CategoryID", "CategoryName"), htmlAttributes: new { @class = "ui fluid normal dropdown", multiple = "multiple" })*@

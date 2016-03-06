@@ -66,7 +66,14 @@ namespace WebApplication2.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            AdminModel model = new AdminModel();
+            model.TutorCount = db.Tutors.Count();
+            model.StudentCount = db.Students.Count();
+            model.CategoriesCount = db.Categories.Count();
+            model.QuestionCount = db.Questions.Count();
+            model.SessionCount = db.sessions.Count();
+            model.complaintsCount = db.contactus.Count();
+            return View(model);
         }
 
         #region Tutor
@@ -414,6 +421,8 @@ namespace WebApplication2.Controllers
             return View("Question/Index",await questions.ToListAsync());
         }
 
+       
+
         // GET: Questions/Details/5
         public async Task<ActionResult> DetailsQuestion(Guid? id)
         {
@@ -432,7 +441,7 @@ namespace WebApplication2.Controllers
         // GET: Questions/Create
         public ActionResult CreateQuestion()
         {
-            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "FirstName");
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "Username");
             return View("Question/Create");
         }
 
@@ -554,6 +563,41 @@ namespace WebApplication2.Controllers
         }
 
         #endregion
+
+        #region sesssion
+
+        // GET: Students1
+        public async Task<ActionResult> IndexSession()
+        {
+            return View("Session/Index", await db.sessions.ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Sessions(Guid SessionId)
+        {
+            var session = await db.sessions.FindAsync(SessionId);
+
+            ChatModel obj = new ChatModel();
+            obj.session = session;
+            var result = db.online.Where(c => c.Username == session.question.student.Username).FirstOrDefault();
+            if (result != null)
+                obj.status = result.Status;
+            else
+                obj.status = false;
+
+            var result2 = db.online.Where(c => c.Username == session.tutor.Username).FirstOrDefault();
+            if (result2 != null)
+                obj.status2nd = result2.Status;
+            else
+                obj.status2nd = false;
+
+            obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
+            obj.offer.amount = obj.session.OfferedFees;
+
+            return View("Question/Sessions", obj);
+        }
+        #endregion
+
 
         protected override void Dispose(bool disposing)
         {

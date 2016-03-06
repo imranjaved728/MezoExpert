@@ -11,19 +11,20 @@
         <div class="col-md-10">
 
 
-            <h1> 
+            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")"> 
             
-            <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a> @Model.session.tutor.Username
-           
+             @Model.session.tutor.Username
+                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a>
             
             </h1>
             <hr />
+            <div class="alert alert-danger alert-dismissable" style="display: none;" id="alerts">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-check"></i>
+                The Session has been closed by tutor.
+            </div>
             <div class="panel-body comments">
-                @*<div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>
-                    <span id="message">Replied to Question Successfully. Message will appear in Inbox if replied by Students.</span>
-                    </div>*@
+                
 
                 <ul class="media-list pchat" id="chatlist">
                     <li class="media">
@@ -212,7 +213,9 @@
                                                                     }
                                                                     var Cstudent = Model.session.question.student;
                                                                     <li class="media" id="poster">
-                                                                        <div class="comment">
+                                                                        @if (!Model.session.isClosed)
+                                                                        {
+                                                                          <div class="comment">
                                                                             <a href="#" class="pull-left">
                                                                                 <img id="tutImg" src="@Cstudent.ProfileImage" alt="" class="img-circle imgSize">
                                                                             </a>
@@ -222,8 +225,9 @@
                                                                                 @Html.AntiForgeryToken()
                                                                                 <div class="media-body">
                                                                                     <strong class="text-success username">@{ @Cstudent.Username}</strong><br />
-                                                                                    @if (Model.session.isClosed) { 
-                                                                                    @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true , id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
+                                                                                    @if (Model.session.isClosed)
+                                                                                    {
+                                                                                    @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true, id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
                                                                                     }
                                                                                     else
                                                                                     {
@@ -297,6 +301,7 @@
                                                                             <div class="clearfix"></div>
 
                                                                         </div>
+                                                                        }
                                                                     </li>
                     }
 
@@ -313,6 +318,7 @@
 @Html.Partial("~/Views/Students/Reject.cshtml", Model.offer)
 @Html.Partial("~/Views/Students/AddFunds.cshtml")
 @Html.Partial("~/Views/Students/Rate.cshtml", Model.offer)
+@Html.Partial("~/Views/Students/sessionclosed.cshtml")
 
 @section scripts {
     <!--Script references. -->
@@ -323,6 +329,12 @@
     <script src="~/signalr/hubs"></script>
 
     <script>
+        var result='@(Model.session.isClosed)';
+        if(result=="True")
+        {
+            $("#alerts").show();
+        }
+
         $(function () {
             $("#QuestionText").val("");
             setTimeout(function () {
@@ -408,13 +420,13 @@
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
                 if ($(".pchat li").hasClass("True"))
                 {
-                   
+
                     $(".True").remove();
                     $("#onlineStatus").removeClass("text-danger");
                     $("#onlineStatus").addClass("text-success");
                 }
                 else {
-                    
+
                     $(".False").remove();
                     $("#onlineStatus").removeClass("text-success");
                     $("#onlineStatus").addClass("text-danger");
@@ -427,6 +439,12 @@
                     }, 0);
                     //CKEDITOR.instances.QuestionText.setData('');
                 });
+            };
+
+            chat.client.recieverSessionClosed = function (message) {
+                $('#sessionClose').modal('show');
+                $("#alerts").show();
+                $("#poster").hide();
             };
 
             chat.client.recieverTutor = function (message) {

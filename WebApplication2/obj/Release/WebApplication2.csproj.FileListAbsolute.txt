@@ -192,12 +192,10 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\Microsoft.Owin.Security.T
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\ar\ClassLibrary1.resources.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.csprojResolveAssemblyReference.cache
-C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.onserver.resources
-C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.contactus.resources
-C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.onlneusers.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Resource.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Resource.ar.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.csproj.GenerateResource.Cache
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\ar\WebApplication2.resources.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.pdb
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.updates.resources

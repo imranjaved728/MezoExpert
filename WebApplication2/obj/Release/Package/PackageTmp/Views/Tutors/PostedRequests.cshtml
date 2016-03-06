@@ -22,7 +22,17 @@
                 "pageLength": 25,
                 "bLengthChange": false,
                 "scrollX": true,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": "First page", // This is the link to the first page
+                        "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
+                        "sNext": "@Resources.NextPage", // This is the link to the next page
+                        "sLast": "Last page", // This is the link to the last page
 
+
+                    },
+                    "sSearch": "@Resources.Search"
+                },
                 "columnDefs": [
                    {
                        "targets": [ 0 ],
@@ -114,7 +124,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
-            <h1>Posted Questions</h1>
+            <h1>@Resources.PostedQuestions</h1>
             <hr>
             <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
                 <thead>
@@ -123,23 +133,23 @@
                             @Html.DisplayNameFor(model => model.QuestionID)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Title)
+                            @Html.DisplayName(Resources.Title)
                         </th>
                        
                         <th>
-                            @Html.DisplayName("Posted By")
+                            @Html.DisplayName(Resources.PostedBy)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Status)
+                            @Html.DisplayName(Resources.Status)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Amount)
+                            @Html.DisplayName(Resources.Amount)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DueDate)
+                            @Html.DisplayName(Resources.DueDate)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PostedTime)
+                            @Html.DisplayName(Resources.PostedTime)
                         </th>
 
                     </tr>

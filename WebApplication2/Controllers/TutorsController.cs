@@ -63,6 +63,71 @@ namespace WebApplication2.Controllers
 
         }
 
+        public void DeleteSessionMessageStudent(string sessionId, string sendTo, string message, IHubContext context)
+        {
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                if (user == null)
+                {
+                    // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                }
+                else
+                {
+                    db.Entry(user)
+                        .Collection(u => u.Connections)
+                        .Query()
+                        .Where(c => c.Connected == true)
+                        .Load();
+
+                    if (user.Connections == null)
+                    {
+                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                    }
+                    else
+                    {
+                        foreach (var connection in user.Connections)
+                        {
+                            context.Clients.Client(connection.ConnectionID)
+                                 .recieverSessionClosed(message);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult DeleteSession(string sessionId)
+        {
+            var session = db.sessions.Find(new Guid(sessionId));
+            if(session.tutor.Username== User.Identity.Name)
+            {
+
+                if (session.Status != Status.Hired)
+                {
+                  
+                    session.isTutorDeleted = true;
+                    session.isClosed = true;
+                    db.Entry(session).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                    var student = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().question.student;
+                    var username = student.Username;
+                    var message = "";
+                    DeleteSessionMessageStudent(sessionId, username, message, context);
+                }
+
+
+
+            }
+
+           return RedirectToAction("inbox");
+
+
+        }
 
         public async Task<ActionResult> Inbox()
         {
@@ -70,8 +135,17 @@ namespace WebApplication2.Controllers
             if (IsCompletedProfile == true)
             {
                 var user = new Guid(User.Identity.GetUserId());
-                var MineSessions = db.sessions.Where(c => c.TutorID == user).ToList();
-                return View(MineSessions);
+                var MineSessions = db.sessions.Where(c => c.TutorID == user && c.isTutorDeleted==false).ToList();
+                TutorInbox model = new TutorInbox();
+                model.sessions = MineSessions;
+                var onlineusers = db.online.Where(c => c.Status == true).ToList();
+                foreach (var v in MineSessions)
+                {
+                    var online = onlineusers.Where(c => c.Username == v.question.student.Username).FirstOrDefault();
+                    var result= online == null ? false : online.Status;
+                    model.online.Add(result);
+                }
+                return View(model);
             }
             else {
                 TempData["isValidate"] = false;
@@ -139,15 +213,21 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> Sessions(Guid SessionId)
         {
             var session = await db.sessions.FindAsync(SessionId);
-  
-            ChatModel obj = new ChatModel();
-            obj.session = session;
-            obj.status = db.online.Where(c => c.Username == session.question.student.Username).FirstOrDefault().Status;
 
-            obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
-            obj.offer.amount = obj.session.OfferedFees;
-            
-            return View(obj);
+            if (session.tutor.Username == User.Identity.Name)
+            {
+
+                ChatModel obj = new ChatModel();
+                obj.session = session;
+                obj.status = db.online.Where(c => c.Username == session.question.student.Username).FirstOrDefault().Status;
+
+                obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
+                obj.offer.amount = obj.session.OfferedFees;
+
+                return View(obj);
+            }
+            else
+              return   RedirectToAction("Unauthorized", "Home", "");
         }
 
 

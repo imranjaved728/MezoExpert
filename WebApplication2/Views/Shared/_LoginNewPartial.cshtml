@@ -43,13 +43,6 @@
                                 }
 
 
-                                        <div class="checkbox">
-                                            <label>
-                                                @*<input type="checkbox">*@
-                                                @Html.CheckBoxFor(m => m.RememberMe) @Resources.RememberMe
-                                            </label>
-                                        </div> <!-- /.checkbox -->
-
                                 <div class="row">
                                     <div class="col-xs-2"></div>
                                         <div class="col-xs-4">
@@ -59,10 +52,10 @@
                                         </div>
                                      <div class="col-xs-3"></div>
                                     </div>
-                                       
+                                    <br/>
+                                    <a href="@Url.Action("forgotpassword","account")">@Resources.ForgotPassword</a>
 
-                                       
-                                        }
+                            }
 
 
                                         <section id="socialLoginForm" style="padding:15px !important">

@@ -21,6 +21,8 @@ using PayPal.Api;
 using System.Web.Helpers;
 using System.Net.Mail;
 using WebApplication2.Helpers;
+using System.Web.Mail;
+using System.Threading;
 
 namespace WebApplication2.Controllers
 {
@@ -45,32 +47,89 @@ namespace WebApplication2.Controllers
         {
          
             var session=await db.sessions.FindAsync(SessionId);
-            ChatModel obj = new ChatModel();
-            obj.session = session;
-            obj.status = db.online.Where(c => c.Username == session.tutor.Username).FirstOrDefault().Status;
-            obj.session.Replies=obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
-            return  View(obj);
+            if (session.question.student.Username == User.Identity.Name)
+            {
+                ChatModel obj = new ChatModel();
+                obj.session = session;
+                obj.status = db.online.Where(c => c.Username == session.tutor.Username).FirstOrDefault().Status;
+                obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
+                return View(obj);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized", "Home", "");
+            }
         }
+
+        public void DeleteSessionMessageTutor(string sessionId, string sendTo, string message, IHubContext context)
+        {
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                if (user == null)
+                {
+                    // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                }
+                else
+                {
+                    db.Entry(user)
+                        .Collection(u => u.Connections)
+                        .Query()
+                        .Where(c => c.Connected == true)
+                        .Load();
+
+                    if (user.Connections == null)
+                    {
+                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                    }
+                    else
+                    {
+                        foreach (var connection in user.Connections)
+                        {
+                            context.Clients.Client(connection.ConnectionID)
+                                 .recieverSessionClosed(message);
+                        }
+                    }
+                }
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> DeleteSession(string sessionId)
+        {
+            var session = db.sessions.Find(new Guid(sessionId));
+            if (session.question.student.Username == User.Identity.Name)
+            {
+
+                if (session.Status != Status.Hired)
+                {
+                    session.isStudentDelete = true;
+                    session.isClosed = true;
+                    db.Entry(session).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+
+                    var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                    var tutor = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().tutor;
+                    var username = tutor.Username;
+                    var message = "";
+                    DeleteSessionMessageTutor(sessionId, username, message, context);
+                }
+            }
+
+            return RedirectToAction("inbox");
+
+        }
+
 
         public async Task<ActionResult> Inbox()
         {
-            Mailer.GmailUsername = "support@mezoexperts.com";
-            Mailer.GmailPassword = "123123";
-
-            Mailer mailer = new Mailer();
-            mailer.ToEmail = "imranjaved728@gmail.com";
-            mailer.Subject = "New Question Posted on MezoExperts.com";
-            mailer.Body = "New question posted on Mezoexperts.com";
-            mailer.IsHtml = true;
-            mailer.Send();
-
             var user = new Guid(User.Identity.GetUserId());
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
             List<StudentInbox> list = new List<StudentInbox>();
             var onlineusers = db.online.Where(c => c.Status == true).ToList();
             foreach (var question in MineSessions)
             {
-                foreach (var session in question.Sessions)
+                foreach (var session in question.Sessions.Where(c=>c.isStudentDelete== false))
                 {
                     StudentInbox obj = new StudentInbox();
                     obj.SenderName = session.tutor.Username;
@@ -128,7 +187,7 @@ namespace WebApplication2.Controllers
                     var payer = new PayPal.Api.Payer() { payment_method = "paypal" };
 
                     // ###Redirect URLS
-                    // These URLs will determine how the user is redirected from PayPal once they have either approved or canceled the payment.
+                    // These URLs will determine how the user is redirected from PayPal oncef they have either approved or canceled the payment.
                     var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Students/AccountSettings?";
                     var guid = Convert.ToString((new Random()).Next(100000));
                     var redirectUrl = baseURI + "guid=" + guid;
@@ -322,7 +381,7 @@ namespace WebApplication2.Controllers
             return View(model);
         }
 
-        public ActionResult PostQuestion(string id)
+        public ActionResult PostQuestion(string id,string question)
         {
             if(id!=null)
             {
@@ -331,8 +390,13 @@ namespace WebApplication2.Controllers
                 ViewBag.Id = id;
             }
             
+
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            return View();
+            QuestionViewModel obj = new QuestionViewModel();
+            obj.Details = question;
+
+           
+            return View(obj);
         }
 
         [HttpPost]
@@ -377,7 +441,40 @@ namespace WebApplication2.Controllers
                 var student=db.Students.Find(quest.StudentID);
        
                 string response = quest.QuestionID +"$"+quest.Title+ "$" + student.ProfileImage + "%" + User.Identity.Name +  "$" + quest.Amount+"$"+quest.PostedTime+"$" + quest.DueDate ;
-               
+
+                //send emails
+                var tutors = db.Tutors.Where(c => c.IsCompletedProfile == true).ToList();
+                var allusers = db.Users.ToList();
+
+                string body;
+                using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "email.html"))
+                {
+                    body = sr.ReadToEnd();
+               }
+                try {
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+                    foreach (var v in tutors)
+                    {
+                        var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
+                        if (emailUser != null)
+                        {
+                            var email = emailUser.Email;
+                            Mailer mailer = new Mailer();
+                            mailer.ToEmail = email;
+                            mailer.Subject = "New Question Posted on MezoExperts.com";
+                            mailer.Body = string.Format(body, question.Title, quest.Details);
+                            mailer.IsHtml = true;
+                            mailer.Send();
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+
+                }
+                
+
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -525,6 +622,10 @@ namespace WebApplication2.Controllers
                 obj.Details = " Automatically Generated Message: I have Approved the payment for " + session.OfferedFees + "$. ";
                 session.Replies.Add(obj);
 
+                var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
+                tutor.CurrentEarning = tutor.CurrentEarning + (float)session.OfferedFees;
+                db.Entry(tutor).State = EntityState.Modified; 
+
                 db.SaveChanges();
 
 
@@ -532,8 +633,8 @@ namespace WebApplication2.Controllers
                 var username = User.Identity.Name;
                 var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
                 string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(), obj.ReplyID.ToString(),false);
-                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
-                var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
+                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send messageFp to urself 
+                //var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
                 var username2 = tutor.Username;
                 SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
 
@@ -581,8 +682,11 @@ namespace WebApplication2.Controllers
                 session.Status = Status.Hired;
                 var quest = session.question;
                 quest.Status = Status.Hired;
+                user.CurrentBalance = user.CurrentBalance - (float)session.OfferedFees;
+                db.Entry(user).State = EntityState.Modified; 
                 db.Entry(quest).State = EntityState.Modified;
                 db.Entry(session).State = EntityState.Modified;
+               
 
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();

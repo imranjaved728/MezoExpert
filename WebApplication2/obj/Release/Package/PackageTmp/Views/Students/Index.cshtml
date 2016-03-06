@@ -21,6 +21,18 @@
                 "pageLength": 10,
                 "bLengthChange": false,
                 "scrollX": true,
+               
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": "First page", // This is the link to the first page
+                        "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
+                        "sNext": "@Resources.NextPage", // This is the link to the next page
+                        "sLast": "Last page", // This is the link to the last page
+                      
+                    }
+                    ,
+                    "sSearch": "@Resources.Search"
+                },
                 "columnDefs": [
                    {
                        "targets": [ 0 ],
@@ -66,6 +78,16 @@
             "pageLength": 10,
             "bLengthChange": false,
             "scrollX": true,
+            
+            "oLanguage": {
+                "oPaginate": {
+                    "sFirst": "First page", // This is the link to the first page
+                    "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
+                    "sNext": "@Resources.NextPage", // This is the link to the next page
+                    "sLast": "Last page" // This is the link to the last page
+                },
+                "sSearch": "@Resources.Search"
+            },
             "columnDefs": [
                {
                    "targets": [0],
@@ -132,16 +154,16 @@
                                             @Html.DisplayName("SessionId")
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Sender")
+                                            @Html.DisplayName(Resources.Sender)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Last Message")
+                                            @Html.DisplayName(Resources.LastMessage)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Status")
+                                            @Html.DisplayName(Resources.Status)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Time")
+                                            @Html.DisplayName(Resources.Time)
                                         </th>
 
 
@@ -213,16 +235,16 @@
                                             @Html.DisplayName("Question ID")
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Title")
+                                            @Html.DisplayName(Resources.Title)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Details")
+                                            @Html.DisplayName(Resources.Details)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Status")
+                                            @Html.DisplayName(Resources.Status)
                                         </th>
                                         <th>
-                                            @Html.DisplayName("Time")
+                                            @Html.DisplayName(Resources.Time)
                                         </th>
 
 

@@ -19,6 +19,8 @@ namespace WebApplication2.DBEntities
         public bool NewMessageTutor { get; set; }
         public bool NewMessageStudent { get; set; }
         public bool isClosed { get; set; }
+        public bool isTutorDeleted { get; set; }
+        public bool isStudentDelete { get; set; }
         public double? ratings { get; set; }
 
         public virtual Question question { get; set; }

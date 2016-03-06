@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.App_Start;
 using WebApplication2.DBEntities;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
@@ -39,7 +41,11 @@ namespace WebApplication2.Controllers
             }
             ViewBag.id = tutor.TutorID;
             ViewBag.Expertise = new MultiSelectList(db.Categories, "CategoryID", "CategoryName", tmodel.Expertise);
-           
+            var result = db.online.Where(c => c.Username == tutor.Username).FirstOrDefault() ;
+            if (result == null)
+                tmodel.isOnline = false;
+            else
+                tmodel.isOnline = result.Status;
             return View(tmodel);
         
         }
@@ -108,25 +114,28 @@ namespace WebApplication2.Controllers
             var onlineUsers = db.online.Where(c => c.Status == true).ToList(); ;
 
             SearchViewModel obj = new SearchViewModel();
-            foreach (var v in tutorExpertise)
+            if (!string.IsNullOrEmpty(search))
             {
-               var isTutor= onlineUsers.Where(c => c.Username == v.tutor.Username).FirstOrDefault();
-                if(isTutor!=null)
-                obj.OnlineResults.Add(true);
-                else
-                obj.OnlineResults.Add(false);
+                foreach (var v in tutorExpertise)
+                {
+                    var isTutor = onlineUsers.Where(c => c.Username == v.tutor.Username).FirstOrDefault();
+                    if (isTutor != null)
+                        obj.OnlineResults.Add(true);
+                    else
+                        obj.OnlineResults.Add(false);
 
-                obj.Results.Add(v.tutor);
-            }
+                    obj.Results.Add(v.tutor);
+                }
 
-            foreach (var v in result)
-            {
-                var isTutor = onlineUsers.Where(c => c.Username == v.Username).FirstOrDefault();
-                if (isTutor != null)
-                    obj.OnlineResults.Add(true);
-                else
-                    obj.OnlineResults.Add(false);
-                obj.Results.Add(v);
+                foreach (var v in result)
+                {
+                    var isTutor = onlineUsers.Where(c => c.Username == v.Username).FirstOrDefault();
+                    if (isTutor != null)
+                        obj.OnlineResults.Add(true);
+                    else
+                        obj.OnlineResults.Add(false);
+                    obj.Results.Add(v);
+                }
             }
 
             foreach(var v in top10)
@@ -145,6 +154,31 @@ namespace WebApplication2.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            /*Mailer.GmailUsername = "cs.solutions.ca@gmail.com";
+            Mailer.GmailPassword = "*****";
+
+            Mailer mailer = new Mailer();
+            mailer.ToEmail = "imranjaved728@gmail.com";
+            mailer.Subject = "New Question Posted on MezoExperts.com";
+            mailer.Body = "We can help you.";
+            mailer.IsHtml = true;
+            mailer.Send();*/
+
+
+            /*Mailer.GmailHost = "smtpout.secureserver.net ";
+            Mailer.GmailPort = 3535;
+            Mailer.GmailSSL = false;*/
+
+            /*Mailer.GmailUsername = "support@mezoexperts.com";
+            Mailer.GmailPassword = "123123";
+
+            Mailer mailer = new Mailer();
+            mailer.ToEmail = "imranjaved728@gmail.com";
+            mailer.Subject = "New Question Posted on MezoExperts.com";
+            mailer.Body = "We can help you.";
+            mailer.IsHtml = true;
+            mailer.Send();*/
 
             return View();
         }

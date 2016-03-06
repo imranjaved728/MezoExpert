@@ -160,6 +160,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check top tutors.
+        /// </summary>
+        public static string check {
+            get {
+                return ResourceManager.GetString("check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Files.
         /// </summary>
         public static string ChooseFiles {
@@ -331,11 +340,29 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Link.
+        /// </summary>
+        public static string EmailLink {
+            get {
+                return ResourceManager.GetString("EmailLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Email field is required..
         /// </summary>
         public static string EmailRequired {
             get {
                 return ResourceManager.GetString("EmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your email..
+        /// </summary>
+        public static string Enteremail {
+            get {
+                return ResourceManager.GetString("Enteremail", resourceCulture);
             }
         }
         
@@ -372,6 +399,24 @@ namespace ClassLibrary1 {
         public static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check your email to reset your password. We have sent password reset link to the given email..
+        /// </summary>
+        public static string ForgotPasswordmsg {
+            get {
+                return ResourceManager.GetString("ForgotPasswordmsg", resourceCulture);
             }
         }
         
@@ -575,6 +620,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offers.
+        /// </summary>
+        public static string Offers {
+            get {
+                return ResourceManager.GetString("Offers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Offline.
         /// </summary>
         public static string Offline {
@@ -643,6 +697,15 @@ namespace ClassLibrary1 {
         public static string PostedBy {
             get {
                 return ResourceManager.GetString("PostedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Posted Question.
+        /// </summary>
+        public static string PostedQuestion {
+            get {
+                return ResourceManager.GetString("PostedQuestion", resourceCulture);
             }
         }
         
@@ -751,6 +814,42 @@ namespace ClassLibrary1 {
         public static string RequestPayment {
             get {
                 return ResourceManager.GetString("RequestPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string reset {
+            get {
+                return ResourceManager.GetString("reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been reset. Please.
+        /// </summary>
+        public static string resetmesg1 {
+            get {
+                return ResourceManager.GetString("resetmesg1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to login.
+        /// </summary>
+        public static string resetmesg2 {
+            get {
+                return ResourceManager.GetString("resetmesg2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset your password..
+        /// </summary>
+        public static string resetpass {
+            get {
+                return ResourceManager.GetString("resetpass", resourceCulture);
             }
         }
         

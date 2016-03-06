@@ -153,6 +153,8 @@ namespace WebApplication2.Models
 
         [DataType(DataType.Text)]
         public string []Expertise { get; set; }
+
+        public Boolean isOnline { get; set; }
     }
 
     public class StudentRegisterModel

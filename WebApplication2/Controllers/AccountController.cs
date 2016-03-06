@@ -12,11 +12,13 @@ using WebApplication2.Models;
 using AutoMapper;
 using Facebook;
 using WebApplication2.App_Start;
+using System.IO;
+using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
    
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         #region Properties
         private ApplicationSignInManager _signInManager;
@@ -73,9 +75,16 @@ namespace WebApplication2.Controllers
             }
 
             var user = await UserManager.FindAsync(model.UserName, model.Password);
+            if (user == null)
+                user = await UserManager.FindByEmailAsync(model.UserName);
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            var result= SignInStatus.Failure;
+            if(user!=null)
+               result= await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            else
+                result=await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -458,8 +467,110 @@ namespace WebApplication2.Controllers
             }
         }
         #endregion
-       
-        
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return View("ForgotPasswordConfirmation");
+                }
+
+               
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                string body;
+                using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
+                {
+                    body = sr.ReadToEnd();
+                }
+                try
+                {
+                    Mailer.GmailUsername = "support@mezoexperts.com";
+                    Mailer.GmailPassword = "123123";
+
+                    var email = model.Email;
+                    Mailer mailer = new Mailer();
+                    mailer.ToEmail = model.Email;
+                    mailer.Subject = "Reset your Password MezoExperts.com";
+                    mailer.Body = string.Format(body, "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    mailer.IsHtml = true;
+                    mailer.Send();
+                        
+                    
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            return code == null ? View("Error") : View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
         /*
         //
         // GET: /Account/Login

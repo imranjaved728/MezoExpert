@@ -17,6 +17,15 @@
                 "pageLength": 25,
                 "bLengthChange": false,
                 "scrollX": true,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": "First page", // This is the link to the first page
+                        "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
+                        "sNext": "@Resources.NextPage", // This is the link to the next page
+                        "sLast": "Last page" // This is the link to the last page
+                    },
+                    "sSearch": "@Resources.Search"
+                },
                 "columnDefs": [
                    {
                        "targets": [ 0 ],
@@ -69,7 +78,7 @@
         <div class="col-md-10 personal-info">
             <h1>@Resources.Home</h1>
             <hr><br/>
-            <h4>Active Sessions</h4>
+            <h4>@Resources.ActiveSessions</h4>
             @{
 
                 <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
@@ -79,16 +88,16 @@
                                 @Html.DisplayName("SessionId")
                             </th>
                             <th>
-                                @Html.DisplayName("Sender")
+                                @Html.DisplayName(Resources.Sender)
                             </th>
                             <th>
-                                @Html.DisplayName("Last Message")
+                                @Html.DisplayName(Resources.LastMessage)
                             </th>
                             <th>
-                                @Html.DisplayName("Status")
+                                @Html.DisplayName(Resources.Status)
                             </th>
                             <th>
-                                @Html.DisplayName("Time")
+                                @Html.DisplayName(Resources.Time)
                             </th>
 
 

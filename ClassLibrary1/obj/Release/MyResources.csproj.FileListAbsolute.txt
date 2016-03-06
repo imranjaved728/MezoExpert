@@ -1,0 +1,10 @@
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\bin\Release\ClassLibrary1.dll
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\bin\Release\ClassLibrary1.pdb
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\bin\Release\ar\ClassLibrary1.resources.dll
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\MyResources.csprojResolveAssemblyReference.cache
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\ClassLibrary1.Resources.resources
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\ClassLibrary1.Resources.ar.resources
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\MyResources.csproj.GenerateResource.Cache
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\ar\ClassLibrary1.resources.dll
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\ClassLibrary1.dll
+C:\Users\Imran\Desktop\projectmezo\ClassLibrary1\obj\Release\ClassLibrary1.pdb
