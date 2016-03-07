@@ -76,6 +76,8 @@ namespace WebApplication2.Models
         public DbSet<Usera> Useras { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<PaymentRequests> paymentRequests { get; set; }
+        public DbSet<NotificationConnections> notifyConnections { get; set; }
+        public DbSet<Notifications> notifications { get; set; }
 
         public class Usera
         {

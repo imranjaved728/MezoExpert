@@ -232,6 +232,8 @@
     <Compile Include="Controllers\TutorsController.cs" />
     <Compile Include="DBEntities\Category.cs" />
     <Compile Include="DBEntities\ContactUs.cs" />
+    <Compile Include="DBEntities\NotificationConnections.cs" />
+    <Compile Include="DBEntities\Notifications.cs" />
     <Compile Include="DBEntities\OnlineUsers.cs" />
     <Compile Include="DBEntities\PaymentRequests.cs" />
     <Compile Include="DBEntities\PaypalPayments.cs" />
@@ -246,7 +248,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Mailer.cs" />
+    <Compile Include="Helpers\notifications.cs" />
     <Compile Include="Helpers\Onlines.cs" />
     <Compile Include="Migrations\201603030313001_updates.cs" />
     <Compile Include="Migrations\201603030313001_updates.Designer.cs">
@@ -255,6 +259,22 @@
     <Compile Include="Migrations\201603060208208_sessiondelete.cs" />
     <Compile Include="Migrations\201603060208208_sessiondelete.Designer.cs">
       <DependentUpon>201603060208208_sessiondelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603062349088_notifications.cs" />
+    <Compile Include="Migrations\201603062349088_notifications.Designer.cs">
+      <DependentUpon>201603062349088_notifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603070519291_noti.cs" />
+    <Compile Include="Migrations\201603070519291_noti.Designer.cs">
+      <DependentUpon>201603070519291_noti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603071815509_notif.cs" />
+    <Compile Include="Migrations\201603071815509_notif.Designer.cs">
+      <DependentUpon>201603071815509_notif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603072216390_sesssionNotification.cs" />
+    <Compile Include="Migrations\201603072216390_sesssionNotification.Designer.cs">
+      <DependentUpon>201603072216390_sesssionNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -334,6 +354,7 @@
     <Content Include="Scripts\bootstrap-datetimepicker.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap-rtl.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -595,6 +616,8 @@
     <Content Include="Views\Admin\Session\Index.cshtml" />
     <Content Include="Views\Students\SessionClosed.cshtml" />
     <Content Include="Views\Tutors\SessionClosed.cshtml" />
+    <Content Include="Views\Shared\notificationView.cshtml" />
+    <Content Include="Views\Home\viewAllNotifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -620,6 +643,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603060208208_sessiondelete.resx">
       <DependentUpon>201603060208208_sessiondelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603062349088_notifications.resx">
+      <DependentUpon>201603062349088_notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603070519291_noti.resx">
+      <DependentUpon>201603070519291_noti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603071815509_notif.resx">
+      <DependentUpon>201603071815509_notif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603072216390_sesssionNotification.resx">
+      <DependentUpon>201603072216390_sesssionNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

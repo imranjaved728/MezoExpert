@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -16,23 +17,26 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-  
+
     public class HomeController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
-        {           
+        {
+            Session["noticounter"] = db.notifications.Where(c => c.UserName == User.Identity.Name && c.isRead == false).Count();
+            var result = db.notifications.Where(c => c.UserName == User.Identity.Name).OrderByDescending(c => c.postedTime).Take(5);
+            Session["notifications"] = result.ToList();
             return View();
         }
 
         public async Task<ActionResult> Profile(String username)
         {
-            if (username == null || username=="")
+            if (username == null || username == "")
             {
                 return HttpNotFound();
             }
-            Tutor tutor =  db.Tutors.Where(c=>c.Username== username).First();
+            Tutor tutor = db.Tutors.Where(c => c.Username == username).First();
             TutorUpdateModel tmodel = Mapper.Map<Tutor, TutorUpdateModel>(tutor);
 
             if (tutor == null)
@@ -41,13 +45,13 @@ namespace WebApplication2.Controllers
             }
             ViewBag.id = tutor.TutorID;
             ViewBag.Expertise = new MultiSelectList(db.Categories, "CategoryID", "CategoryName", tmodel.Expertise);
-            var result = db.online.Where(c => c.Username == tutor.Username).FirstOrDefault() ;
+            var result = db.online.Where(c => c.Username == tutor.Username).FirstOrDefault();
             if (result == null)
                 tmodel.isOnline = false;
             else
                 tmodel.isOnline = result.Status;
             return View(tmodel);
-        
+
         }
         public ActionResult Chat()
         {
@@ -61,6 +65,63 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        
+        public ActionResult viewAllNotifications()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity.Name;
+                var notificationsAll = db.notifications.Where(c => c.UserName == user).OrderByDescending(c => c.postedTime);
+                return View(notificationsAll);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized");
+            }
+            
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateSession()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity.Name;
+                var counter = db.notifications.Where(c => c.UserName == User.Identity.Name && c.isRead == false).Count();
+                Session["noticounter"] = counter;
+
+                if (counter > 0)
+                {
+                    var result = db.notifications.Where(c => c.UserName == User.Identity.Name).OrderByDescending(c => c.postedTime).Take(10);
+                    Session["notifications"] = result.ToList();
+                }
+                
+            }
+
+            return null;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ReadNotifications()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity.Name;
+                var result = db.notifications.Where(c => c.UserName == user && c.isRead==false);
+
+                foreach(var noti in result)
+                {
+                    noti.isRead = true;
+                     db.Entry(noti).State = EntityState.Modified;
+                }
+               await  db.SaveChangesAsync();
+
+                Session["noticounter"] = db.notifications.Where(c => c.UserName == User.Identity.Name && c.isRead == false).Count();
+            }
+
+            return null;
+        }
+        
         public ActionResult Language(string language)
         {
             if (language.CompareTo("English")==0)

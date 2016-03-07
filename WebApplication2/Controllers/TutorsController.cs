@@ -45,12 +45,50 @@ namespace WebApplication2.Controllers
             return IsCompletedProfile;
         }
 
+        private void SendNotification(string sendTo, string username, string image, string message,Boolean storeDB)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<notifications>();
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.notifyConnections.Where(c => c.userName == sendTo).FirstOrDefault();
+                if (user != null)
+                {
+                    string finalmessage = image + "^" + username + "^" + message;
+                    if (storeDB == true)
+                    { 
+                        Notifications notify = new Notifications();
+                        notify.ID = Guid.NewGuid();
+                        notify.isRead = false;
+                        notify.Message = finalmessage;
+                        notify.UserName = sendTo;
+                        notify.postedTime = DateTime.Now;
+                        db.notifications.Add(notify);
+                        db.SaveChanges();
+                    }
+
+                    var counter = db.notifications.Where(c => c.UserName == sendTo && c.isRead==false).Count();
+                    
+                    finalmessage = finalmessage + "^" + counter;
+
+                  
+                    context.Clients.Client(user.connectionId)
+                         .recieverNotifier(finalmessage);
+
+                   
+                }
+            }
+        }
         // GET: Tutors
         public async Task<ActionResult> Index()
         {
            
             bool IsCompletedProfile = await isProfileCompleted();
-           
+
+            Session["noticounter"] = db.notifications.Where(c => c.UserName == User.Identity.Name && c.isRead == false).Count();
+            var result = db.notifications.Where(c => c.UserName == User.Identity.Name).OrderByDescending(c => c.postedTime).Take(5);
+            Session["notifications"] = result.ToList();
+
             if (IsCompletedProfile == true)
             {
                 var user = new Guid(User.Identity.GetUserId());
@@ -61,6 +99,7 @@ namespace WebApplication2.Controllers
                 TempData["isValidate"] = false;
                 return RedirectToAction("EditProfile");
             }
+
 
         }
 
@@ -119,6 +158,7 @@ namespace WebApplication2.Controllers
                     var username = student.Username;
                     var message = "";
                     DeleteSessionMessageStudent(sessionId, username, message, context);
+                    SendNotification(username, session.tutor.Username,session.tutor.ProfileImage, "Session has been closed.",false);
                 }
 
 
@@ -126,7 +166,6 @@ namespace WebApplication2.Controllers
             }
 
            return RedirectToAction("inbox");
-
 
         }
 
@@ -280,6 +319,9 @@ namespace WebApplication2.Controllers
                 rep.Details = reply.replyDetails;
                 db.Replies.Add(rep);
                 await db.SaveChangesAsync();
+
+                SendNotification(postedQuestion.student.Username, obj.tutor.Username, obj.tutor.ProfileImage, "Replied to your question.",false);
+
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -415,7 +457,30 @@ namespace WebApplication2.Controllers
 
                     if (user.Connections == null)
                     {
-                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                            var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
+                            var Username = session.tutor.Username;
+                            var img = session.tutor.ProfileImage;
+
+                            var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
+                            if (notiAlready == null)
+                            {
+                                Notifications notify = new Notifications();
+                                notify.ID = Guid.NewGuid();
+                                notify.isRead = false;
+                                notify.Message =     session.question.student.ProfileImage + "^" +Username+ "^"+ "has sent you a message.";
+                                notify.UserName = sendTo;
+                                notify.sessionId = sessionId;
+                                notify.postedTime = DateTime.Now;
+                                db.notifications.Add(notify);
+                            }
+                            else
+                            {
+                                notiAlready.counts = notiAlready.counts + 1;
+                                notiAlready.isRead = false;
+                                db.Entry(notiAlready).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                            SendNotification(sendTo, session.tutor.Username, session.tutor.ProfileImage, "has sent you a message.",false);
                     }
                     else
                     {
@@ -659,7 +724,7 @@ namespace WebApplication2.Controllers
                 //send button update
                 var message2 = "<button type=\"button\" id=\"offer\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#hireNewModal\">Hire for ("+question.amount+"$)</button>";
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-
+                SendNotification(username2, username, imgsrc, "I have offered my services for $"+question.amount,true);
 
                 try
                 {
@@ -744,7 +809,7 @@ namespace WebApplication2.Controllers
                 message2 = message2 + "<button type =\"button\" id=\"reject\" class=\"btn  btn-primary\" data-toggle=\"modal\" data-target=\"#rejectNewModal\">Reject </button>";
 
                    SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-
+                   SendNotification(username2, username, imgsrc, "I have sent Invoice of $" + question.amount,true);
                 try
                 {
 

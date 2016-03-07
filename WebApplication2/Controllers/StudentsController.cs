@@ -106,6 +106,7 @@ namespace WebApplication2.Controllers
                     session.isStudentDelete = true;
                     session.isClosed = true;
                     db.Entry(session).State = EntityState.Modified;
+
                     await db.SaveChangesAsync();
 
                     var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
@@ -113,6 +114,9 @@ namespace WebApplication2.Controllers
                     var username = tutor.Username;
                     var message = "";
                     DeleteSessionMessageTutor(sessionId, username, message, context);
+                    SendNotification(username, session.question.student.Username, session.question.student.ProfileImage, "Session has been closed.",true);
+
+
                 }
             }
 
@@ -347,8 +351,9 @@ namespace WebApplication2.Controllers
 
         public ActionResult Index()
         {
-
+            
             var user = new Guid(User.Identity.GetUserId());
+           
             var MineSessions = db.Questions.Where(c => c.StudentID == user).ToList();
             List<StudentInbox> list = new List<StudentInbox>();
             var onlineusers = db.online.Where(c => c.Status == true).ToList();
@@ -376,7 +381,11 @@ namespace WebApplication2.Controllers
             }
             StudentHomeModel model = new StudentHomeModel();
             model.obj = list;
-            model.questions= MineSessions.OrderBy(c => c.PostedTime).ToList(); 
+            model.questions= MineSessions.OrderBy(c => c.PostedTime).ToList();
+
+            Session["noticounter"] = db.notifications.Where(c => c.UserName == User.Identity.Name && c.isRead == false).Count();
+            var result = db.notifications.Where(c => c.UserName == User.Identity.Name).OrderByDescending(c => c.postedTime).Take(5);
+            Session["notifications"] = result.ToList();
 
             return View(model);
         }
@@ -450,7 +459,7 @@ namespace WebApplication2.Controllers
                 {
                     body = sr.ReadToEnd();
                 }
-
+               
                 //send emails
                 if (singleTutor == false)
                 {
@@ -462,7 +471,10 @@ namespace WebApplication2.Controllers
                         
                         foreach (var v in tutors)
                         {
+
                             var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
+                            SendNotification(emailUser.UserName, student.Username, student.ProfileImage, "New Question posted.",true);
+
                             if (emailUser != null)
                             {
                                 var email = emailUser.Email;
@@ -484,9 +496,12 @@ namespace WebApplication2.Controllers
                 {
                     try
                     {
-                        var email = db.Users.Find(quest.TutorID.ToString()).Email;
+                        var tutor = db.Users.Find(quest.TutorID.ToString());
+                      
+                        SendNotification(tutor.UserName, student.Username, student.ProfileImage, "I have a new task for you.",true);
+                        
                         Mailer mailer = new Mailer();
-                        mailer.ToEmail = email;
+                        mailer.ToEmail = tutor.Email;
                         mailer.Subject = "New Question Posted on MezoExperts.com";
                         mailer.Body = string.Format(body, question.Title, quest.Details);
                         mailer.IsHtml = true;
@@ -551,6 +566,10 @@ namespace WebApplication2.Controllers
                 var message2 = " <button type=\"button\" id=\"rejected\" disabled class=\"btn btn-primary\">Rejected Invoice</button>";
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+                SendNotification(username2, username, imgsrc, "I have approved the payment of $" + session.OfferedFees,true);
+                //close sessions
+                DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
+                DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
 
                 try
                 {
@@ -626,7 +645,9 @@ namespace WebApplication2.Controllers
                 tutor.Rating = rating;
                 db.Entry(tutor).State = EntityState.Modified;
                 db.SaveChanges();
-                
+
+                SendNotification(tutor.Username, session.question.student.Username, session.question.student.ProfileImage, "I have rated you " + rating+" star for your work.",true);
+
 
                 return new JsonResult()
                 {
@@ -690,7 +711,10 @@ namespace WebApplication2.Controllers
                 var message2 = " <button type=\"button\" id=\"accepted\" disabled class=\"btn btn-primary\">Accepted Invoice</button>";
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-
+                SendNotification(username2, session.question.student.Username, session.question.student.ProfileImage, "I have approved the payment of $" + session.OfferedFees,true);
+                //close sessions
+                DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
+                DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
                 try
                 {
 
@@ -730,6 +754,40 @@ namespace WebApplication2.Controllers
                     Data = new { result = "fail" }
                 };
 
+            }
+        }
+
+        private void SendNotification(string sendTo,string username,string image, string message,bool addDb)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<notifications>();
+            //var name = Context.User.Identity.Name;
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.notifyConnections.Where(c => c.userName == sendTo).FirstOrDefault();
+                if (user != null) {
+
+                    string finalmessage = image + "^" + username + "^" + message;
+
+                    if (addDb == true)
+                    {
+                        Notifications notify = new Notifications();
+                        notify.ID = Guid.NewGuid();
+                        notify.isRead = false;
+                        notify.Message = finalmessage;
+                        notify.UserName = sendTo;
+                        notify.postedTime = DateTime.Now;
+                        db.notifications.Add(notify);
+                        db.SaveChanges();
+                    }
+                    var counter = db.notifications.Where(c => c.UserName == sendTo && c.isRead == false).Count();
+
+                    finalmessage = finalmessage + "^" + counter;
+
+                    context.Clients.Client(user.connectionId)
+                                 .recieverNotifier(finalmessage);
+
+                    
+                 }
             }
         }
 
@@ -787,6 +845,7 @@ namespace WebApplication2.Controllers
                 var message2 = "  <button type=\"button\" id=\"hire\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#invoiceNewModal\">Send Invoice</button>";
                                                                                        
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
+                SendNotification(username2, username,imgsrc, "I have hired you for $"+session.OfferedFees,true);
 
                 try
                 {
@@ -898,6 +957,7 @@ namespace WebApplication2.Controllers
                 SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
                
                 SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+                //SendNotification(username2, imgsrc,"I have hired you for ");
 
             return new JsonResult()
                 {
@@ -983,8 +1043,33 @@ namespace WebApplication2.Controllers
 
                     if (user.Connections == null)
                     {
-                        //  Clients.Caller.showErrorMessage("The user is no longer connected.");
+                            var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
+                            var Username = session.question.student.Username;
+                            var img = session.question.student.ProfileImage;
+
+                            var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
+                            if (notiAlready == null)
+                            {
+                                Notifications notify = new Notifications();
+                                notify.ID = Guid.NewGuid();
+                                notify.isRead = false;
+                                notify.Message = session.question.student.ProfileImage+"^"+Username + "^" + "has sent you a message.";
+                                notify.UserName = sendTo;
+                                notify.sessionId = sessionId;
+                                notify.postedTime = DateTime.Now;
+                                db.notifications.Add(notify);
+                             
+                            }
+                            else
+                            {
+                                notiAlready.counts = notiAlready.counts + 1;
+                                notiAlready.isRead = false;
+                                db.Entry(notiAlready).State = EntityState.Modified;
+                        }
+                        db.SaveChanges();
+                        SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.",false);
                     }
+
                     else
                     {
                         foreach (var connection in user.Connections)
@@ -992,6 +1077,8 @@ namespace WebApplication2.Controllers
                             context.Clients.Client(connection.ConnectionID)
                                  .recieverStudent2(message);
                         }
+                        
+
                     }
                 }
             }

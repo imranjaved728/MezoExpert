@@ -312,7 +312,7 @@
 
 @Html.Partial("~/Views/Tutors/SendOffer.cshtml", Model.offer)
 @Html.Partial("~/Views/Tutors/Invoice.cshtml", Model.offer)
-@Html.Partial("~/Views/Tutors/sessionclosed.cshtml")
+@*@Html.Partial("~/Views/Tutors/sessionclosed.cshtml")*@
 
 @section scripts {
 
@@ -417,7 +417,7 @@
             // chat.qs = { "sessionId": sessionId };
 
             chat.client.recieverSessionClosed = function (message) {
-                $('#sessionClose').modal('show');
+                //$('#sessionClose').modal('show');
                 $("#alerts").show();
                 $("#poster").hide();
                 $(".comment").last().hide();

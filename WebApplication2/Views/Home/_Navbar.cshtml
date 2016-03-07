@@ -126,17 +126,22 @@
                                                         </ul>
                                                     </li>
                                                 </ul>
-                                                <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                                                <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
                                                     <li class="hidden">
                                                         <a href="#page-top"></a>
                                                     </li>
 
                                                     @{
+                                                       
+
 
                                                         if (User.IsInRole("Student"))
                                                         {
 
-                                                            <li><a href="#search"><i class="fa fa-search"></i></a></li>
+                                                            @Html.Partial("~/Views/Shared/notificationView.cshtml")
+                                                         @*<li><a href="#" id="notificationsbar"><i class="glyphicon glyphicon-bell"></i><span class="badge" id="noticounter">@{@counters}</span></a></li>*@
+                                                                <!-- /.dropdown-messages -->
+                                                        <li><a href="#search"><i class="fa fa-search"></i></a></li>
 
                                                             <li>
                                                                 <a href="#" onclick="location.href='@Url.Action("Index","Students")'"><i class="fa fa-home"></i> @Resources.Home</a>
@@ -151,6 +156,7 @@
                                                         else if (User.IsInRole("Tutor"))
                                                         {
 
+                                                            @Html.Partial("~/Views/Shared/notificationView.cshtml")
                                                             <li><a href="#search"><i class="fa fa-search"></i></a></li>
 
                                                             <li>

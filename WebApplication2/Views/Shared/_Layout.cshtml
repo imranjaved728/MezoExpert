@@ -95,7 +95,7 @@
     <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Theme/js/prettify.js"></script>
-
+    <script src="~/Scripts/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
        
         $(window).load(function () {
@@ -159,12 +159,114 @@
 
             });
 
+            var notification = $.connection.notifications;
+
+            notification.client.recieverNotifier = function (message) {
+                // Add the message to the page.
+                var parseresult = message.split("^");
+                var image =parseresult[0];
+                var username = parseresult[1];
+                var textmessage = parseresult[2];
+                var counter = parseresult[3];
+                
+                $.ajax({
+                    type: 'Post',
+                    url: '@Url.AbsoluteAction("UpdateSession", "Home")',
+
+                    success: function (response) {
+                        //$('#chatroom').append(response);
+
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                }); // End Ajax  
+
+          
+
+                $("#notification_count").text(counter);
+                $("#notification_count").fadeIn("slow");
+                var notificationtext = '<div data-notify="container" style="margin-bottom:0px" class="col-xs-12 col-sm-12 alert alert-minimalist" role="alert">' +
+                        '<img data-notify="icon" class="img-circle pull-left" src="'+image+'">' +
+                        '<span data-notify="title">' + username + '</span>' +
+                        '<span data-notify="message" style=text-transform: none;">' + textmessage + '</span>' +
+                    '</div>';
+
+              
+                $("#notificationsBody").prepend(notificationtext);
+
+                //notifiy
+                $.notify({
+                    icon: image,
+                    title: username,
+                    message: textmessage
+                }, {
+                    placement: {
+                        from: "bottom",
+                        align: "left"
+                    },
+                    allow_dismiss: true,
+                    mouse_over: 'pause',
+                    type: 'minimalist',
+                    delay: 5000,
+                    icon_type: 'image',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                        '<img data-notify="icon" class="img-circle pull-left">' +
+                        '<span data-notify="title">{1}</span>' +
+                        '<span data-notify="message">{2}</span>' +
+                    '</div>'
+                });
+
+                //add in notifcation bar body.
+
+            };
 
 
         });
 
+        
+       
 
 
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            if ($("#notification_count").text() == "0")
+                $("#notification_count").fadeOut("slow");
+
+        $("#notificationLink").click(function()
+        {
+                $("#notificationContainer").fadeToggle(300);
+                $("#notification_count").fadeOut("slow");
+                $.ajax({
+                    type: 'Post',
+                    url: '@Url.AbsoluteAction("ReadNotifications", "Home")',
+
+                    success: function (response) {
+                        //$('#chatroom').append(response);
+
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                }); // End Ajax
+                return false;
+        });
+
+        //Document Click hiding the popup
+        $(document).click(function()
+        {
+        $("#notificationContainer").hide();
+        });
+
+        //Popup on click
+        $("#notificationContainer").click(function()
+        {
+       
+        });
+
+        });
     </script>
 </body>
 

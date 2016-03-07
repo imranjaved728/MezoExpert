@@ -14,6 +14,7 @@ using Facebook;
 using WebApplication2.App_Start;
 using System.IO;
 using WebApplication2.Helpers;
+using WebApplication2.DBEntities;
 
 namespace WebApplication2.Controllers
 {
@@ -24,6 +25,7 @@ namespace WebApplication2.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _dbContext;
+     
 
         public AccountController()
         {
@@ -88,8 +90,9 @@ namespace WebApplication2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    
-                        if (UserManager.IsInRole(user.Id, "Student"))
+                  
+
+                    if (UserManager.IsInRole(user.Id, "Student"))
                         {
                             return RedirectToAction("Index", "Students");
                         }
@@ -140,6 +143,23 @@ namespace WebApplication2.Controllers
                     stu.ProfileImage = "/Profiles/default/" + filename + ".png";
                     stu.Username = user.UserName;
                     _dbContext.Students.Add(stu);
+                    _dbContext.SaveChanges();
+
+                    Notifications notify = new Notifications();
+                    notify.ID = Guid.NewGuid();
+                    notify.isRead = false;
+                    notify.Message = "/Profiles/default/admin.png^Admin^You have successfully created your account. You can click ask question to post your first question.";
+                    notify.UserName = stu.Username;
+                    notify.postedTime = DateTime.Now;
+                    _dbContext.notifications.Add(notify);
+
+                    Notifications notify2 = new Notifications();
+                    notify2.ID = Guid.NewGuid();
+                    notify2.isRead = false;
+                    notify2.Message = "/Profiles/default/admin.png^Admin^We now have Arabic Language support as well.";
+                    notify2.UserName = stu.Username;
+                    notify2.postedTime = DateTime.Now;
+                    _dbContext.notifications.Add(notify2);
                     _dbContext.SaveChanges();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -193,9 +213,16 @@ namespace WebApplication2.Controllers
                     int filename = rnd.Next(1, 4);
                     tutor.ProfileImage = "/Profiles/default/"+filename+".png";
                     _dbContext.Tutors.Add(tutor);
-                    _dbContext.SaveChanges(); 
-                    
+                    _dbContext.SaveChanges();
 
+                    Notifications notify = new Notifications();
+                    notify.ID = Guid.NewGuid();
+                    notify.isRead = false;
+                    notify.Message = "/Profiles/default/admin.png^Admin^Please complete your profile so that you have full access.";
+                    notify.UserName = tutor.Username;
+                    notify.postedTime = DateTime.Now;
+                    _dbContext.notifications.Add(notify);
+                    _dbContext.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -330,6 +357,23 @@ namespace WebApplication2.Controllers
                         stu.ProfileImage = "/Profiles/default/" + filename + ".png";
                         stu.Username = user.UserName;
                         _dbContext.Students.Add(stu);
+
+                        Notifications notify = new Notifications();
+                        notify.ID = Guid.NewGuid();
+                        notify.isRead = false;
+                        notify.Message = "/Profiles/default/admin.png^Admin^You have successfully created your account. You can click ask question to post your first question.";
+                        notify.UserName = stu.Username;
+                        notify.postedTime = DateTime.Now;
+                        _dbContext.notifications.Add(notify);
+
+                        Notifications notify2 = new Notifications();
+                        notify2.ID = Guid.NewGuid();
+                        notify2.isRead = false;
+                        notify2.Message = "/Profiles/default/admin.png^Admin^We now have Arabic Language support as well.";
+                        notify2.UserName = stu.Username;
+                        notify2.postedTime = DateTime.Now;
+                        _dbContext.notifications.Add(notify2);
+
                         _dbContext.SaveChanges();
 
                     }
@@ -346,6 +390,15 @@ namespace WebApplication2.Controllers
                         int filename = rnd.Next(1, 4);
                         tutor.ProfileImage = "/Profiles/default/" + filename + ".png";
                         _dbContext.Tutors.Add(tutor);
+
+                        Notifications notify = new Notifications();
+                        notify.ID = Guid.NewGuid();
+                        notify.isRead = false;
+                        notify.Message = "/Profiles/default/admin.png^Admin^Please complete your profile so that you have full access.";
+                        notify.UserName = tutor.Username;
+                        notify.postedTime = DateTime.Now;
+                        _dbContext.notifications.Add(notify);
+
                         _dbContext.SaveChanges();
                     }
 
@@ -353,6 +406,7 @@ namespace WebApplication2.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                       
                         return RedirectToLocal(returnUrl);
                     }
                 }

@@ -224,7 +224,7 @@
                                                                             @Html.HiddenFor(m => m.sessionID)
                                                                             @Html.AntiForgeryToken()
                                                                             <div class="media-body">
-                                                                                <strong class="text-success username">@{ @Cstudent.Username}<</strong><br />
+                                                                                <strong class="text-success username">@{ @Cstudent.Username}</strong><br />
                                                                                 @if (Model.session.isClosed)
                                                                                     {
                                                                                     @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true, id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
@@ -318,7 +318,7 @@
 @Html.Partial("~/Views/Students/Reject.cshtml", Model.offer)
 @Html.Partial("~/Views/Students/AddFunds.cshtml")
 @Html.Partial("~/Views/Students/Rate.cshtml", Model.offer)
-@Html.Partial("~/Views/Students/sessionclosed.cshtml")
+@*@Html.Partial("~/Views/Students/sessionclosed.cshtml")*@
 
 @section scripts {
 
@@ -438,7 +438,7 @@
             };
 
             chat.client.recieverSessionClosed = function (message) {
-                $('#sessionClose').modal('show');
+                //$('#sessionClose').modal('show');
                 $("#alerts").show();
                 $("#poster").hide();
             };

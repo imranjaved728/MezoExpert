@@ -305,3 +305,7 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\WebApplication2.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\WebApplication2.pdb
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\ar\WebApplication2.resources.dll
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.sessiondelete.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.notifications.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.noti.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.notif.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.sesssionNotification.resources

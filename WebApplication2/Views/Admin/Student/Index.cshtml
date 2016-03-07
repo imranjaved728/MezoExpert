@@ -42,21 +42,21 @@
             <table class="display list finallist" cellspacing="0" width="100%" id="tutorlist">
                 <thead>
                     <tr>
-                    
+
                         <th>
                             @Html.DisplayNameFor(model => model.FirstName)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.LastName)
                         </th>
-                     
+
                         <th>
                             @Html.DisplayNameFor(model => model.DateCreated)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CurrentBalance)
                         </th>
-                       
+
                         <th>
                             @Html.DisplayNameFor(model => model.Username)
                         </th>
@@ -74,14 +74,14 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.LastName)
                             </td>
-                            
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.DateCreated)
                             </td>
                             <td>
                                 <span class="label label-success"> $@Html.DisplayFor(modelItem => item.CurrentBalance)</span>
-</td>
-                            
+                            </td>
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.Username)
                             </td>
@@ -102,7 +102,7 @@
             </div>
         </div>
 
- 
+
         <div class="col-md-1"></div>
     </div>
 </div>

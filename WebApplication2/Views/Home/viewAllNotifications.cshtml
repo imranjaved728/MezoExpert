@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApplication2.DBEntities.Notifications>
+<div class="container fill img-rounded">
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 personal-info">
+
+            <h1>Notifications</h1>
+            <hr>
+            @{ 
+
+            
+            foreach (var noti in Model)
+            {
+                var completeMessage = noti.Message;
+                var results = completeMessage.Split('^');
+                <div data-notify="container" class="col-xs-12 col-sm-12 alert alert-minimalist" role="alert">
+                    <img data-notify="icon" class="img-circle pull-left" src='@results[0]'>
+                    <span data-notify="title">@results[1]</span>
+                    <span data-notify="message" style="text-transform: none;">@results[2]</span>
+                    @if (noti.sessionId != null)
+                    {
+                        <br/><span data-notify="message">Total Messages: @noti.counts</span>
+                    }
+                   <br/> <span data-notify="message" style="float:right">Notification Time: @noti.postedTime</span>
+                  
+                </div>
+               }
+            }
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
