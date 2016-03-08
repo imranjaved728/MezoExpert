@@ -18,8 +18,7 @@ namespace SignalRChat
             string roomName = "tutors";
             Clients.Group(roomName).addNewMessageToPage(message);
         }
-
-
+        
         public void SendChatMessage(string who, string message)
         {
             var name = Context.User.Identity.Name;

@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <!-- stylesheet -->
+    <link href="css/literallycanvas.css" rel="stylesheet">
+
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <!-- dependency: React.js -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+
+    <!-- Literally Canvas -->
+    <script src="js/literallycanvas.js"></script>
+  </head>
+  <body>
+    <!-- where the widget goes. you can do CSS to it. -->
+    <div class="literally"></div>
+
+    <!-- kick it off -->
+    <script>
+        // Look ma, no jQuery!
+        var lc=LC.init(
+            document.getElementsByClassName('literally')[0],
+            {imageURLPrefix: 'static/img'});
+			
+       
+	       var localStorageKey = 'drawing'
+    if (localStorage.getItem(localStorageKey)) {
+      lc.loadSnapshot(JSON.parse(localStorage.getItem(localStorageKey)));
+    }
+	
+    lc.on('drawingChange', function() {
+      localStorage.setItem(localStorageKey, JSON.stringify(lc.getSnapshot()));
+	
+    });
+				
+        /* or if you just love jQuery,
+            $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
+            or
+            LC.init($('.literally').get(0), {imageURLPrefix: '/static/img'})
+        */
+    </script>
+  </body>
+</html>

@@ -246,6 +246,7 @@
                                                                                                 <table>
                                                                                                     <tr>
                                                                                                         <td>
+                                                                                                            
                                                                                                             <div id="buttonsUpdate" style="padding-right:10px;padding-left:10px">
                                                                                                                 @if (Model.session.Status == "Posted")
                                                                                                                 {
@@ -284,9 +285,15 @@
                                                                                                             }
                                                                                                             else
                                                                                                             {
-                                                                                                                <button type="submit" id="formsubmit" class="btn  btn-success" style="width:100px">@Resources.Send</button>
+                                                                                                                
+                                                                                                                    <button type="submit" id="formsubmit" class="btn  btn-success" style="width:100px">@Resources.Send</button>
 
+                                                                                                                   
+                                                                                                                
                                                                                                             }
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <a target="_blank" class="btn btn-info" style="float:right" href="@Url.Action("Canvas","Home",new { username=Model.session.question.student.Username})"><i class="fa fa-align-justify"></i> Board</a>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>

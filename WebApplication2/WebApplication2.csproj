@@ -247,6 +247,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\canvas.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Mailer.cs" />
@@ -410,6 +411,38 @@
     <Content Include="Theme\bootstrap-3.3.4-dist\js\npm.js" />
     <Content Include="Theme\buttons\bootstrap-social.css" />
     <Content Include="Theme\buttons\social-buttons.css" />
+    <Content Include="Theme\Canvas\css\literallycanvas.css" />
+    <Content Include="Theme\Canvas\index.html" />
+    <Content Include="Theme\Canvas\js\jquery-1.12.1.min.js" />
+    <Content Include="Theme\Canvas\js\literallycanvas-core.js" />
+    <Content Include="Theme\Canvas\js\literallycanvas-core.min.js" />
+    <Content Include="Theme\Canvas\js\literallycanvas.js" />
+    <Content Include="Theme\Canvas\js\literallycanvas.min.js" />
+    <Content Include="Theme\Canvas\js\react-with-addons.js" />
+    <Content Include="Theme\Canvas\README.txt" />
+    <Content Include="Theme\Canvas\static\img\alpha.png" />
+    <Content Include="Theme\Canvas\static\img\checkerboard-8x8.png" />
+    <Content Include="Theme\Canvas\static\img\dashed-line.png" />
+    <Content Include="Theme\Canvas\static\img\ellipse.png" />
+    <Content Include="Theme\Canvas\static\img\eraser.png" />
+    <Content Include="Theme\Canvas\static\img\eyedropper.png" />
+    <Content Include="Theme\Canvas\static\img\hue.png" />
+    <Content Include="Theme\Canvas\static\img\line-with-arrow.png" />
+    <Content Include="Theme\Canvas\static\img\line.png" />
+    <Content Include="Theme\Canvas\static\img\pan.png" />
+    <Content Include="Theme\Canvas\static\img\pencil.png" />
+    <Content Include="Theme\Canvas\static\img\polygon-cancel.png" />
+    <Content Include="Theme\Canvas\static\img\polygon-closed.png" />
+    <Content Include="Theme\Canvas\static\img\polygon-open.png" />
+    <Content Include="Theme\Canvas\static\img\polygon.png" />
+    <Content Include="Theme\Canvas\static\img\rectangle.png" />
+    <Content Include="Theme\Canvas\static\img\redo.png" />
+    <Content Include="Theme\Canvas\static\img\saturation.png" />
+    <Content Include="Theme\Canvas\static\img\screenshot.png" />
+    <Content Include="Theme\Canvas\static\img\text.png" />
+    <Content Include="Theme\Canvas\static\img\undo.png" />
+    <Content Include="Theme\Canvas\static\img\zoom-in.png" />
+    <Content Include="Theme\Canvas\static\img\zoom-out.png" />
     <Content Include="Theme\css\bootstrap.css" />
     <Content Include="Theme\css\bootstrap.min.css" />
     <Content Include="Theme\css\chat.css" />
@@ -618,6 +651,14 @@
     <Content Include="Views\Tutors\SessionClosed.cshtml" />
     <Content Include="Views\Shared\notificationView.cshtml" />
     <Content Include="Views\Home\viewAllNotifications.cshtml" />
+    <Content Include="Theme\Canvas\.DS_Store" />
+    <Content Include="Theme\Canvas\bower.json" />
+    <Content Include="Theme\Canvas\css\.DS_Store" />
+    <Content Include="Theme\Canvas\js\.DS_Store" />
+    <Content Include="Theme\Canvas\js\.gitignore" />
+    <Content Include="Theme\Canvas\static\.DS_Store" />
+    <Content Include="Theme\Canvas\static\img\.DS_Store" />
+    <Content Include="Views\Home\Canvas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

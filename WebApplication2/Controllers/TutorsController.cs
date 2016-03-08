@@ -446,6 +446,31 @@ namespace WebApplication2.Controllers
                 if (user == null)
                 {
                     // context.Clients.Caller.showErrorMessage("Could not find that user.");
+                    var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
+                    var Username = session.tutor.Username;
+                    var img = session.tutor.ProfileImage;
+
+                    var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
+                    if (notiAlready == null)
+                    {
+                        Notifications notify = new Notifications();
+                        notify.ID = Guid.NewGuid();
+                        notify.isRead = false;
+                        notify.Message = session.question.student.ProfileImage + "^" + Username + "^" + "has sent you a message.";
+                        notify.UserName = sendTo;
+                        notify.sessionId = sessionId;
+                        notify.postedTime = DateTime.Now;
+                        db.notifications.Add(notify);
+                    }
+                    else
+                    {
+                        notiAlready.counts = notiAlready.counts + 1;
+                        notiAlready.isRead = false;
+                        db.Entry(notiAlready).State = EntityState.Modified;
+                       
+                    }
+                    db.SaveChanges();
+                    SendNotification(sendTo, session.tutor.Username, session.tutor.ProfileImage, "has sent you a message.", false);
                 }
                 else
                 {

@@ -262,6 +262,12 @@ namespace WebApplication2.Controllers
             return View("Index");
         }
 
+        public async Task<ActionResult> Canvas()
+        {
+            return View();
+        }
+
+
         public ActionResult Unauthorized()
         {
             return View();
