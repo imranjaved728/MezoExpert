@@ -1,0 +1,40 @@
+﻿@using WebApplication2.DBEntities
+@{ 
+    var counters = 0;
+    counters = ((int?)Session["noticounter"] ?? 0) + 0;
+
+
+<li id="notification_li" class="notificationsbar">
+
+   
+    <span id="notification_count">@{@counters}</span>
+
+    <a href="#" id="notificationLink"><i class="glyphicon glyphicon-bell"></i></a>
+
+    <div id="notificationContainer" class="container" style="padding:0px">
+        <div id="notificationTitle">Notifications</div>
+        <div id="notificationsBody" class="notifications">
+            @{
+                var notifications = (List<Notifications>)Session["notifications"];
+                if (notifications != null)
+                {
+                    foreach (var noti in notifications)
+                    {
+                        var completeMessage = noti.Message;
+                        var results = completeMessage.Split('^');
+                        <div data-notify="container" style="margin-bottom:0px" class="col-xs-12 col-sm-12 alert alert-minimalist" role="alert">
+                            <img data-notify="icon" class="img-circle pull-left" src='@results[0]'>
+                            <span data-notify="title">@results[1]</span>
+                            <span data-notify="message" style="text-transform: none;">@results[2]</span>
+                        </div>
+                    }
+
+                }
+            }
+        </div>
+        <div id="notificationFooter"><a href="@Url.Action("viewAllNotifications","home")">See All</a></div>
+    </div>
+
+</li>
+
+}

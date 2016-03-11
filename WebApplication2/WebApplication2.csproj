@@ -348,6 +348,7 @@
     <Content Include="Profiles\default\2.png" />
     <Content Include="Profiles\default\3.png" />
     <Content Include="Profiles\default\4.png" />
+    <Content Include="Profiles\default\admin.png" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />

@@ -66,24 +66,6 @@
                     </div>
                 </div>
 
-                @*<div class="form-group">
-                        <label class="col-lg-3 control-label">Time Zone:</label>
-                        <div class="col-lg-8">
-                            <div class="ui-select">
-                                <select id="user_time_zone" class="form-control">
-                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>*@
-
                 <div class="form-group">
                     <label class="col-md-3 control-label">@Html.LabelFor(model => model.Country)</label>
                     <div class="col-md-6">
@@ -129,60 +111,54 @@
 </div>
 
 @section scripts{
-    
-<script>
 
-    function showMessage() {
+    <script>
 
-        $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
+        function showMessage() {
 
-        });
-      
+            $('html, body').animate({ scrollTop: 0 }, 'slow', function () {
 
-        $("#alerts").show();
-        window.setTimeout(function () {
-            $("#alerts").fadeTo(800, 0).slideUp(800, function () {
-                $(this).remove();
             });
-        }, 5000);
 
-    }
 
-    $(document).ready(function () {
+            $("#alerts").show();
+            window.setTimeout(function () {
+                $("#alerts").fadeTo(800, 0).slideUp(800, function () {
+                    $(this).remove();
+                });
+            }, 5000);
 
-       
-        $("#FileUpload").change(function () {
-            var formData = new FormData();
-            var totalFiles = document.getElementById("FileUpload").files.length;
-            for (var i = 0; i < totalFiles; i++) {
-                var file = document.getElementById("FileUpload").files[i];
+        }
 
-                formData.append("FileUpload", file);
-            }
-            $.ajax({
-                type: "POST",
-                url: '/Students/UploadProfile',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    $("#profImg").attr("src", response.result);
-                    $("#ProfileImage").val(response.result);
-                },
-                error: function (error) {
-                    alert("errror uploading profile");
+        $(document).ready(function () {
+
+
+            $("#FileUpload").change(function () {
+                var formData = new FormData();
+                var totalFiles = document.getElementById("FileUpload").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var file = document.getElementById("FileUpload").files[i];
+
+                    formData.append("FileUpload", file);
                 }
+                $.ajax({
+                    type: "POST",
+                    url: '/Students/UploadProfile',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $("#profImg").attr("src", response.result);
+                        $("#ProfileImage").val(response.result);
+                    },
+                    error: function (error) {
+                        alert("errror uploading profile");
+                    }
+                });
             });
         });
-    });
 
+    </script>
 
-
-   </script>    
-    
-    
-    
-    
-    
 }

@@ -12,7 +12,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-10 personal-info">
                 <h1 class="h1over"><a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.isOnline == true ? "text-success" : "text-danger")"></i></a> @Model.UserName</h1>
-              
+
                 <hr>
             </div>
         </div>
@@ -102,12 +102,12 @@
                     </label>
                     <div class="col-md-6">
                         @*@Html.DropDownListFor(model => model.Expertise, new SelectList(ViewBag.Expertise, "CategoryID", "CategoryName"), htmlAttributes: new { @class = "ui fluid normal dropdown", multiple = "multiple" })*@
-                      <ul>
-                                @for(int i=0; i<Model.Expertise.Length;i++)
-                                {
-                                    <li><b>@ViewBag.Expertise.Items.Local[i].CategoryName</b></li>
-                                }
-                       </ul>
+                        <ul>
+                            @for (int i = 0; i < Model.Expertise.Length; i++)
+                            {
+                                <li><b>@ViewBag.Expertise.Items.Local[i].CategoryName</b></li>
+                            }
+                        </ul>
                     </div>
                 </div>
 
@@ -127,10 +127,10 @@
 @section scripts{
 
     <script>
-   
-    $(document).on('ready', function () {
-        $('#rating').rating({ displayOnly: true, step: 0.5 });
-    });
+
+        $(document).on('ready', function () {
+            $('#rating').rating({ displayOnly: true, step: 0.5 });
+        });
     </script>
 
 

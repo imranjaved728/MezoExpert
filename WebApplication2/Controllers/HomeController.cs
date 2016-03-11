@@ -146,8 +146,9 @@ namespace WebApplication2.Controllers
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
+            return Redirect(Request.UrlReferrer.PathAndQuery);
 
-            return View("Index");
+           // return View("Index");
         }
         public ActionResult SetCulture(string culture)
         {

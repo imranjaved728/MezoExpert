@@ -3,7 +3,6 @@
     ViewBag.Title = "Tutors - Home";
 }
 
-
 @section scripts{
 
     <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
@@ -28,7 +27,7 @@
                 },
                 "columnDefs": [
                    {
-                       "targets": [ 0 ],
+                       "targets": [0],
                        "visible": false,
                        "searchable": false
                    },
@@ -46,22 +45,22 @@
 
                 "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                            // Bind click event
-                            $(nRow).click(function () {
+                    // Bind click event
+                    $(nRow).click(function () {
 
-                               // alert('You clicked on ' + aData[0] + '\'s row');
+                        // alert('You clicked on ' + aData[0] + '\'s row');
 
-                                $("#SessionId").val(aData[0]);
-                                document.getElementById('QuestionDetails').submit();
-                            });
-
-                            return nRow;
-                        }
+                        $("#SessionId").val(aData[0]);
+                        document.getElementById('QuestionDetails').submit();
                     });
+
+                    return nRow;
+                }
+            });
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
-                });
+        });
 
     </script>
 }
@@ -77,7 +76,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
             <h1>@Resources.Home</h1>
-            <hr><br/>
+            <hr><br />
             <h4>@Resources.ActiveSessions</h4>
             @{
 

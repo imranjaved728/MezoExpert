@@ -4,36 +4,46 @@
 }
 
 <style>
-    .error-template {padding: 40px 15px;text-align: center;}
-    .error-actions {margin-top:15px;margin-bottom:15px;}
-    .error-actions .btn { margin-right:10px; }
+    .error-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+
+    .error-actions {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .error-actions .btn {
+            margin-right: 10px;
+        }
 </style>
 <div class="container fill img-rounded">
 
-    
+
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 personal-info">
-            
 
-                    <div class="error-template">
-                        <h1> Oops!</h1>
-                       
-                        <h2>
-                            404 Not Found
-                        </h2>
-                        <div class="error-details">
-                            Sorry, an error has occured, Requested page not found!
-                        </div>
-                        <br/><br/><br/>
-                        <div class="error-actions">
-                            <a href="@Url.Action("Index", "Home")" class="btn btn-success btn-lg">
-                                <span class="glyphicon glyphicon-home"></span>
-                                Take Me Home
-                            </a><a href="@Url.Action("Contact", "Home")" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support </a>
-                        </div>
-                    </div>
-              
+
+            <div class="error-template">
+                <h1> Oops!</h1>
+
+                <h2>
+                    404 Not Found
+                </h2>
+                <div class="error-details">
+                    Sorry, an error has occured, Requested page not found!
+                </div>
+                <br /><br /><br />
+                <div class="error-actions">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Take Me Home
+                    </a><a href="@Url.Action("Contact", "Home")" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

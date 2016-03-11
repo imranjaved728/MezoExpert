@@ -47,7 +47,7 @@
                                 </div>
                                 @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                             </div>
-                           
+
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
                             @Html.TextAreaFor(model => model.Experience, new { @class = "form-control", @rows = "6", @columns = "48", @style = "resize: none;" })
 
 
-                          
+
                             @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -155,13 +155,11 @@
             }
 
             <div>
-                @Html.ActionLink("Back to List", "IndexTutor","",new {@class="btn btn-warning" })
+                @Html.ActionLink("Back to List", "IndexTutor", "", new { @class = "btn btn-warning" })
             </div>
 
         </div>
         <div class="col-md-1"></div>
     </div>
 </div>
-
-
 

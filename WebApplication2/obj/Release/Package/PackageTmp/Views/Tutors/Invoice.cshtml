@@ -15,11 +15,11 @@
 
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(model => model.SessionId, new { id = "HiddenText" })
-                           
+
                             <div class="form-group">
                                 You can send invoice as originally negotiated or update the fees.
                                 <div class="input-group">
-                                    
+
                                     <span class="input-group-addon">$</span>
                                     @Html.TextBoxFor(m => m.amount, new { @class = "form-control" })
 

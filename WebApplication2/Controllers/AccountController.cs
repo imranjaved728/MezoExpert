@@ -168,7 +168,7 @@ namespace WebApplication2.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Students");
                 }
                 else {
 
@@ -229,7 +229,7 @@ namespace WebApplication2.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Tutors");
                 }
                 else
                 {
@@ -297,6 +297,13 @@ namespace WebApplication2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (_dbContext.Tutors.Where(c => c.Username == loginInfo.DefaultUserName).FirstOrDefault() != null)
+                        return RedirectToAction("Index","Tutors");
+                    else if(_dbContext.Students.Where(c => c.Username == loginInfo.DefaultUserName).FirstOrDefault()!=null)
+                        return RedirectToAction("Index", "Students");
+                    else
+                        return RedirectToAction("Index", "Admin");
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

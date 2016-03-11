@@ -10,7 +10,7 @@
     <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
 
     <script>
-       
+
         $(document).ready(function () {
             $('#tutorlist').DataTable({
                 "ordering": false,
@@ -33,9 +33,9 @@
         <div class="col-md-10 personal-info">
             <h1>Tutors</h1>
             <hr>
-           
+
             <p>
-                @Html.ActionLink("Create New", "CreateTutor","", new { @class="btn btn-success"})
+                @Html.ActionLink("Create New", "CreateTutor", "", new { @class = "btn btn-success" })
             </p>
             <table class="display list finallist" cellspacing="0" width="100%" id="tutorlist">
                 <thead>
@@ -47,35 +47,35 @@
                             @Html.DisplayNameFor(model => model.LastName)
                         </th>
                         @*<th>
-                    @Html.DisplayNameFor(model => model.DateOfBirth)
-                </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Degree)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.University)
-                        </th>
-                        <th>
-                    @Html.DisplayNameFor(model => model.AboutMe)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Experience)
-                </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.City)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Country)
-                        </th>
-                        <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
-                </th>*@
+                                @Html.DisplayNameFor(model => model.DateOfBirth)
+                            </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Degree)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.University)
+                                    </th>
+                                    <th>
+                                @Html.DisplayNameFor(model => model.AboutMe)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Experience)
+                            </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.City)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Country)
+                                    </th>
+                                    <th>
+                                @Html.DisplayNameFor(model => model.DateCreated)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.CurrentEarning)
                         </th>
                         @*<th>
-                    @Html.DisplayNameFor(model => model.ProfileImage)
-                </th>*@
+                                @Html.DisplayNameFor(model => model.ProfileImage)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.Username)
                         </th>
@@ -100,55 +100,56 @@
                                 @Html.DisplayFor(modelItem => item.LastName)
                             </td>
                             @*<td>
-                        @Html.DisplayFor(modelItem => item.DateOfBirth)
-                    </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Degree)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.University)
-                            </td>
-                            <td>
-                        @Html.DisplayFor(modelItem => item.AboutMe)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Experience)
-                    </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Country)
-                            </td>
-                            @*<td>
-                        @Html.DisplayFor(modelItem => item.DateCreated)
-                    </td>*@
+                                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                                </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Degree)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.University)
+                                        </td>
+                                        <td>
+                                    @Html.DisplayFor(modelItem => item.AboutMe)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Experience)
+                                </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.City)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country)
+                                        </td>
+                                        @*<td>
+                                    @Html.DisplayFor(modelItem => item.DateCreated)
+                                </td>*@
                             <td>
                                 <span class="label label-success">$@Html.DisplayFor(modelItem => item.CurrentEarning)</span>
                             </td>
                             @*<td>
-                        @Html.DisplayFor(modelItem => item.ProfileImage)
-                    </td>*@
+                                    @Html.DisplayFor(modelItem => item.ProfileImage)
+                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Username)
                             </td>
                             <td>
-                               @if (item.IsCompletedProfile) {
-                                <span class="label label-success">Yes</span>
-                               }
-                               else
-                               {
-                                <span class="label label-danger">No</span>
-                               }
+                                @if (item.IsCompletedProfile)
+                                {
+                                    <span class="label label-success">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">No</span>
+                                }
                             </td>
                             <td>
                                 <span class="label label-info">@Html.DisplayFor(modelItem => item.Rating)</span>
-</td>
+                            </td>
                             <td>
-                              <a href="@Url.Action("EditTutor", "Admin", new { id = item.TutorID })"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="@Url.Action("EditTutor", "Admin", new { id = item.TutorID })"><i class="fa fa-pencil-square-o"></i></a>
                                 |
-                               <a href="@Url.Action("DeleteTutor", "Admin", new { id = item.TutorID })"><i class="fa fa-trash-o"></i></a>
-                               
+                                <a href="@Url.Action("DeleteTutor", "Admin", new { id = item.TutorID })"><i class="fa fa-trash-o"></i></a>
+
 
                             </td>
                         </tr>
@@ -157,15 +158,11 @@
             </table>
 
             <div>
-               <a class = "btn btn-warning" href="@Url.Action("Index","Admin","")"><i class="fa fa-arrow-left"> Back to Home</i></a> 
+                <a class="btn btn-warning" href="@Url.Action("Index","Admin","")"><i class="fa fa-arrow-left"> Back to Home</i></a>
             </div>
         </div>
 
-        
+
         <div class="col-md-1"></div>
     </div>
 </div>
-
-
-
-

@@ -200,3 +200,7 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.d
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.pdb
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.updates.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.sessiondelete.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.notifications.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.noti.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.notif.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.sesssionNotification.resources

@@ -37,7 +37,7 @@
                                         foreach (var v in Model.question.Files)
                                         {
                                             var path = @v.Path.Split('/');
-                                            <strong class="text-success"><a href="@v.Path">@path[path.Length - 1]</a></strong><br />
+                                            <strong class="text-success"><a href="/Tutors/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                         }
                                     }
                                     <br />

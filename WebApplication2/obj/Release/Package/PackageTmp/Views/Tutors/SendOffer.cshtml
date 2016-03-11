@@ -9,9 +9,9 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h2>Offer Service</h2>
                         <hr class="star-primary">
-                      
-                       @using (Ajax.BeginForm("SendOffer", "Tutor", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "updateButtonsOffer" }, new { id = "myOffer" }))
-                       {
+
+                        @using (Ajax.BeginForm("SendOffer", "Tutor", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "updateButtonsOffer" }, new { id = "myOffer" }))
+                        {
 
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(model => model.SessionId, new { id = "HiddenText" })
@@ -19,12 +19,12 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
                                     @Html.TextBoxFor(m => m.amount, new { @class = "form-control" })
-                                   
+
 
                                 </div>
                                 @Html.ValidationMessageFor(m => m.amount, "", new { @class = "text-danger" })
                             </div> <!-- /.form-group -->
-                            
+
                             <div class="row">
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-4">

@@ -158,7 +158,7 @@ namespace WebApplication2.Controllers
                     var username = student.Username;
                     var message = "";
                     DeleteSessionMessageStudent(sessionId, username, message, context);
-                    SendNotification(username, session.tutor.Username,session.tutor.ProfileImage, "Session has been closed.",false);
+                    SendNotification(username, session.tutor.Username,session.tutor.ProfileImage, "Session has been closed.",true);
                 }
 
 
@@ -296,6 +296,7 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> QuestionsReply(TutorQuestionDetails reply)
         {
             var userId= new Guid(User.Identity.GetUserId());
+            var user = db.Tutors.Where(c => c.TutorID == userId).FirstOrDefault();
             var question = db.Questions.Where(c => c.QuestionID == reply.QuestionID);
             var postedQuestion = question.FirstOrDefault();
             var selectedSession = postedQuestion.Sessions.Where(c => c.TutorID.Value == userId).FirstOrDefault();
@@ -320,7 +321,7 @@ namespace WebApplication2.Controllers
                 db.Replies.Add(rep);
                 await db.SaveChangesAsync();
 
-                SendNotification(postedQuestion.student.Username, obj.tutor.Username, obj.tutor.ProfileImage, "Replied to your question.",false);
+                SendNotification(postedQuestion.student.Username, user.Username, user.ProfileImage, "Replied to your question.",true);
 
                 return new JsonResult()
                 {

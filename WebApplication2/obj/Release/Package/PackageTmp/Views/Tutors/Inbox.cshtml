@@ -2,12 +2,9 @@
 @{
     ViewBag.Title = "Tutors - Inbox";
 }
-
-
 @section scripts{
 
     <link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
-   
     <script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
 
     <script>
@@ -31,7 +28,7 @@
 
                 "columnDefs": [
                    {
-                       "targets": [ 0 ],
+                       "targets": [0],
                        "visible": false,
                        "searchable": false
                    },
@@ -40,8 +37,8 @@
                        "width": "22%"
                    },
                 {
-                         "targets": [2],
-                         "width": "50%"
+                    "targets": [2],
+                    "width": "50%"
                 },
                 {
                     "targets": [3],
@@ -52,28 +49,28 @@
                      "width": "12%"
                  },
 
-                   { 'bSortable': false, 'aTargets': [1, 2, 3,5] }
+                   { 'bSortable': false, 'aTargets': [1, 2, 3, 5] }
                 ],
                 "order": [[4, "desc"]],
 
-                        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                            // Bind click event
-                            $(nRow).click(function () {
+                    // Bind click event
+                    $(nRow).click(function () {
 
-                               // alert('You clicked on ' + aData[0] + '\'s row');
+                        // alert('You clicked on ' + aData[0] + '\'s row');
 
-                                $("#SessionId").val(aData[0]);
-                                document.getElementById('QuestionDetails').submit();
-                            });
-
-                            return nRow;
-                        }
+                        $("#SessionId").val(aData[0]);
+                        document.getElementById('QuestionDetails').submit();
                     });
+
+                    return nRow;
+                }
+            });
 
             $("#postedRequests tr").css('cursor', 'pointer');
 
-               });
+        });
 
     </script>
 }
@@ -92,97 +89,98 @@
             <hr>
             @{
 
-                    <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayName("SessionId")
-                                </th>
-                               
-                                <th>
-                                    @Html.DisplayName(Resources.Sender)
-                                </th>
-                                <th>
-                                    @Html.DisplayName(Resources.LastMessage)
-                                </th>
-                                <th>
-                                    @Html.DisplayName(Resources.Status)
-                                </th>
-                                <th>
-                                    @Html.DisplayName(Resources.Time)
-                                </th>
-                                <th>
+                <table id="postedRequests" class="display formatTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("SessionId")
+                            </th>
 
-                                </th>
+                            <th>
+                                @Html.DisplayName(Resources.Sender)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.LastMessage)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.Status)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.Time)
+                            </th>
+                            <th>
 
-                            </tr>
+                            </th>
 
-                        </thead>
-                        <tbody>
-                            @{ var i = 0;}
-                            @foreach (var item in Model.sessions)
-                            {
-                                i++;
-                                var val = item.Replies.OrderBy(c => c.PostedTime);
-                                var lastreply = val.LastOrDefault();
-                              
+                        </tr>
 
-                                <tr style="@(item.NewMessageTutor== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SessionID)
-                                    </td>
-                                    
-                                    <td>
-                                         
-                                        <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(Model.online[i-1] == true ? "text-success" : "text-danger")"></i></a>&nbsp; <img src="@item.question.student.ProfileImage" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.question.student.Username)</b>
+                    </thead>
+                    <tbody>
+                        @{ var i = 0;}
+                        @foreach (var item in Model.sessions)
+                        {
+                            i++;
+                            var val = item.Replies.OrderBy(c => c.PostedTime);
+                            var lastreply = val.LastOrDefault();
 
-                                    </td>
-                                    <td>
-                                        @if (lastreply != null) {
+
+                            <tr style="@(item.NewMessageTutor== true ? "background-color:white !important" : "background-color:#F1F1F1 !important")">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SessionID)
+                                </td>
+
+                                <td>
+
+                                    <a href="#" style="text-decoration:none;"><i id="onlineStatus" class="fa fa-circle  @(Model.online[i-1] == true ? "text-success" : "text-danger")"></i></a>&nbsp; <img src="@item.question.student.ProfileImage" alt="" class="img-circle imgSizeInbox"><b>&nbsp;@Html.DisplayFor(modelItem => item.question.student.Username)</b>
+
+                                </td>
+                                <td>
+                                    @if (lastreply != null)
+                                    {
                                         var length = lastreply.Details.Length;
-                                        
-                                        @lastreply.Details.Substring(0, Math.Min(length, 256))
-                                            if (length > 256)
-                                            {
-                                                <b>@Html.Raw("...")</b>
-                                            }
-                                        }
-                                    </td>
-                                    <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
-                                        @if (item.Status == "Approved")
-                                        {
-                                            <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else if (item.Status == "Conflict")
-                                        {
-                                            <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else if (item.Status == "Hired")
-                                        {
-                                            <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else if (item.Status == "Posted")
-                                        {
-                                            <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
-                                        }
-                                    </td>
-                                    <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
-                                        @Html.DisplayFor(modelItem => lastreply.PostedTime)
-                                    </td>
-                                    <td>
-                                        <a style="color:black" href="@Url.Action("DeleteSession", "Tutors", new { sessionid = item.SessionID })"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
 
-                    </table>
-                }
-            
+                                        @lastreply.Details.Substring(0, Math.Min(length, 256))
+                                        if (length > 256)
+                                        {
+                                            <b>@Html.Raw("...")</b>
+                                        }
+                                    }
+                                </td>
+                                <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
+                                    @if (item.Status == "Approved")
+                                    {
+                                        <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Conflict")
+                                    {
+                                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Hired")
+                                    {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Posted")
+                                    {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-primary"> @Html.DisplayFor(modelItem => item.Status)</span>
+                                    }
+                                </td>
+                                <td style="@(item.NewMessageTutor== true ? "background-color:white " : "background-color:#F1F1F1 ")">
+                                    @Html.DisplayFor(modelItem => lastreply.PostedTime)
+                                </td>
+                                <td>
+                                    <a style="color:black" href="@Url.Action("DeleteSession", "Tutors", new { sessionid = item.SessionID })"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            }
+
         </div>
         <div class="col-md-1"></div>
     </div>

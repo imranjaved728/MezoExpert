@@ -11,11 +11,11 @@
         <div class="col-md-10">
 
 
-            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")"> 
-            
-             @Model.session.tutor.Username
+            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")">
+
+                @Model.session.tutor.Username
                 <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a>
-            
+
             </h1>
             <hr />
             <div class="alert alert-danger alert-dismissable" style="display: none;" id="alerts">
@@ -24,7 +24,7 @@
                 The Session has been closed by tutor.
             </div>
             <div class="panel-body comments">
-                
+
 
                 <ul class="media-list pchat" id="chatlist">
                     <li class="media">
@@ -178,131 +178,134 @@
                                                     var isTeacher = Model.session.question.TutorID;
                                                     if (isTeacher == null || (isTeacher != null && count != 1))
                                                     {
-                                                    <li class="media">
-                                                        <div class="comment">
-                                                            <a href="#" class="pull-left">
-                                                                <img src="@student.ProfileImage" alt="" class="img-circle imgSize">
-                                                            </a>
+                                                        <li class="media">
+                                                            <div class="comment">
+                                                                <a href="#" class="pull-left">
+                                                                    <img src="@student.ProfileImage" alt="" class="img-circle imgSize">
+                                                                </a>
 
-                                                            <div class="media-body">
-                                                                <strong class="text-success userText username">@{ @student.Username}</strong><br />
-                                                                @Html.Raw(reply.Details)
+                                                                <div class="media-body">
+                                                                    <strong class="text-success userText username">@{ @student.Username}</strong><br />
+                                                                    @Html.Raw(reply.Details)
 
-                                                                @if (reply.Files.Count > 0)
-                                                                { <br /><br />
-                                                                    foreach (var v in reply.Files)
-                                                                    {
-                                                                        var path = @v.Path.Split('/');
-                                                                        <strong class="text-success"><a target="_blank" href="/Students/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
-                                                                    }
-                                                                }
-                                                                <div class="clearfix"></div>
-                                                            </div>
-
-                                                            <br />
-                                                            <div style="margin-bottom:20px">
-                                                                <small class="text-muted pull-right">@reply.PostedTime</small>
-                                                            </div>
-
-
-                                                            <hr>
-                                                        </div>
-                                                    </li>
-                                                                            }
+                                                                    @if (reply.Files.Count > 0)
+                                                                    { <br /><br />
+                                                                        foreach (var v in reply.Files)
+                                                                        {
+                                                                            var path = @v.Path.Split('/');
+                                                                            <strong class="text-success"><a target="_blank" href="/Students/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
                                                                         }
                                                                     }
-                                                                    var Cstudent = Model.session.question.student;
-                                                                    <li class="media" id="poster">
-                                                                        @if (!Model.session.isClosed)
-                                                                        {
-                                                                          <div class="comment">
-                                                                            <a href="#" class="pull-left">
-                                                                                <img id="tutImg" src="@Cstudent.ProfileImage" alt="" class="img-circle imgSize">
-                                                                            </a>
-                                                                            @using (Ajax.BeginForm("Chat", "Students", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                                <br />
+                                                                <div style="margin-bottom:20px">
+                                                                    <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                                </div>
+
+
+                                                                <hr>
+                                                            </div>
+                                                        </li>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        var Cstudent = Model.session.question.student;
+                                                                        <li class="media" id="poster">
+                                                                            @if (!Model.session.isClosed)
                                                                             {
-                                                                                @Html.HiddenFor(m => m.sessionID)
-                                                                                @Html.AntiForgeryToken()
-                                                                                <div class="media-body">
-                                                                                    <strong class="text-success username">@{ @Cstudent.Username}</strong><br />
-                                                                                    @if (Model.session.isClosed)
+                                                                                <div class="comment">
+                                                                                    <a href="#" class="pull-left">
+                                                                                        <img id="tutImg" src="@Cstudent.ProfileImage" alt="" class="img-circle imgSize">
+                                                                                    </a>
+                                                                                    @using (Ajax.BeginForm("Chat", "Students", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "notifyMessage" }, new { id = "mypost" }))
+                                                                            {
+                                                                            @Html.HiddenFor(m => m.sessionID)
+                                                                            @Html.AntiForgeryToken()
+                                                                            <div class="media-body">
+                                                                                <strong class="text-success username">@{ @Cstudent.Username}</strong><br />
+                                                                                @if (Model.session.isClosed)
                                                                                     {
                                                                                     @Html.TextAreaFor(model => model.replyDetail, new { @readonly = true, id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        @Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
+                                                                                    @Html.TextAreaFor(model => model.replyDetail, new { id = "QuestionText", @class = "form-control", placeholder = "Write a reply...", @rows = "6", @columns = "48", @style = "resize: none;" })
 
                                                                                     }
 
 
-                                                                                    @Html.ValidationMessageFor(model => model.replyDetail, "", new { @class = "text-danger" })
+                                                                                @Html.ValidationMessageFor(model => model.replyDetail, "", new { @class = "text-danger" })
 
-                                                                                    <div class="form-group">
-                                                                                        <input type="file" multiple id="FileUpload" />
-                                                                                    </div>
+                                                                                <div class="form-group">
+                                                                                    <input type="file" multiple id="FileUpload" />
+                                                                                </div>
 
-                                                                                    <div class="pull-right">
-                                                                                        <table>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <div id="buttonsUpdate" style="padding-right:10px;padding-left:10px">
-                                                                                                        @if (Model.session.Status == "Offered")
+                                                                                <div class="pull-right">
+                                                                                    <table>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div id="buttonsUpdate" style="padding-right:10px;padding-left:10px">
+                                                                                                    @if (Model.session.Status == "Offered")
                                                                                                         {
-                                                                                                            <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#hireNewModal">&nbsp;&nbsp;&nbsp;Hire for $@Model.session.OfferedFees   &nbsp; &nbsp;</button>
+                                                                                                        <button type="button" id="offer" class="btn  btn-primary" data-toggle="modal" data-target="#hireNewModal">&nbsp;&nbsp;&nbsp;Hire for $@Model.session.OfferedFees   &nbsp; &nbsp;</button>
 
                                                                                                         }
-                                                                                                        @if (Model.session.Status == "Hired")
+                                                                                                    @if (Model.session.Status == "Hired")
                                                                                                         {
-                                                                                                            <button type="button" id="hired" class="btn  btn-primary" disabled>Hired</button>
+                                                                                                        <button type="button" id="hired" class="btn  btn-primary" disabled>Hired</button>
                                                                                                         }
-                                                                                                        @if (Model.session.Status == "Invoiced")
+                                                                                                    @if (Model.session.Status == "Invoiced")
                                                                                                         {
-                                                                                                            <button type="button" id="accept" class="btn  btn-primary" data-toggle="modal" data-target="#approveNewModal" style="margin-right:5px">Accept</button>
-                                                                                                            <button type="button" id="reject" class="btn  btn-primary" data-toggle="modal" data-target="#rejectNewModal">Reject</button>
+                                                                                                        <button type="button" id="accept" class="btn  btn-primary" data-toggle="modal" data-target="#approveNewModal" style="margin-right:5px">Accept</button>
+                                                                                                        <button type="button" id="reject" class="btn  btn-primary" data-toggle="modal" data-target="#rejectNewModal">Reject</button>
 
                                                                                                         }
-                                                                                                        @if (Model.session.Status == "Approved")
+                                                                                                    @if (Model.session.Status == "Approved")
                                                                                                         {
-                                                                                                            <button type="button" id="accepted" disabled class="btn  btn-primary">Accepted Invoice</button>
+                                                                                                        <button type="button" id="accepted" disabled class="btn  btn-primary">Accepted Invoice</button>
 
                                                                                                         }
-                                                                                                        @if (Model.session.Status == "Conflict")
+                                                                                                    @if (Model.session.Status == "Conflict")
                                                                                                         {
-                                                                                                            <button type="button" id="rejected" disabled class="btn  btn-primary">Rejected Invoice</button>
+                                                                                                        <button type="button" id="rejected" disabled class="btn  btn-primary">Rejected Invoice</button>
 
                                                                                                         }
-                                                                                                    </div>
+                                                                                                </div>
 
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    @if (Model.session.isClosed)
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @if (Model.session.isClosed)
                                                                                                     {
-                                                                                                              <button type="submit" id="formsubmit" disabled class="btn btn-success" style="width:100px">@Resources.Send</button>
+                                                                                                    <button type="submit" id="formsubmit" disabled class="btn btn-success" style="width:100px">@Resources.Send</button>
                                                                                                     }
                                                                                                     else
                                                                                                     {
-                                                                                                        <button type="submit" id="formsubmit"  class="btn btn-success" style="width:100px">@Resources.Send</button>
-
-                                                                                                    }
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </table>
-
-                                                                                    </div>
-
-                                                                                    <div class="clearfix"></div>
+                                                                                                    <button type="submit" id="formsubmit" class="btn btn-success" style="width:100px">@Resources.Send</button>
+                                                                                                    @*<a class="btn btn-info" target="_blank" href="@Url.Action(" Canvas","Home",new { id=Model.session.tutor.Username})"><i class="fa fa-align-justify"></i> Board</a>*@
+                                                                                                }
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-info" target="_blank" style="float:right" href="@Url.Action("Canvas","Home",new { username=Model.session.tutor.Username})"><i class="fa fa-align-justify"></i> @Resources.Board</a>  
+                                                                                              </td>
+                                                                                        </tr>
+                                                                                    </table>
 
                                                                                 </div>
+
+                                                                                <div class="clearfix"></div>
+
+                                                                            </div>
 
 
 
                                                                                         }
-                                                                            <div class="clearfix"></div>
+                                                                                    <div class="clearfix"></div>
 
-                                                                        </div>
-                                                                        }
-                                                                    </li>
+                                                                                </div>
+                                                                                    }
+                                                                        </li>
                     }
 
 
@@ -318,20 +321,18 @@
 @Html.Partial("~/Views/Students/Reject.cshtml", Model.offer)
 @Html.Partial("~/Views/Students/AddFunds.cshtml")
 @Html.Partial("~/Views/Students/Rate.cshtml", Model.offer)
-@Html.Partial("~/Views/Students/sessionclosed.cshtml")
+@*@Html.Partial("~/Views/Students/sessionclosed.cshtml")*@
 
 @section scripts {
-    <!--Script references. -->
-    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+
     <!--Reference the SignalR library. -->
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <!--Reference the autogenerated SignalR hub script. -->
     <script src="~/signalr/hubs"></script>
 
     <script>
-        var result='@(Model.session.isClosed)';
-        if(result=="True")
-        {
+        var result = '@(Model.session.isClosed)';
+        if (result == "True") {
             $("#alerts").show();
         }
 
@@ -402,16 +403,10 @@
                 else {
                     var control = $("#FileUpload");
                     control.replaceWith(control = control.clone(true));
-
                 }
 
-
-
             }
-            else {
-
-            }
-
+            
 
         }
 
@@ -421,11 +416,9 @@
             var chat = $.connection.tutorStudentChat;
 
             chat.client.recieverStudent = function (message) {
-                // Add the message to the page.
-
+               
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
-                if ($(".pchat li").hasClass("True"))
-                {
+                if ($(".pchat li").hasClass("True")) {
 
                     $(".True").remove();
                     $("#onlineStatus").removeClass("text-danger");
@@ -443,12 +436,12 @@
                     setTimeout(function () {
                         $("#QuestionText").focus();
                     }, 0);
-                    //CKEDITOR.instances.QuestionText.setData('');
+         
                 });
             };
 
             chat.client.recieverSessionClosed = function (message) {
-                $('#sessionClose').modal('show');
+                //$('#sessionClose').modal('show');
                 $("#alerts").show();
                 $("#poster").hide();
             };
@@ -459,29 +452,23 @@
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
                 $(function () {
-
-                    //$("#QuestionText").val("");
                     setTimeout(function () {
                         $("#QuestionText").focus();
                     }, 0);
-                    //CKEDITOR.instances.QuestionText.setData('');
+                 
                 });
             };
             chat.client.recieverTutorFile = function (message) {
 
                 var splitData = message.split("$");
                 $("#" + splitData[0]).html(splitData[1]).fadeIn('slow');
-                // Add the message to the page.
-
-                //$('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
+               
 
                 $(function () {
-
-                    //$("#QuestionText").val("");
                     setTimeout(function () {
                         $("#QuestionText").focus();
                     }, 0);
-                    // CKEDITOR.instances.QuestionText.setData('');
+                   
                 });
             };
 
@@ -501,12 +488,6 @@
             $.connection.hub.qs = { "sessionId": sessionId };
 
             $.connection.hub.start().done(function () {
-
-                // Call the Send method on the hub.
-
-                // Clear text box and reset focus for next comment.
-
-
 
             });
 
@@ -552,8 +533,6 @@
         function updateButtonsRate(data) {
             $('#rateNewModal').modal('hide');
         }
-
-
 
     </script>
 
