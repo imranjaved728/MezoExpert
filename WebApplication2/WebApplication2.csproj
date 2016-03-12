@@ -277,6 +277,10 @@
     <Compile Include="Migrations\201603072216390_sesssionNotification.Designer.cs">
       <DependentUpon>201603072216390_sesssionNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603120236168_notifcationslinks.cs" />
+    <Compile Include="Migrations\201603120236168_notifcationslinks.Designer.cs">
+      <DependentUpon>201603120236168_notifcationslinks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -697,6 +701,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603072216390_sesssionNotification.resx">
       <DependentUpon>201603072216390_sesssionNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603120236168_notifcationslinks.resx">
+      <DependentUpon>201603120236168_notifcationslinks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -448,4 +448,7 @@
   <data name="resetpass" xml:space="preserve">
     <value>إعادة تعيين كلمة المرور الخاصة بك.</value>
   </data>
+  <data name="Board" xml:space="preserve">
+    <value>السبورة</value>
+  </data>
 </root>

@@ -359,6 +359,11 @@
         };
 
         function notifyMessage(data) {
+            //alert(1);
+            //var sessionId = getUrlParameter('SessionId');
+            //var chats = $.connection.notifications;
+            //chats.server.senderTest(sessionId, $("#QuestionText").val());
+
             var result = data.result;
             if (data.result != "null") {
                 var splitData = result.split("$");

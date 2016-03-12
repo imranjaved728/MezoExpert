@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace WebApplication2.Helpers
@@ -33,7 +34,7 @@ namespace WebApplication2.Helpers
             Mailer.GmailPassword = "123123";
         }
 
-        public void Send()
+        public async Task Send()
         {
             SmtpClient smtp = new SmtpClient();
             smtp.Host = GmailHost;
@@ -48,7 +49,7 @@ namespace WebApplication2.Helpers
                 message.Subject = Subject;
                 message.Body = Body;
                 message.IsBodyHtml = IsHtml;
-                smtp.Send(message);
+                await smtp.SendMailAsync(message);
             }
         }
     }

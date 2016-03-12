@@ -114,7 +114,7 @@ namespace WebApplication2.Controllers
                     var username = tutor.Username;
                     var message = "";
                     DeleteSessionMessageTutor(sessionId, username, message, context);
-                    SendNotification(username, session.question.student.Username, session.question.student.ProfileImage, "Session has been closed.",true);
+                    SendNotification(username, session.question.student.Username, session.question.student.ProfileImage, "Session has been closed.",true, "Tutors", "Sessions", "SessionId=" + sessionId);
 
 
                 }
@@ -423,11 +423,14 @@ namespace WebApplication2.Controllers
                 quest.Details=quest.Details.Replace(Environment.NewLine, "<br/>");
 
                 bool singleTutor = false;
+                string sessionId = null;
+                string postId = quest.QuestionID.ToString();
                 if(question.TutorID!=null)
                 {
                     singleTutor = true;
                     Session obj = new Session();
                     obj.SessionID = Guid.NewGuid();
+                    sessionId = obj.SessionID.ToString();
                     obj.TutorID = question.TutorID; 
                     obj.QuestionID = quest.QuestionID;
                     obj.PostedTime = DateTime.Now;
@@ -465,32 +468,36 @@ namespace WebApplication2.Controllers
                 {
                     var tutors = db.Tutors.Where(c => c.IsCompletedProfile == true).ToList();
                     var allusers = db.Users.ToList();
-                    
-                    try
-                    {
-                        
-                        foreach (var v in tutors)
-                        {
 
-                            var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
-                            SendNotification(emailUser.UserName, student.Username, student.ProfileImage, "New Question posted.",true);
+                   
 
-                            if (emailUser != null)
+                            foreach (var v in tutors)
                             {
-                                var email = emailUser.Email;
-                                Mailer mailer = new Mailer();
-                                mailer.ToEmail = email;
-                                mailer.Subject = "New Question Posted on MezoExperts.com";
-                                mailer.Body = string.Format(body, question.Title, quest.Details);
-                                mailer.IsHtml = true;
-                                mailer.Send();
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
+                                try
+                                {
+                                    var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
+                                    SendNotification(emailUser.UserName, student.Username, student.ProfileImage, "New Question posted.",true, "Tutors", "QuestionDetails", "PostId=" + postId);
 
-                    }
+                                    if (emailUser != null)
+                                    {
+                                        var email = emailUser.Email;
+                                        Mailer mailer = new Mailer();
+                                        mailer.ToEmail = email;
+                                        mailer.Subject = "New Question Posted on MezoExperts.com";
+                                        mailer.Body = string.Format(body, question.Title, quest.Details);
+                                        mailer.IsHtml = true;
+                                       await mailer.Send();
+                                    }
+                                    // Send the emails here
+                               //
+                                 }
+                                catch (Exception e)
+                                {
+
+                                }
+                        }
+                    
+
                 }
                 else
                 {
@@ -498,14 +505,14 @@ namespace WebApplication2.Controllers
                     {
                         var tutor = db.Users.Find(quest.TutorID.ToString());
                       
-                        SendNotification(tutor.UserName, student.Username, student.ProfileImage, "I have a new task for you.",true);
+                        SendNotification(tutor.UserName, student.Username, student.ProfileImage, "I have a new task for you.",true, "Tutors", "Sessions", "SessionId=" + sessionId);
                         
                         Mailer mailer = new Mailer();
                         mailer.ToEmail = tutor.Email;
                         mailer.Subject = "New Question Posted on MezoExperts.com";
                         mailer.Body = string.Format(body, question.Title, quest.Details);
                         mailer.IsHtml = true;
-                        mailer.Send();
+                        await mailer.Send();
 
 
                     }
@@ -566,7 +573,7 @@ namespace WebApplication2.Controllers
                 var message2 = " <button type=\"button\" id=\"rejected\" disabled class=\"btn btn-primary\">Rejected Invoice</button>";
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-                SendNotification(username2, username, imgsrc, "I have approved the payment of $" + session.OfferedFees,true);
+                SendNotification(username2, username, imgsrc, "I have approved the payment of $" + session.OfferedFees,true, "Tutors", "Sessions", "SessionId=" + sessionId);
                 //close sessions
                 DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
                 DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
@@ -586,7 +593,7 @@ namespace WebApplication2.Controllers
                     mailer.Subject = "Invoice Rejected on MezoExperts.com";
                     mailer.Body = string.Format(body, username + " rejected the invoice. Now administrator will handle the session.");
                     mailer.IsHtml = true;
-                    mailer.Send();
+                    await mailer.Send();
 
 
                 }
@@ -646,7 +653,7 @@ namespace WebApplication2.Controllers
                 db.Entry(tutor).State = EntityState.Modified;
                 db.SaveChanges();
 
-                SendNotification(tutor.Username, session.question.student.Username, session.question.student.ProfileImage, "I have rated you " + rating+" star for your work.",true);
+                SendNotification(tutor.Username, session.question.student.Username, session.question.student.ProfileImage, "I have rated you " + rating+" star for your work.",true, "Tutors", "Sessions", "SessionId=" + sessionId);
 
 
                 return new JsonResult()
@@ -711,7 +718,7 @@ namespace WebApplication2.Controllers
                 var message2 = " <button type=\"button\" id=\"accepted\" disabled class=\"btn btn-primary\">Accepted Invoice</button>";
 
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-                SendNotification(username2, session.question.student.Username, session.question.student.ProfileImage, "I have approved the payment of $" + session.OfferedFees,true);
+                SendNotification(username2, session.question.student.Username, session.question.student.ProfileImage, "I have approved the payment of $" + session.OfferedFees,true, "Tutors", "Sessions", "SessionId=" + sessionId);
                 //close sessions
                 DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
                 DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
@@ -730,7 +737,7 @@ namespace WebApplication2.Controllers
                     mailer.Subject = "Invoice Approved on MezoExperts.com";
                     mailer.Body = string.Format(body, username+" approved the Invoice.");
                     mailer.IsHtml = true;
-                    mailer.Send();
+                    await mailer.Send();
 
 
                 }
@@ -757,7 +764,7 @@ namespace WebApplication2.Controllers
             }
         }
 
-        private void SendNotification(string sendTo,string username,string image, string message,bool addDb)
+        private void SendNotification(string sendTo,string username,string image, string message,bool addDb,string controller,string action,string param)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<notifications>();
             //var name = Context.User.Identity.Name;
@@ -767,7 +774,7 @@ namespace WebApplication2.Controllers
                 if (user != null) {
 
                     string finalmessage = image + "^" + username + "^" + message;
-
+                    string link= controller + "/" + action + "?" + param; 
                     if (addDb == true)
                     {
                         Notifications notify = new Notifications();
@@ -776,12 +783,13 @@ namespace WebApplication2.Controllers
                         notify.Message = finalmessage;
                         notify.UserName = sendTo;
                         notify.postedTime = DateTime.Now;
+                        notify.link = link;
                         db.notifications.Add(notify);
                         db.SaveChanges();
                     }
                     var counter = db.notifications.Where(c => c.UserName == sendTo && c.isRead == false).Count();
 
-                    finalmessage = finalmessage + "^" + counter;
+                    finalmessage = finalmessage + "^" + counter+"^"+ link ;
 
                     context.Clients.Client(user.connectionId)
                                  .recieverNotifier(finalmessage);
@@ -845,7 +853,7 @@ namespace WebApplication2.Controllers
                 var message2 = "  <button type=\"button\" id=\"hire\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#invoiceNewModal\">Send Invoice</button>";
                                                                                        
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
-                SendNotification(username2, username,imgsrc, "I have hired you for $"+session.OfferedFees,true);
+                SendNotification(username2, username,imgsrc, "I have hired you for $"+session.OfferedFees,true,"Tutors","Sessions", "SessionId="+sessionId);
 
                 try
                 {
@@ -863,7 +871,7 @@ namespace WebApplication2.Controllers
                     mailer.Subject = "Hired on MezoExperts.com";
                     mailer.Body = string.Format(body, username + " has hired you for the job.");
                     mailer.IsHtml = true;
-                    mailer.Send();
+                    await mailer.Send();
 
 
                 }
@@ -928,43 +936,47 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Chat(ChatModel reply)
         {
-                Reply obj = new Reply();
-                obj.ReplyID = Guid.NewGuid();
-                obj.ReplierID= new Guid(User.Identity.GetUserId());
-                obj.SessionID = reply.sessionID;
-                obj.PostedTime = DateTime.Now;
-                reply.replyDetail=reply.replyDetail.Replace(Environment.NewLine, "<br/>");
-                obj.Details = reply.replyDetail;
-            
-                db.Replies.Add(obj);
+            Reply obj = new Reply();
+            obj.ReplyID = Guid.NewGuid();
+            obj.ReplierID= new Guid(User.Identity.GetUserId());
+            obj.SessionID = reply.sessionID;
+            obj.PostedTime = DateTime.Now;
+            reply.replyDetail=reply.replyDetail.Replace(Environment.NewLine, "<br/>");
+            obj.Details = reply.replyDetail;
 
-                var session = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault();
-                session.NewMessageTutor = true;
-                db.Entry(session).State = EntityState.Modified;
+            db.Replies.Add(obj);
 
-                await db.SaveChangesAsync();
+            var session = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault();
+            session.NewMessageTutor = true;
+            db.Entry(session).State = EntityState.Modified;
 
-                var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
-                var username = User.Identity.Name;
-                var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-              
-               //part moved up
-                var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
-                var username2 = tutor.Username;
-                var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
+            await db.SaveChangesAsync();
 
-                string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
-                SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
-               
-                SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
-                //SendNotification(username2, imgsrc,"I have hired you for ");
+            var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+            var username = User.Identity.Name;
+            var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
 
-            return new JsonResult()
-                {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = obj.ReplyID +"$" + obj.SessionID }
-                };
-           
+           //part moved up
+            var tutor = db.sessions.Where(c => c.SessionID == obj.SessionID).FirstOrDefault().tutor;
+            var username2 = tutor.Username;
+            var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
+
+            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
+            SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
+
+            SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+            //SendNotification(username2, imgsrc,"I have hired you for ");
+          
+        return new JsonResult()
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new { result = obj.ReplyID +"$" + obj.SessionID }
+            };
+          /*  return new JsonResult()
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new { result = "empty" }
+            }; */
         }
 
         public string generateMessage(string username, string detail, string imgsrc,string postedTime,string replyID, bool online)
@@ -1037,6 +1049,7 @@ namespace WebApplication2.Controllers
                     var img = session.question.student.ProfileImage;
 
                     var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
+                    string link = "Tutors/Sessions"  + "?SessionId=" + sessionId;
                     if (notiAlready == null)
                     {
                         Notifications notify = new Notifications();
@@ -1046,6 +1059,8 @@ namespace WebApplication2.Controllers
                         notify.UserName = sendTo;
                         notify.sessionId = sessionId;
                         notify.postedTime = DateTime.Now;
+                        notify.link = link;
+                        notify.counts = 1;
                         db.notifications.Add(notify);
 
                     }
@@ -1053,10 +1068,11 @@ namespace WebApplication2.Controllers
                     {
                         notiAlready.counts = notiAlready.counts + 1;
                         notiAlready.isRead = false;
+                        notiAlready.postedTime = DateTime.Now;
                         db.Entry(notiAlready).State = EntityState.Modified;
                     }
                     db.SaveChanges();
-                    SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.", false);
+                    SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.", false, "Tutors", "Sessions", "SessionId=" + sessionId);
                 }
                 else
                 {
@@ -1071,7 +1087,7 @@ namespace WebApplication2.Controllers
                             var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
                             var Username = session.question.student.Username;
                             var img = session.question.student.ProfileImage;
-
+                            string link = "Tutors/Sessions" + "?SessionId=" + sessionId;
                             var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
                             if (notiAlready == null)
                             {
@@ -1082,6 +1098,7 @@ namespace WebApplication2.Controllers
                                 notify.UserName = sendTo;
                                 notify.sessionId = sessionId;
                                 notify.postedTime = DateTime.Now;
+                                notify.link = link;
                                 db.notifications.Add(notify);
                              
                             }
@@ -1089,10 +1106,11 @@ namespace WebApplication2.Controllers
                             {
                                 notiAlready.counts = notiAlready.counts + 1;
                                 notiAlready.isRead = false;
+                                notiAlready.postedTime = DateTime.Now;
                                 db.Entry(notiAlready).State = EntityState.Modified;
                         }
                         db.SaveChanges();
-                        SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.",false);
+                        SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.",false, "Tutors", "Sessions", "SessionId=" + sessionId);
                     }
 
                     else

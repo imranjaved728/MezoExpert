@@ -142,6 +142,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Board.
+        /// </summary>
+        public static string Board {
+            get {
+                return ResourceManager.GetString("Board", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
         public static string Category {

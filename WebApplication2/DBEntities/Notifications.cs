@@ -22,6 +22,8 @@ namespace WebApplication2.DBEntities
 
         public int counts { get; set; } //for future
 
+        public string link { get; set; }
+
         public DateTime postedTime { get; set; }
     }
 }
