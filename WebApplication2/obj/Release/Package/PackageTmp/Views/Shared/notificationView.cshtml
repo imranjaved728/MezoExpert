@@ -22,11 +22,13 @@
                     {
                         var completeMessage = noti.Message;
                         var results = completeMessage.Split('^');
-                        <div data-notify="container" style="margin-bottom:0px" class="col-xs-12 col-sm-12 alert alert-minimalist" role="alert">
-                            <img data-notify="icon" class="img-circle pull-left" src='@results[0]'>
-                            <span data-notify="title">@results[1]</span>
-                            <span data-notify="message" style="text-transform: none;">@results[2]</span>
-                        </div>
+                        <a href="/@noti.link">
+                            <div data-notify="container" style="margin-bottom:0px" class="col-xs-12 col-sm-12 alert alert-minimalist" role="alert">
+                                <img data-notify="icon" class="img-circle pull-left" src='@results[0]'>
+                                <span data-notify="title">@results[1]</span>
+                                <span data-notify="message" style="text-transform: none;">@results[2]</span>
+                            </div>
+                        </a>
                     }
 
                 }

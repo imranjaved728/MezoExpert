@@ -5,17 +5,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>MezoExperts - Online Tutoring</title>
     @Scripts.Render("~/bundles/modernizr")
-    <meta name="description" content="Need help in your studies. We have the top tutors from around the globe to help you.">
+    <meta name="description" content="Need help in your studies. We have the top tutors from around the globe to help you in your assignments, projects, quizes preperation.">
     <meta name="author" content="Imran Jawaid">
-    <meta property="og:title" content="Need help in your studies. We have the top tutors from around the globe to help you.">
+    <meta property="og:title" content="Need help in your studies. We have the top tutors from around the globe to help you in your assignments, projects, quizes preperation.">
     <meta property="og:site_name" content="MezoExperts">
     <meta property="og:url" content="https://www.MezoExperts.com">
     <meta property="og:description" content="Need help is solving a problem in assignment, understanding a concept, preparation of exam. Visit us and get help from our top tutors">
     <meta property="og:type" content="eLearning">
     <meta property="og:locale" content="en_US">
-    <title>MezoExperts</title>
+ 
 
     <style>
         .no-js #loader { display: none;  }
@@ -30,7 +30,7 @@
 	        background: url(/Images/Preloader_2.gif) center no-repeat #fff;
         }
     </style>
-    <link href="~/Theme/dropdownMultiple/semantic.min.css" rel="stylesheet" />
+    @*<link href="~/Theme/dropdownMultiple/semantic.min.css" rel="stylesheet" />*@
      @if (CultureHelper.IsRighToLeft())
      {
         <link href="~/Content/bootstrap-rtl.css" rel="stylesheet" />
@@ -48,7 +48,8 @@
     <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
 
 
-    <link href="~/Theme/rating/css/star-rating.css" rel="stylesheet" />
+    @*<link href="~/Theme/rating/css/star-rating.css" rel="stylesheet" />*@
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -79,7 +80,6 @@
     </div>
 
     <!-- jQuery -->
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
@@ -89,7 +89,7 @@
     @*@Scripts.Render("~/bundles/ratings")*@
     @RenderSection("scripts", required: false)
 
-    <script src="~/Theme/rating/js/star-rating.min.js"></script>
+    @*<script src="~/Theme/rating/js/star-rating.min.js"></script>*@
     <!-- Bootstrap Core JavaScript -->
     @*<script type="text/javascript" src="~/Scripts/moment.min.js"></script>*@
     <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
@@ -236,7 +236,7 @@
         $(document).ready(function()
         {
             if ($("#notification_count").text() == "0")
-                $("#notification_count").fadeOut("slow");
+                $("#notification_count").fadeOut("fast");
 
         $("#notificationLink").click(function()
         {

@@ -791,7 +791,7 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Regina, Canada.
+        ///   Looks up a localized string similar to Toronto, Canada.
         /// </summary>
         public static string Regina {
             get {

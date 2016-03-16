@@ -1,9 +1,12 @@
 ﻿@model WebApplication2.Models.SearchViewModel
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Search - MezoExperts";
+    <meta name="description" content="Get help of top tutors from around the world.">
+    <meta name="author" content="Imran Jawaid">
+    <meta property="og:title" content="Get help of top tutors from around the world.">
 }
-
+<link href="~/Theme/rating/css/star-rating.css" rel="stylesheet" />
 <link href="~/Theme/css/search.css" rel="stylesheet" />
 
 <div class="container fill img-rounded">
@@ -260,7 +263,10 @@
 </div>
 
 @section scripts{
-    <script>
+<script src="~/Theme/rating/js/star-rating.min.js"></script>
+   
+     <script>
+        
         $(document).on('ready', function () {
             $('.rating1').rating({ displayOnly: true, step: 0.5 });
         });

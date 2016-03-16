@@ -112,10 +112,10 @@
 
 <div class="container fill img-rounded">
 
-    @using (Html.BeginForm("QuestionDetails", "Tutors", FormMethod.Post, new { id = "QuestionDetails" }))
+    @using (Html.BeginForm("QuestionDetails", "Tutors", FormMethod.Get, new { id = "QuestionDetails" }))
     {
         @Html.Hidden("PostId")
-        @Html.AntiForgeryToken()
+        @*@Html.AntiForgeryToken()*@
     }
     <div class="row">
         <div class="col-md-1"></div>

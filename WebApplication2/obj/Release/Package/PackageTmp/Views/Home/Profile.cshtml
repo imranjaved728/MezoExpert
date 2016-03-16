@@ -4,6 +4,7 @@
 }
 
 
+
 @using (Html.BeginForm("PostQuestion", "Students", new { id = ViewBag.id }, FormMethod.Get, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
@@ -125,6 +126,8 @@
 
 
 @section scripts{
+<link href="~/Theme/rating/css/star-rating.css" rel="stylesheet" />
+<script src="~/Theme/rating/js/star-rating.min.js"></script>
 
     <script>
 

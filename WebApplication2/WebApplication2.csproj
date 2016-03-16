@@ -244,6 +244,20 @@
     <Compile Include="DBEntities\Session.cs" />
     <Compile Include="DBEntities\Student.cs" />
     <Compile Include="DBEntities\Tutor.cs" />
+    <Compile Include="Entities\Admin.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Command.cs" />
+    <Compile Include="Entities\Files.cs" />
+    <Compile Include="Entities\Notifications.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\RecieveMessage.cs" />
+    <Compile Include="Entities\Reply.cs" />
+    <Compile Include="Entities\SendMessage.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Entities\Tutor.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

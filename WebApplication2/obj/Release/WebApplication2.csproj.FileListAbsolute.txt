@@ -204,3 +204,4 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.M
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.noti.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.notif.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.sesssionNotification.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.notifcationslinks.resources
