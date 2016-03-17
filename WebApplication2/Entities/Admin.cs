@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication2;
+using WebApplication2.Models;
 
 namespace WebApplication3.Entities
 {
     public class Admin:User
     {
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
+
         public Admin()
         {
             role = "Admin";
@@ -14,8 +21,12 @@ namespace WebApplication3.Entities
 
         bool login(string username, string password)
         {
+            var user = _dbContext.Users.Where(c => c.UserName == username && password == password);
 
-            return false;
+            if (user == null)
+                return false;
+            else
+                return true;
 
         }
         bool Register(User obj)
