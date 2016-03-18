@@ -100,7 +100,7 @@
                                                         <i class="fa fa-stack-exchange fa-4x"></i>
                                                     </div>
                                                     <div class="col-xs-9 text-right">
-                                                        <div class="huge">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.Status</div>
+                                                        <div class="medium">&nbsp;&nbsp;&nbsp;&nbsp;@Model.question.Status</div>
 
                                                     </div>
                                                 </div>
@@ -194,7 +194,7 @@
 
                                                         <div class="media-body">
                                                             <strong class="text-success userText">@{ @Model.tutor.Username}</strong><br /><br />
-                                                            @Html.Raw(Model.session.Replies.FirstOrDefault().Details)
+                                                            @Html.Raw(Model.session.Replies.OrderBy(c=>c.PostedTime).FirstOrDefault().Details)
                                                             <br>
                                                             <div class="clearfix"></div>
                                                         </div>

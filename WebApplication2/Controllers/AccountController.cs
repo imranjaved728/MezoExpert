@@ -294,7 +294,10 @@ namespace WebApplication2.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            var username = _dbContext.Users.Where(c => c.Email == loginInfo.Email).FirstOrDefault().UserName;
+            
+            string username = "";
+            if (result == SignInStatus.Success)
+                username = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity.GetUserName();
             switch (result)
             {
                 case SignInStatus.Success:

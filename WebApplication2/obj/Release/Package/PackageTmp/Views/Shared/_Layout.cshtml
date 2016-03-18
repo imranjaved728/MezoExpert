@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MezoExperts - Online Tutoring</title>
+    <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/modernizr")
     <meta name="description" content="Need help in your studies. We have the top tutors from around the globe to help you in your assignments, projects, quizes preperation.">
     <meta name="author" content="Imran Jawaid">
@@ -218,7 +218,7 @@
                     '</div>'
                 });
 
-                $("#notifloat").wrap( "<a href='"+url+"'></a>" );
+                $("#notifloat").wrap( "<a href='/"+url+"'></a>" );
 
                 //add in notifcation bar body.
 
@@ -236,7 +236,7 @@
         $(document).ready(function()
         {
             if ($("#notification_count").text() == "0")
-                $("#notification_count").fadeOut("slow");
+                $("#notification_count").fadeOut("fast");
 
         $("#notificationLink").click(function()
         {

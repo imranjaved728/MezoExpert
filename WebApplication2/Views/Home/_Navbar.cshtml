@@ -207,7 +207,7 @@
 
                                                                     @if (User.IsInRole("Tutor"))
                                                                     {
-                                                                        <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> <i class="fa fa-user"></i><b>@Resources.Profile</b></a></li>
+                                                                        <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Tutors")'"> <i class="fa fa-user"></i><b> @Resources.Profile</b></a></li>
                                                                     }
                                                                     else {
                                                                         <li><a href="#" onclick="location.href='@Url.Action("EditProfile","Students")'"><i class="fa fa-user"></i><b> @Resources.Profile</b></a></li>
