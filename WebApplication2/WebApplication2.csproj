@@ -267,6 +267,7 @@
     <Compile Include="Helpers\Mailer.cs" />
     <Compile Include="Helpers\notifications.cs" />
     <Compile Include="Helpers\Onlines.cs" />
+    <Compile Include="Microsoft\AspNet\Identity\UserManager.cs" />
     <Compile Include="Migrations\201603030313001_updates.cs" />
     <Compile Include="Migrations\201603030313001_updates.Designer.cs">
       <DependentUpon>201603030313001_updates.cs</DependentUpon>

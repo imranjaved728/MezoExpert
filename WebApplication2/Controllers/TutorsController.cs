@@ -762,31 +762,14 @@ namespace WebApplication2.Controllers
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
                 SendNotification(username2, username, imgsrc, "I have offered my services for $"+question.amount,true, "Students", "Sessions", "SessionId=" + sessionId);
 
-                try
-                {
+             
+                var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
+                String subject = "Tutor Offered service on MezoExperts.com";
+                String bodyText = username + " has offered to do your job for $" + question.amount;
+                string fileTemplate = "passwordreset.html";
+                await sendEmail(email, subject, bodyText, fileTemplate, "");
 
-                    string body;
-                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
-                    {
-                        body = sr.ReadToEnd();
-                    }
-
-
-                    var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
-                    Mailer mailer = new Mailer();
-                    mailer.ToEmail = email;
-                    mailer.Subject = "Tutor Offered service on MezoExperts.com";
-                    mailer.Body = string.Format(body, username + " has offered to do your job for $"+question.amount);
-                    mailer.IsHtml = true;
-                    await mailer.Send();
-
-
-                }
-                catch (Exception e)
-                {
-
-                }
-
+                
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -846,30 +829,15 @@ namespace WebApplication2.Controllers
 
                    SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
                    SendNotification(username2, username, imgsrc, "I have sent Invoice of $" + question.amount,true, "Students", "Sessions", "SessionId=" + sessionId);
-                try
-                {
+                
+                //send email
+                var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
+                String subject = "Tutor sent Invoice on MezoExperts.com";
+                String bodyText = username + " has sent invoice for $" + question.amount;
+                string fileTemplate = "passwordreset.html";
+                await sendEmail(email, subject, bodyText, fileTemplate, "");
 
-                    string body;
-                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
-                    {
-                        body = sr.ReadToEnd();
-                    }
-                    
-                    var email = db.Users.Where(c => c.Id == session.question.StudentID.ToString()).FirstOrDefault().Email;
-                    Mailer mailer = new Mailer();
-                    mailer.ToEmail = email;
-                    mailer.Subject = "Tutor sent Invoice on MezoExperts.com";
-                    mailer.Body = string.Format(body, username + " has sent invoice for $" + question.amount);
-                    mailer.IsHtml = true;
-                    await mailer.Send();
-
-
-                }
-                catch (Exception e)
-                {
-
-                }
-
+                
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -1109,7 +1077,36 @@ namespace WebApplication2.Controllers
             }
         }
 
-        
+        private async Task sendEmail(string SendtoEmail, string subject, string bodyMessage, string filename, string optionalParam)
+
+        {
+            try
+            {
+
+                string body;
+                using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + filename))
+                {
+                    body = sr.ReadToEnd();
+                }
+
+                Mailer mailer = new Mailer();
+                mailer.ToEmail = SendtoEmail;
+                mailer.Subject = subject;
+                if (optionalParam == "")
+                    mailer.Body = string.Format(body, bodyMessage);
+                else
+                    mailer.Body = string.Format(body, bodyMessage, optionalParam);
+                mailer.IsHtml = true;
+                await mailer.Send();
+
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -294,17 +294,18 @@ namespace WebApplication2.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var username = _dbContext.Users.Where(c => c.Email == loginInfo.Email).FirstOrDefault().UserName;
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (_dbContext.Tutors.Where(c => c.Username == loginInfo.DefaultUserName).FirstOrDefault() != null)
+                    if (_dbContext.Tutors.Where(c => c.Username == username).FirstOrDefault() != null)
                         return RedirectToAction("Index","Tutors");
-                    else if(_dbContext.Students.Where(c => c.Username == loginInfo.DefaultUserName).FirstOrDefault()!=null)
+                    else if(_dbContext.Students.Where(c => c.Username == username).FirstOrDefault()!=null)
                         return RedirectToAction("Index", "Students");
                     else
                         return RedirectToAction("Index", "Admin");
 
-                    return RedirectToLocal(returnUrl);
+                   // return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

@@ -34,14 +34,14 @@ namespace WebApplication3.Entities
         }
         bool Register(User obj)
         {
-            var roleresult = Microsoft.AspNet.Identity.UserManager.AddToRole(username, Status.Student);
+           
             Student stu = new Student();
             stu.ID = Guid.NewGuid();
             stu.DateCreated = DateTime.Today;
             Random rnd = new Random();
             int filename = rnd.Next(1, 4);
             stu.ProfileImage = "/Profiles/default/" + filename + ".png";
-            stu.Username = username;
+            stu.Username = stu.Username;
 
 
             Notifications notify = new Notifications();

@@ -457,11 +457,6 @@ namespace WebApplication2.Controllers
        
                 string response = quest.QuestionID +"$"+quest.Title+ "$" + student.ProfileImage + "%" + User.Identity.Name +  "$" + quest.Amount+"$"+quest.PostedTime+"$" + quest.DueDate ;
 
-                string body;
-                using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "email.html"))
-                {
-                    body = sr.ReadToEnd();
-                }
                
                 //send emails
                 if (singleTutor == false)
@@ -473,53 +468,37 @@ namespace WebApplication2.Controllers
 
                             foreach (var v in tutors)
                             {
-                                try
-                                {
+                               
                                     var emailUser = allusers.Where(c => c.UserName == v.Username).FirstOrDefault();
                                     SendNotification(emailUser.UserName, student.Username, student.ProfileImage, "New Question posted.",true, "Tutors", "QuestionDetails", "PostId=" + postId);
 
                                     if (emailUser != null)
                                     {
+                                        // Send the emails here
                                         var email = emailUser.Email;
-                                        Mailer mailer = new Mailer();
-                                        mailer.ToEmail = email;
-                                        mailer.Subject = "New Question Posted on MezoExperts.com";
-                                        mailer.Body = string.Format(body, question.Title, quest.Details);
-                                        mailer.IsHtml = true;
-                                       await mailer.Send();
+                                        String subject = "New Question Posted on MezoExperts.com";
+                                        String bodyText = question.Title;
+                                        String optional = quest.Details;
+                                        string FileTemplate = "email.html";
+                                        await sendEmail(email, subject, bodyText, FileTemplate, optional);
                                     }
-                                    // Send the emails here
-                               //
-                                 }
-                                catch (Exception e)
-                                {
-
-                                }
                         }
                     
 
                 }
                 else
                 {
-                    try
-                    {
                         var tutor = db.Users.Find(quest.TutorID.ToString());
                       
                         SendNotification(tutor.UserName, student.Username, student.ProfileImage, "I have a new task for you.",true, "Tutors", "Sessions", "SessionId=" + sessionId);
-                        
-                        Mailer mailer = new Mailer();
-                        mailer.ToEmail = tutor.Email;
-                        mailer.Subject = "New Question Posted on MezoExperts.com";
-                        mailer.Body = string.Format(body, question.Title, quest.Details);
-                        mailer.IsHtml = true;
-                        await mailer.Send();
 
-
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
+                        var email = tutor.Email;
+                        String subject = "New Question Posted on MezoExperts.com";
+                        String bodyText = question.Title;
+                        String optional = quest.Details;
+                        string FileTemplate = "email.html";
+                        await sendEmail(email, subject, bodyText, FileTemplate, optional);
+                    
                 }
 
                 return new JsonResult()
@@ -578,30 +557,12 @@ namespace WebApplication2.Controllers
                 DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
                 DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
 
-                try
-                {
-
-                    string body;
-                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
-                    {
-                        body = sr.ReadToEnd();
-                    }
-                    
-                    var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
-                    Mailer mailer = new Mailer();
-                    mailer.ToEmail = email;
-                    mailer.Subject = "Invoice Rejected on MezoExperts.com";
-                    mailer.Body = string.Format(body, username + " rejected the invoice. Now administrator will handle the session.");
-                    mailer.IsHtml = true;
-                    await mailer.Send();
-
-
-                }
-                catch (Exception e)
-                {
-
-                }
-
+                var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
+                String subject = "Invoice Rejected on MezoExperts.com";
+                String bodyText = username + " rejected the invoice. Now administrator will handle the session.";
+                string FileTemplate = "passwordreset.html";
+                await sendEmail(email, subject, bodyText, FileTemplate,"");
+                
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -722,29 +683,13 @@ namespace WebApplication2.Controllers
                 //close sessions
                 DeleteSessionMessageTutor(sessionId.ToString(), username2, "", context);
                 DeleteSessionMessageTutor(sessionId.ToString(), username, "", context);
-                try
-                {
 
-                    string body;
-                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
-                    {
-                        body = sr.ReadToEnd();
-                    }
-                    
-                    var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
-                    Mailer mailer = new Mailer();
-                    mailer.ToEmail = email;
-                    mailer.Subject = "Invoice Approved on MezoExperts.com";
-                    mailer.Body = string.Format(body, username+" approved the Invoice.");
-                    mailer.IsHtml = true;
-                    await mailer.Send();
+                var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
+                String subject = "Invoice Approved on MezoExperts.com";
+                String bodyText = username + " approved the Invoice.";
+                string FileTemplate = "passwordreset.html";
+                await sendEmail(email, subject, bodyText, FileTemplate, "");
 
-
-                }
-                catch (Exception e)
-                {
-
-                }
 
                 return new JsonResult()
                 {
@@ -760,6 +705,36 @@ namespace WebApplication2.Controllers
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
                     Data = new { result = "fail" }
                 };
+
+            }
+        }
+
+        private async Task sendEmail(string SendtoEmail, string subject, string bodyMessage,string filename,string optionalParam)
+
+        {
+            try
+            {
+
+                string body;
+                using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + filename))
+                {
+                    body = sr.ReadToEnd();
+                }
+                
+                Mailer mailer = new Mailer();
+                mailer.ToEmail = SendtoEmail;
+                mailer.Subject = subject;
+                if(optionalParam=="")
+                    mailer.Body = string.Format(body, bodyMessage);
+                else
+                    mailer.Body = string.Format(body, bodyMessage,optionalParam);
+                mailer.IsHtml = true;
+                await mailer.Send();
+
+
+            }
+            catch (Exception e)
+            {
 
             }
         }
@@ -855,31 +830,12 @@ namespace WebApplication2.Controllers
                 SendButtonStudent(sessionId.ToString(), username2, message2, context); //send message to other person 
                 SendNotification(username2, username,imgsrc, "I have hired you for $"+session.OfferedFees,true,"Tutors","Sessions", "SessionId="+sessionId);
 
-                try
-                {
-
-                    string body;
-                    using (var sr = new StreamReader(Server.MapPath("\\Helpers\\") + "passwordreset.html"))
-                    {
-                        body = sr.ReadToEnd();
-                    }
-                    
-
-                    var email = db.Users.Where(c=>c.Id==quest.TutorID.ToString()).FirstOrDefault().Email;
-                    Mailer mailer = new Mailer();
-                    mailer.ToEmail = email;
-                    mailer.Subject = "Hired on MezoExperts.com";
-                    mailer.Body = string.Format(body, username + " has hired you for the job.");
-                    mailer.IsHtml = true;
-                    await mailer.Send();
-
-
-                }
-                catch (Exception e)
-                {
-
-                }
-
+                var email = db.Users.Where(c => c.Id == quest.TutorID.ToString()).FirstOrDefault().Email;
+                String subject = "Hired on MezoExperts.com";
+                String bodyText = username + " has hired you for the job.";
+                string fileTemplate = "passwordreset.html";
+                await sendEmail(email, subject, bodyText,fileTemplate,"");
+                
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
@@ -1035,13 +991,26 @@ namespace WebApplication2.Controllers
             }
         }
 
-        public void SendChatMessageTutorReciever(string sessionId, string sendTo, string message, IHubContext context)
+        public async void SendChatMessageTutorReciever(string sessionId, string sendTo, string message, IHubContext context)
         {
             //var name = Context.User.Identity.Name;
             using (var db = new ApplicationDbContext())
             {
-                var user = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
-                if (user == null)
+                var userWithSession = db.Useras.Where(c => c.UserName == sendTo && c.SessionId == sessionId).FirstOrDefault();
+                var Online = db.online.Where(c => c.Username == sendTo).FirstOrDefault().Status;
+                
+                //if not online send eamail
+                if (Online == false)
+                {
+                    var email = db.Users.Where(c => c.UserName == sendTo).FirstOrDefault().Email;
+                    String subject = "New message for you on MezoExperts.com";
+                    String bodyText = sendTo + " sent you a message on MezoExperts.";
+                    string FileTemplate = "passwordreset.html";
+                    await sendEmail(email, subject, bodyText, FileTemplate, "");
+                }
+
+                //if user was not on session
+                if (userWithSession == null)
                 {
                     // context.Clients.Caller.showErrorMessage("Could not find that user.");
                     var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
@@ -1050,6 +1019,8 @@ namespace WebApplication2.Controllers
 
                     var notiAlready = db.notifications.Where(c => c.sessionId == sessionId && c.UserName == sendTo).FirstOrDefault();
                     string link = "Tutors/Sessions"  + "?SessionId=" + sessionId;
+                   
+
                     if (notiAlready == null)
                     {
                         Notifications notify = new Notifications();
@@ -1063,6 +1034,7 @@ namespace WebApplication2.Controllers
                         notify.counts = 1;
                         db.notifications.Add(notify);
 
+                       
                     }
                     else
                     {
@@ -1070,19 +1042,21 @@ namespace WebApplication2.Controllers
                         notiAlready.isRead = false;
                         notiAlready.postedTime = DateTime.Now;
                         db.Entry(notiAlready).State = EntityState.Modified;
+
+
                     }
                     db.SaveChanges();
                     SendNotification(sendTo, Username, session.question.student.ProfileImage, "has sent you a message.", false, "Tutors", "Sessions", "SessionId=" + sessionId);
                 }
                 else
                 {
-                    db.Entry(user)
+                    db.Entry(userWithSession)
                         .Collection(u => u.Connections)
                         .Query()
                         .Where(c => c.Connected == true)
                         .Load();
 
-                    if (user.Connections == null)
+                    if (userWithSession.Connections == null)
                     {
                             var session = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault();
                             var Username = session.question.student.Username;
@@ -1115,7 +1089,7 @@ namespace WebApplication2.Controllers
 
                     else
                     {
-                        foreach (var connection in user.Connections)
+                        foreach (var connection in userWithSession.Connections)
                         {
                             context.Clients.Client(connection.ConnectionID)
                                  .recieverStudent2(message);
