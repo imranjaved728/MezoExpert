@@ -15,5 +15,6 @@ namespace WebApplication2.DBEntities
         public string amount { get; set; }
         public string status { get; set; }
         public Guid UserId { get; set; }
+        public DateTime? PostedTime { get; set; }
     }
 }

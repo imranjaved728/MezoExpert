@@ -430,6 +430,15 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Funds added to your account Successfully !!!.
+        /// </summary>
+        public static string fundsaddmsg {
+            get {
+                return ResourceManager.GetString("fundsaddmsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get help with your Questions..
         /// </summary>
         public static string getHelp {
@@ -670,6 +679,24 @@ namespace ClassLibrary1 {
         public static string PasswordRequired {
             get {
                 return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PaymentId.
+        /// </summary>
+        public static string PaymentId {
+            get {
+                return ResourceManager.GetString("PaymentId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payments History.
+        /// </summary>
+        public static string PaymentsHistory {
+            get {
+                return ResourceManager.GetString("PaymentsHistory", resourceCulture);
             }
         }
         

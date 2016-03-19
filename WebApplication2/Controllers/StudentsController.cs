@@ -109,13 +109,15 @@ namespace WebApplication2.Controllers
 
                     await db.SaveChangesAsync();
 
-                    var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
-                    var tutor = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().tutor;
-                    var username = tutor.Username;
-                    var message = "";
-                    DeleteSessionMessageTutor(sessionId, username, message, context);
-                    SendNotification(username, session.question.student.Username, session.question.student.ProfileImage, "Session has been closed.",true, "Tutors", "Sessions", "SessionId=" + sessionId);
-
+                    if (session.isTutorDeleted == false)
+                    {
+                        var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                        var tutor = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().tutor;
+                        var username = tutor.Username;
+                        var message = "";
+                        DeleteSessionMessageTutor(sessionId, username, message, context);
+                        SendNotification(username, session.question.student.Username, session.question.student.ProfileImage, "Session has been closed.", true, "Tutors", "Sessions", "SessionId=" + sessionId);
+                    }
 
                 }
             }
@@ -276,6 +278,7 @@ namespace WebApplication2.Controllers
                     payments.paymentId = createdPayment.id;
                     payments.token = createdPayment.token;
                     payments.guid = guid;
+                    payments.PostedTime = DateTime.Now;
                     payments.UserId = new Guid(User.Identity.GetUserId());
                     db.payments.Add(payments);
                     db.SaveChanges();
@@ -319,6 +322,7 @@ namespace WebApplication2.Controllers
                     {
                         var payments = db.payments.Where(c => c.paymentId == paymentId).FirstOrDefault();
                         payments.status = Status.Approved;
+                        payments.PostedTime = DateTime.Now;
 
                         var user = db.Students.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
                         user.CurrentBalance = user.CurrentBalance + (float)Convert.ToDouble(payments.amount);
@@ -343,8 +347,12 @@ namespace WebApplication2.Controllers
            
 
             Models.Payment obj = new Models.Payment();
-            obj.Balance = db.Students.Where(c => c.Username == User.Identity.Name).FirstOrDefault().CurrentBalance.ToString();
-           return View(obj);
+            var student = db.Students.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
+            obj.Balance = student.CurrentBalance.ToString();
+            obj.Payments = db.payments.Where(c => c.UserId == student.StudentID && c.status==Status.Approved).ToList();
+            obj.Payments = obj.Payments.OrderByDescending(c => c.PostedTime).ToList();
+
+            return View(obj);
            
 
         }
@@ -529,6 +537,16 @@ namespace WebApplication2.Controllers
                 quest.Status = Status.Conflict;
                 db.Entry(quest).State = EntityState.Modified;
                 db.Entry(session).State = EntityState.Modified;
+
+                DBEntities.Transaction tran = new DBEntities.Transaction();
+                tran.TransactionID = Guid.NewGuid();
+                tran.SessionID = sessionId;
+                tran.Status = Status.Conflict;
+                tran.OfferedFees = question.amount;
+                tran.PostedTime = DateTime.Now;
+                db.transcations.Add(tran);
+
+
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();
                 obj.ReplierID = new Guid(User.Identity.GetUserId());
@@ -651,7 +669,15 @@ namespace WebApplication2.Controllers
                 quest.Status = Status.Approved;
                 db.Entry(quest).State = EntityState.Modified;
                 db.Entry(session).State = EntityState.Modified;
-               
+
+                DBEntities.Transaction tran = new DBEntities.Transaction();
+                tran.TransactionID = Guid.NewGuid();
+                tran.SessionID = sessionId;
+                tran.Status = Status.Approved;
+                tran.OfferedFees = question.amount;
+                tran.PostedTime = DateTime.Now;
+                db.transcations.Add(tran);
+
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();
                 obj.ReplierID = new Guid(User.Identity.GetUserId());
@@ -799,7 +825,15 @@ namespace WebApplication2.Controllers
                 db.Entry(user).State = EntityState.Modified; 
                 db.Entry(quest).State = EntityState.Modified;
                 db.Entry(session).State = EntityState.Modified;
-               
+
+                //hire transaction
+                DBEntities.Transaction tran = new DBEntities.Transaction();
+                tran.TransactionID = Guid.NewGuid();
+                tran.SessionID = sessionId;
+                tran.Status = Status.Hired;
+                tran.OfferedFees = question.amount;
+                tran.PostedTime = DateTime.Now;
+                db.transcations.Add(tran);
 
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();
@@ -1176,8 +1210,8 @@ namespace WebApplication2.Controllers
                     filestring = filestring + "<br />";
                     filestringTutor= filestringTutor +"<br />";
                     var pathhtml = qf.Path.Split('/');
-                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName="+qf.Path+"\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
-                    filestringTutor= filestringTutor+ "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName=" + qf.Path+ "\'><img style=\'margin-right:0px; width: 25px; height: 25px; \' src=\'/Images/paper_clip_attachment.png\' />" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestringTutor= filestringTutor+ "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'><img style=\'margin-right:0px; width: 25px; height: 25px; \' src=\'/Images/paper_clip_attachment.png\' />" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
 
                 }
 

@@ -451,4 +451,13 @@ Send us your bank details on support@mezoexperts.com</value>
   <data name="Board" xml:space="preserve">
     <value>Board</value>
   </data>
+  <data name="fundsaddmsg" xml:space="preserve">
+    <value>Funds added to your account Successfully !!!</value>
+  </data>
+  <data name="PaymentId" xml:space="preserve">
+    <value>PaymentId</value>
+  </data>
+  <data name="PaymentsHistory" xml:space="preserve">
+    <value>Payments History</value>
+  </data>
 </root>

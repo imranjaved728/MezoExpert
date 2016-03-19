@@ -155,12 +155,15 @@ namespace WebApplication2.Controllers
                     db.Entry(session).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
-                    var student = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().question.student;
-                    var username = student.Username;
-                    var message = "";
-                    DeleteSessionMessageStudent(sessionId, username, message, context);
-                    SendNotification(username, session.tutor.Username,session.tutor.ProfileImage, "Session has been closed.",true,"Students","Sessions","SessionId="+sessionId);
+                    if (session.isStudentDelete == false)
+                    {
+                        var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
+                        var student = db.sessions.Where(c => c.SessionID == new Guid(sessionId)).FirstOrDefault().question.student;
+                        var username = student.Username;
+                        var message = "";
+                        DeleteSessionMessageStudent(sessionId, username, message, context);
+                        SendNotification(username, session.tutor.Username, session.tutor.ProfileImage, "Session has been closed.", true, "Students", "Sessions", "SessionId=" + sessionId);
+                    }
                 }
 
 
@@ -610,8 +613,8 @@ namespace WebApplication2.Controllers
                     filestring = filestring + "<br />";
                     filestringTutor = filestringTutor + "<br />";
                     var pathhtml = qf.Path.Split('/');
-                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
-                    filestringTutor = filestringTutor + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'>" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestring = filestring + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Students/Download?fileName=" + qf.Path + "\'><img style=\'margin-right:0px; width: 25px; height: 25px; \' src=\'/Images/paper_clip_attachment.png\' />" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
+                    filestringTutor = filestringTutor + "<strong class=\'text-info\'><a target = \'_blank\' href=\'/Tutors/Download?fileName=" + qf.Path + "\'><img style=\'margin-right:0px; width: 25px; height: 25px; \' src=\'/Images/paper_clip_attachment.png\' />" + pathhtml[pathhtml.Length - 1] + "</a></strong><br />";
 
                 }
 
@@ -737,6 +740,15 @@ namespace WebApplication2.Controllers
                 session.Status = Status.Offered;
                 db.Entry(session).State = EntityState.Modified;
 
+                //add in transaction
+                DBEntities.Transaction tran = new DBEntities.Transaction();
+                tran.TransactionID = Guid.NewGuid();
+                tran.SessionID = sessionId;
+                tran.Status = Status.Offered;
+                tran.OfferedFees = question.amount;
+                tran.PostedTime = DateTime.Now;
+                db.transcations.Add(tran);
+
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();
                 obj.ReplierID = new Guid(User.Identity.GetUserId());
@@ -800,6 +812,14 @@ namespace WebApplication2.Controllers
                 session.OfferedFees = question.amount;
                 session.Status = Status.Invoiced;
                 db.Entry(session).State = EntityState.Modified;
+
+                DBEntities.Transaction tran = new DBEntities.Transaction();
+                tran.TransactionID = Guid.NewGuid();
+                tran.SessionID = sessionId;
+                tran.Status = Status.Invoiced;
+                tran.OfferedFees = question.amount;
+                tran.PostedTime = DateTime.Now;
+                db.transcations.Add(tran);
 
                 Reply obj = new Reply();
                 obj.ReplyID = Guid.NewGuid();

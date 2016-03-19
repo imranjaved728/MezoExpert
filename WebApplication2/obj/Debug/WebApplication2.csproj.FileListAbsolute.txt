@@ -310,3 +310,5 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Mig
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.notif.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.sesssionNotification.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.notifcationslinks.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.changeinPaypalPayments.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.changeinPaypalPayments1.resources

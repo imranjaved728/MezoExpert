@@ -12,6 +12,7 @@ namespace WebApplication2.DBEntities
         public Guid SessionID { get; set; }
         public Double OfferedFees { get; set; }
         public String Status { get; set; }
+        public DateTime PostedTime { get; set; }
         public virtual Session session { get; set; }
     }
 }

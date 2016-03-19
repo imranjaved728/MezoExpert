@@ -296,6 +296,14 @@
     <Compile Include="Migrations\201603120236168_notifcationslinks.Designer.cs">
       <DependentUpon>201603120236168_notifcationslinks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603182305042_changeinPaypalPayments.cs" />
+    <Compile Include="Migrations\201603182305042_changeinPaypalPayments.Designer.cs">
+      <DependentUpon>201603182305042_changeinPaypalPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603190012006_changeinPaypalPayments1.cs" />
+    <Compile Include="Migrations\201603190012006_changeinPaypalPayments1.Designer.cs">
+      <DependentUpon>201603190012006_changeinPaypalPayments1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -361,6 +369,7 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\paper_clip_attachment.png" />
     <Content Include="Images\paypal.jpg" />
     <Content Include="Images\Preloader_2.gif" />
     <Content Include="Profiles\default\1.png" />
@@ -719,6 +728,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603120236168_notifcationslinks.resx">
       <DependentUpon>201603120236168_notifcationslinks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603182305042_changeinPaypalPayments.resx">
+      <DependentUpon>201603182305042_changeinPaypalPayments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603190012006_changeinPaypalPayments1.resx">
+      <DependentUpon>201603190012006_changeinPaypalPayments1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

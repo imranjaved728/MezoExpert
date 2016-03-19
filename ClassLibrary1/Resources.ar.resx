@@ -451,4 +451,13 @@
   <data name="Board" xml:space="preserve">
     <value>السبورة</value>
   </data>
+  <data name="fundsaddmsg" xml:space="preserve">
+    <value>أموال تضاف إلى حسابك بنجاح!</value>
+  </data>
+  <data name="PaymentId" xml:space="preserve">
+    <value>دفع إيد</value>
+  </data>
+  <data name="PaymentsHistory" xml:space="preserve">
+    <value>المدفوعات التاريخ</value>
+  </data>
 </root>
