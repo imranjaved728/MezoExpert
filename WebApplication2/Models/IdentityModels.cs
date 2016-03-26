@@ -56,6 +56,9 @@ namespace WebApplication2.Models
                 .HasRequired(t => t.category)
                 .WithMany(t => t.tutorExperties)
                 .HasForeignKey(t => t.CategoryID);
+
+
+
     }
 
         public DbSet<Student> Students { get; set; }

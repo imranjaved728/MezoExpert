@@ -312,3 +312,15 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Mig
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.notifcationslinks.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.changeinPaypalPayments.resources
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.changeinPaypalPayments1.resources
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\Microsoft.Azure.AppService.ApiApps.Service.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\Swashbuckle.Core.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Net.Http.Formatting.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.WebHost.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\WebActivatorEx.dll
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Net.Http.Formatting.xml
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.xml
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.WebHost.xml
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Debug\WebApplication2.Migrations.timezone.resources

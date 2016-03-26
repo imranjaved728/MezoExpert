@@ -199,7 +199,7 @@
     <value>The First Name field is required.</value>
   </data>
   <data name="getHelp" xml:space="preserve">
-    <value>Get help with your Questions.</value>
+    <value>with your academic questions</value>
   </data>
   <data name="getHelpNow" xml:space="preserve">
     <value>Get Help Now</value>
@@ -454,10 +454,16 @@ Send us your bank details on support@mezoexperts.com</value>
   <data name="fundsaddmsg" xml:space="preserve">
     <value>Funds added to your account Successfully !!!</value>
   </data>
+  <data name="getHelp2" xml:space="preserve">
+    <value>Get help from a top tutor</value>
+  </data>
   <data name="PaymentId" xml:space="preserve">
     <value>PaymentId</value>
   </data>
   <data name="PaymentsHistory" xml:space="preserve">
     <value>Payments History</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>TimeZone</value>
   </data>
 </root>

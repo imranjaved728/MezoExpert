@@ -88,6 +88,10 @@
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.AppService.ApiApps.Service, Version=0.9.16.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.AppService.ApiApps.Service.0.9.16\lib\net45\Microsoft.Azure.AppService.ApiApps.Service.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -105,15 +109,35 @@
       <HintPath>..\packages\PayPalCoreSDK.1.7.0\lib\net451\PayPalCoreSDK.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -157,6 +181,10 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -222,6 +250,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -303,6 +332,10 @@
     <Compile Include="Migrations\201603190012006_changeinPaypalPayments1.cs" />
     <Compile Include="Migrations\201603190012006_changeinPaypalPayments1.Designer.cs">
       <DependentUpon>201603190012006_changeinPaypalPayments1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603260511284_timezone.cs" />
+    <Compile Include="Migrations\201603260511284_timezone.Designer.cs">
+      <DependentUpon>201603260511284_timezone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -394,7 +427,12 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="apiapp.json" />
+    <None Include="Properties\PublishProfiles\azure.pubxml" />
     <None Include="Properties\PublishProfiles\beta.mezoexperts.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mezoexperts - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mezoexperts - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mezoexperts.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mezoexperts.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -438,6 +476,16 @@
     <Content Include="Theme\bootstrap-3.3.4-dist\js\bootstrap.js" />
     <Content Include="Theme\bootstrap-3.3.4-dist\js\bootstrap.min.js" />
     <Content Include="Theme\bootstrap-3.3.4-dist\js\npm.js" />
+    <Content Include="Theme\bootstrapformhelpers\css\bootstrap-formhelpers.css" />
+    <Content Include="Theme\bootstrapformhelpers\css\bootstrap-formhelpers.min.css" />
+    <Content Include="Theme\bootstrapformhelpers\img\bootstrap-formhelpers-countries.flags-LICENSE.txt" />
+    <Content Include="Theme\bootstrapformhelpers\img\bootstrap-formhelpers-countries.flags.png" />
+    <Content Include="Theme\bootstrapformhelpers\img\bootstrap-formhelpers-currencies.flags.png" />
+    <Content Include="Theme\bootstrapformhelpers\img\bootstrap-formhelpers-googlefonts.png" />
+    <Content Include="Theme\bootstrapformhelpers\js\bootstrap-formhelpers-countries.js" />
+    <Content Include="Theme\bootstrapformhelpers\js\bootstrap-formhelpers.js" />
+    <Content Include="Theme\bootstrapformhelpers\js\bootstrap-formhelpers.min.js" />
+    <Content Include="Theme\bootstrapformhelpers\js\timezones.full.min.js" />
     <Content Include="Theme\buttons\bootstrap-social.css" />
     <Content Include="Theme\buttons\social-buttons.css" />
     <Content Include="Theme\Canvas\css\literallycanvas.css" />
@@ -688,6 +736,7 @@
     <Content Include="Theme\Canvas\static\.DS_Store" />
     <Content Include="Theme\Canvas\static\img\.DS_Store" />
     <Content Include="Views\Home\Canvas.cshtml" />
+    <Content Include="Theme\bootstrapformhelpers\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -734,6 +783,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603190012006_changeinPaypalPayments1.resx">
       <DependentUpon>201603190012006_changeinPaypalPayments1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603260511284_timezone.resx">
+      <DependentUpon>201603260511284_timezone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

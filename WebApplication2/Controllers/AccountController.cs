@@ -68,7 +68,6 @@ namespace WebApplication2.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -122,7 +121,6 @@ namespace WebApplication2.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(StudentRegisterModel model)
         {
             if (ModelState.IsValid)
@@ -192,7 +190,6 @@ namespace WebApplication2.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterTutor(TutorRegisterModel model)
         {
             if (ModelState.IsValid)

@@ -22,7 +22,7 @@ using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
-    [CustomAuthorize(Roles = "Tutor")]
+    [CustomAuthorize(Roles = "Tutor,Admin")]
     public class TutorsController : BaseController
     {
         private PayPal.Api.Payment payment;
@@ -674,7 +674,7 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DOB,Country,City,University,Degree,AboutMe,Experience,ProfileImage,Expertise")] TutorUpdateModel tutor)
+        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DOB,Country,City,University,Degree,AboutMe,Experience,ProfileImage,Expertise,timeZone")] TutorUpdateModel tutor)
         {
             if (ModelState.IsValid)
             {
@@ -691,6 +691,7 @@ namespace WebApplication2.Controllers
                 loaddb.Experience = tutor.Experience;
                 loaddb.University = tutor.University;
                 loaddb.Degree= tutor.Degree;
+                loaddb.Timezone = tutor.timeZone;
                 //loaddb.ProfileImage = tutor.ProfileImage;
                 if (!String.IsNullOrWhiteSpace(tutor.DOB))
                     loaddb.DateOfBirth = Convert.ToDateTime(tutor.DOB);

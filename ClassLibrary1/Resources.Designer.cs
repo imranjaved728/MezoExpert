@@ -439,11 +439,20 @@ namespace ClassLibrary1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get help with your Questions..
+        ///   Looks up a localized string similar to with your academic questions.
         /// </summary>
         public static string getHelp {
             get {
                 return ResourceManager.GetString("getHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get help from a top tutor.
+        /// </summary>
+        public static string getHelp2 {
+            get {
+                return ResourceManager.GetString("getHelp2", resourceCulture);
             }
         }
         
@@ -976,6 +985,15 @@ namespace ClassLibrary1 {
         public static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TimeZone.
+        /// </summary>
+        public static string TimeZone {
+            get {
+                return ResourceManager.GetString("TimeZone", resourceCulture);
             }
         }
         

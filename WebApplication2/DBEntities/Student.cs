@@ -19,6 +19,7 @@ namespace WebApplication2.Models
         public float CurrentBalance { get; set; }
         public string ProfileImage { get; set; }
         public string Username { get; set; }
+        public string Timezone { get; set; }
 
 
     }

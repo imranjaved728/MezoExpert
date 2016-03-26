@@ -32,45 +32,166 @@
         </div><!-- ./col -->
         <div class="col-md-1"></div>
         <div class="col-md-8 personal-info">
-            <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-check"></i>
-                Funds added to your account Successfully !!!
-            </div>
-            <br />
-            @using (Html.BeginForm("Payment", "Students", FormMethod.Post, new { id = "QuestionDetails" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">@Html.Label(Resources.Amount + " : ")</label>
-                    <div class="col-lg-6">
-                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a data-toggle="tab" href="#1"><b>@Resources.AddFunds </b></a></li>
+                <li role="presentation"><a data-toggle="tab" href="#2"><b>@Resources.PaymentsHistory</b></a></li>
+
+            </ul>
+            <div class="tab-content ">
+                <div class="tab-pane active" id="1">
+                    
+                    <div class="alert alert-info alert-dismissable" style="display: none;" id="alerts">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-check"></i>
+                        @Resources.fundsaddmsg
                     </div>
+                    <br />
+                    @using (Html.BeginForm("Payment", "Students", FormMethod.Post, new { id = "QuestionDetails" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.Label(Resources.Amount + " : ")</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                            </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-6">
-                            <br />
-                            <input type="submit" class="btn btn-success" value="@Resources.AddFunds">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-6">
+                                    <br />
+                                    <input type="submit" class="btn btn-success" value="@Resources.AddFunds">
 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <br />
+                                <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/paypal.jpg" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <br />
-                        <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="~/Images/paypal.jpg" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
-                    </div>
-                </div>
 
-            }
+                    }
+                    </div>
+                    
+              
+            <div class="tab-pane" id="2">
+            <br/>
+                @{ 
+                    var payments = Model.Payments;
+                <table id="postedQuestions" class="display formatTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            
+                            <th>
+                                @Html.DisplayName(Resources.PaymentId)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.Amount)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.Status)
+                            </th>
+                            <th>
+                                @Html.DisplayName(Resources.Time)
+                            </th>
+
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in payments)
+                        {
+                           
+                            //var lastreply = item.Replies.LastOrDefault();
+                            <tr style="background-color:#F1F1F1 !important">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paymentId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.amount)
+
+                                </td>
+                                <td>
+                                    @item.status
+                                </td>
+                                <td>
+                                    @item.PostedTime
+                                </td>
+                               
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+                    }
+
+             </div>
+
+
+            </div>
+
+            </div>
         </div>
-
     </div>
-</div>
 
 
 @section scripts{
+<link href="~/Theme/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Theme/dataTable/jquery.dataTables.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+            });
+
+            $('#postedQuestions').DataTable({
+                //"ordering": false,
+                "info": false,
+                "pageLength": 10,
+                "bLengthChange": false,
+                "scrollX": true,
+
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": "First page", // This is the link to the first page
+                        "sPrevious": "@Resources.PreviousPage", // This is the link to the previous page
+                        "sNext": "@Resources.NextPage", // This is the link to the next page
+                        "sLast": "Last page", // This is the link to the last page
+
+                    }
+                    ,
+                    "sSearch": "@Resources.Search"
+                },
+                "columnDefs": [
+
+                 { 'bSortable': false, 'aTargets': [1, 2, 3] }
+                ],
+                "order": [[3, "desc"]],
+
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                    // Bind click event
+                    $(nRow).click(function () {
+
+                        // alert('You clicked on ' + aData[0] + '\'s row');
+
+                        //$("#SessionId").val(aData[0]);
+                        //document.getElementById('QuestionDetails').submit();
+                    });
+
+                    return nRow;
+                }
+            });
+
+            //$("#postedRequests tr").css('cursor', 'pointer');
+
+        });
+
+</script>
     <script>
 
         var getUrlParameter = function getUrlParameter(sParam) {

@@ -94,8 +94,11 @@
                         @Html.ValidationMessageFor(model => model.Degree, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-
+                <select id="countries_timezones1" class="form-control bfh-countries" data-country="US" data-flags="true"></select>
+                <br><br>
+                <select class="form-control bfh-timezones" data-country="countries_timezones1"></select>
+                <div class="bfh-selectbox bfh-countries" data-country="US" data-flags="true">
+                </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-6">
@@ -112,8 +115,10 @@
 
 @section scripts{
 
-    <script>
 
+    <script>
+    
+     
         function showMessage() {
 
             $('html, body').animate({ scrollTop: 0 }, 'slow', function () {

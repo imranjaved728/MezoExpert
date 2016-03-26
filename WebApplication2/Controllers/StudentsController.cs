@@ -1336,7 +1336,7 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditProfile([Bind(Include = "FirstName,LastName,DateOfBirth,Country,City,University,Degree,ProfileImage")] StudentUpdateModel student)
+        public async Task<ActionResult> EditProfile( StudentUpdateModel student)
         {
             if (ModelState.IsValid)
             {
@@ -1351,6 +1351,7 @@ namespace WebApplication2.Controllers
                 loaddb.City = student.City;
                 loaddb.University = student.University;
                 loaddb.Degree = student.Degree;
+                loaddb.Timezone = student.timeZone;
                 //loaddb.ProfileImage = student.ProfileImage;
                 if (!String.IsNullOrWhiteSpace(student.DateOfBirth))
                      loaddb.DateOfBirth =Convert.ToDateTime(student.DateOfBirth);

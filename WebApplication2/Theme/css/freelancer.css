@@ -111,16 +111,16 @@ header .intro-text .skills {
 
 @media(min-width:768px) {
     header .container {
-        padding-top: 250px;
+        padding-top: 200px;
         padding-bottom: 100px;
     }
 
     header .intro-text .name {
-        font-size: 4.50em;
+        font-size: 3.50em;
     }
 
     header .intro-text .skills {
-        font-size: 1.75em;
+        font-size: 2.5em;
     }
 }
 .navbar-brand{
@@ -711,4 +711,8 @@ body::-webkit-scrollbar-thumb {
 #notificationsBody::-webkit-scrollbar-thumb {
   background-color: black;
   outline: 1px solid slategrey;
+}
+
+.bfh-selectbox .bfh-selectbox-options ul li>a:hover, .bfh-selectbox .bfh-selectbox-options ul li>a:focus{
+    color:#18bc9c !important;
 }

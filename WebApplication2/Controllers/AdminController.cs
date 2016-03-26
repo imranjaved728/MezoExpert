@@ -15,6 +15,8 @@ using WebApplication2.App_Start;
 using System.Data.Entity;
 using System.Net;
 using WebApplication2.DBEntities;
+using System.Collections.Generic;
+
 
 namespace WebApplication2.Controllers
 {
@@ -119,9 +121,9 @@ namespace WebApplication2.Controllers
                 if (result.Succeeded)
                 {
                     var roleresult = UserManager.AddToRole(user.Id, "Tutor");
-                   
 
-                    tutor.TutorID = Guid.NewGuid();
+
+                    tutor.TutorID = new Guid(user.Id);
                     tutor.DateCreated = DateTime.Now;
                     db.Tutors.Add(tutor);
                     await db.SaveChangesAsync();
@@ -171,6 +173,8 @@ namespace WebApplication2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tutor tutor = await db.Tutors.FindAsync(id);
+            ApplicationUser user = db.Users.Where(c => c.Id == id.ToString()).FirstOrDefault();
+            db.Users.Remove(user);
             if (tutor == null)
             {
                 return HttpNotFound();
@@ -341,7 +345,7 @@ namespace WebApplication2.Controllers
                 if (result.Succeeded)
                 {
                     var roleresult = UserManager.AddToRole(user.Id, "Student");
-                    student.StudentID = Guid.NewGuid();
+                    student.StudentID = new Guid(user.Id);
                     student.DateCreated = DateTime.Now;
                     db.Students.Add(student);
                     await db.SaveChangesAsync();
@@ -404,6 +408,8 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> DeleteConfirmedStudent(Guid id)
         {
             Student student = await db.Students.FindAsync(id);
+            ApplicationUser user= db.Users.Where(c=>c.Id==id.ToString()).FirstOrDefault();
+            db.Users.Remove(user);
             db.Students.Remove(student);
             await db.SaveChangesAsync();
             return RedirectToAction("IndexStudent");
@@ -519,6 +525,22 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult> DeleteConfirmedQuestion(Guid id)
         {
             Question question = await db.Questions.FindAsync(id);
+           /* ICollection<Session> session = question.Sessions;
+            foreach(var v in session)
+            {
+                ICollection<Reply> replies = v.Replies;
+                foreach (var r in replies)
+                {
+                    ICollection<Files> files = r.Files;
+                    foreach (var f in files)
+                        db.Files.Remove(f);
+
+                    db.Replies.Remove(r);
+                }
+                
+                db.sessions.Remove(v);
+            }
+            */
             db.Questions.Remove(question);
             await db.SaveChangesAsync();
             return RedirectToAction("IndexQuestion");

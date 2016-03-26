@@ -199,7 +199,7 @@
     <value>مطلوب الحقل الأول</value>
   </data>
   <data name="getHelp" xml:space="preserve">
-    <value>الحصول على المساعدة مع الأسئلة الخاصة بك</value>
+    <value>مع الأسئلة الأكاديمية</value>
   </data>
   <data name="getHelpNow" xml:space="preserve">
     <value>الحصول على مساعدة الآن</value>
@@ -454,10 +454,16 @@
   <data name="fundsaddmsg" xml:space="preserve">
     <value>أموال تضاف إلى حسابك بنجاح!</value>
   </data>
+  <data name="getHelp2" xml:space="preserve">
+    <value>الحصول على مساعدة من كبار المعلمين</value>
+  </data>
   <data name="PaymentId" xml:space="preserve">
     <value>دفع إيد</value>
   </data>
   <data name="PaymentsHistory" xml:space="preserve">
     <value>المدفوعات التاريخ</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>والوقت</value>
   </data>
 </root>

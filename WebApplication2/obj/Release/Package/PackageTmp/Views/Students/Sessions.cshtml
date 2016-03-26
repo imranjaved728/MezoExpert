@@ -10,14 +10,23 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
 
+            <table>
+                <tr>
+                    <td>
+                        <a style="text-decoration:none" href="@Url.Action("Profile","Home",new { username =   Model.session.tutor.Username })">
+                            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")">
+                                @Model.session.tutor.Username
+                            </h1>
+                            </a>
+                    </td>
+                    <td>
+                        <a href="#" style="text-decoration:none;font-size:15px;padding-left:5px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a>
+                     </td>
+                </tr>
+            </table>
 
-            <h1 class="@(@Model.status == true ? "text-success" : "text-danger")">
-
-                @Model.session.tutor.Username
-                <a href="#" style="text-decoration:none;font-size:15px;margin-bottom:10px"><i id="onlineStatus" class="fa fa-circle  @(@Model.status == true ? "text-success" : "text-danger")"></i></a>
-
-            </h1>
-            <hr />
+            
+            <hr style="margin-top:0px"/>
             <div class="alert alert-danger alert-dismissable" style="display: none;" id="alerts">
                 <a class="panel-close close" data-dismiss="alert">×</a>
                 <i class="fa fa-check"></i>
@@ -44,7 +53,8 @@
                                         foreach (var v in Model.session.question.Files)
                                         {
                                             var path = @v.Path.Split('/');
-                                            <strong class="text-success"><a target="_blank" href="/Students/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                            <strong class="text-success">
+                                            <a target="_blank" href="/Students/Download?fileName=@v.Path"><img style="margin-right:0px;width:25px;height:25px;" src="~/Images/paper_clip_attachment.png" />@path[path.Length - 1]</a></strong><br />
                                         }
                                     }
                                     <br />
@@ -157,7 +167,8 @@
                                                 foreach (var v in reply.Files)
                                                 {
                                                     var path = @v.Path.Split('/');
-                                                    <strong class="text-success"><a target="_blank" href="/Students/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                                    <strong class="text-success">
+                                                    <a target="_blank" href="/Students/Download?fileName=@v.Path"><img style="margin-right:0px;width:25px;height:25px;" src="~/Images/paper_clip_attachment.png" />@path[path.Length - 1]</a></strong><br />
                                                 }
                                             }
                                             <div class="clearfix"></div>
@@ -193,7 +204,8 @@
                                                                         foreach (var v in reply.Files)
                                                                         {
                                                                             var path = @v.Path.Split('/');
-                                                                            <strong class="text-success"><a target="_blank" href="/Students/Download?fileName=@v.Path">@path[path.Length - 1]</a></strong><br />
+                                                                            <strong class="text-success">
+                                                                            <a target="_blank" href="/Students/Download?fileName=@v.Path"><img style="margin-right:0px;width:25px;height:25px;" src="~/Images/paper_clip_attachment.png" />@path[path.Length - 1]</a></strong><br />
                                                                         }
                                                                     }
                                                                     <div class="clearfix"></div>
@@ -447,9 +459,10 @@
                 $(function () {
 
                     $("#QuestionText").val("");
-                    setTimeout(function () {
-                        $("#QuestionText").focus();
-                    }, 0);
+                    $('html, body').animate({
+                        scrollTop: $('#chatlist').find(' > li:nth-last-child(3)').offset().top
+                    }, 1000);
+                   
          
                 });
             };
@@ -466,9 +479,9 @@
                 $('#chatlist').find(' > li:nth-last-child(1)').before(message).fadeIn('slow');
 
                 $(function () {
-                    setTimeout(function () {
-                        $("#QuestionText").focus();
-                    }, 0);
+                    $('html, body').animate({
+                        scrollTop: $('#chatlist').find(' > li:nth-last-child(4)').offset().top
+                    }, 1000);
                  
                 });
             };
@@ -479,9 +492,9 @@
                
 
                 $(function () {
-                    setTimeout(function () {
-                        $("#QuestionText").focus();
-                    }, 0);
+                    $('html, body').animate({
+                        scrollTop: $('#chatlist').find(' > li:nth-last-child(4)').offset().top
+                    }, 1000);
                    
                 });
             };
@@ -492,9 +505,9 @@
                 $("#buttonsUpdate").html(message).fadeIn('slow');
 
                 $(function () {
-                    setTimeout(function () {
-                        $("#QuestionText").focus();
-                    }, 0);
+                    $('html, body').animate({
+                        scrollTop: $('#chatlist').find(' > li:nth-last-child(3)').offset().top
+                    }, 1000);
 
                 });
             };

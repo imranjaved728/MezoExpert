@@ -23,6 +23,7 @@ namespace WebApplication2.Models
         public float CurrentEarning { get; set; }
         public string ProfileImage { get; set; }
         public string Username { get; set; }
+        public string Timezone { get; set; }
 
         public Boolean IsCompletedProfile { get; set; }
         public float Rating { get; set; }

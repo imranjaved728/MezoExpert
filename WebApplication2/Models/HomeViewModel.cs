@@ -122,6 +122,10 @@ namespace WebApplication2.Models
         [DataType(DataType.Text)]
         public string University { get; set; }
 
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
+        [DataType(DataType.Text)]
+        public string timeZone { get; set; }
+
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long and maximum 256 characters long.", MinimumLength = 100)]
         [Display(Name = "AboutMe", ResourceType = typeof(Resources))]
@@ -211,6 +215,12 @@ namespace WebApplication2.Models
         [Display(Name = "Degree", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
         public string Degree { get; set; }
+
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
+        [DataType(DataType.Text)]
+        public string timeZone { get; set; }
+
+
 
         [Display(Name = "Country", ResourceType = typeof(Resources))]
         [DataType(DataType.Text)]
