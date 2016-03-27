@@ -71,7 +71,7 @@
                     <label class="col-md-3 control-label">@Html.LabelFor(model => model.Country)</label>
                     <div class="col-md-6">
                         @Html.HiddenFor(x => x.Country)
-                        <div class="bfh-selectbox bfh-countries" data-country="@Model.Country" data-flags="true">
+                        <div class="bfh-selectbox bfh-countries" data-blank="false" data-country="@Model.Country" data-flags="true">
                             <input type="hidden" value="">
                         </div>
                         @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
@@ -140,7 +140,7 @@
         });
 
         $("#timezone").change(function () {
-            $("#timeZone").val($("#timezone").val());
+            $("#timeZone").val($("#timezone").val() + "$" + $('#timezone').find('option:selected').attr("data-offset"));
         });
 
 

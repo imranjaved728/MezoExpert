@@ -188,7 +188,7 @@
             $("#timezone").val(selectedZone);
 
         $("#timezone").change(function () {
-            $("#timeZone").val($("#timezone").val());
+            $("#timeZone").val($("#timezone").val() + "$" + $('#timezone').find('option:selected').attr("data-offset"));
         });
 
 

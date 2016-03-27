@@ -131,7 +131,11 @@
                             </div>
                             <br />
                             <div style="margin-bottom:20px">
-                                <small class="text-muted pull-right">@Model.session.question.PostedTime</small>
+                                @{
+                                    var finalTime3 = @Model.session.question.PostedTime.AddMinutes(Model.offsetTime);
+                                }
+
+                                <small class="text-muted pull-right">@finalTime3</small>
                             </div>
 
 
@@ -156,7 +160,7 @@
                                         </a>
 
                                         <div class="media-body">
-                                            <a style="text-decoration:none" href="@Url.Action("Profile","Home",new { username =tutor.Username })"> <strong class="text-success userText username">@{ @tutor.Username}</strong></a><br />
+                                            <a style="text-decoration:none" href="@Url.Action("Profile", "Home", new { username = tutor.Username })"> <strong class="text-success userText username">@{ @tutor.Username}</strong></a><br />
                                             @Html.Raw(reply.Details)
 
                                             @if (reply.Files.Count > 0)
@@ -174,7 +178,10 @@
                                         </div>
                                         <br />
                                         <div style="margin-bottom:20px">
-                                            <small class="text-muted pull-right">@reply.PostedTime</small>
+                                            @{
+                                                var finalTime= reply.PostedTime.AddMinutes(Model.offsetTime);
+                                            }
+                                            <small class="text-muted pull-right">@finalTime</small>
                                         </div>
 
 
@@ -212,7 +219,10 @@
                                                                 <br />
 
                                                                 <div style="margin-bottom:20px">
-                                                                    <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                                    @{
+                                                                        var finalTime2 = reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                                    }
+                                                                    <small class="text-muted pull-right">@finalTime2</small>
                                                                 </div>
 
 

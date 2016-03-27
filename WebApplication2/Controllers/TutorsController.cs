@@ -268,7 +268,18 @@ namespace WebApplication2.Controllers
 
                 obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
                 obj.offer.amount = obj.session.OfferedFees;
-
+                if (!string.IsNullOrEmpty(session.tutor.Timezone))
+                {
+                    string[] splited = session.tutor.Timezone.Split('$');
+                    string[] hoursMin= splited[1].Split(':');
+                    double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                    if(minutes<0)
+                        minutes=minutes-Convert.ToDouble(hoursMin[1]);
+                    else
+                        minutes=minutes+Convert.ToDouble(hoursMin[1]);
+                    obj.offsetTime = minutes;
+                }
+                
                 return View(obj);
             }
             else
@@ -655,6 +666,11 @@ namespace WebApplication2.Controllers
             }
             Tutor tutor = await db.Tutors.FindAsync(user);
             TutorUpdateModel tmodel = Mapper.Map<Tutor, TutorUpdateModel>(tutor);
+            if(!string.IsNullOrEmpty(tmodel.timeZone))
+            {
+                string[] splittedString = tmodel.timeZone.Split('$');
+                tmodel.timeZone = splittedString[0];
+            }
             
             if (tutor == null)
             {

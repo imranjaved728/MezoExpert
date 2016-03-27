@@ -218,3 +218,4 @@ C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.IdentityModel.Toke
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Net.Http.Formatting.xml
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.xml
 C:\Users\Imran\Desktop\projectmezo\WebApplication2\bin\System.Web.Http.WebHost.xml
+C:\Users\Imran\Desktop\projectmezo\WebApplication2\obj\Release\WebApplication2.Migrations.timezone.resources

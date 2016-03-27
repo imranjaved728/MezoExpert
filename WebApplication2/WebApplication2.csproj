@@ -388,7 +388,11 @@
     <Content Include="Images\bdg_secured_by_pp_2line.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\howitworks.png" />
     <Content Include="Images\MezoImages\backhome.jpg" />
+    <Content Include="Images\MezoImages\backhome2.jpg" />
+    <Content Include="Images\MezoImages\backhome3.jpg" />
+    <Content Include="Images\MezoImages\backhome4.jpg" />
     <Content Include="Images\MezoImages\bluebacksmall.png" />
     <Content Include="Images\MezoImages\email.jpg" />
     <Content Include="Images\MezoImages\logo.png" />

@@ -26,6 +26,7 @@ namespace WebApplication2.Models
         public Offer offer { get; set; }
         public Boolean status { get; set; }
         public Boolean status2nd { get; set; }
+        public double offsetTime { get; set; }
     }
 
 

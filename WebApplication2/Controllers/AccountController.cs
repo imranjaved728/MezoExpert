@@ -252,7 +252,7 @@ namespace WebApplication2.Controllers
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider

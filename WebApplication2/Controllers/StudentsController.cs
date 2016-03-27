@@ -53,6 +53,18 @@ namespace WebApplication2.Controllers
                 obj.session = session;
                 obj.status = db.online.Where(c => c.Username == session.tutor.Username).FirstOrDefault().Status;
                 obj.session.Replies = obj.session.Replies.OrderBy(c => c.PostedTime).ToList();
+                if (!string.IsNullOrEmpty(session.question.student.Timezone))
+                {
+                    string[] splited = session.question.student.Timezone.Split('$');
+                    string[] hoursMin = splited[1].Split(':');
+                    double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                    if (minutes < 0)
+                        minutes = minutes - Convert.ToDouble(hoursMin[1]);
+                    else
+                        minutes = minutes + Convert.ToDouble(hoursMin[1]);
+                    obj.offsetTime = minutes;
+
+                }
                 return View(obj);
             }
             else
@@ -1321,6 +1333,12 @@ namespace WebApplication2.Controllers
             Student student = await db.Students.FindAsync(user);
             StudentUpdateModel stu = Mapper.Map<Student, StudentUpdateModel>(student);
             stu.DateOfBirth = student.DateOfBirth.HasValue ? student.DateOfBirth.Value.ToString("MM/dd/yyyy") : string.Empty;
+
+            if (!string.IsNullOrEmpty(stu.timeZone))
+            {
+                string[] splittedString = stu.timeZone.Split('$');
+                stu.timeZone = splittedString[0];
+            }
 
             if (student == null)
             {
