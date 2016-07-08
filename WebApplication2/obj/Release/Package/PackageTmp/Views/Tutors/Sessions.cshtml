@@ -131,7 +131,12 @@
                             </div>
                             <br />
                             <div style="margin-bottom:20px">
-                                <small class="text-muted pull-right">@Model.session.question.PostedTime</small>
+                                @{
+                                    var finalTime3 = @Model.session.question.PostedTime.AddMinutes(Model.offsetTime);
+                                    finalTime3 = finalTime3.AddHours(7);
+                                }
+
+                                <small class="text-muted pull-right">@finalTime3</small>
                             </div>
 
 
@@ -175,10 +180,10 @@
                                         <br />
                                         <div style="margin-bottom:20px">
                                             @{
-                                                //var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(" /* users time zone here */");
-                                                //var convertedTime = TimeZoneInfo.ConvertTime(reply.PostedTime, timeZoneInfo);
+                                                var finalTime= reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                finalTime = finalTime.AddHours(7);
                                             }
-                                            <small class="text-muted pull-right">@reply.PostedTime</small>
+                                            <small class="text-muted pull-right">@finalTime</small>
                                         </div>
 
 
@@ -216,7 +221,11 @@
                                                                 <br />
 
                                                                 <div style="margin-bottom:20px">
-                                                                    <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                                    @{
+                                                                        var finalTime2 = reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                                        finalTime2 = finalTime2.AddHours(7);
+                                                                    }
+                                                                    <small class="text-muted pull-right">@finalTime2</small>
                                                                 </div>
 
 

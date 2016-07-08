@@ -134,7 +134,11 @@
                             </div>
                             <br />
                             <div style="margin-bottom:20px">
-                                <small class="text-muted pull-right">@Model.session.question.PostedTime</small>
+                                @{
+                                    var finalTime = Model.session.question.PostedTime.AddMinutes(Model.offsetTime);
+                                    finalTime = finalTime.AddHours(7);
+                                }
+                                <small class="text-muted pull-right">@finalTime</small>
                             </div>
 
                             <hr>
@@ -175,7 +179,11 @@
                                         </div>
                                         <br />
                                         <div style="margin-bottom:20px">
-                                            <small class="text-muted pull-right">@reply.PostedTime</small>
+                                            @{
+                                                var finalTime2 = reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                finalTime2 = finalTime2.AddHours(7);
+                                            }
+                                            <small class="text-muted pull-right">@finalTime2</small>
                                         </div>
 
 
@@ -213,7 +221,11 @@
 
                                                                 <br />
                                                                 <div style="margin-bottom:20px">
-                                                                    <small class="text-muted pull-right">@reply.PostedTime</small>
+                                                                    @{
+                                                                        var finalTime3 = reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                                        finalTime3 = finalTime3.AddHours(7);
+                                                                    }
+                                                                    <small class="text-muted pull-right">@finalTime3</small>
                                                                 </div>
 
 

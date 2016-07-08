@@ -26,7 +26,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2016 03:58:31</publishTime>
     </File>
     <File Include="bin/ar/WebApplication2.resources.dll">
-      <publishTime>03/26/2016 04:09:04</publishTime>
+      <publishTime>03/27/2016 00:00:52</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>03/02/2016 21:55:55</publishTime>
@@ -203,7 +203,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/22/2016 16:57:02</publishTime>
     </File>
     <File Include="bin/WebApplication2.dll">
-      <publishTime>03/26/2016 04:09:04</publishTime>
+      <publishTime>03/27/2016 00:00:52</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>03/02/2016 21:56:00</publishTime>
@@ -283,8 +283,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/heroAccent.png">
       <publishTime>03/02/2016 21:55:37</publishTime>
     </File>
+    <File Include="Images/howitworks.png">
+      <publishTime>03/26/2016 22:18:48</publishTime>
+    </File>
     <File Include="Images/MezoImages/backhome.jpg">
       <publishTime>03/04/2016 19:32:24</publishTime>
+    </File>
+    <File Include="Images/MezoImages/backhome2.jpg">
+      <publishTime>03/26/2016 13:40:34</publishTime>
+    </File>
+    <File Include="Images/MezoImages/backhome3.jpg">
+      <publishTime>03/26/2016 14:08:32</publishTime>
+    </File>
+    <File Include="Images/MezoImages/backhome4.jpg">
+      <publishTime>03/26/2016 14:08:44</publishTime>
     </File>
     <File Include="Images/MezoImages/bluebacksmall.png">
       <publishTime>03/02/2016 21:55:37</publishTime>
@@ -541,6 +553,183 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Theme/bootstrapformhelpers/img/bootstrap-formhelpers-countries.flags.png">
       <publishTime>03/21/2016 22:06:00</publishTime>
     </File>
+    <File Include="Theme/bootstrapformhelpers/img/bootstrap-formhelpers-currencies.flags.png">
+      <publishTime>03/21/2016 22:06:00</publishTime>
+    </File>
+    <File Include="Theme/bootstrapformhelpers/img/bootstrap-formhelpers-googlefonts.png">
+      <publishTime>03/21/2016 22:06:00</publishTime>
+    </File>
+    <File Include="Theme/bootstrapformhelpers/js/bootstrap-formhelpers-countries.js">
+      <publishTime>03/21/2016 22:15:33</publishTime>
+    </File>
+    <File Include="Theme/bootstrapformhelpers/js/bootstrap-formhelpers.js">
+      <publishTime>03/21/2016 22:05:57</publishTime>
+    </File>
+    <File Include="Theme/bootstrapformhelpers/js/bootstrap-formhelpers.min.js">
+      <publishTime>03/21/2016 22:29:57</publishTime>
+    </File>
+    <File Include="Theme/bootstrapformhelpers/js/timezones.full.min.js">
+      <publishTime>03/26/2016 00:02:11</publishTime>
+    </File>
+    <File Include="Theme/buttons/bootstrap-social.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/buttons/bootstrap-social.less">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/buttons/bootstrap-social.scss">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/buttons/social-buttons.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/Canvas/.DS_Store">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/bower.json">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/css/.DS_Store">
+      <publishTime>03/07/2016 21:05:01</publishTime>
+    </File>
+    <File Include="Theme/Canvas/css/literallycanvas.css">
+      <publishTime>03/07/2016 21:05:02</publishTime>
+    </File>
+    <File Include="Theme/Canvas/index.html">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/.DS_Store">
+      <publishTime>03/07/2016 21:05:04</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/.gitignore">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/jquery-1.12.1.min.js">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/literallycanvas-core.js">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/literallycanvas-core.min.js">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/literallycanvas.js">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/literallycanvas.min.js">
+      <publishTime>03/07/2016 21:05:05</publishTime>
+    </File>
+    <File Include="Theme/Canvas/js/react-with-addons.js">
+      <publishTime>03/07/2016 21:20:02</publishTime>
+    </File>
+    <File Include="Theme/Canvas/README.txt">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/.DS_Store">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/.DS_Store">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/alpha.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/checkerboard-8x8.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/dashed-line.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/ellipse.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/eraser.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/eyedropper.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/hue.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/line-with-arrow.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/line.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/pan.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/pencil.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/polygon-cancel.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/polygon-closed.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/polygon-open.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/polygon.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/rectangle.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/redo.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/saturation.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/screenshot.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/text.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/undo.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/zoom-in.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/Canvas/static/img/zoom-out.png">
+      <publishTime>03/07/2016 21:05:08</publishTime>
+    </File>
+    <File Include="Theme/css/bootstrap.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/css/bootstrap.min.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/css/chat.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/css/custom.css">
+      <publishTime>03/07/2016 00:14:30</publishTime>
+    </File>
+    <File Include="Theme/css/footer-distributed-with-address-and-phones.css">
+      <publishTime>03/02/2016 21:55:38</publishTime>
+    </File>
+    <File Include="Theme/css/freelancer.css">
+      <publishTime>03/26/2016 22:55:47</publishTime>
+    </File>
+    <File Include="Theme/css/search.css">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/css/theme.min.css">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/dataTable/jquery.dataTables.min.css">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/dataTable/jquery.dataTables.min.js">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
     <File Include="Theme/dropdownMultiple/semantic.min.css">
       <publishTime>03/12/2016 21:22:18</publishTime>
     </File>
@@ -557,6 +746,108 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2016 21:55:39</publishTime>
     </File>
     <File Include="Theme/font-awesome/fonts/fontawesome-webfont.svg">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/fonts/fontawesome-webfont.ttf">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/fonts/fontawesome-webfont.woff">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/fonts/FontAwesome.otf">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/bordered-pulled.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/core.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/fixed-width.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/font-awesome.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/icons.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/larger.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/list.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/mixins.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/path.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/rotated-flipped.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/spinning.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/stacked.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/less/variables.less">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/font-awesome.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_bordered-pulled.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_core.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_fixed-width.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_icons.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_larger.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_list.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_mixins.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_path.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_rotated-flipped.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_spinning.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_stacked.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/font-awesome/scss/_variables.scss">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>03/02/2016 21:55:39</publishTime>
+    </File>
+    <File Include="Theme/fonts/glyphicons-halflings-regular.woff2">
       <publishTime>03/02/2016 21:55:39</publishTime>
     </File>
     <File Include="Theme/images/favicon.ico">
@@ -893,7 +1184,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/05/2016 19:23:03</publishTime>
     </File>
     <File Include="Views/Shared/howitworks.cshtml">
-      <publishTime>03/17/2016 23:52:50</publishTime>
+      <publishTime>03/26/2016 22:27:09</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
       <publishTime>03/02/2016 21:55:40</publishTime>
@@ -923,7 +1214,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2016 16:05:29</publishTime>
     </File>
     <File Include="Views/Students/EditProfile.cshtml">
-      <publishTime>03/26/2016 03:35:54</publishTime>
+      <publishTime>03/26/2016 14:34:40</publishTime>
     </File>
     <File Include="Views/Students/Hire.cshtml">
       <publishTime>03/06/2016 16:04:47</publishTime>
@@ -947,13 +1238,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2016 16:03:08</publishTime>
     </File>
     <File Include="Views/Students/Sessions.cshtml">
-      <publishTime>03/18/2016 21:35:03</publishTime>
+      <publishTime>03/26/2016 23:22:00</publishTime>
     </File>
     <File Include="Views/Tutors/AccountSettings.cshtml">
       <publishTime>03/06/2016 16:01:41</publishTime>
     </File>
     <File Include="Views/Tutors/EditProfile.cshtml">
-      <publishTime>03/26/2016 03:35:51</publishTime>
+      <publishTime>03/26/2016 14:21:05</publishTime>
     </File>
     <File Include="Views/Tutors/Inbox.cshtml">
       <publishTime>03/06/2016 17:44:41</publishTime>
@@ -977,7 +1268,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/06/2016 15:56:48</publishTime>
     </File>
     <File Include="Views/Tutors/Sessions.cshtml">
-      <publishTime>03/26/2016 03:57:37</publishTime>
+      <publishTime>03/26/2016 23:19:46</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/02/2016 21:55:40</publishTime>
@@ -986,7 +1277,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2016 21:55:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/26/2016 04:09:10</publishTime>
+      <publishTime>03/27/2016 00:00:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

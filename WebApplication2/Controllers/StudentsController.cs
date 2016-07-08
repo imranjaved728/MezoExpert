@@ -954,6 +954,38 @@ namespace WebApplication2.Controllers
 
             await db.SaveChangesAsync();
 
+            string adjustedTimeTutor;
+            string adjustedTimeStudent;
+            DateTime TutorTime = obj.PostedTime.AddHours(7);
+            DateTime StudentTime = obj.PostedTime.AddHours(7);
+            if (!string.IsNullOrEmpty(session.tutor.Timezone))
+            {
+                string[] splited = session.tutor.Timezone.Split('$');
+                string[] hoursMin = splited[1].Split(':');
+                double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                if (minutes < 0)
+                    minutes = minutes - Convert.ToDouble(hoursMin[1]);
+                else
+                    minutes = minutes + Convert.ToDouble(hoursMin[1]);
+
+                TutorTime=TutorTime.AddMinutes(minutes);
+            }
+            adjustedTimeTutor = TutorTime.ToString();
+
+            if (!string.IsNullOrEmpty(session.question.student.Timezone))
+            {
+                string[] splited = session.question.student.Timezone.Split('$');
+                string[] hoursMin = splited[1].Split(':');
+                double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                if (minutes < 0)
+                    minutes = minutes - Convert.ToDouble(hoursMin[1]);
+                else
+                    minutes = minutes + Convert.ToDouble(hoursMin[1]);
+
+                StudentTime=StudentTime.AddMinutes(minutes);
+            }
+            adjustedTimeStudent = StudentTime.ToString();
+
             var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
             var username = User.Identity.Name;
             var imgsrc = db.Students.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
@@ -963,10 +995,11 @@ namespace WebApplication2.Controllers
             var username2 = tutor.Username;
             var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
 
-            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
+            string message = generateMessage(username, obj.Details, imgsrc, adjustedTimeStudent, obj.ReplyID.ToString(), status);
             SendChatMessageStudentReciever(obj.SessionID.ToString(), username, message, context); //send message to urself 
 
-            SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+            string message2 = generateMessage(username, obj.Details, imgsrc, adjustedTimeTutor, obj.ReplyID.ToString(), status);
+            SendChatMessageTutorReciever(obj.SessionID.ToString(), username2, message2, context); //send message to other person 
             //SendNotification(username2, imgsrc,"I have hired you for ");
           
         return new JsonResult()

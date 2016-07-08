@@ -366,6 +366,10 @@ namespace WebApplication2.Controllers
             obj.ReplierID = new Guid(User.Identity.GetUserId());
             obj.SessionID = reply.sessionID;
             obj.PostedTime = DateTime.Now;
+
+          
+
+
             reply.replyDetail=reply.replyDetail.Replace(Environment.NewLine, "<br/>");
             obj.Details = reply.replyDetail;
             db.Replies.Add(obj);
@@ -376,6 +380,39 @@ namespace WebApplication2.Controllers
             
             await db.SaveChangesAsync();
 
+            string adjustedTimeTutor;
+            string adjustedTimeStudent;
+            DateTime TutorTime = obj.PostedTime.AddHours(7);
+            DateTime StudentTime = obj.PostedTime.AddHours(7);
+            if (!string.IsNullOrEmpty(session.tutor.Timezone))
+            {
+                string[] splited = session.tutor.Timezone.Split('$');
+                string[] hoursMin = splited[1].Split(':');
+                double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                if (minutes < 0)
+                    minutes = minutes - Convert.ToDouble(hoursMin[1]);
+                else
+                    minutes = minutes + Convert.ToDouble(hoursMin[1]);
+
+                TutorTime=TutorTime.AddMinutes(minutes);
+            }
+            adjustedTimeTutor = TutorTime.ToString();
+
+            if (!string.IsNullOrEmpty(session.question.student.Timezone))
+            {
+                string[] splited = session.question.student.Timezone.Split('$');
+                string[] hoursMin = splited[1].Split(':');
+                double minutes = (Convert.ToDouble(hoursMin[0]) * 60);
+                if (minutes < 0)
+                    minutes = minutes - Convert.ToDouble(hoursMin[1]);
+                else
+                    minutes = minutes + Convert.ToDouble(hoursMin[1]);
+
+               StudentTime= StudentTime.AddMinutes(minutes);
+            }
+            adjustedTimeStudent = StudentTime.ToString();
+
+
             var context = GlobalHost.ConnectionManager.GetHubContext<TutorStudentChat>();
             var username = User.Identity.Name;
            
@@ -385,11 +422,11 @@ namespace WebApplication2.Controllers
             var status = db.online.Where(c => c.Username == username2).FirstOrDefault().Status;
 
             var imgsrc = db.Tutors.Where(c => c.Username == username).FirstOrDefault().ProfileImage;
-            string message = generateMessage(username, obj.Details, imgsrc, obj.PostedTime.ToString(),obj.ReplyID.ToString(), status);
+            string message = generateMessage(username, obj.Details, imgsrc, adjustedTimeTutor, obj.ReplyID.ToString(), status);
             SendChatTutorReciever(obj.SessionID.ToString(),username, message, context); //send message to urself 
 
-            
-            SendChatStudentReiever(obj.SessionID.ToString(), username2, message, context); //send message to other person 
+            string message2 = generateMessage(username, obj.Details, imgsrc, adjustedTimeStudent, obj.ReplyID.ToString(), status);
+            SendChatStudentReiever(obj.SessionID.ToString(), username2, message2, context); //send message to other person 
             //context.Clients.All.test("hello world");
 
             return new JsonResult()

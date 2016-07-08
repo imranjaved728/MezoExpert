@@ -133,6 +133,7 @@
                             <div style="margin-bottom:20px">
                                 @{
                                     var finalTime3 = @Model.session.question.PostedTime.AddMinutes(Model.offsetTime);
+                                    finalTime3 = finalTime3.AddHours(7);
                                 }
 
                                 <small class="text-muted pull-right">@finalTime3</small>
@@ -180,6 +181,7 @@
                                         <div style="margin-bottom:20px">
                                             @{
                                                 var finalTime= reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                finalTime = finalTime.AddHours(7);
                                             }
                                             <small class="text-muted pull-right">@finalTime</small>
                                         </div>
@@ -221,6 +223,7 @@
                                                                 <div style="margin-bottom:20px">
                                                                     @{
                                                                         var finalTime2 = reply.PostedTime.AddMinutes(Model.offsetTime);
+                                                                        finalTime2 = finalTime2.AddHours(7);
                                                                     }
                                                                     <small class="text-muted pull-right">@finalTime2</small>
                                                                 </div>

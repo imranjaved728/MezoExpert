@@ -223,7 +223,7 @@
                                                                 <a id="dd1" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()<span class="caret"></span></a>
                                                                 <ul class="dropdown-menu">
 
-                                                                    <li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>
+                                                                    @*<li><a href="#" onclick="location.href='@Url.Action("AccountSettings", "Tutors")'"><i class="fa fa-cog"></i> <b> @Resources.Settings</b></a></li>*@
 
 
                                                                     <li><a href="#" onclick="document.getElementById('LogoutForm').submit();"><i class="fa fa-sign-out"></i><b> @Resources.LogOut</b></a></li>
